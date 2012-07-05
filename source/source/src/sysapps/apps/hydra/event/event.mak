@@ -27,7 +27,7 @@ define process-subdir
 		fi;\
 	done	
 endef
-$(skip-dir)	// skip this dir is SKIP==yes
+#$(skip-dir)	// skip this dir is SKIP==yes
 define skip-dir
 	@if [ "$(SKIP)" = "yes" ]; \
 	then \

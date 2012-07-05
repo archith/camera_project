@@ -393,7 +393,7 @@ include/linux/version.h: ./Makefile
 comma	:= ,
 
 init/version.o: init/version.c include/linux/compile.h include/config/MARKER
-    @if [ "$(SILENT)" == "y" ]; then echo -e "--- cc $< $(PWD) ---"; fi
+	@if [ "$(SILENT)" == "y" ]; then echo -e "--- cc $< $(PWD) ---"; fi
 	$(CC) $(CFLAGS) $(CFLAGS_KERNEL) -DUTS_MACHINE='"$(ARCH)"' -DKBUILD_BASENAME=$(subst $(comma),_,$(subst -,_,$(*F))) -c -o init/version.o init/version.c
 
 init/main.o: init/main.c include/config/MARKER

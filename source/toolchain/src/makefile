@@ -2,7 +2,7 @@ PWD=$(shell pwd)
 BIN_DIR=$(subst /,\/,$(PWD))
 all:
 	#build toolchain
-	tar xfj buildroot-0.9.27.tar.bz2
+	tar xfj buildroot-0.9.27_mod.tar.bz2
 	cd buildroot; patch -p1 < ../buildroot_pl1029.patch
 	cd buildroot; ln -s ../../pkg/ dl
 	cd buildroot;cp config.arm.pl1029 ./.config;

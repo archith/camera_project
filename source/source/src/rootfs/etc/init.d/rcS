@@ -82,6 +82,7 @@ echo "/sbin/ifconfig lo"
 /sbin/insmod dmfe
 /sbin/ifconfig eth0 up
 /sbin/ifconfig eth0 192.168.1.99
+/sbin/route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
 
 # ---- Run rc.sethost ---- #
 /etc/rc.sethost 
@@ -96,13 +97,16 @@ echo "/sbin/ifconfig lo"
 # ---- Start Qset daemon ---- #
 /usr/local/bin/nc_qset &
 
+# ---- RUN telnetd ----- #
+/bin/busybox telnetd &
+
 # ---- insert module needed by https server ---- #
 cp -f /usr/local/bin/Cisco.cert.pem /mnt/ramdisk/Cisco.cert.pem
 cp -f /usr/local/bin/Cisco.key.pem /mnt/ramdisk/Cisco.key.pem
 
 # ---- http/https server ----- #
-/usr/local/bin/auth
-/usr/local/bin/webd -c -r all
+#/usr/local/bin/auth
+#/usr/local/bin/webd -c -r all
 
 # ---- Set LED To Device (Ready ON) ----- #
 /usr/local/bin/do_leds 0 0
@@ -115,8 +119,8 @@ cp -f /usr/local/bin/Cisco.key.pem /mnt/ramdisk/Cisco.key.pem
 /sbin/insmod plmedia-1.2.11.1.o
 
 # ---- io port ---- #
-/sbin/insmod ioport.o
-/usr/local/bin/io_init
+#/sbin/insmod ioport.o
+#/usr/local/bin/io_init
 
 # ---- hydra ---- #
 /usr/local/bin/hydra &
@@ -125,7 +129,7 @@ cp -f /usr/local/bin/Cisco.key.pem /mnt/ramdisk/Cisco.key.pem
 /usr/local/bin/ccdc_daemon &
 
 # ----  Streaming Server ---- #
-/usr/local/bin/dsp_dae &
+#/usr/local/bin/dsp_dae &
 #/usr/sbin/telnetd &
 
 # ---- IP filter start up ---#
@@ -138,23 +142,29 @@ cp -f /usr/local/bin/Cisco.key.pem /mnt/ramdisk/Cisco.key.pem
 /usr/local/bin/boot_run_bulk
 
 # ---- Set DDNS (Register to the server) ---- #
-/usr/local/bin/ddnsinit &
+#/usr/local/bin/ddnsinit &
 
 # ----- RUN upnp_traversal ---- #
-/usr/local/bin/upnp_traversal &
+#/usr/local/bin/upnp_traversal &
 
 # ---- RUN upnp discovery ----- #
-/usr/local/bin/upnp_discovery &
+#/usr/local/bin/upnp_discovery &
 
 # ---- RUN instant message (jabber) ----- #
-/usr/local/bin/jabberlog &
+#/usr/local/bin/jabberlog &
 
 # ---- RUN Bonjour ----- #
-/usr/local/bin/mDNSResponderPosix &
+#/usr/local/bin/mDNSResponderPosix &
 
 # ---- RUN regular video recording through samba client ----#
-/usr/local/bin/smbc_rec &
+#/usr/local/bin/smbc_rec &
 
 # ---- startup cdp ----- #
 /usr/local/bin/rc cdp start
 
+# ---- snapshot ----- #
+#/usr/local/bin/smart_grab /mnt/ramdisk/frame.dat
+#/usr/local/bin/send_file /mnt/ramdisk/frame.dat 192.168.1.177 2820
+export PATH=$PATH:/usr/local/bin
+QUERY_STRING="size=3" /usr/local/www/img/snapshot.cgi | tail -n +7 > /mnt/ramdisk/frame.jpg
+/usr/local/bin/send_file /mnt/ramdisk/frame.jpg 192.168.1.177 2820

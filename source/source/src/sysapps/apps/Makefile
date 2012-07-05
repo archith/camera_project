@@ -31,6 +31,8 @@ SUBDIRS += lighttpd-1.4.13
 SUBDIRS += wavplay
 SUBDIRS += simple
 SUBDIRS += rc_start
+#SUBDIRS += smart_grab
+#SUBDIRS += send_file
 
 ifeq ($(PROJ_INSTALL),)
 all install:

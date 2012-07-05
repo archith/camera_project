@@ -20,8 +20,11 @@ prebuild:
 	mkdir -p host/bin
 	make -C host/open_source/squashfs-tools
 
-config menuconfig oldconfig silentoldconfig %_defconfig:
+config menuconfig oldconfig silentoldconfig:
 # Configure Ingenient BSP
+	@$(MAKE) -C src/sysapps/busybox-1.01 $@
+
+%_defconfig:
 	@$(MAKE) -C src/sysapps/busybox-1.01 $@
 
 # Configure Linux Kernel
