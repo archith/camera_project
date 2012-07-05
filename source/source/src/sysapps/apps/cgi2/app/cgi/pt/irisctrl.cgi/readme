@@ -1,0 +1,27 @@
+Purpose: Implement the MT CGI of the document. 
+
+Document Location: NCS Discussion -> Spec -> Sercomm Camera SPEC!!!!!!!!!!! -> WVC2300 HTTP API V212 MT.doc
+
+1.6. Auto-Iris commands (for SONY CCD model only,  Manufacturing purpose)
+1.6.1.1. COM port control (RS-485 command bypass)
+Set different voltage level to the auto-iris port. This command is for the MT code purpose only. After 
+receiving this command, the F/W will disable the ¡§Auto-Iris¡¨ feature and only output such fixed voltage 
+to the iris control pin.
+
+Method	: GET
+URL	: http://<IP>/pt/irisctrl.cgi?Level=<value>
+value	: 1 ~ 10
+
+Return: (Successful)
+HTTP/1.0 204 No Context\r\n
+content-type: text/plain\r\n
+\r\n
+OK\r\n
+
+Return: (Failed)
+HTTP/1.0 204 No Context\r\n
+content-type: text/plain\r\n
+\r\n
+ERROR\r\n
+
+

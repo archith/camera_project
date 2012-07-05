@@ -1,0 +1,14 @@
+SUBDIR = $(filter-out makefile $(shell ls *.TXT) $(SKIPDIR), $(shell ls))
+all clean install uninstall:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i $@ || exit 1 ; \
+	done
+
+gpl-clean:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i $@ || exit 1 ; \
+	done
+	@rm -rf $(filter $(SKIPDIR), $(shell ls))
+
+h:
+	

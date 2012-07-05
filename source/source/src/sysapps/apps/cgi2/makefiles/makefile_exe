@@ -1,0 +1,61 @@
+CFLAGS	+= -I$(PROJ_CGI2)/inc
+BIN	= $(BASE)
+PBIN 	= -L$(PROJ_CGI2)/bin
+ifeq	($(GPL_LICENSE), yes)
+	LDFLAGS += -ldhcp_pond
+else
+	LDFLAGS += -lpond -lpthread
+endif
+
+include $(PROJ_CGI2)/makefiles/makefile_ground
+
+
+%.o: %.c	
+	$(CC) $(CFLAGS) -c $< -o $@
+
+	
+all: .depend $(BIN)
+	@make install
+
+clean:
+	@rm -f $(OBJS) .depend $(BIN)
+
+$(INSTALL_DIR)/$(BIN): $(BIN)
+	install -D --mode=0755 $(BIN) $(INSTALL_DIR)/$(BIN)
+
+ifeq	($(GPL_LICENSE), yes)
+gpl-clean:
+	@make clean
+else
+gpl-clean:
+	rm -f $(SRCS) .depend
+endif
+	
+ifeq	($(INSTALL_MANUAL),)
+install: $(INSTALL_DIR)/$(BIN)	
+
+uninstall:
+
+endif
+
+h:
+	
+$(BIN): $(OBJS)
+ifneq	($(OBJS),)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(PBIN)  $(LDFLAGS)
+ifneq	($(CROSS),)
+	$(STRIP) -s $(BIN)
+endif
+endif
+
+
+.depend:
+ifneq ($(SRCS),)
+ifeq ($(wildcard .depend),)
+	@$(CC) -M $(CFLAGS) $(SRCS) > .depend
+endif
+endif
+
+ifneq ($(wildcard .depend),)
+include .depend
+endif

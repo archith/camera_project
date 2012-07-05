@@ -1,0 +1,27 @@
+*Function - Audio Upload
+
+*File List
+
+Name		Descript
+---------------	-----------------------------------------------
+au_main.c	Main program.
+audio_common.h  Type definition.
+g711.c		G.711(A/U) decoder main functions.
+g726.c		G.726 decoder main functions.
+g726.h		G.726 decoder header file.
+globals.h	Global definition.
+shm.c		Shared memory to set the uploading flag.
+Makefile	
+     
+
+*Flow: 
+
+1. Open the speaker device. (If failed, it means someone are using)
+2. Get the decoder type that will be used.
+3. Initialize the decoder if necessary.
+4. Create the pthread to decode and play the audio.
+5. Main program will recevie the data and put to the buffer.
+
+
+*Debug:
+_SONY_AUDIO_UPLOAD_TEST_	Using the Sony Utility to test the upload.

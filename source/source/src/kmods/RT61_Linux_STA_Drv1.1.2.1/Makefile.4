@@ -1,0 +1,122 @@
+######################################################################
+#	Module Name: Makefile
+#	Abstract: Makefile for rt61 linux driver on kernel series 2.4
+######################################################################
+
+
+CC := cc
+
+include ./config.mk
+
+#Enable for wpa_supplicant's spcific driver "driver_ralink.c", default enabled.
+HAS_RALINK_WPA_SUPPLICANT_SUPPORT=n
+
+#Enable for wpa_supplicant's generic driver "driver_wext.c", used for NetworkManager
+HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=y
+
+WFLAGS := -DAGGREGATION_SUPPORT -DWMM_SUPPORT -Wall -Wstrict-prototypes -Wno-trigraphs
+CFLAGS := -D__KERNEL__ -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -mpreferred-stack-boundary=2 -march=i686 -DMODULE -DMODVERSIONS -include $(LINUX_SRC)/include/linux/modversions.h
+
+ifeq ($(HAS_RALINK_WPA_SUPPLICANT_SUPPORT),y)
+WFLAGS += -DWPA_SUPPLICANT_SUPPORT
+endif
+
+ifeq ($(HAS_NATIVE_WPA_SUPPLICANT_SUPPORT),y)
+WFLAGS += -DNATIVE_WPA_SUPPLICANT_SUPPORT
+endif
+
+## Comment/uncomment the following line to enable/disable
+#CFLAGS += -DDBG
+
+
+
+CFLAGS += $(WFLAGS)
+OBJ = rt61.o
+
+RT61_OBJ =	rtmp_main.o	\
+	rtmp_task.o	\
+	mlme.o		\
+	connect.o	\
+	sync.o		\
+	assoc.o		\
+	auth.o		\
+	auth_rsp.o	\
+	rtmp_data.o	\
+	rtmp_init.o	\
+	sanity.o	\
+	rtmp_wep.o	\
+	rtmp_info.o	\
+	eeprom.o	\
+	rtmp_tkip.o	\
+	wpa.o		\
+	md5.o		\
+
+
+#ifdef MAT_SUPPORT
+ifeq ($(HAS_ETH_CONVERT),y)
+rt61-objs +=	cmm_mat.o	\
+	cmm_mat_iparp.o	\
+	cmm_mat_ipv6.o	\
+	cmm_mat_pppoe.o
+endif
+#endif // MAT_SUPPORT //
+
+ifeq ($(HAS_NATIVE_WPA_SUPPLICANT_SUPPORT),y)
+rt61-objs += rtmp_wext.o
+endif
+
+## NDDIR/ifcfg-ra0
+ND_CONF=/etc/sysconfig/network-scripts/ifcfg-ra0
+
+ifdef NDDIR
+	NDDIR := $(NDDIR)
+else
+	NDDIR := /etc/sysconfig/network-scripts
+endif
+
+ifdef MOD_CONF
+	MOD_CONF := $(MOD_CONF)	
+else
+	MOD_CONF := /etc/modules.conf 
+endif
+
+ifdef MODDIR
+	MOD_ROOT := $(MODDIR)
+else
+	MOD_ROOT := /lib/modules/$(shell uname -r)/extra
+endif
+
+all: $(OBJ)
+	@touch config.mk
+	
+rt61.o: $(RT61_OBJ)
+          
+	$(LD) -r $^ -o $@
+				
+clean:
+	rm -rf *.o *~ core .*.cmd *.ko *.mod.c .tmp_versions built-in.o
+
+install:
+	@touch config.mk
+	install -m 755 -o 0 -g 0 -d $(MOD_ROOT)
+	install -m 644 -o 0 -g 0 $(OBJ) $(MOD_ROOT)
+
+	@echo "Network device directory $(NDDIR)"; 
+	@echo "Module configuration file $(MOD_CONF)";	
+	
+	@if [ -d "$(NDDIR)" ] ; then \
+		if [ ! -f "$(ND_CONF)" ]; then \
+			echo "Create 'ifcfg-ra0' in $(NDDIR)/"; \
+			cp ifcfg-ra0 $(NDDIR)/ ; \
+		fi; \
+ 	fi
+	
+	@if ! grep -q 'ra0' $(MOD_CONF) ; then \
+		echo "append 'alias ra0 rt61' to $(MOD_CONF)"; \
+		echo "alias ra0 rt61" >> $(MOD_CONF) ; \
+ 	fi
+	/sbin/depmod -a
+
+config:
+	@touch config.mk
+	@./Configure

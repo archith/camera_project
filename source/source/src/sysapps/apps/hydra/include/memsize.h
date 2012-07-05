@@ -1,0 +1,51 @@
+#ifndef _MEMSIZE_H_
+#define _MESSIZE_H_
+
+#define MEMSIZE_16M	(1<<24)
+#define MEMSIZE_8M	(1<<23)
+#define MEMSIZE_4M	(1<<22)
+#define MEMSIZE_2M	(1<<21)
+#define MEMSIZE_1M	(1<<20)
+#define MEMSIZE_512K	(1<<19)
+#define MEMSIZE_256K	(1<<18)
+#define MEMSIZE_128K	(1<<17)
+#define MEMSIZE_64K	(1<<16)
+#define MEMSIZE_32K	(1<<15)
+#define MEMSIZE_16K	(1<<14)
+#define MEMSIZE_8K	(1<<13)
+#define MEMSIZE_4K	(1<<12)
+#define MEMSIZE_2K	(1<<11)
+#define MEMSIZE_1K	(1<<10)
+
+
+#ifdef _MEM_ABOVE_64M_
+#define MP4_QUEUE_LEN	MEMSIZE_8M
+//#define MP4_SECOND	30
+#define MP4_SECOND	15
+
+
+#define MOBILE_QUEUE_LEN	MEMSIZE_512K
+#define MOBILE_SECOND	4
+
+#define JPG_QUEUE_LEN	MEMSIZE_16M
+#define JPG_QUEUE_VIEW	MEMSIZE_4M
+#define JPG_SECOND_VIEW	5
+#define JPG_QUEUE_CAP	(MEMSIZE_16M - MEMSIZE_4M)
+#define JPG_SECOND_CAP	15
+#else
+#define MP4_QUEUE_LEN	MEMSIZE_2M
+#define MP4_SECOND	10
+
+#define MOBILE_QUEUE_LEN	MEMSIZE_128K
+#define MOBILE_SECOND	2
+
+#define JPG_QUEUE_LEN	MEMSIZE_4M
+#define JPG_QUEUE_VIEW	MEMSIZE_2M
+#define JPG_SECOND_VIEW	1
+#define JPG_QUEUE_CAP	(MEMSIZE_4M - MEMSIZE_2M)
+#define JPG_SECOND_CAP	5
+#endif
+
+
+
+#endif

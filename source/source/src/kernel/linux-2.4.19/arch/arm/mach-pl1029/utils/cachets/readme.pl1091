@@ -1,0 +1,37 @@
+Author: Stefano
+
+Date: 05/05/05
+
+MAKE
+
+1.cd ../src/kernel/linux2.4.20
+
+2.make menuconfig
+
+[*] Enable loadable module support 
+System Type  ---> <M> Test Cache Module
+
+3.make
+
+4.mae modules
+
+5.pwd
+  ../linux-2.4.20/arch/arm/mach-pl1091/utils/cachets/cachetsUI
+  make
+
+6. ../linux-2.4.20/arch/arm/mach-pl1091/utils/cachets/cachets.o -> PL1091
+   ../linux-2.4.20/arch/arm/mach-pl1091/utils/cachets/cachetsUI/cachetsUI -> PL1091
+
+How to Test:
+
+  ./cachetsUI -n  ;change test memory lengt
+  ./cachetsUI -o  ;change memory offset
+  ./cachetsUI -i  ;Use 'invalidate_dcache_range' function to test D-Cache
+  ./cachetsUI -a  ;Use 'invalidate_dcache_range' function to test D-Cache alignment
+  ./cachetsUI -c  ;Use 'clean_dcache_range'      function to test D-Cache
+  ./cachetsUI -f  ;Use 'flush_dcache_range'      function to test D-Cache
+  ./cachetsUI -e  ;Use 'clean_dcache_entry'      function to test D-Cache
+  ./cachetsUI -p  ;Use 'flush_dcache_page'       function to test D-Cache
+  ./cachetsUI -b  ;Use 'invalidate_dcache_range' function to test D-Cache page boundary
+  ./cachetsUI -I  ;Test I-Cache
+

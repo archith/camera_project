@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function setNext()
+{
+	var delayTimeStr = "@delayTime#";
+	var nextFile = "@next_file#";
+
+	var cmdstr = "location.href='" + nextFile + "'";
+	var delayTime = parseInt(delayTimeStr);
+	if (isNaN(delayTime))
+		delayTime = 10000;
+	if(nextFile.length > 2)
+		setTimeout(cmdstr,delayTime);
+
+}
+
+// End Script -->
+</script>
+
+
+
+<title>PVC2300 Internet Camera</title>
+
+<STYLE TYPE="text/css">
+BODY, P, TABLE, TD, UL, OL, LI, DD 
+        { color: black;  }
+B       { font-weight: bold; }
+b.main  { color: white; font: bold 10pt    Arial Narrow,Helvetica,sans-serif; }
+b.wh    { color: black; font-weight: bold; }
+big     { color: black;  font: bold 10pt    Arial,Helvetica,sans-serif; text-indent: 10pt; }
+caption { color: black;   font: bold 8pt      Arial,Helvetica,sans-serif; }
+DL, DT  { color: #666666; font: bold 10pt     Arial,Helvetica,sans-serif; }
+H1      { color: #333366;   font: bold 14pt   Arial,Helvetica,sans-serif; }
+H2      { color: black;   font: bold 16pt    Arial,Helvetica,sans-serif; }
+H3      { color: black;   font: bold 14pt      Arial,Helvetica,sans-serif; }
+H4      { color: white;   font: bold 12pt     Arial,Helvetica,sans-serif; }
+small   { color: black;   font: normal 8pt  Arial,Helvetica,sans-serif; }
+TH      { color: #00ada4;  font: bold 10pt Arial,Helvetica,sans-serif; padding-top:6px;}
+TH.help { color: black; font: bold 10pt Arial,Helvetica,sans-serif; text-align:left;}
+</style>
+
+</head>
+
+<body onLoad="" bgcolor="#f2f2f2" style="background-color:transparent;">
+<P>Camera is rebooting and IP address may change. Please use the Windows utility to locate the camera and configure it correctly for your environment. You should now close this Browser window.
+</p>
+<BR>
+
+
+
+
+
+
+</body>
+</html>

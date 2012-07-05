@@ -1,0 +1,19 @@
+ifeq ($(DEBUG_UTIL),yes)
+
+DMALLOC	= yes
+
+DMALLOC_DIR	= dmalloc-5.5.2
+ifeq ($(DMALLOC),yes)
+DMALLOC_CFLAGS	= -DDMALLOC_FUNC_CHECK -include stdlib.h -include string.h -include dmalloc.h
+CFLAGS	+= $(if $(filter $(DMALLOC_DIR),$(BASE)), , $(DMALLOC_CFLAGS))
+else
+SKIPDIR	+= $(DMALLOC_DIR)
+endif
+
+
+else #$(DEBUG_UTIL)
+
+DEBUG_DIR = debug_utility
+SKIPDIR	+= $(DEBUG_DIR)
+
+endif #$(DEBUG_UTIL)

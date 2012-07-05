@@ -1,0 +1,22 @@
+CC := arm-linux-gcc
+LD := arm-linux-ld
+
+LINUX_SRC=/usr/src/linux-dist/arm-linux-2.4.19
+
+WFLAGS := -Wall -Wstrict-prototypes -Wno-trigraphs -Wno-unused
+CFLAGS := -D__KERNEL__ -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -DMODULE -include $(LINUX_SRC)/include/linux/modversions.h $(WFLAGS)
+
+OBJ = mlme_zydas.o
+
+
+mlme_zydas.o:  mlme.o \
+            auth.o  \
+            assoc.o \
+                fw_linux.o    \
+                hw_ctrl.o \
+                sync.o
+	$(LD) -r $^ -o $@
+
+clean:
+	rm -f *.o *~ core
+

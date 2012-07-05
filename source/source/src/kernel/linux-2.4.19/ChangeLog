@@ -1,0 +1,69 @@
+ChangeLog of Prolific arm arch
+------------------------------
+
+1.0.11
+------
+1. merge 2.4.24 net 
+   replace by 2.4.24
+   include/net/*
+   include/sunrpc/*
+   include/netdevice.h
+   include/in.h
+   include/skbuff.h
+   include/inet.h
+   include/intdevice.h
+   include/socket.h
+   include/net.h
+   include/ethtool.h
+   include/netlink.h
+   include/jhash.h
+   include/igmp.h
+   include/netfilter.h
+   include/notifilter.h
+   include/nfs_xdr.h
+   include/nfs_fs.h
+   include/nfs.h
+   include/nfs2.h
+   include/nfs3.h
+   net/*
+   fs/nfs/*
+   lib/dump_stack.c
+   Modified from 2.4.19
+   sysctl.h	add NET_CORE_DEV_WEIGHT, NET_IPV4_ROUTE_SECRET_INTERVAL
+   kernel.h     add dump_stack()
+   mm.h		add PG_fs_1
+   list.h	add list_move_tail
+   highmem.h	add kmap_nonblock
+
+
+
+
+
+
+1.0.10
+------
+1. rewire new console driver (pl_ser.c)
+
+1.0.9
+-----
+1. add crypto library support
+
+1.0.8
+-----
+1. add set_dma_mde_base, set_dma_mde_idx and set_dma_burst_length to kernel 
+   symbols.
+
+1.0.7
+-----
+1. i2c, ac97, uart, keypad support 120MHz dev clock
+
+1.0.6
+-----
+1. Enable Prolific embedded USB-OHCI Host driver
+
+1.0.5
+-----
+1. fix uncompressing kernel bug. The bug may overwirte address 0x40_0000 
+   where the rootfz.gz locate on. For the bug fixing, uncompressed kernel 
+   size is not greater than 2M once it exceed a warning message will be
+   showed in making. 

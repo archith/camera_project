@@ -1,0 +1,562 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function checkData()
+{
+ 	var cf = document.forms[0];
+	var msg = ""; msg1 = "";
+
+	if (cf.set_wport.checked)
+	{
+	    msg+= checkInt(cf.wport, msg_http_port, 1024, 65535, cf.wport.value == "");
+	    if(cf.rtsp_port.value == cf.wport.value && cf.wport.value != "")
+		{ msg+= msg_port_conflict ; }
+	}
+
+	if (cf.set_ssport.checked)
+	{
+		msg+= checkInt(cf.ssport, msg_http_port, 1024, 65535, cf.ssport.value == "");
+		if(cf.rtsp_port.value == cf.ssport.value && cf.ssport.value != "")
+		{ msg+= msg_port_conflict ; }
+	}
+	
+	if ((cf.set_wport.checked) && (cf.set_ssport.checked) && (cf.ssport.value == cf.wport.value && cf.wport.value != ""))
+	{ msg+= msg_conflict ; }
+
+	if(cf.rtsp_port.value != "554"){
+		msg+= checkInt(cf.rtsp_port, msg_rtsp_port, 1024, 65535, cf.rtsp_port.value == "");
+	}
+
+	msg+= checkInt(cf.rtp_src_port, msg_rtp_src_port, 1024, 65535, cf.rtp_src_port.value == "");
+
+	msg+= checkInt(cf.rtp_pkt_len, msg_rtp_pkt_len, 400, 1400, cf.rtp_pkt_len.value == "");
+
+	if (cf.en_multi.checked)
+	{
+		msg+= checkValid(cf.mcast_group_name, msg_mcast_group_name, Valid_str_name, 64, false);
+		msg+= checkIp(cf.vad1,cf.vad2,cf.vad3,cf.vad4,msg_video_add,true);
+		if ( cf.v_port.value == "")
+		{ msg+= addstr(msg_blank,msg_video_port); }
+		else if (!checkPort(cf.v_port.value))
+		{ msg+= msg_v_port; }
+		msg+= checkIp(cf.aad1,cf.aad2,cf.aad3,cf.aad4,msg_audio_add,true);
+		if ( cf.a_port.value == "")
+		{ msg+= addstr(msg_blank,msg_audio_port); }
+		else if (!checkPort(cf.a_port.value))
+		{ msg+= msg_a_port; }
+		msg+= checkInt(cf.rtp_time, msg_rtp_time, 1, 255, cf.rtp_time.value == "");
+	}
+	
+	if (cf.qos_mode.checked)
+	{ msg+= checkInt(cf.q_dscp, msg_q_dscp, 0, 63, cf.q_dscp.value == ""); }
+	
+	if (cf.cos_mode.checked)
+	{ msg+= checkInt(cf.cos_vid, msg_cos_vid, 1, 4094, cf.cos_vid.value == ""); }
+
+	if (msg.length > 1)	
+	{
+//		rALERT("Advanced Setup",msg);
+		rWARN("Advance Setup",msg);
+		return false;
+	}
+	return true;	
+}
+
+function setData()
+{
+    var cf = document.forms[0];
+	dataToVisible(cf);
+	
+	setUPNP();
+	userport();
+	sstport();
+	en_cos();
+	qav_mode();
+	set_multi();
+}
+
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+
+	if (!(checkData()))
+		return;
+
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+function userport()
+{
+    var cf = document.forms[0];
+	var dFlag = ( cf.set_wport.checked );
+	
+	cf.wport.disabled = !dFlag; 
+}
+
+function sstport()
+{
+    var cf = document.forms[0];
+	var dFlag = ( cf.set_ssport.checked );
+	
+	cf.ssport.disabled = !dFlag; 
+}
+
+function setUPNP() {
+	var cf = document.forms[0];
+	if(cf.enable_upnp.checked) {
+		cf.set_wport_upnp.disabled = false;
+		document.getElementById("TRAVERSAL_TEXT").disabled = false;
+	}
+	else {
+		cf.set_wport_upnp.checked = false;
+
+		cf.set_wport_upnp.disabled = true;
+		document.getElementById("TRAVERSAL_TEXT").disabled = true;
+	}
+}
+
+function en_cos()
+{
+    var cf = document.forms[0];
+	var dFlag = ( cf.cos_mode.checked );
+	
+	cf.cos_pri.disabled = !dFlag; 
+	cf.cos_vid.disabled = !dFlag; 
+	document.getElementById("PRIORITY_TEXT").disabled = !dFlag;
+	document.getElementById("VLAN_ID_TEXT").disabled = !dFlag;
+}
+
+function qav_mode()
+{
+    var cf = document.forms[0];
+	var dFlag = cf.qos_mode.checked;
+	cf.q_mode[0].disabled = cf.q_mode[1].disabled = cf.q_mode[2].disabled = cf.q_dscp.disabled = !dFlag; 
+	
+	document.getElementById("QOS_AUDIO_TEXT").disabled = !dFlag;
+	document.getElementById("QOS_VIDEO_TEXT").disabled = !dFlag;
+	document.getElementById("QOS_BOTH_TEXT").disabled = !dFlag;
+	document.getElementById("DSCP_TEXT").disabled = !dFlag;
+}
+
+function set_multi()
+{
+	var cf = document.forms[0];
+	var mfalg = cf.en_multi.checked;   
+	show_hide("multi", (mfalg));
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('Advance Setup');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+    
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Advance Setup</div>
+ 	
+
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px;">HTTP/HTTPS</div>
+        <table class="std"  cellspacing="0" cellpadding="0" >
+  <tr>
+ 
+       <td  width="21px"><input type="checkbox" name="set_wport" id="set_wport" value="enable" onClick="userport()" style="margin-left:-3px">
+       			<script>				 
+				 if(!isIE())
+					document.getElementById("set_wport").style.marginLeft="0px";
+				 </script>
+    </td>
+                 
+       <td width="174px"> Enable HTTP Alternative Port</td>
+       
+        <td nowrap><input type="text" class="num" name="wport" value="@wport#" size="6" maxlength="5" onFocus="if(this.disabled)this.blur()"><span style="color:#8e8e8e"> (1024-65535)</span></td>
+   </tr>
+   <!-- <tr>
+     <td nowrap><input type="checkbox" name="set_sport" value="enable" onClick="stport()"> Enable HTTPS Default Port &nbsp;</td>
+     <td nowrap valign="top"><input type="text" class="num" name="sport" value="@sport#" size="6" maxlength="5" onFocus="if(this.disabled)this.blur()"> (1024-65535)</td>
+       </tr> -->
+	  <tr>
+		<td   width="21px"><input type="checkbox" name="set_ssport" id="set_ssport" value="enable" onClick="sstport()" style="margin-left:-3px"> 
+        <script>				 
+				 if(!isIE())
+					document.getElementById("set_ssport").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td>Enable HTTPS Alternative Port</td>
+		<td nowrap><input type="text" class="num" name="ssport" value="@ssport#" size="6" maxlength="5" onFocus="if(this.disabled)this.blur()"> <span style="color:#8e8e8e">(1024-65535)</span></td>
+        
+	</tr>
+    </table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+
+
+ 	<div class="newGroupBoxTitle" style="height:25px;">RTP/RTSP</div>
+    
+    <table class="std" cellspacing="0" cellpadding="0" >
+  <tr>
+       <td  width="195px" nowrap>RTSP Port:</td>
+        <td nowrap><input type="text" class="num" name="rtsp_port" value="@rtsp_port#" size="6" maxlength="5"><span style="color:#8e8e8e"> (554,1024-65535)</span></td>
+   </tr>
+   <tr>
+     <td nowrap>RTP Data Port: </td>
+     <td nowrap valign="top"><input type="text" class="num" name="rtp_src_port" value="@rtp_src_port#" size="6" maxlength="5"><span style="color:#8e8e8e"> (mobile phone only)</span></td>
+       </tr>
+	  <tr>
+		<td nowrap>Max RTP Data Packet: </td>
+		<td nowrap><input type="text" class="num" name="rtp_pkt_len" value="@rtp_pkt_len#" size="6" maxlength="5"> bytes<span style="color:#8e8e8e"> (400-1400)</span></td>
+	</tr>
+    </table>
+    <table class="std" cellspacing="0" cellpadding="0" >
+  <tr><tr>
+       <td nowrap height="25"  width="21px">
+	   <input type="checkbox" name="en_multi" id="en_multi" value="enable" onClick="set_multi();" style="margin-left:-3px">
+       <script>				 
+				 if(!isIE())
+					document.getElementById("en_multi").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+       <td> Enable Multicast
+	   </td>
+   </tr>
+  <tr>
+       
+   </tr>
+    </table>
+    <table class="std" id="multi" style="display:none" cellspacing="0" cellpadding="0" >
+  <tr>
+       <td  width="195px" nowrap >Group Name:</td>
+        <td nowrap><input type="text" name="mcast_group_name" value="@mcast_group_name#" size="16" maxlength="64"></td>
+   </tr>
+  <tr>
+       <td nowrap><div style="margin-left:1">Video Address:</div></td>
+        <td nowrap><input type="text" class="num" name="vad1" value="@vad1#" size=3 maxlength=3>.<input type="text" class="num" name="vad2" value="@vad2#" size=3 maxlength=3>.<input type="text" class="num" name="vad3" value="@vad3#" size=3 maxlength=3>.<input type="text" class="num" name="vad4" value="@vad4#" size=3 maxlength=3></td>
+   </tr>
+  <tr>
+       <td nowrap><div style="margin-left:1">Video Port:</div></td>
+        <td nowrap><input type="text" class="num" name="v_port" value="@v_port#" size="6" maxlength="5"><span style="color:#8e8e8e"> (Even Value, 1024-65534)</span></td>
+   </tr>
+  <tr>
+       <td nowrap><div style="margin-left:1">Audio Address:</div></td>
+        <td nowrap><input type="text" class="num" name="aad1" value="@aad1#" size=3 maxlength=3>.<input type="text" class="num" name="aad2" value="@aad2#" size=3 maxlength=3>.<input type="text" class="num" name="aad3" value="@aad3#" size=3 maxlength=3>.<input type="text" class="num" name="aad4" value="@aad4#" size=3 maxlength=3></td>
+   </tr>
+  <tr>
+       <td nowrap><div style="margin-left:1">Audio Port:</div></td>
+        <td nowrap><input type="text" class="num" name="a_port" value="@a_port#" size="6" maxlength="5"><span style="color:#8e8e8e"> (Even Value, 1024-65534)</span></td>
+   </tr>
+  <tr>
+       <td nowrap><div style="margin-left:1">Time to Live:</div></td>
+        <td nowrap><input type="text" class="num" name="rtp_time" value="@rtp_time#" size="6" maxlength="3"><span style="color:#8e8e8e"> (Hops, 1~255)</span></td>
+   </tr>
+    </table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Discovery Settings</div>
+    <table class="std" cellspacing="0" cellpadding="0" >
+  <tr>
+       <td  width="21px"><input type="checkbox" name="enable_upnp" id="enable_upnp" value="enable" onClick="setUPNP();" style="margin-left:-3px">
+       <script>				 
+				 if(!isIE())
+					document.getElementById("enable_upnp").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+       <td> Enable UPnP Discovery</td>
+   </tr>
+	  <tr>
+		<td width="21px"><input type="checkbox" name="set_wport_upnp" id="set_wport_upnp" value="enable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("set_wport_upnp").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td><span id="TRAVERSAL_TEXT"> Enable UPnP Traversal (Port Mapping)</span></td>
+	</tr>
+    <tr>
+       <td  width="21px">
+	  <input type="checkbox" name="enable_bonj" id="enable_bonj" value="enable" onClick="" style="margin-left:-3px">
+      <script>				 
+				 if(!isIE())
+					document.getElementById("enable_bonj").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+      <td>Enable Bonjour</td>
+
+   </tr>
+   
+    </table> 
+ 
+               <!-- <hr class="newHR">
+        <br style="height:10px">
+   
+
+        <div class="newGroupBoxTitle" style="height:25px;">CDP</div>
+    <table class="std" cellspacing="0" cellpadding="0" >
+   <tr>
+       <td  width="21px">
+          <input type="checkbox" name="set_cdp" id="set_cdp" value="enable" onClick="" style="margin-left:-3px">
+      <script>                           
+                                 if(!isIE())
+                                        document.getElementById("enable_cdp").style.marginLeft="0px";
+                                 </script>
+    </td>
+
+      <td>Enable CDP (Cisco Discovery Protocol)</td>
+
+   </tr>
+   
+    </table>
+-->
+<!--
+	<hr class="newHR">
+	<br style="height:10px">
+    
+    <div class="newGroupBoxTitle" style="height:25px;">Bonjour</div>
+     <table class="std" cellspacing="0" cellpadding="0" >
+  	<tr>
+       <td  colspan="2" width="21px">
+	  <input type="checkbox" name="enable_bonj" id="enable_bonj" value="enable" onClick="" style="margin-left:-3px">
+      <script>				 
+				 if(!isIE())
+					document.getElementById("enable_bonj").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+      <td><div style="margin-left:-1">Enable Bonjour</div></td>
+
+   </tr>
+    </table>
+    <table class="std" cellspacing="0" cellpadding="0" >
+  	<tr>
+       <td  colspan="2" width="21px">
+	  <input type="checkbox" name="enable_csbdp_bonj" id="enable_csbdp_bonj" value="enable" onClick="" style="margin-left:-3px">
+      <script>				 
+				 if(!isIE())
+					document.getElementById("enable_csbdp_bonj").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+      <td><div style="margin-left:-1">Enable CSBDP Bonjour</div></td>
+
+   </tr>
+    </table>
+-->    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">QoS</div>
+    <table class="std" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+  <td>
+  <table cellpadding="0" cellspacing="0">
+  <tr>
+       <td width="22px">
+	  <input type="checkbox" name="qos_mode" id="qos_mode" value="enable" onClick="qav_mode();" style="margin-left:-3px">
+      <script>				 
+				 if(!isIE())
+					document.getElementById("qos_mode").style.marginLeft="0px";
+				 </script>
+	   </td>
+	   <td  width="172px" nowrap class="lmc">Enable QoS Mode </td>
+       </tr>
+       </table>
+ </td>       
+ <td>
+        <table cellpadding="0" cellspacing="0" border="0">
+        
+	    <td width="22px">
+		  <input type="radio" name="q_mode" id="q_mode1" value="0" onClick="" style="margin-left:-3px">
+          <script>				 
+				 if(!isIE())
+					document.getElementById("q_mode1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+           <td><span id="QOS_AUDIO_TEXT">Audio</span></td>
+        
+	    
+                  </tr>
+                  </table>
+                  
+                  
+                  </td>
+                  <td width="8px"></td>
+                  <td nowrap>
+                  <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+        <td width="22px">
+		  <input type="radio" name="q_mode" id="q_mode2" value="1" onClick=""  style="margin-left:-3px">
+          <script>				 
+				 if(!isIE())
+					document.getElementById("q_mode2").style.marginLeft="0px";
+				 </script>
+                 
+    </td>
+    
+          <td><span id="QOS_VIDEO_TEXT"> Video</span></td>
+          </tr>
+          </table>
+          </td>
+          
+          <td width="8px"></td>
+          
+          <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+		  <input type="radio" name="q_mode" id="q_mode3" value="2" onClick="" style="margin-left:-3px">
+          <script>				 
+				 if(!isIE())
+					document.getElementById("q_mode3").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+          <td><span id="QOS_BOTH_TEXT"> Both</span></td>
+          </tr>
+          </table>
+          </td>
+          
+         
+          
+		</td>
+   </tr>
+  <tr>
+  <table cellpadding="0" cellspacing="0">
+ <!--      <td nowrap>&nbsp;</td>-->
+	   <td nowrap class="lmc" width="195px"><span id="DSCP_TEXT">DSCP: </span></td>
+		<td nowrap>
+<input type="text" class="num" name="q_dscp" value="@q_dscp#"  onFocus="if(this.disabled)this.blur()" size="6" maxlength="5"><span style="color:#8e8e8e"> &nbsp; (0-63)</span>
+		</td>
+   </tr>
+    </table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">CoS</div>
+    <table class="std" cellspacing="0" cellpadding="0" >
+  <tr>
+       <td colspan="2" width="21px">
+	  <input type="checkbox" name="cos_mode" id="cos_mode" value="enable" onClick="en_cos();" style="margin-left:-3px">
+      <script>				 
+				 if(!isIE())
+					document.getElementById("cos_mode").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+	   
+       <td><div style="margin-left:-1">Enable CoS Mode</div></td>
+   </tr>
+   </table>
+   
+   <table class="std" cellspacing="0" cellpadding="0" >
+  <tr>
+       
+       <td  width="195px" nowrap class="lmc"><span id="PRIORITY_TEXT">Priority: </span></td>
+       <td nowrap>
+	   <select name="cos_pri" size="1" onChange="" style="{width:49}" width=49>
+		 <option value="0">0</option>
+		 <option value="1">1</option>
+		 <option value="2">2</option>
+		 <option value="3">3</option>
+		 <option value="4">4</option>
+		 <option value="5">5</option>
+		 <option value="6">6</option>
+		 <option value="7">7</option>
+	   </select>
+	   </td>
+   </tr>
+  <tr>
+       
+       <td nowrap><div style="margin-left:1"><span id="VLAN_ID_TEXT">VLAN ID:</span></div></td>
+       <td nowrap>
+	   <input type="text" class="num" name="cos_vid" value="@cos_vid#"  onFocus="if(this.disabled)this.blur()" size="6" maxlength="5"><span style="color:#8e8e8e"> &nbsp; (1-4094)</span>
+	   </td>
+   </tr>
+    </table>
+    
+
+
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE-->        
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=advance.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='advance.htm'">
+<!--    --> 
+	</div>
+    <br>
+
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+     
+    <input type="hidden" name="h_set_wport" value="@h_set_wport#">
+<input type="hidden" name="h_set_ssport" value="@h_set_ssport#">
+
+<input type="Hidden" name="h_en_multi" value="@h_en_multi#">
+
+<input type="Hidden" name="h_enable_upnp" value="@h_enable_upnp#">
+<input type="Hidden" name="h_set_wport_upnp" value="@h_set_wport_upnp#">
+<input type="Hidden" name="h_enable_bonj" value="@h_enable_bonj#">
+<input type="Hidden" name="h_set_cdp" value="@h_set_cdp#">
+<input type="Hidden" name="h_enable_csbdp_bonj" value="@h_enable_csbdp_bonj#">
+
+<input type="Hidden" name="h_qos_mode" value="@h_qos_mode#">
+<input type="Hidden" name="h_q_mode" value="@h_q_mode#">
+
+<input type="Hidden" name="h_cos_mode" value="@h_cos_mode#">
+<input type="Hidden" name="h_cos_pri" value="@h_cos_pri#">
+
+<input type="Hidden" name="this_file" value="advance.htm">
+<input type="Hidden" name="next_file" value="advance.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+<input type="hidden" name="video_file" value="@video_file#">
+
+</form>     
+</div> <!--  newContentArea end --> 
+
+</body>
+
+</html>

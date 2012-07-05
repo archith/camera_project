@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<script language="javascript" type="text/javascript" src="../P.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var pchar = "|";          // progress char
+var maxchars = 50;  
+var delay_time = 4000; // msecs
+var charcount = 0;  
+
+function updateProgress()
+{
+//	alert("updateProgress")
+		var cf = document.forms[0];
+		if (charcount < maxchars)
+		{
+			charcount ++;
+	
+		var pb = document.getElementById("prog_bg");
+		pb.style.width = 500-(10*charcount)+'px';
+		pb.style.marginLeft = 10*charcount+'px';
+		
+		window.status = "Progress: " + Math.floor(charcount/maxchars *100) + " %";
+		setTimeout("updateProgress()",delay_time);
+		}
+		else
+		{ 
+//		alert("finish")
+			uConfirm("Upgrade Firmware",finish_msg);
+			//self.close();
+		}
+}
+
+function makeStr(strSize, fillChar)
+{
+	var temp = "";
+	for (i=0; i < strSize ; i ++)
+		temp = temp + fillChar;
+	return temp;
+}
+
+function getupgmsg()
+{
+	var time_risidual = delay_time%1200;
+	var time_min = (delay_time-time_risidual)/1200;
+	var time_end = time_min+1;
+	var msg_upg=pgv002;
+	var msg="";
+	 msg= addstr(msg_upg,time_min,time_end);
+	return msg;
+}
+// End Script --> 
+</script>
+
+<style type="text/css">
+
+
+.p_td
+{
+	background-image:url(../images/progress_body.gif);
+
+}
+
+</style>
+
+<link rel="icon" href="../images/cisco.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="../images/cisco.ico" type="image/x-icon" />
+
+</head>
+<body onLoad="updateProgress()" style="background-image:url(../images/ToolbarMain.png)">
+      
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ 
+ 	<br>
+<form method="post" action="upg_pg.cgi" onSubmit="return false">
+	<div id="formpane" class="newFormPanePopup">
+<div class="newGroupBoxTitle" style="height:25px; margin-left:9px">Firmware Upgrade in Progress!</div>
+<table cellpadding="8" cellspacing="0" width="420">
+						<tr>
+						 <td align="left" ></td>
+						</tr>
+						<tr><td nowrap align="left" >
+						  <span class="style1">Please wait. This could take 4 to 5 minutes.</span></td>
+						</tr>
+						<tr><td nowrap align="left" ></td>
+						</tr>
+						<tr>
+						 <td colspan="2"  align="center" style="padding-bottom:0px; width:500px" valign="bottom"><b>Progress</b></td>
+						</tr>
+                        
+                        
+						<tr>
+						 <td colspan="2" nowrap style="padding-top:6px; padding-bottom:6px">
+<img id="prog_ok" src="../images/progress_ok.gif" style="position:absolute; z-index:0;" >
+ </div>
+ 
+
+ <img id="prog_bg" src="../images/progress_bg.gif" style="position:relative; z-index:9; height:19px; width:300px; margin-left:200px">
+    </td>
+</tr> 
+ 
+						<tr>
+						 <td nowrap align="left" valign="top" style="padding-top:0px"><b>0%</b></td>
+						 <td nowrap align="right" valign="top" style="padding-top:0px"><b>100%</b></td>
+						</tr>
+						<tr><td align="left" >
+						  Upgrade must NOT be interrupted! </td>
+						</tr>
+						</table>
+
+
+
+
+
+	</div><!-- formpane end-->
+	<br>
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+<input type="Hidden" name="this_file" value="upg_pg.htm">
+
+</form>
+
+
+<!-- Alert Box -->
+
+<iframe id="AB_IFrame" frameborder="0" class="AB_FRAME"></iframe>
+<div dragable="dragable" id="CON" onMouseDown="startDrag(this.id)"   class="AB_ALL" style="display:none;"></div>
+
+<iframe id="cover" style="position: absolute; z-index: 99; width: 100%; height: 100%; top: 0; left:0; opacity:0; filter:alpha(opacity=0); display:none;" frameborder="0"></iframe>
+
+<!--</div>   newContentArea end -->  
+</body>
+</html>

@@ -1,0 +1,39 @@
+include $(PROJ_CGI2)/makefiles/makefile_ground
+POBJS 	= $(wildcard obj/*.o)
+BIN	= $(PROJ_CGI2)/bin/lib$(BASE).so
+SUBDIR = $(filter-out makefile obj $(shell ls *.TXT) $(SKIPDIR), $(shell ls))
+all install: obj
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i all || exit 1 ; \
+	done
+	@make --no-print-director $(BIN) $(PROJ_INSTALL)/usr/lib/lib$(BASE).so
+	
+clean uninstall:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i $(@) || exit 1; \
+	done
+	rm -f $(BIN) $(PROJ_INSTALL)/usr/lib/lib$(BASE).so
+	rm -rf obj
+
+gpl-clean:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -s --no-print-director  -C $$i $@ || exit 1 ; \
+	done
+	rm -rf $(filter $(SKIPDIR), $(shell ls))
+
+h:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -s --no-print-director  -C $$i $@ || exit 1 ; \
+	done
+
+$(PROJ_INSTALL)/usr/lib/lib$(BASE).so: ../bin/lib$(BASE).so
+	install -D ../bin/lib$(BASE).so $(PROJ_INSTALL)/usr/lib/lib$(BASE).so
+	
+	
+$(BIN): $(POBJS)
+#	$(AR) rcs $@ $?
+	$(CC) -shared -Wl,-soname,lib$(BASE).so -o ../bin/lib$(BASE).so $(POBJS)
+
+obj:
+	mkdir -p $@
+	

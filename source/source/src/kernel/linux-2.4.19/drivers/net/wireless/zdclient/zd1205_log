@@ -1,0 +1,2142 @@
+In file included from /root/Faraday/linux-dist/arm-linux-2.4.19/include/asm/arch/hardware.h:11,
+                 from /root/Faraday/linux-dist/arm-linux-2.4.19/include/asm/pci.h:6,
+                 from /root/Faraday/linux-dist/arm-linux-2.4.19/include/linux/pci.h:619,
+                 from zd1205.h:10,
+                 from zddebug.h:8,
+                 from zddebug.c:4:
+/root/Faraday/linux-dist/arm-linux-2.4.19/include/asm/arch/cpe/cpe.h:173: warning: `CPE_AC97_BASE' redefined
+/root/Faraday/linux-dist/arm-linux-2.4.19/include/asm/arch/cpe/cpe.h:170: warning: this is the location of the previous definition
+zddebug.c: In function `zd1205_lb_mode':
+zddebug.c:836: warning: unused variable `encryMode'
+zddebug.c:835: warning: unused variable `i'
+zddebug.c:834: warning: unused variable `keyLength'
+ARM GAS   			page 1
+
+
+   1              	
+   2              	.file "zddebug.c"
+   3              	gcc2_compiled.:
+   7              	.Ltext0:
+  13              	.align 2
+  14              	.LC0:
+  15 0000 2F726F6F 	.ascii "/root/Faraday/linux-dist/arm-linux-2.4.19/include/l"
+  15      742F4661 
+  15      72616461 
+  15      792F6C69 
+  15      6E75782D 
+  16 0033 696E7578 	.ascii "inux/wait.h\000"
+  16      2F776169 
+  16      742E6800 
+  17 003f 00       	.align 2
+  18              	.LC2:
+  19 0040 62616420 	.ascii "bad magic %lx (should be %lx, creator %lx), \000"
+  19      6D616769 
+  19      6320256C 
+  19      78202873 
+  19      686F756C 
+  20 006d 000000   	.align 2
+  21              	.LC3:
+  22 0070 62616420 	.ascii "bad magic %lx (should be %lx), \000"
+  22      6D616769 
+  22      6320256C 
+  22      78202873 
+  22      686F756C 
+  23              	.align 2
+  24              	.LC7:
+  25 0090 2F726F6F 	.ascii "/root/Faraday/linux-dist/arm-linux-2.4.19/include/a"
+  25      742F4661 
+  25      72616461 
+  25      792F6C69 
+  25      6E75782D 
+  26 00c3 736D2F73 	.ascii "sm/semaphore.h\000"
+  26      656D6170 
+  26      686F7265 
+  26      2E6800
+  27              	.text
+  28              	.align 2
+  29              	.global zd1205_set_sniffer_mode
+  31              	zd1205_set_sniffer_mode:
+  32              	.LFB1:
+  33              	
+  34              	
+  35              	.LBB2:
+  36              	.LBB3:
+  37              	.LBB4:
+  38              	.LBB5:
+  39              	.LBE5:
+  40              	.LBE4:
+  41              	.LBE3:
+  42 0000 0DC0A0E1 	mov ip,sp
+  43 0004 30D82DE9 	stmfd sp!,{r4,r5,fp,ip,lr,pc}
+  44              	.LM1:
+  45              	
+ARM GAS   			page 2
+
+
+  46 0008 5C309FE5 	ldr r3,.L1427
+  47              	.LM2:
+  48              	
+  49 000c 0050A0E1 	mov r5,r0
+  50              	.LM3:
+  51              	
+  52 0010 704195E5 	ldr r4,[r5,#368]
+  53              	.LM4:
+  54              	
+  55 0014 002095E5 	ldr r2,[r5,#0]
+  56              	.LM5:
+  57              	
+  58 0018 B436C2E1 	strh r3,[r2,#100]
+  59              	.LM6:
+  60              	
+  61 001c 0630A0E3 	mov r3,#6
+  62 0020 8030C2E5 	strb r3,[r2,#128]
+  63              	.LM7:
+  64              	
+  65 0024 0E30A0E3 	mov r3,#14
+  66 0028 B636C2E1 	strh r3,[r2,#102]
+  67 002c 04B04CE2 	sub fp,ip,#4
+  68              	.LM8:
+  69              	
+  70 0030 2C30D2E5 	ldrb r3,[r2,#44]
+  71              	.LM9:
+  72              	
+  73 0034 2C1082E2 	add r1,r2,#44
+  74              	.LM10:
+  75              	
+  76 0038 020013E3 	tst r3,#2
+  77 003c 1000000A 	beq .L1423
+  78              	.LM11:
+  79              	
+  80              	.LBB6:
+  81              	.LM12:
+  82              	
+  83 0040 0000A0E3 	mov r0,#0
+  84 0044 FEFFFFEB 	bl set_bit
+  85              	.LM13:
+  86              	
+  87              	.LBE6:
+  88              	.L1423:
+  89              	.LM14:
+  90              	
+  91 0048 0130A0E3 	mov r3,#1
+  92 004c 743684E5 	str r3,[r4,#1652]
+  93              	.LM15:
+  94              	
+  95 0050 FF34E0E3 	mvn r3,#-16777216
+  96 0054 8C3684E5 	str r3,[r4,#1676]
+  97              	.LM16:
+  98              	
+  99 0058 0830A0E3 	mov r3,#8
+ 100 005c 783684E5 	str r3,[r4,#1656]
+ 101              	.LM17:
+ 102              	
+ARM GAS   			page 3
+
+
+ 103 0060 0238A0E3 	mov r3,#131072
+ 104 0064 843185E5 	str r3,[r5,#388]
+ 105              	.LM18:
+ 106              	
+ 107              	.LBE2:
+ 108 0068 30A81BE9 	ldmea fp,{r4,r5,fp,sp,pc}
+ 109              	.L1428:
+ 110              	.align 2
+ 111              	.L1427:
+ 112 006c 21030000 	.word 801
+ 113              	.LFE1:
+ 114              	.Lfe1:
+ 116              	.section .rodata
+ 117 00d2 0000     	.align 2
+ 118              	.LC11:
+ 119 00d4 3C373E2A 	.ascii "<7>*******************************************\012\000"
+ 119      2A2A2A2A 
+ 119      2A2A2A2A 
+ 119      2A2A2A2A 
+ 119      2A2A2A2A 
+ 120              	.align 2
+ 121              	.LC12:
+ 122 0104 3C373E49 	.ascii "<7>InterruptCtrl      = %08x \012\000"
+ 122      6E746572 
+ 122      72757074 
+ 122      4374726C 
+ 122      20202020 
+ 123 0123 00       	.align 2
+ 124              	.LC13:
+ 125 0124 3C373E52 	.ascii "<7>ReadTcbAddress     = %08x, ReadRfdAddress= %04x\012"
+ 125      65616454 
+ 125      63624164 
+ 125      64726573 
+ 125      73202020 
+ 126 0157 00       	.ascii "\000"
+ 127              	.align 2
+ 128              	.LC14:
+ 129 0158 3C373E52 	.ascii "<7>RCB address low= 0x%08x\012\000"
+ 129      43422061 
+ 129      64647265 
+ 129      7373206C 
+ 129      6F773D20 
+ 130              	.align 2
+ 131              	.LC15:
+ 132 0174 3C373E42 	.ascii "<7>BCNInterval        = %08x. BCNPLCPCfg    = %04x\012"
+ 132      434E496E 
+ 132      74657276 
+ 132      616C2020 
+ 132      20202020 
+ 133 01a7 00       	.ascii "\000"
+ 134              	.align 2
+ 135              	.LC16:
+ 136 01a8 3C373E54 	.ascii "<7>TSF_LowPart        = %08x, TSF_HighPart  = %04x\012"
+ 136      53465F4C 
+ 136      6F775061 
+ 136      72742020 
+ 136      20202020 
+ARM GAS   			page 4
+
+
+ 137 01db 00       	.ascii "\000"
+ 138              	.align 2
+ 139              	.LC17:
+ 140 01dc 3C373E42 	.ascii "<7>BCN_FIFO_Semaphore = %08x, CtlReg1       = %04x\012"
+ 140      434E5F46 
+ 140      49464F5F 
+ 140      53656D61 
+ 140      70686F72 
+ 141 020f 00       	.ascii "\000"
+ 142              	.align 2
+ 143              	.LC18:
+ 144 0210 3C373E44 	.ascii "<7>DeviceState        = %08x, NAV_CCA       = %04x\012"
+ 144      65766963 
+ 144      65537461 
+ 144      74652020 
+ 144      20202020 
+ 145 0243 00       	.ascii "\000"
+ 146              	.align 2
+ 147              	.LC19:
+ 148 0244 3C373E43 	.ascii "<7>CRC32Cnt           = %08x, CRC16Cnt      = %04x\012"
+ 148      52433332 
+ 148      436E7420 
+ 148      20202020 
+ 148      20202020 
+ 149 0277 00       	.ascii "\000"
+ 150              	.align 2
+ 151              	.LC20:
+ 152 0278 3C373E54 	.ascii "<7>TotalRxFrm         = %08x, TotalTxFrm    = %04x\012"
+ 152      6F74616C 
+ 152      52784672 
+ 152      6D202020 
+ 152      20202020 
+ 153 02ab 00       	.ascii "\000"
+ 154              	.align 2
+ 155              	.LC21:
+ 156 02ac 3C373E52 	.ascii "<7>RxFIFOOverrun      = %08x, UnderrunCnt   = %04x\012"
+ 156      78464946 
+ 156      4F4F7665 
+ 156      7272756E 
+ 156      20202020 
+ 157 02df 00       	.ascii "\000"
+ 158              	.align 2
+ 159              	.LC22:
+ 160 02e0 3C373E44 	.ascii "<7>DecrypErr_UNI      = %08x, DecrypErr_Mul = %04x\012"
+ 160      65637279 
+ 160      70457272 
+ 160      5F554E49 
+ 160      20202020 
+ 161 0313 00       	.ascii "\000"
+ 162              	.align 2
+ 163              	.LC23:
+ 164 0314 3C363E46 	.ascii "<6>Finish zd1205_dump_regs\012\000"
+ 164      696E6973 
+ 164      68207A64 
+ 164      31323035 
+ 164      5F64756D 
+ 165              	.text
+ARM GAS   			page 5
+
+
+ 166              	.align 2
+ 167              	.global zd1205_dump_regs
+ 169              	zd1205_dump_regs:
+ 170              	.LFB2:
+ 171              	
+ 172              	
+ 173              	.LBB7:
+ 174              	.LBB8:
+ 175              	.LBE8:
+ 176              	.LBB9:
+ 177              	.LBE9:
+ 178              	.LBB10:
+ 179              	.LBE10:
+ 180              	.LBB11:
+ 181              	.LBE11:
+ 182              	.LBB12:
+ 183              	.LBE12:
+ 184              	.LBB13:
+ 185              	.LBE13:
+ 186              	.LBB14:
+ 187              	.LBE14:
+ 188              	.LBB15:
+ 189              	.LBE15:
+ 190              	.LBB16:
+ 191              	.LBE16:
+ 192              	.LBB17:
+ 193              	.LBE17:
+ 194              	.LBB18:
+ 195              	.LBE18:
+ 196              	.LBB19:
+ 197              	.LBE19:
+ 198              	.LBB20:
+ 199              	.LBE20:
+ 200              	.LBB21:
+ 201              	.LBE21:
+ 202              	.LBB22:
+ 203              	.LBE22:
+ 204              	.LBB23:
+ 205              	.LBE23:
+ 206              	.LBB24:
+ 207              	.LBE24:
+ 208              	.LBB25:
+ 209              	.LBE25:
+ 210              	.LBB26:
+ 211              	.LBE26:
+ 212              	.LBB27:
+ 213              	.LBE27:
+ 214 0070 0DC0A0E1 	mov ip,sp
+ 215 0074 10D82DE9 	stmfd sp!,{r4,fp,ip,lr,pc}
+ 216              	.LM19:
+ 217              	
+ 218 0078 704190E5 	ldr r4,[r0,#368]
+ 219              	.LM20:
+ 220              	
+ 221 007c B8009FE5 	ldr r0,.L1430
+ 222 0080 04B04CE2 	sub fp,ip,#4
+ 223 0084 FEFFFFEB 	bl printk
+ARM GAS   			page 6
+
+
+ 224              	.LM21:
+ 225              	
+ 226 0088 101594E5 	ldr r1,[r4,#1296]
+ 227 008c AC009FE5 	ldr r0,.L1430+4
+ 228 0090 FEFFFFEB 	bl printk
+ 229              	.LM22:
+ 230              	
+ 231 0094 A8009FE5 	ldr r0,.L1430+8
+ 232 0098 E81694E5 	ldr r1,[r4,#1768]
+ 233 009c EC2694E5 	ldr r2,[r4,#1772]
+ 234 00a0 FEFFFFEB 	bl printk
+ 235              	.LM23:
+ 236              	
+ 237 00a4 081694E5 	ldr r1,[r4,#1544]
+ 238 00a8 98009FE5 	ldr r0,.L1430+12
+ 239 00ac FEFFFFEB 	bl printk
+ 240              	.LM24:
+ 241              	
+ 242 00b0 94009FE5 	ldr r0,.L1430+16
+ 243 00b4 201594E5 	ldr r1,[r4,#1312]
+ 244 00b8 202694E5 	ldr r2,[r4,#1568]
+ 245 00bc FEFFFFEB 	bl printk
+ 246              	.LM25:
+ 247              	
+ 248 00c0 88009FE5 	ldr r0,.L1430+20
+ 249 00c4 141594E5 	ldr r1,[r4,#1300]
+ 250 00c8 182594E5 	ldr r2,[r4,#1304]
+ 251 00cc FEFFFFEB 	bl printk
+ 252              	.LM26:
+ 253              	
+ 254 00d0 7C009FE5 	ldr r0,.L1430+24
+ 255 00d4 941694E5 	ldr r1,[r4,#1684]
+ 256 00d8 802694E5 	ldr r2,[r4,#1664]
+ 257 00dc FEFFFFEB 	bl printk
+ 258              	.LM27:
+ 259              	
+ 260 00e0 70009FE5 	ldr r0,.L1430+28
+ 261 00e4 841694E5 	ldr r1,[r4,#1668]
+ 262 00e8 C82694E5 	ldr r2,[r4,#1736]
+ 263 00ec FEFFFFEB 	bl printk
+ 264              	.LM28:
+ 265              	
+ 266 00f0 64009FE5 	ldr r0,.L1430+32
+ 267 00f4 A41694E5 	ldr r1,[r4,#1700]
+ 268 00f8 A82694E5 	ldr r2,[r4,#1704]
+ 269 00fc FEFFFFEB 	bl printk
+ 270              	.LM29:
+ 271              	
+ 272 0100 58009FE5 	ldr r0,.L1430+36
+ 273 0104 A01694E5 	ldr r1,[r4,#1696]
+ 274 0108 F42694E5 	ldr r2,[r4,#1780]
+ 275 010c FEFFFFEB 	bl printk
+ 276              	.LM30:
+ 277              	
+ 278 0110 4C009FE5 	ldr r0,.L1430+40
+ 279 0114 B01694E5 	ldr r1,[r4,#1712]
+ 280 0118 882694E5 	ldr r2,[r4,#1672]
+ARM GAS   			page 7
+
+
+ 281 011c FEFFFFEB 	bl printk
+ 282              	.LM31:
+ 283              	
+ 284 0120 40009FE5 	ldr r0,.L1430+44
+ 285 0124 AC1694E5 	ldr r1,[r4,#1708]
+ 286 0128 BC2694E5 	ldr r2,[r4,#1724]
+ 287 012c FEFFFFEB 	bl printk
+ 288              	.LM32:
+ 289              	
+ 290 0130 34009FE5 	ldr r0,.L1430+48
+ 291 0134 FEFFFFEB 	bl printk
+ 292              	.LM33:
+ 293              	
+ 294              	.LBE7:
+ 295 0138 10A81BE9 	ldmea fp,{r4,fp,sp,pc}
+ 296              	.L1431:
+ 297              	.align 2
+ 298              	.L1430:
+ 299 013c D4000000 	.word .LC11
+ 300 0140 04010000 	.word .LC12
+ 301 0144 24010000 	.word .LC13
+ 302 0148 58010000 	.word .LC14
+ 303 014c 74010000 	.word .LC15
+ 304 0150 A8010000 	.word .LC16
+ 305 0154 DC010000 	.word .LC17
+ 306 0158 10020000 	.word .LC18
+ 307 015c 44020000 	.word .LC19
+ 308 0160 78020000 	.word .LC20
+ 309 0164 AC020000 	.word .LC21
+ 310 0168 E0020000 	.word .LC22
+ 311 016c 14030000 	.word .LC23
+ 312              	.LFE2:
+ 313              	.Lfe2:
+ 315              	.section .rodata
+ 316              	.align 2
+ 317              	.LC24:
+ 318 0330 3C373E66 	.ascii "<7>freeTxQ         = %04x, activeTxQ      = %04x\012"
+ 318      72656554 
+ 318      78512020 
+ 318      20202020 
+ 318      2020203D 
+ 319 0361 00       	.ascii "\000"
+ 320 0362 0000     	.align 2
+ 321              	.LC25:
+ 322 0364 3C373E66 	.ascii "<7>freeSignalCount = %04x, freeFdescCount = %04x\012"
+ 322      72656553 
+ 322      69676E61 
+ 322      6C436F75 
+ 322      6E74203D 
+ 323 0395 00       	.ascii "\000"
+ 324 0396 0000     	.align 2
+ 325              	.LC26:
+ 326 0398 3C373E62 	.ascii "<7>bcnCnt          = %04x, dtimCnt        = %04x\012"
+ 326      636E436E 
+ 326      74202020 
+ 326      20202020 
+ 326      2020203D 
+ARM GAS   			page 8
+
+
+ 327 03c9 00       	.ascii "\000"
+ 328 03ca 0000     	.align 2
+ 329              	.LC27:
+ 330 03cc 3C373E74 	.ascii "<7>txCnt           = %04x, txCmpCnt       = %04x\012"
+ 330      78436E74 
+ 330      20202020 
+ 330      20202020 
+ 330      2020203D 
+ 331 03fd 00       	.ascii "\000"
+ 332 03fe 0000     	.align 2
+ 333              	.LC28:
+ 334 0400 3C373E72 	.ascii "<7>retryFailCnt    = %04x, rxCnt          = %04x\012"
+ 334      65747279 
+ 334      4661696C 
+ 334      436E7420 
+ 334      2020203D 
+ 335 0431 00       	.ascii "\000"
+ 336 0432 0000     	.align 2
+ 337              	.LC29:
+ 338 0434 3C373E54 	.ascii "<7>TxRx_DeadLock   = %04x, HMAC_NoPhyClk  = %04x\012"
+ 338      7852785F 
+ 338      44656164 
+ 338      4C6F636B 
+ 338      2020203D 
+ 339 0465 00       	.ascii "\000"
+ 340 0466 0000     	.align 2
+ 341              	.LC30:
+ 342 0468 3C373E48 	.ascii "<7>HMAC PCI Hang-up= %04x, TX Timeout Cnt = %04x\012"
+ 342      4D414320 
+ 342      50434920 
+ 342      48616E67 
+ 342      2D75703D 
+ 343 0499 00       	.ascii "\000"
+ 344              	.text
+ 345              	.align 2
+ 346              	.global zd1205_dump_cnters
+ 348              	zd1205_dump_cnters:
+ 349              	.LFB3:
+ 350              	
+ 351              	
+ 352 0170 0DC0A0E1 	mov ip,sp
+ 353 0174 10D82DE9 	stmfd sp!,{r4,fp,ip,lr,pc}
+ 354 0178 04B04CE2 	sub fp,ip,#4
+ 355              	.LM34:
+ 356              	
+ 357 017c 0040A0E1 	mov r4,r0
+ 358              	.LM35:
+ 359              	
+ 360 0180 FEFFFFEB 	bl zd1205_lock
+ 361              	.LM36:
+ 362              	
+ 363 0184 B4009FE5 	ldr r0,.L1433
+ 364 0188 FEFFFFEB 	bl printk
+ 365              	.LM37:
+ 366              	
+ 367 018c 883194E5 	ldr r3,[r4,#392]
+ 368 0190 AC009FE5 	ldr r0,.L1433+4
+ARM GAS   			page 9
+
+
+ 369 0194 B810D3E1 	ldrh r1,[r3,#8]
+ 370 0198 8C3194E5 	ldr r3,[r4,#396]
+ 371 019c B820D3E1 	ldrh r2,[r3,#8]
+ 372 01a0 FEFFFFEB 	bl printk
+ 373              	.LM38:
+ 374              	
+ 375 01a4 9C309FE5 	ldr r3,.L1433+8
+ 376 01a8 9C009FE5 	ldr r0,.L1433+12
+ 377 01ac 001093E5 	ldr r1,[r3,#0]
+ 378 01b0 98309FE5 	ldr r3,.L1433+16
+ 379 01b4 002093E5 	ldr r2,[r3,#0]
+ 380 01b8 FEFFFFEB 	bl printk
+ 381              	.LM39:
+ 382              	
+ 383 01bc 90009FE5 	ldr r0,.L1433+20
+ 384 01c0 C71F84E2 	add r1,r4,#796
+ 385 01c4 060091E8 	ldmia r1,{r1,r2}
+ 386 01c8 FEFFFFEB 	bl printk
+ 387              	.LM40:
+ 388              	
+ 389 01cc 84009FE5 	ldr r0,.L1433+24
+ 390 01d0 301394E5 	ldr r1,[r4,#816]
+ 391 01d4 242394E5 	ldr r2,[r4,#804]
+ 392 01d8 FEFFFFEB 	bl printk
+ 393              	.LM41:
+ 394              	
+ 395 01dc 78009FE5 	ldr r0,.L1433+28
+ 396 01e0 2C1394E5 	ldr r1,[r4,#812]
+ 397 01e4 282394E5 	ldr r2,[r4,#808]
+ 398 01e8 FEFFFFEB 	bl printk
+ 399              	.LM42:
+ 400              	
+ 401 01ec 6C009FE5 	ldr r0,.L1433+32
+ 402 01f0 DA1F84E2 	add r1,r4,#872
+ 403 01f4 060091E8 	ldmia r1,{r1,r2}
+ 404 01f8 FEFFFFEB 	bl printk
+ 405              	.LM43:
+ 406              	
+ 407 01fc 60009FE5 	ldr r0,.L1433+36
+ 408 0200 701394E5 	ldr r1,[r4,#880]
+ 409 0204 782394E5 	ldr r2,[r4,#888]
+ 410 0208 FEFFFFEB 	bl printk
+ 411              	.LM44:
+ 412              	
+ 413 020c FEFFFFEB 	bl ShowQInfo
+ 414              	.LM45:
+ 415              	
+ 416 0210 0030A0E3 	mov r3,#0
+ 417 0214 1C3384E5 	str r3,[r4,#796]
+ 418              	.LM46:
+ 419              	
+ 420 0218 203384E5 	str r3,[r4,#800]
+ 421              	.LM47:
+ 422              	
+ 423 021c 283384E5 	str r3,[r4,#808]
+ 424              	.LM48:
+ 425              	
+ARM GAS   			page 10
+
+
+ 426 0220 243384E5 	str r3,[r4,#804]
+ 427              	.LM49:
+ 428              	
+ 429 0224 303384E5 	str r3,[r4,#816]
+ 430              	.LM50:
+ 431              	
+ 432 0228 2C3384E5 	str r3,[r4,#812]
+ 433              	.LM51:
+ 434              	
+ 435 022c 343384E5 	str r3,[r4,#820]
+ 436              	.LM52:
+ 437              	
+ 438 0230 0400A0E1 	mov r0,r4
+ 439              	.LM53:
+ 440              	
+ 441 0234 383384E5 	str r3,[r4,#824]
+ 442              	.LM54:
+ 443              	
+ 444 0238 FEFFFFEB 	bl zd1205_unlock
+ 445 023c 10A81BE9 	ldmea fp,{r4,fp,sp,pc}
+ 446              	.L1434:
+ 447              	.align 2
+ 448              	.L1433:
+ 449 0240 D4000000 	.word .LC11
+ 450 0244 30030000 	.word .LC24
+ 451 0248 00000000 	.word freeSignalCount
+ 452 024c 64030000 	.word .LC25
+ 453 0250 00000000 	.word freeFdescCount
+ 454 0254 98030000 	.word .LC26
+ 455 0258 CC030000 	.word .LC27
+ 456 025c 00040000 	.word .LC28
+ 457 0260 34040000 	.word .LC29
+ 458 0264 68040000 	.word .LC30
+ 459              	.LFE3:
+ 460              	.Lfe3:
+ 462              	.align 2
+ 463              	.global zd1205_wep_on_off
+ 465              	zd1205_wep_on_off:
+ 466              	.LFB4:
+ 467              	
+ 468              	
+ 469 0268 0DC0A0E1 	mov ip,sp
+ 470 026c 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ 471 0270 04B04CE2 	sub fp,ip,#4
+ 472              	.LM55:
+ 473              	
+ 474 0274 000051E3 	cmp r1,#0
+ 475              	.LM56:
+ 476              	
+ 477 0278 0130A013 	movne r3,#1
+ 478 027c A431C015 	strneb r3,[r0,#420]
+ 479              	.LM57:
+ 480              	
+ 481              	.L1436:
+ 482              	.LM58:
+ 483              	
+ 484 0280 A411C005 	streqb r1,[r0,#420]
+ARM GAS   			page 11
+
+
+ 485              	.L1437:
+ 486              	.LM59:
+ 487              	
+ 488 0284 690F80E2 	add r0,r0,#420
+ 489 0288 FEFFFFEB 	bl zd_UpdateCardSetting
+ 490 028c 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 491              	.LFE4:
+ 492              	.Lfe4:
+ 494              	.section .rodata
+ 495 049a 0000     	.align 2
+ 496              	.LC31:
+ 497 049c 3C373E25 	.ascii "<7>%s\012\000"
+ 497      730A00
+ 498 04a3 00       	.align 2
+ 499              	.LC32:
+ 500 04a4 44756D70 	.ascii "Dump Debug FIFO\000"
+ 500      20446562 
+ 500      75672046 
+ 500      49464F00 
+ 501              	.align 2
+ 502              	.LC33:
+ 503 04b4 3C373E25 	.ascii "<7>%s = %x\012\000"
+ 503      73203D20 
+ 503      25780A00 
+ 504              	.align 2
+ 505              	.LC34:
+ 506 04c0 6C656E67 	.ascii "length\000"
+ 506      746800
+ 507 04c7 00       	.align 2
+ 508              	.LC35:
+ 509 04c8 25327800 	.ascii "%2x\000"
+ 510              	.align 2
+ 511              	.LC36:
+ 512 04cc 2000     	.ascii " \000"
+ 513 04ce 0000     	.align 2
+ 514              	.LC37:
+ 515 04d0 0A00     	.ascii "\012\000"
+ 516              	.text
+ 517              	.align 2
+ 518              	.global zd1205_dbg_fifo
+ 520              	zd1205_dbg_fifo:
+ 521              	.LFB5:
+ 522              	
+ 523              	
+ 524              	.LBB28:
+ 525              	.LBB29:
+ 526              	.LBE29:
+ 527 0290 0DC0A0E1 	mov ip,sp
+ 528 0294 70D82DE9 	stmfd sp!,{r4,r5,r6,fp,ip,lr,pc}
+ 529              	.LM60:
+ 530              	
+ 531 0298 706190E5 	ldr r6,[r0,#368]
+ 532              	.LM61:
+ 533              	
+ 534 029c 80009FE5 	ldr r0,.L1446
+ 535 02a0 80109FE5 	ldr r1,.L1446+4
+ 536 02a4 04B04CE2 	sub fp,ip,#4
+ARM GAS   			page 12
+
+
+ 537 02a8 FEFFFFEB 	bl printk
+ 538              	.LM62:
+ 539              	
+ 540 02ac 023CA0E3 	mov r3,#512
+ 541 02b0 043886E5 	str r3,[r6,#2052]
+ 542              	.LM63:
+ 543              	
+ 544 02b4 70009FE5 	ldr r0,.L1446+8
+ 545              	.LM64:
+ 546              	
+ 547 02b8 084896E5 	ldr r4,[r6,#2056]
+ 548              	.LM65:
+ 549              	
+ 550 02bc 6C109FE5 	ldr r1,.L1446+12
+ 551 02c0 0420A0E1 	mov r2,r4
+ 552 02c4 FEFFFFEB 	bl printk
+ 553              	.LM66:
+ 554              	
+ 555 02c8 000054E3 	cmp r4,#0
+ 556 02cc 70A81B09 	ldmeqea fp,{r4,r5,r6,fp,sp,pc}
+ 557              	.LM67:
+ 558              	
+ 559 02d0 0050A0E3 	mov r5,#0
+ 560 02d4 040055E1 	cmp r5,r4
+ 561 02d8 C400002A 	bcs .L1441
+ 562              	.L1443:
+ 563              	.LM68:
+ 564              	
+ 565              	.LBB30:
+ 566              	.LBE30:
+ 567 02dc 001896E5 	ldr r1,[r6,#2048]
+ 568              	.LM69:
+ 569              	
+ 570 02e0 4C009FE5 	ldr r0,.L1446+16
+ 571 02e4 FEFFFFEB 	bl printk
+ 572              	.LM70:
+ 573              	
+ 574 02e8 48009FE5 	ldr r0,.L1446+20
+ 575 02ec FEFFFFEB 	bl printk
+ 576              	.LM71:
+ 577              	
+ 578 02f0 000055E3 	cmp r5,#0
+ 579 02f4 C10000DA 	ble .L1442
+ 580 02f8 013085E2 	add r3,r5,#1
+ 581 02fc 030013E3 	tst r3,#3
+ 582 0300 C100001A 	bne .L1442
+ 583              	.LM72:
+ 584              	
+ 585 0304 30009FE5 	ldr r0,.L1446+24
+ 586 0308 FEFFFFEB 	bl printk
+ 587              	.LM73:
+ 588              	
+ 589              	.L1442:
+ 590 030c 015085E2 	add r5,r5,#1
+ 591 0310 040055E1 	cmp r5,r4
+ 592 0314 B500003A 	bcc .L1443
+ 593              	.L1441:
+ARM GAS   			page 13
+
+
+ 594              	.LM74:
+ 595              	
+ 596 0318 1C009FE5 	ldr r0,.L1446+24
+ 597 031c FEFFFFEB 	bl printk
+ 598              	.LM75:
+ 599              	
+ 600              	.LBE28:
+ 601 0320 70A81BE9 	ldmea fp,{r4,r5,r6,fp,sp,pc}
+ 602              	.L1447:
+ 603              	.align 2
+ 604              	.L1446:
+ 605 0324 9C040000 	.word .LC31
+ 606 0328 A4040000 	.word .LC32
+ 607 032c B4040000 	.word .LC33
+ 608 0330 C0040000 	.word .LC34
+ 609 0334 C8040000 	.word .LC35
+ 610 0338 CC040000 	.word .LC36
+ 611 033c D0040000 	.word .LC37
+ 612              	.LFE5:
+ 613              	.Lfe5:
+ 615              	.section .rodata
+ 616 04d2 0000     	.align 2
+ 617              	.LC38:
+ 618 04d4 53657420 	.ascii "Set Fragment Threshold\000"
+ 618      46726167 
+ 618      6D656E74 
+ 618      20546872 
+ 618      6573686F 
+ 619              	.text
+ 620              	.align 2
+ 621              	.global zd1205_set_frag
+ 623              	zd1205_set_frag:
+ 624              	.LFB6:
+ 625              	
+ 626              	
+ 627 0340 0DC0A0E1 	mov ip,sp
+ 628 0344 30D82DE9 	stmfd sp!,{r4,r5,fp,ip,lr,pc}
+ 629              	.LM76:
+ 630              	
+ 631 0348 0040A0E1 	mov r4,r0
+ 632              	.LM77:
+ 633              	
+ 634 034c 20009FE5 	ldr r0,.L1449
+ 635              	.LM78:
+ 636              	
+ 637 0350 0150A0E1 	mov r5,r1
+ 638              	.LM79:
+ 639              	
+ 640 0354 1C109FE5 	ldr r1,.L1449+4
+ 641 0358 04B04CE2 	sub fp,ip,#4
+ 642 035c FEFFFFEB 	bl printk
+ 643              	.LM80:
+ 644              	
+ 645 0360 14309FE5 	ldr r3,.L1449+8
+ 646              	.LM81:
+ 647              	
+ 648 0364 690F84E2 	add r0,r4,#420
+ARM GAS   			page 14
+
+
+ 649              	.LM82:
+ 650              	
+ 651 0368 B35084E1 	strh r5,[r4,r3]
+ 652              	.LM83:
+ 653              	
+ 654 036c FEFFFFEB 	bl zd_UpdateCardSetting
+ 655 0370 30A81BE9 	ldmea fp,{r4,r5,fp,sp,pc}
+ 656              	.L1450:
+ 657              	.align 2
+ 658              	.L1449:
+ 659 0374 9C040000 	.word .LC31
+ 660 0378 D4040000 	.word .LC38
+ 661 037c BA010000 	.word 442
+ 662              	.LFE6:
+ 663              	.Lfe6:
+ 665              	.section .rodata
+ 666 04eb 00       	.align 2
+ 667              	.LC39:
+ 668 04ec 53657420 	.ascii "Set RTS Threshold\000"
+ 668      52545320 
+ 668      54687265 
+ 668      73686F6C 
+ 668      6400
+ 669              	.text
+ 670              	.align 2
+ 671              	.global zd1205_set_rts
+ 673              	zd1205_set_rts:
+ 674              	.LFB7:
+ 675              	
+ 676              	
+ 677 0380 0DC0A0E1 	mov ip,sp
+ 678 0384 30D82DE9 	stmfd sp!,{r4,r5,fp,ip,lr,pc}
+ 679              	.LM84:
+ 680              	
+ 681 0388 0040A0E1 	mov r4,r0
+ 682              	.LM85:
+ 683              	
+ 684 038c 20009FE5 	ldr r0,.L1452
+ 685              	.LM86:
+ 686              	
+ 687 0390 0150A0E1 	mov r5,r1
+ 688              	.LM87:
+ 689              	
+ 690 0394 1C109FE5 	ldr r1,.L1452+4
+ 691 0398 04B04CE2 	sub fp,ip,#4
+ 692 039c FEFFFFEB 	bl printk
+ 693              	.LM88:
+ 694              	
+ 695 03a0 690F84E2 	add r0,r4,#420
+ 696              	.LM89:
+ 697              	
+ 698 03a4 6F3FA0E3 	mov r3,#444
+ 699 03a8 B35084E1 	strh r5,[r4,r3]
+ 700              	.LM90:
+ 701              	
+ 702 03ac FEFFFFEB 	bl zd_UpdateCardSetting
+ 703 03b0 30A81BE9 	ldmea fp,{r4,r5,fp,sp,pc}
+ARM GAS   			page 15
+
+
+ 704              	.L1453:
+ 705              	.align 2
+ 706              	.L1452:
+ 707 03b4 9C040000 	.word .LC31
+ 708 03b8 EC040000 	.word .LC39
+ 709              	.LFE7:
+ 710              	.Lfe7:
+ 712              	.section .rodata
+ 713 04fe 0000     	.align 2
+ 714              	.LC40:
+ 715 0500 53657420 	.ascii "Set Preamble Type\000"
+ 715      50726561 
+ 715      6D626C65 
+ 715      20547970 
+ 715      6500
+ 716              	.text
+ 717              	.align 2
+ 718              	.global zd1205_set_preamble
+ 720              	zd1205_set_preamble:
+ 721              	.LFB8:
+ 722              	
+ 723              	
+ 724 03bc 0DC0A0E1 	mov ip,sp
+ 725 03c0 30D82DE9 	stmfd sp!,{r4,r5,fp,ip,lr,pc}
+ 726              	.LM91:
+ 727              	
+ 728 03c4 0050A0E1 	mov r5,r0
+ 729              	.LM92:
+ 730              	
+ 731 03c8 1C009FE5 	ldr r0,.L1455
+ 732              	.LM93:
+ 733              	
+ 734 03cc 0140A0E1 	mov r4,r1
+ 735              	.LM94:
+ 736              	
+ 737 03d0 18109FE5 	ldr r1,.L1455+4
+ 738 03d4 04B04CE2 	sub fp,ip,#4
+ 739 03d8 FEFFFFEB 	bl printk
+ 740              	.LM95:
+ 741              	
+ 742 03dc A641C5E5 	strb r4,[r5,#422]
+ 743              	.LM96:
+ 744              	
+ 745 03e0 690F85E2 	add r0,r5,#420
+ 746 03e4 FEFFFFEB 	bl zd_UpdateCardSetting
+ 747 03e8 30A81BE9 	ldmea fp,{r4,r5,fp,sp,pc}
+ 748              	.L1456:
+ 749              	.align 2
+ 750              	.L1455:
+ 751 03ec 9C040000 	.word .LC31
+ 752 03f0 00050000 	.word .LC40
+ 753              	.LFE8:
+ 754              	.Lfe8:
+ 756              	.align 2
+ 757              	.global acquire_ctrl_of_phy_req
+ 759              	acquire_ctrl_of_phy_req:
+ 760              	.LFB9:
+ARM GAS   			page 16
+
+
+ 761              	
+ 762              	
+ 763              	.LBB31:
+ 764              	.LBB32:
+ 765              	.LBE32:
+ 766 03f4 0DC0A0E1 	mov ip,sp
+ 767 03f8 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ 768              	.LM97:
+ 769              	
+ 770 03fc 803690E5 	ldr r3,[r0,#1664]
+ 771 0400 04B04CE2 	sub fp,ip,#4
+ 772              	.LM98:
+ 773              	
+ 774 0404 8030C3E3 	bic r3,r3,#128
+ 775              	.LM99:
+ 776              	
+ 777 0408 803680E5 	str r3,[r0,#1664]
+ 778              	.LM100:
+ 779              	
+ 780              	.LBE31:
+ 781 040c 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 782              	.LFE9:
+ 783              	.Lfe9:
+ 785              	.align 2
+ 786              	.global release_ctrl_of_phy_req
+ 788              	release_ctrl_of_phy_req:
+ 789              	.LFB10:
+ 790              	
+ 791              	
+ 792              	.LBB33:
+ 793              	.LBB34:
+ 794              	.LBE34:
+ 795 0410 0DC0A0E1 	mov ip,sp
+ 796 0414 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ 797              	.LM101:
+ 798              	
+ 799 0418 803690E5 	ldr r3,[r0,#1664]
+ 800 041c 04B04CE2 	sub fp,ip,#4
+ 801              	.LM102:
+ 802              	
+ 803 0420 803083E3 	orr r3,r3,#128
+ 804              	.LM103:
+ 805              	
+ 806 0424 803680E5 	str r3,[r0,#1664]
+ 807              	.LM104:
+ 808              	
+ 809              	.LBE33:
+ 810 0428 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 811              	.LFE10:
+ 812              	.Lfe10:
+ 814              	.section .rodata
+ 815 0512 0000     	.align 2
+ 816              	.LC41:
+ 817 0514 3C373E43 	.ascii "<7>CR%d = %04x,     CR%d = %04x\012\000"
+ 817      52256420 
+ 817      3D202530 
+ 817      34782C20 
+ARM GAS   			page 17
+
+
+ 817      20202020 
+ 818              	.text
+ 819              	.align 2
+ 820              	.global zd1205_dump_phy
+ 822              	zd1205_dump_phy:
+ 823              	.LFB11:
+ 824              	
+ 825              	
+ 826              	.LBB35:
+ 827 042c 0DC0A0E1 	mov ip,sp
+ 828 0430 30D82DE9 	stmfd sp!,{r4,r5,fp,ip,lr,pc}
+ 829 0434 04B04CE2 	sub fp,ip,#4
+ 830              	.LM105:
+ 831              	
+ 832 0438 0040A0E3 	mov r4,#0
+ 833 043c 04D04DE2 	sub sp,sp,#4
+ 834              	.LM106:
+ 835              	
+ 836 0440 705190E5 	ldr r5,[r0,#368]
+ 837              	.L1463:
+ 838              	.LM107:
+ 839              	
+ 840              	.LBB36:
+ 841              	.LBE36:
+ 842              	.LBB37:
+ 843              	.LBE37:
+ 844 0444 0500A0E1 	mov r0,r5
+ 845 0448 FEFFFFEB 	bl acquire_ctrl_of_phy_req
+ 846              	.LM108:
+ 847              	
+ 848 044c 0410A0E3 	mov r1,#4
+ 849 0450 945123E0 	mla r3,r4,r1,r5
+ 850              	.LM109:
+ 851              	
+ 852 0454 042195E7 	ldr r2,[r5,r4,asl#2]
+ 853              	.LM110:
+ 854              	
+ 855 0458 24009FE5 	ldr r0,.L1466
+ 856              	.LM111:
+ 857              	
+ 858 045c 013093E7 	ldr r3,[r3,r1]
+ 859              	.LM112:
+ 860              	
+ 861 0460 0410A0E1 	mov r1,r4
+ 862 0464 013084E2 	add r3,r4,#1
+ 863              	.LM113:
+ 864              	
+ 865 0468 024084E2 	add r4,r4,#2
+ 866              	.LM114:
+ 867              	
+ 868 046c 00208DE5 	str r2,[sp,#0]
+ 869 0470 FEFFFFEB 	bl printk
+ 870              	.LM115:
+ 871              	
+ 872 0474 0500A0E1 	mov r0,r5
+ 873 0478 FEFFFFEB 	bl release_ctrl_of_phy_req
+ 874              	.LM116:
+ARM GAS   			page 18
+
+
+ 875              	
+ 876 047c CB0054E3 	cmp r4,#203
+ 877 0480 200100EA 	b .L1465
+ 878              	.L1467:
+ 879              	.align 2
+ 880              	.L1466:
+ 881 0484 14050000 	.word .LC41
+ 882              	.L1465:
+ 883 0488 0F0100DA 	ble .L1463
+ 884              	.LM117:
+ 885              	
+ 886              	.LBE35:
+ 887 048c 30A81BE9 	ldmea fp,{r4,r5,fp,sp,pc}
+ 888              	.LFE11:
+ 889              	.Lfe11:
+ 891              	.align 2
+ 892              	.global zd1205_dbg_port
+ 894              	zd1205_dbg_port:
+ 895              	.LFB12:
+ 896              	
+ 897              	
+ 898              	.LBB38:
+ 899              	.LBB39:
+ 900              	.LBE39:
+ 901 0490 0DC0A0E1 	mov ip,sp
+ 902 0494 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ 903              	.LM118:
+ 904              	
+ 905 0498 703190E5 	ldr r3,[r0,#368]
+ 906              	.LM119:
+ 907              	
+ 908 049c F82693E5 	ldr r2,[r3,#1784]
+ 909              	.LM120:
+ 910              	
+ 911 04a0 202082E3 	orr r2,r2,#32
+ 912 04a4 F82683E5 	str r2,[r3,#1784]
+ 913 04a8 04B04CE2 	sub fp,ip,#4
+ 914              	.LM121:
+ 915              	
+ 916 04ac 041883E5 	str r1,[r3,#2052]
+ 917              	.LM122:
+ 918              	
+ 919              	.LBE38:
+ 920 04b0 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 921              	.LFE12:
+ 922              	.Lfe12:
+ 924              	.align 2
+ 925              	.global zd1205_set_sc
+ 927              	zd1205_set_sc:
+ 928              	.LFB13:
+ 929              	
+ 930              	
+ 931              	.LBB40:
+ 932              	.LBB41:
+ 933              	.LBE41:
+ 934 04b4 0DC0A0E1 	mov ip,sp
+ 935 04b8 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ARM GAS   			page 19
+
+
+ 936              	.LM123:
+ 937              	
+ 938 04bc B411C0E5 	strb r1,[r0,#436]
+ 939 04c0 04B04CE2 	sub fp,ip,#4
+ 940              	.LM124:
+ 941              	
+ 942 04c4 702190E5 	ldr r2,[r0,#368]
+ 943              	.LM125:
+ 944              	
+ 945 04c8 000051E3 	cmp r1,#0
+ 946              	.LM126:
+ 947              	
+ 948 04cc 783692E5 	ldr r3,[r2,#1656]
+ 949              	.LM127:
+ 950              	
+ 951              	.LM128:
+ 952              	
+ 953 04d0 08308313 	orrne r3,r3,#8
+ 954              	.L1470:
+ 955              	.LM129:
+ 956              	
+ 957 04d4 0830C303 	biceq r3,r3,#8
+ 958              	.L1471:
+ 959              	.LM130:
+ 960              	
+ 961 04d8 690F80E2 	add r0,r0,#420
+ 962              	.LM131:
+ 963              	
+ 964 04dc 783682E5 	str r3,[r2,#1656]
+ 965              	.LM132:
+ 966              	
+ 967 04e0 FEFFFFEB 	bl zd_UpdateCardSetting
+ 968              	.LM133:
+ 969              	
+ 970              	.LBE40:
+ 971 04e4 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 972              	.LFE13:
+ 973              	.Lfe13:
+ 975              	.align 2
+ 976              	.global zd1205_show_hash
+ 978              	zd1205_show_hash:
+ 979              	.LFB14:
+ 980              	
+ 981              	
+ 982 04e8 0DC0A0E1 	mov ip,sp
+ 983 04ec 00D82DE9 	stmfd sp!,{fp,ip,lr,pc}
+ 984 04f0 04B04CE2 	sub fp,ip,#4
+ 985              	.LM134:
+ 986              	
+ 987 04f4 200051E3 	cmp r1,#32
+ 988 04f8 00A81B89 	ldmhiea fp,{fp,sp,pc}
+ 989              	.LM135:
+ 990              	
+ 991 04fc FF0001E2 	and r0,r1,#255
+ 992 0500 FEFFFFEB 	bl ShowHashInfo
+ 993 0504 00A81BE9 	ldmea fp,{fp,sp,pc}
+ 994              	.LFE14:
+ARM GAS   			page 20
+
+
+ 995              	.Lfe14:
+ 997              	.section .rodata
+ 998 0535 000000   	.align 2
+ 999              	.LC42:
+ 1000 0538 3C373E52 	.ascii "<7>RTSThreshold = %04x\012\000"
+ 1000      54535468 
+ 1000      72657368 
+ 1000      6F6C6420 
+ 1000      3D202530 
+ 1001              	.align 2
+ 1002              	.LC43:
+ 1003 0550 3C373E46 	.ascii "<7>FragThreshold = %04x\012\000"
+ 1003      72616754 
+ 1003      68726573 
+ 1003      686F6C64 
+ 1003      203D2025 
+ 1004 0569 000000   	.align 2
+ 1005              	.LC44:
+ 1006 056c 3C373E44 	.ascii "<7>DtimPeriod = %04x\012\000"
+ 1006      74696D50 
+ 1006      6572696F 
+ 1006      64203D20 
+ 1006      25303478 
+ 1007 0582 0000     	.align 2
+ 1008              	.LC45:
+ 1009 0584 3C373E45 	.ascii "<7>EncryOnOff = %04x\012\000"
+ 1009      6E637279 
+ 1009      4F6E4F66 
+ 1009      66203D20 
+ 1009      25303478 
+ 1010 059a 0000     	.align 2
+ 1011              	.LC46:
+ 1012 059c 3C373E50 	.ascii "<7>PreambleType = %04x\012\000"
+ 1012      7265616D 
+ 1012      626C6554 
+ 1012      79706520 
+ 1012      3D202530 
+ 1013              	.align 2
+ 1014              	.LC47:
+ 1015 05b4 3C373E45 	.ascii "<7>EncryKeyId = %04x\012\000"
+ 1015      6E637279 
+ 1015      4B657949 
+ 1015      64203D20 
+ 1015      25303478 
+ 1016 05ca 0000     	.align 2
+ 1017              	.LC48:
+ 1018 05cc 3C373E43 	.ascii "<7>Channel = %04x\012\000"
+ 1018      68616E6E 
+ 1018      656C203D 
+ 1018      20253034 
+ 1018      780A00
+ 1019 05df 00       	.align 2
+ 1020              	.LC49:
+ 1021 05e0 3C373E42 	.ascii "<7>BeaconInterval = %04x\012\000"
+ 1021      6561636F 
+ 1021      6E496E74 
+ 1021      65727661 
+ARM GAS   			page 21
+
+
+ 1021      6C203D20 
+ 1022              	.text
+ 1023              	.align 2
+ 1024              	.global zd1205_show_card_setting
+ 1026              	zd1205_show_card_setting:
+ 1027              	.LFB15:
+ 1028              	
+ 1029              	
+ 1030 0508 0DC0A0E1 	mov ip,sp
+ 1031 050c 10D82DE9 	stmfd sp!,{r4,fp,ip,lr,pc}
+ 1032              	.LM136:
+ 1033              	
+ 1034 0510 0040A0E1 	mov r4,r0
+ 1035              	.LM137:
+ 1036              	
+ 1037 0514 74009FE5 	ldr r0,.L1475
+ 1038 0518 6F3FA0E3 	mov r3,#444
+ 1039 051c B31094E1 	ldrh r1,[r4,r3]
+ 1040 0520 04B04CE2 	sub fp,ip,#4
+ 1041 0524 FEFFFFEB 	bl printk
+ 1042              	.LM138:
+ 1043              	
+ 1044 0528 64309FE5 	ldr r3,.L1475+4
+ 1045 052c 64009FE5 	ldr r0,.L1475+8
+ 1046 0530 B31094E1 	ldrh r1,[r4,r3]
+ 1047 0534 FEFFFFEB 	bl printk
+ 1048              	.LM139:
+ 1049              	
+ 1050 0538 5C009FE5 	ldr r0,.L1475+12
+ 1051 053c 073DA0E3 	mov r3,#448
+ 1052 0540 B31094E1 	ldrh r1,[r4,r3]
+ 1053 0544 FEFFFFEB 	bl printk
+ 1054              	.LM140:
+ 1055              	
+ 1056 0548 50009FE5 	ldr r0,.L1475+16
+ 1057 054c A411D4E5 	ldrb r1,[r4,#420]
+ 1058 0550 FEFFFFEB 	bl printk
+ 1059              	.LM141:
+ 1060              	
+ 1061 0554 48009FE5 	ldr r0,.L1475+20
+ 1062 0558 A611D4E5 	ldrb r1,[r4,#422]
+ 1063 055c FEFFFFEB 	bl printk
+ 1064              	.LM142:
+ 1065              	
+ 1066 0560 40009FE5 	ldr r0,.L1475+24
+ 1067 0564 B211D4E5 	ldrb r1,[r4,#434]
+ 1068 0568 FEFFFFEB 	bl printk
+ 1069              	.LM143:
+ 1070              	
+ 1071 056c 38009FE5 	ldr r0,.L1475+28
+ 1072 0570 6E3FA0E3 	mov r3,#440
+ 1073 0574 B31094E1 	ldrh r1,[r4,r3]
+ 1074 0578 FEFFFFEB 	bl printk
+ 1075              	.LM144:
+ 1076              	
+ 1077 057c 2C309FE5 	ldr r3,.L1475+32
+ 1078 0580 2C009FE5 	ldr r0,.L1475+36
+ARM GAS   			page 22
+
+
+ 1079 0584 B31094E1 	ldrh r1,[r4,r3]
+ 1080 0588 FEFFFFEB 	bl printk
+ 1081 058c 10A81BE9 	ldmea fp,{r4,fp,sp,pc}
+ 1082              	.L1476:
+ 1083              	.align 2
+ 1084              	.L1475:
+ 1085 0590 38050000 	.word .LC42
+ 1086 0594 BA010000 	.word 442
+ 1087 0598 50050000 	.word .LC43
+ 1088 059c 6C050000 	.word .LC44
+ 1089 05a0 84050000 	.word .LC45
+ 1090 05a4 9C050000 	.word .LC46
+ 1091 05a8 B4050000 	.word .LC47
+ 1092 05ac CC050000 	.word .LC48
+ 1093 05b0 BE010000 	.word 446
+ 1094 05b4 E0050000 	.word .LC49
+ 1095              	.LFE15:
+ 1096              	.Lfe15:
+ 1098              	.section .rodata
+ 1099 05fa 0000     	.align 2
+ 1100              	.LC50:
+ 1101 05fc 3C363E52 	.ascii "<6>Reg: 0x%08x = 0x%08x\012\000"
+ 1101      65673A20 
+ 1101      30782530 
+ 1101      3878203D 
+ 1101      20307825 
+ 1102 0615 000000   	.align 2
+ 1103              	.LC51:
+ 1104 0618 3C373E7A 	.ascii "<7>zd1205 read register:  reg = %4x, value = %4x\012"
+ 1104      64313230 
+ 1104      35207265 
+ 1104      61642072 
+ 1104      65676973 
+ 1105 0649 00       	.ascii "\000"
+ 1106 064a 0000     	.align 2
+ 1107              	.LC52:
+ 1108 064c 3C363E57 	.ascii "<6>Write value: 0x%08x to Reg: 0x%08x\012\000"
+ 1108      72697465 
+ 1108      2076616C 
+ 1108      75653A20 
+ 1108      30782530 
+ 1109 0673 00       	.align 2
+ 1110              	.LC53:
+ 1111 0674 6D656D00 	.ascii "mem\000"
+ 1112              	.align 2
+ 1113              	.LC54:
+ 1114 0678 3C373E7A 	.ascii "<7>zd1205: dbg_flag = %x\012\000"
+ 1114      64313230 
+ 1114      353A2064 
+ 1114      62675F66 
+ 1114      6C616720 
+ 1115 0692 0000     	.align 2
+ 1116              	.LC55:
+ 1117 0694 3C373E7A 	.ascii "<7>zd1205: lb_mode = %x\012\000"
+ 1117      64313230 
+ 1117      353A206C 
+ 1117      625F6D6F 
+ARM GAS   			page 23
+
+
+ 1117      6465203D 
+ 1118 06ad 000000   	.align 2
+ 1119              	.LC56:
+ 1120 06b0 3C373E7A 	.ascii "<7>zd1205: txOn = %x\012\000"
+ 1120      64313230 
+ 1120      353A2074 
+ 1120      784F6E20 
+ 1120      3D202578 
+ 1121 06c6 0000     	.align 2
+ 1122              	.LC57:
+ 1123 06c8 3C373E7A 	.ascii "<7>zd1205: sniffer_on = %x\012\000"
+ 1123      64313230 
+ 1123      353A2073 
+ 1123      6E696666 
+ 1123      65725F6F 
+ 1124              	.align 2
+ 1125              	.LC58:
+ 1126 06e4 3C373E7A 	.ascii "<7>zd1205: wep_on_off = %x\012\000"
+ 1126      64313230 
+ 1126      353A2077 
+ 1126      65705F6F 
+ 1126      6E5F6F66 
+ 1127              	.align 2
+ 1128              	.LC59:
+ 1129 0700 3C373E7A 	.ascii "<7>zd1205: fifo\012\000"
+ 1129      64313230 
+ 1129      353A2066 
+ 1129      69666F0A 
+ 1129      00
+ 1130 0711 000000   	.align 2
+ 1131              	.LC60:
+ 1132 0714 3C373E7A 	.ascii "<7>zd1205: frag = %x\012\000"
+ 1132      64313230 
+ 1132      353A2066 
+ 1132      72616720 
+ 1132      3D202578 
+ 1133 072a 0000     	.align 2
+ 1134              	.LC61:
+ 1135 072c 3C373E7A 	.ascii "<7>zd1205: rts = %x\012\000"
+ 1135      64313230 
+ 1135      353A2072 
+ 1135      7473203D 
+ 1135      2025780A 
+ 1136 0741 000000   	.align 2
+ 1137              	.LC62:
+ 1138 0744 3C373E7A 	.ascii "<7>zd1205: pre = %x\012\000"
+ 1138      64313230 
+ 1138      353A2070 
+ 1138      7265203D 
+ 1138      2025780A 
+ 1139 0759 000000   	.align 2
+ 1140              	.LC63:
+ 1141 075c 3C373E7A 	.ascii "<7>zd1205: dump phy\012\000"
+ 1141      64313230 
+ 1141      353A2064 
+ 1141      756D7020 
+ 1141      7068790A 
+ARM GAS   			page 24
+
+
+ 1142 0771 000000   	.align 2
+ 1143              	.LC64:
+ 1144 0774 3C373E7A 	.ascii "<7>zd1205: port = %x\012\000"
+ 1144      64313230 
+ 1144      353A2070 
+ 1144      6F727420 
+ 1144      3D202578 
+ 1145 078a 0000     	.align 2
+ 1146              	.LC65:
+ 1147 078c 3C373E7A 	.ascii "<7>zd1205: card setting\012\000"
+ 1147      64313230 
+ 1147      353A2063 
+ 1147      61726420 
+ 1147      73657474 
+ 1148 07a5 000000   	.align 2
+ 1149              	.LC66:
+ 1150 07a8 3C373E7A 	.ascii "<7>zd1205: card reset\012\000"
+ 1150      64313230 
+ 1150      353A2063 
+ 1150      61726420 
+ 1150      72657365 
+ 1151 07bf 00       	.align 2
+ 1152              	.LC67:
+ 1153 07c0 3C373E7A 	.ascii "<7>zd1205: sc = %x\012\000"
+ 1153      64313230 
+ 1153      353A2073 
+ 1153      63203D20 
+ 1153      25780A00 
+ 1154              	.align 2
+ 1155              	.LC68:
+ 1156 07d4 3C373E7A 	.ascii "<7>zd1205: aid = %x\012\000"
+ 1156      64313230 
+ 1156      353A2061 
+ 1156      6964203D 
+ 1156      2025780A 
+ 1157 07e9 000000   	.align 2
+ 1158              	.LC69:
+ 1159 07ec 3C373E3D 	.ascii "<7>===== zd1205 rfd dump =====\012\000"
+ 1159      3D3D3D3D 
+ 1159      207A6431 
+ 1159      32303520 
+ 1159      72666420 
+ 1160              	.align 2
+ 1161              	.LC70:
+ 1162 080c 3C373E7A 	.ascii "<7>zd1205: channel = %d\012\000"
+ 1162      64313230 
+ 1162      353A2063 
+ 1162      68616E6E 
+ 1162      656C203D 
+ 1163 0825 000000   	.align 2
+ 1164              	.LC71:
+ 1165 0828 3C373E7A 	.ascii "<7>zd1205: read memory addr: 0x%08x value: 0x%08x\012"
+ 1165      64313230 
+ 1165      353A2072 
+ 1165      65616420 
+ 1165      6D656D6F 
+ 1166 085a 00       	.ascii "\000"
+ARM GAS   			page 25
+
+
+ 1167 085b 00       	.align 2
+ 1168              	.LC72:
+ 1169 085c 3C373E7A 	.ascii "<7>zd1205: write value: 0x%08x to memory addr: 0x%0"
+ 1169      64313230 
+ 1169      353A2077 
+ 1169      72697465 
+ 1169      2076616C 
+ 1170 088f 38780A00 	.ascii "8x\012\000"
+ 1171 0893 00       	.align 2
+ 1172              	.LC73:
+ 1173 0894 3C333E7A 	.ascii "<3>zd1205: error command = %x\012\000"
+ 1173      64313230 
+ 1173      353A2065 
+ 1173      72726F72 
+ 1173      20636F6D 
+ 1174 08b3 00       	.text
+ 1175              	.align 2
+ 1176              	.global zd1205_zd_dbg_ioctl
+ 1178              	zd1205_zd_dbg_ioctl:
+ 1179              	.LFB16:
+ 1180              	
+ 1181              	
+ 1182              	.LBB42:
+ 1183 05b8 0DC0A0E1 	mov ip,sp
+ 1184 05bc 70D82DE9 	stmfd sp!,{r4,r5,r6,fp,ip,lr,pc}
+ 1185 05c0 04B04CE2 	sub fp,ip,#4
+ 1186              	.LM145:
+ 1187              	
+ 1188 05c4 0150A0E1 	mov r5,r1
+ 1189              	.LM146:
+ 1190              	
+ 1191 05c8 B010D5E1 	ldrh r1,[r5,#0]
+ 1192              	.LM147:
+ 1193              	
+ 1194 05cc 0040A0E1 	mov r4,r0
+ 1195              	.LM148:
+ 1196              	
+ 1197 05d0 706194E5 	ldr r6,[r4,#368]
+ 1198              	.LM149:
+ 1199              	
+ 1200 05d4 013041E2 	sub r3,r1,#1
+ 1201 05d8 240053E3 	cmp r3,#36
+ 1202 05dc 03F19F97 	ldrls pc,[pc,r3,asl#2]
+ 1203 05e0 420200EA 	b .L1504
+ 1204              	.align 2
+ 1205              	.L1505:
+ 1206 05e4 78060000 	.word .L1479
+ 1207 05e8 B0060000 	.word .L1480
+ 1208 05ec F0060000 	.word .L1482
+ 1209 05f0 00070000 	.word .L1483
+ 1210 05f4 0C070000 	.word .L1484
+ 1211 05f8 24070000 	.word .L1485
+ 1212 05fc 30070000 	.word .L1486
+ 1213 0600 10090000 	.word .L1504
+ 1214 0604 54070000 	.word .L1487
+ 1215 0608 10090000 	.word .L1504
+ 1216 060c 10090000 	.word .L1504
+ARM GAS   			page 26
+
+
+ 1217 0610 10090000 	.word .L1504
+ 1218 0614 10090000 	.word .L1504
+ 1219 0618 10090000 	.word .L1504
+ 1220 061c 6C070000 	.word .L1488
+ 1221 0620 8C070000 	.word .L1489
+ 1222 0624 10090000 	.word .L1504
+ 1223 0628 10090000 	.word .L1504
+ 1224 062c 10090000 	.word .L1504
+ 1225 0630 10090000 	.word .L1504
+ 1226 0634 10090000 	.word .L1504
+ 1227 0638 10090000 	.word .L1504
+ 1228 063c A8070000 	.word .L1490
+ 1229 0640 BC070000 	.word .L1491
+ 1230 0644 D8070000 	.word .L1492
+ 1231 0648 F4070000 	.word .L1493
+ 1232 064c 10080000 	.word .L1494
+ 1233 0650 24080000 	.word .L1495
+ 1234 0654 40080000 	.word .L1496
+ 1235 0658 10090000 	.word .L1504
+ 1236 065c 54080000 	.word .L1497
+ 1237 0660 68080000 	.word .L1498
+ 1238 0664 84080000 	.word .L1499
+ 1239 0668 A0080000 	.word .L1500
+ 1240 066c B4080000 	.word .L1501
+ 1241 0670 D8080000 	.word .L1502
+ 1242 0674 F0080000 	.word .L1503
+ 1243              	.L1479:
+ 1244              	.LM150:
+ 1245              	
+ 1246              	.LBB43:
+ 1247              	.LBE43:
+ 1248 0678 0600A0E1 	mov r0,r6
+ 1249 067c FEFFFFEB 	bl acquire_ctrl_of_phy_req
+ 1250              	.LM151:
+ 1251              	
+ 1252 0680 043095E5 	ldr r3,[r5,#4]
+ 1253              	.LM152:
+ 1254              	
+ 1255 0684 0600A0E1 	mov r0,r6
+ 1256              	.LM153:
+ 1257              	
+ 1258 0688 034096E7 	ldr r4,[r6,r3]
+ 1259              	.LM154:
+ 1260              	
+ 1261 068c FEFFFFEB 	bl release_ctrl_of_phy_req
+ 1262              	.LM155:
+ 1263              	
+ 1264 0690 88029FE5 	ldr r0,.L1506
+ 1265 0694 041095E5 	ldr r1,[r5,#4]
+ 1266 0698 0420A0E1 	mov r2,r4
+ 1267 069c FEFFFFEB 	bl printk
+ 1268              	.LM156:
+ 1269              	
+ 1270 06a0 7C029FE5 	ldr r0,.L1506+4
+ 1271 06a4 060095E9 	ldmib r5,{r1,r2}
+ 1272 06a8 FEFFFFEB 	bl printk
+ 1273              	.LM157:
+ARM GAS   			page 27
+
+
+ 1274              	
+ 1275 06ac 440200EA 	b .L1478
+ 1276              	.L1480:
+ 1277              	.LM158:
+ 1278              	
+ 1279 06b0 0600A0E1 	mov r0,r6
+ 1280 06b4 FEFFFFEB 	bl acquire_ctrl_of_phy_req
+ 1281              	.LM159:
+ 1282              	
+ 1283 06b8 0C0095E9 	ldmib r5,{r2,r3}
+ 1284              	.LM160:
+ 1285              	
+ 1286 06bc 0600A0E1 	mov r0,r6
+ 1287              	.LM161:
+ 1288              	
+ 1289 06c0 023086E7 	str r3,[r6,r2]
+ 1290              	.LM162:
+ 1291              	
+ 1292 06c4 FEFFFFEB 	bl release_ctrl_of_phy_req
+ 1293              	.LM163:
+ 1294              	
+ 1295 06c8 58029FE5 	ldr r0,.L1506+8
+ 1296 06cc 081095E5 	ldr r1,[r5,#8]
+ 1297 06d0 042095E5 	ldr r2,[r5,#4]
+ 1298 06d4 FEFFFFEB 	bl printk
+ 1299              	.LM164:
+ 1300              	
+ 1301 06d8 042095E5 	ldr r2,[r5,#4]
+ 1302 06dc 48329FE5 	ldr r3,.L1506+12
+ 1303 06e0 030052E1 	cmp r2,r3
+ 1304              	.LM165:
+ 1305              	
+ 1306 06e4 08309505 	ldreq r3,[r5,#8]
+ 1307 06e8 A0318405 	streq r3,[r4,#416]
+ 1308              	.LM166:
+ 1309              	
+ 1310 06ec 440200EA 	b .L1478
+ 1311              	.L1482:
+ 1312              	.LM167:
+ 1313              	
+ 1314 06f0 38029FE5 	ldr r0,.L1506+16
+ 1315 06f4 060095E9 	ldmib r5,{r1,r2}
+ 1316 06f8 FEFFFFEB 	bl zd1205_dump_data
+ 1317              	.LM168:
+ 1318              	
+ 1319 06fc 440200EA 	b .L1478
+ 1320              	.L1483:
+ 1321              	.LM169:
+ 1322              	
+ 1323 0700 0400A0E1 	mov r0,r4
+ 1324 0704 FEFFFFEB 	bl zd1205_dump_regs
+ 1325              	.LM170:
+ 1326              	
+ 1327 0708 440200EA 	b .L1478
+ 1328              	.L1484:
+ 1329              	.LM171:
+ 1330              	
+ARM GAS   			page 28
+
+
+ 1331 070c 083095E5 	ldr r3,[r5,#8]
+ 1332              	.LM172:
+ 1333              	
+ 1334 0710 1C029FE5 	ldr r0,.L1506+20
+ 1335 0714 0310A0E1 	mov r1,r3
+ 1336              	.LM173:
+ 1337              	
+ 1338 0718 183384E5 	str r3,[r4,#792]
+ 1339              	.LM174:
+ 1340              	
+ 1341 071c FEFFFFEB 	bl printk
+ 1342              	.LM175:
+ 1343              	
+ 1344 0720 440200EA 	b .L1478
+ 1345              	.L1485:
+ 1346              	.LM176:
+ 1347              	
+ 1348 0724 0400A0E1 	mov r0,r4
+ 1349 0728 FEFFFFEB 	bl zd1205_dump_cnters
+ 1350              	.LM177:
+ 1351              	
+ 1352 072c 440200EA 	b .L1478
+ 1353              	.L1486:
+ 1354              	.LM178:
+ 1355              	
+ 1356 0730 00029FE5 	ldr r0,.L1506+24
+ 1357              	.LM179:
+ 1358              	
+ 1359 0734 B850D5E1 	ldrh r5,[r5,#8]
+ 1360 0738 EA3FA0E3 	mov r3,#936
+ 1361 073c B35084E1 	strh r5,[r4,r3]
+ 1362              	.LM180:
+ 1363              	
+ 1364 0740 B31094E1 	ldrh r1,[r4,r3]
+ 1365 0744 FEFFFFEB 	bl printk
+ 1366              	.LM181:
+ 1367              	
+ 1368 0748 0400A0E1 	mov r0,r4
+ 1369 074c FEFFFFEB 	bl zd1205_lb_mode
+ 1370              	.LM182:
+ 1371              	
+ 1372 0750 440200EA 	b .L1478
+ 1373              	.L1487:
+ 1374              	.LM183:
+ 1375              	
+ 1376 0754 0830D5E5 	ldrb r3,[r5,#8]
+ 1377              	.LM184:
+ 1378              	
+ 1379 0758 DC019FE5 	ldr r0,.L1506+28
+ 1380              	.LM185:
+ 1381              	
+ 1382 075c 9233C4E5 	strb r3,[r4,#914]
+ 1383              	.LM186:
+ 1384              	
+ 1385 0760 9213D4E5 	ldrb r1,[r4,#914]
+ 1386 0764 FEFFFFEB 	bl printk
+ 1387              	.LM187:
+ARM GAS   			page 29
+
+
+ 1388              	
+ 1389 0768 440200EA 	b .L1478
+ 1390              	.L1488:
+ 1391              	.LM188:
+ 1392              	
+ 1393 076c 0830D5E5 	ldrb r3,[r5,#8]
+ 1394              	.LM189:
+ 1395              	
+ 1396 0770 C8019FE5 	ldr r0,.L1506+32
+ 1397              	.LM190:
+ 1398              	
+ 1399 0774 5731C4E5 	strb r3,[r4,#343]
+ 1400              	.LM191:
+ 1401              	
+ 1402 0778 5711D4E5 	ldrb r1,[r4,#343]
+ 1403 077c FEFFFFEB 	bl printk
+ 1404              	.LM192:
+ 1405              	
+ 1406 0780 0400A0E1 	mov r0,r4
+ 1407 0784 FEFFFFEB 	bl zd1205_set_sniffer_mode
+ 1408              	.LM193:
+ 1409              	
+ 1410 0788 440200EA 	b .L1478
+ 1411              	.L1489:
+ 1412              	.LM194:
+ 1413              	
+ 1414 078c B0019FE5 	ldr r0,.L1506+36
+ 1415 0790 081095E5 	ldr r1,[r5,#8]
+ 1416 0794 FEFFFFEB 	bl printk
+ 1417              	.LM195:
+ 1418              	
+ 1419 0798 081095E5 	ldr r1,[r5,#8]
+ 1420 079c 0400A0E1 	mov r0,r4
+ 1421 07a0 FEFFFFEB 	bl zd1205_wep_on_off
+ 1422              	.LM196:
+ 1423              	
+ 1424 07a4 440200EA 	b .L1478
+ 1425              	.L1490:
+ 1426              	.LM197:
+ 1427              	
+ 1428 07a8 98019FE5 	ldr r0,.L1506+40
+ 1429 07ac FEFFFFEB 	bl printk
+ 1430              	.LM198:
+ 1431              	
+ 1432 07b0 0400A0E1 	mov r0,r4
+ 1433 07b4 FEFFFFEB 	bl zd1205_dbg_fifo
+ 1434              	.LM199:
+ 1435              	
+ 1436 07b8 440200EA 	b .L1478
+ 1437              	.L1491:
+ 1438              	.LM200:
+ 1439              	
+ 1440 07bc 88019FE5 	ldr r0,.L1506+44
+ 1441 07c0 081095E5 	ldr r1,[r5,#8]
+ 1442 07c4 FEFFFFEB 	bl printk
+ 1443              	.LM201:
+ 1444              	
+ARM GAS   			page 30
+
+
+ 1445 07c8 081095E5 	ldr r1,[r5,#8]
+ 1446 07cc 0400A0E1 	mov r0,r4
+ 1447 07d0 FEFFFFEB 	bl zd1205_set_frag
+ 1448              	.LM202:
+ 1449              	
+ 1450 07d4 440200EA 	b .L1478
+ 1451              	.L1492:
+ 1452              	.LM203:
+ 1453              	
+ 1454 07d8 70019FE5 	ldr r0,.L1506+48
+ 1455 07dc 081095E5 	ldr r1,[r5,#8]
+ 1456 07e0 FEFFFFEB 	bl printk
+ 1457              	.LM204:
+ 1458              	
+ 1459 07e4 081095E5 	ldr r1,[r5,#8]
+ 1460 07e8 0400A0E1 	mov r0,r4
+ 1461 07ec FEFFFFEB 	bl zd1205_set_rts
+ 1462              	.LM205:
+ 1463              	
+ 1464 07f0 440200EA 	b .L1478
+ 1465              	.L1493:
+ 1466              	.LM206:
+ 1467              	
+ 1468 07f4 58019FE5 	ldr r0,.L1506+52
+ 1469 07f8 081095E5 	ldr r1,[r5,#8]
+ 1470 07fc FEFFFFEB 	bl printk
+ 1471              	.LM207:
+ 1472              	
+ 1473 0800 081095E5 	ldr r1,[r5,#8]
+ 1474 0804 0400A0E1 	mov r0,r4
+ 1475 0808 FEFFFFEB 	bl zd1205_set_preamble
+ 1476              	.LM208:
+ 1477              	
+ 1478 080c 440200EA 	b .L1478
+ 1479              	.L1494:
+ 1480              	.LM209:
+ 1481              	
+ 1482 0810 40019FE5 	ldr r0,.L1506+56
+ 1483 0814 FEFFFFEB 	bl printk
+ 1484              	.LM210:
+ 1485              	
+ 1486 0818 0400A0E1 	mov r0,r4
+ 1487 081c FEFFFFEB 	bl zd1205_dump_phy
+ 1488              	.LM211:
+ 1489              	
+ 1490 0820 440200EA 	b .L1478
+ 1491              	.L1495:
+ 1492              	.LM212:
+ 1493              	
+ 1494 0824 30019FE5 	ldr r0,.L1506+60
+ 1495 0828 081095E5 	ldr r1,[r5,#8]
+ 1496 082c FEFFFFEB 	bl printk
+ 1497              	.LM213:
+ 1498              	
+ 1499 0830 081095E5 	ldr r1,[r5,#8]
+ 1500 0834 0400A0E1 	mov r0,r4
+ 1501 0838 FEFFFFEB 	bl zd1205_dbg_port
+ARM GAS   			page 31
+
+
+ 1502              	.LM214:
+ 1503              	
+ 1504 083c 440200EA 	b .L1478
+ 1505              	.L1496:
+ 1506              	.LM215:
+ 1507              	
+ 1508 0840 18019FE5 	ldr r0,.L1506+64
+ 1509 0844 FEFFFFEB 	bl printk
+ 1510              	.LM216:
+ 1511              	
+ 1512 0848 0400A0E1 	mov r0,r4
+ 1513 084c FEFFFFEB 	bl zd1205_show_card_setting
+ 1514              	.LM217:
+ 1515              	
+ 1516 0850 440200EA 	b .L1478
+ 1517              	.L1497:
+ 1518              	.LM218:
+ 1519              	
+ 1520 0854 08019FE5 	ldr r0,.L1506+68
+ 1521 0858 FEFFFFEB 	bl printk
+ 1522              	.LM219:
+ 1523              	
+ 1524 085c 0400A0E1 	mov r0,r4
+ 1525 0860 FEFFFFEB 	bl zd1205_sleep_reset
+ 1526              	.LM220:
+ 1527              	
+ 1528 0864 440200EA 	b .L1478
+ 1529              	.L1498:
+ 1530              	.LM221:
+ 1531              	
+ 1532 0868 F8009FE5 	ldr r0,.L1506+72
+ 1533 086c 081095E5 	ldr r1,[r5,#8]
+ 1534 0870 FEFFFFEB 	bl printk
+ 1535              	.LM222:
+ 1536              	
+ 1537 0874 081095E5 	ldr r1,[r5,#8]
+ 1538 0878 0400A0E1 	mov r0,r4
+ 1539 087c FEFFFFEB 	bl zd1205_set_sc
+ 1540              	.LM223:
+ 1541              	
+ 1542 0880 440200EA 	b .L1478
+ 1543              	.L1499:
+ 1544              	.LM224:
+ 1545              	
+ 1546 0884 E0009FE5 	ldr r0,.L1506+76
+ 1547 0888 081095E5 	ldr r1,[r5,#8]
+ 1548 088c FEFFFFEB 	bl printk
+ 1549              	.LM225:
+ 1550              	
+ 1551 0890 081095E5 	ldr r1,[r5,#8]
+ 1552 0894 0400A0E1 	mov r0,r4
+ 1553 0898 FEFFFFEB 	bl zd1205_show_hash
+ 1554              	.LM226:
+ 1555              	
+ 1556 089c 440200EA 	b .L1478
+ 1557              	.L1500:
+ 1558              	.LM227:
+ARM GAS   			page 32
+
+
+ 1559              	
+ 1560 08a0 C8009FE5 	ldr r0,.L1506+80
+ 1561 08a4 FEFFFFEB 	bl printk
+ 1562              	.LM228:
+ 1563              	
+ 1564 08a8 0400A0E1 	mov r0,r4
+ 1565 08ac FEFFFFEB 	bl zd1205_dump_rfds
+ 1566              	.LM229:
+ 1567              	
+ 1568 08b0 440200EA 	b .L1478
+ 1569              	.L1501:
+ 1570              	.LM230:
+ 1571              	
+ 1572 08b4 B8009FE5 	ldr r0,.L1506+84
+ 1573 08b8 081095E5 	ldr r1,[r5,#8]
+ 1574 08bc FEFFFFEB 	bl printk
+ 1575              	.LM231:
+ 1576              	
+ 1577 08c0 6E3FA0E3 	mov r3,#440
+ 1578 08c4 B850D5E1 	ldrh r5,[r5,#8]
+ 1579              	.LM232:
+ 1580              	
+ 1581 08c8 690F84E2 	add r0,r4,#420
+ 1582              	.LM233:
+ 1583              	
+ 1584 08cc B35084E1 	strh r5,[r4,r3]
+ 1585              	.LM234:
+ 1586              	
+ 1587 08d0 FEFFFFEB 	bl zd_UpdateCardSetting
+ 1588              	.LM235:
+ 1589              	
+ 1590 08d4 440200EA 	b .L1478
+ 1591              	.L1502:
+ 1592              	.LM236:
+ 1593              	
+ 1594              	.LBB44:
+ 1595              	.LM237:
+ 1596              	
+ 1597 08d8 041095E5 	ldr r1,[r5,#4]
+ 1598              	.LM238:
+ 1599              	
+ 1600 08dc 94009FE5 	ldr r0,.L1506+88
+ 1601              	.LM239:
+ 1602              	
+ 1603 08e0 013181E2 	add r3,r1,#1073741824
+ 1604              	.LM240:
+ 1605              	
+ 1606 08e4 002093E5 	ldr r2,[r3,#0]
+ 1607 08e8 FEFFFFEB 	bl printk
+ 1608              	.LM241:
+ 1609              	
+ 1610 08ec 440200EA 	b .L1478
+ 1611              	.LM242:
+ 1612              	
+ 1613              	.LBE44:
+ 1614              	.L1503:
+ 1615              	.LM243:
+ARM GAS   			page 33
+
+
+ 1616              	
+ 1617              	.LBB45:
+ 1618              	.LM244:
+ 1619              	
+ 1620 08f0 84009FE5 	ldr r0,.L1506+92
+ 1621              	.LM245:
+ 1622              	
+ 1623 08f4 043095E5 	ldr r3,[r5,#4]
+ 1624              	.LM246:
+ 1625              	
+ 1626 08f8 081095E5 	ldr r1,[r5,#8]
+ 1627              	.LM247:
+ 1628              	
+ 1629 08fc 013183E2 	add r3,r3,#1073741824
+ 1630              	.LM248:
+ 1631              	
+ 1632 0900 001083E5 	str r1,[r3,#0]
+ 1633              	.LM249:
+ 1634              	
+ 1635 0904 042095E5 	ldr r2,[r5,#4]
+ 1636 0908 FEFFFFEB 	bl printk
+ 1637              	.LM250:
+ 1638              	
+ 1639 090c 440200EA 	b .L1478
+ 1640              	.LM251:
+ 1641              	
+ 1642              	.LBE45:
+ 1643              	.L1504:
+ 1644              	.LM252:
+ 1645              	
+ 1646 0910 68009FE5 	ldr r0,.L1506+96
+ 1647 0914 FEFFFFEB 	bl printk
+ 1648              	.L1478:
+ 1649              	.LM253:
+ 1650              	
+ 1651 0918 0000A0E3 	mov r0,#0
+ 1652              	.LM254:
+ 1653              	
+ 1654              	.LBE42:
+ 1655 091c 70A81BE9 	ldmea fp,{r4,r5,r6,fp,sp,pc}
+ 1656              	.L1507:
+ 1657              	.align 2
+ 1658              	.L1506:
+ 1659 0920 FC050000 	.word .LC50
+ 1660 0924 18060000 	.word .LC51
+ 1661 0928 4C060000 	.word .LC52
+ 1662 092c F8060000 	.word 1784
+ 1663 0930 74060000 	.word .LC53
+ 1664 0934 78060000 	.word .LC54
+ 1665 0938 94060000 	.word .LC55
+ 1666 093c B0060000 	.word .LC56
+ 1667 0940 C8060000 	.word .LC57
+ 1668 0944 E4060000 	.word .LC58
+ 1669 0948 00070000 	.word .LC59
+ 1670 094c 14070000 	.word .LC60
+ 1671 0950 2C070000 	.word .LC61
+ 1672 0954 44070000 	.word .LC62
+ARM GAS   			page 34
+
+
+ 1673 0958 5C070000 	.word .LC63
+ 1674 095c 74070000 	.word .LC64
+ 1675 0960 8C070000 	.word .LC65
+ 1676 0964 A8070000 	.word .LC66
+ 1677 0968 C0070000 	.word .LC67
+ 1678 096c D4070000 	.word .LC68
+ 1679 0970 EC070000 	.word .LC69
+ 1680 0974 0C080000 	.word .LC70
+ 1681 0978 28080000 	.word .LC71
+ 1682 097c 5C080000 	.word .LC72
+ 1683 0980 94080000 	.word .LC73
+ 1684              	.LFE16:
+ 1685              	.Lfe16:
+ 1687              	.align 2
+ 1688              	.global zd1205_lb_mode
+ 1690              	zd1205_lb_mode:
+ 1691              	.LFB17:
+ 1692              	
+ 1693              	
+ 1694              	.LBB46:
+ 1695 0984 0DC0A0E1 	mov ip,sp
+ 1696 0988 10D82DE9 	stmfd sp!,{r4,fp,ip,lr,pc}
+ 1697              	.LM255:
+ 1698              	
+ 1699 098c EA3FA0E3 	mov r3,#936
+ 1700 0990 B33090E1 	ldrh r3,[r0,r3]
+ 1701 0994 04B04CE2 	sub fp,ip,#4
+ 1702              	.LM256:
+ 1703              	
+ 1704 0998 704190E5 	ldr r4,[r0,#368]
+ 1705              	.LM257:
+ 1706              	
+ 1707 099c 000053E3 	cmp r3,#0
+ 1708 09a0 7202001A 	bne .L1509
+ 1709              	.LM258:
+ 1710              	
+ 1711              	.LBB47:
+ 1712              	.LBE47:
+ 1713 09a4 0400A0E1 	mov r0,r4
+ 1714 09a8 FEFFFFEB 	bl acquire_ctrl_of_phy_req
+ 1715              	.LM259:
+ 1716              	
+ 1717 09ac 0830A0E3 	mov r3,#8
+ 1718 09b0 BC3084E5 	str r3,[r4,#188]
+ 1719              	.LM260:
+ 1720              	
+ 1721 09b4 0400A0E1 	mov r0,r4
+ 1722              	.LM261:
+ 1723              	
+ 1724 09b8 843084E5 	str r3,[r4,#132]
+ 1725              	.LM262:
+ 1726              	
+ 1727 09bc FEFFFFEB 	bl release_ctrl_of_phy_req
+ 1728              	.LM263:
+ 1729              	
+ 1730 09c0 203594E5 	ldr r3,[r4,#1312]
+ 1731              	.LM264:
+ARM GAS   			page 35
+
+
+ 1732              	
+ 1733 09c4 013483E3 	orr r3,r3,#16777216
+ 1734              	.LM265:
+ 1735              	
+ 1736 09c8 203584E5 	str r3,[r4,#1312]
+ 1737              	.LM266:
+ 1738              	
+ 1739 09cc 10A81BE9 	ldmea fp,{r4,fp,sp,pc}
+ 1740              	.L1509:
+ 1741              	.LM267:
+ 1742              	
+ 1743              	.LBB48:
+ 1744              	.LBE48:
+ 1745 09d0 203594E5 	ldr r3,[r4,#1312]
+ 1746              	.LM268:
+ 1747              	
+ 1748 09d4 0400A0E1 	mov r0,r4
+ 1749              	.LM269:
+ 1750              	
+ 1751 09d8 0134C3E3 	bic r3,r3,#16777216
+ 1752              	.LM270:
+ 1753              	
+ 1754 09dc 203584E5 	str r3,[r4,#1312]
+ 1755              	.LM271:
+ 1756              	
+ 1757 09e0 FEFFFFEB 	bl acquire_ctrl_of_phy_req
+ 1758              	.LM272:
+ 1759              	
+ 1760 09e4 0400A0E1 	mov r0,r4
+ 1761              	.LM273:
+ 1762              	
+ 1763 09e8 1830A0E3 	mov r3,#24
+ 1764 09ec BC3084E5 	str r3,[r4,#188]
+ 1765              	.LM274:
+ 1766              	
+ 1767 09f0 143083E2 	add r3,r3,#20
+ 1768 09f4 843084E5 	str r3,[r4,#132]
+ 1769              	.LM275:
+ 1770              	
+ 1771 09f8 FEFFFFEB 	bl release_ctrl_of_phy_req
+ 1772              	.LM276:
+ 1773              	
+ 1774              	.LBE46:
+ 1775 09fc 10A81BE9 	ldmea fp,{r4,fp,sp,pc}
+ 1776              	.LFE17:
+ 1777              	.Lfe17:
+ 1779              	
+ 1780              	.section .text
+ 1781              	.Letext0:
+ 1782              	
+ARM GAS   			page 36
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 zddebug.c
+    {standard input}:3      .text:00000000 gcc2_compiled.
+    {standard input}:31     .text:00000000 zd1205_set_sniffer_mode
+    {standard input}:169    .text:00000070 zd1205_dump_regs
+    {standard input}:348    .text:00000170 zd1205_dump_cnters
+    {standard input}:465    .text:00000268 zd1205_wep_on_off
+    {standard input}:520    .text:00000290 zd1205_dbg_fifo
+    {standard input}:623    .text:00000340 zd1205_set_frag
+    {standard input}:673    .text:00000380 zd1205_set_rts
+    {standard input}:720    .text:000003bc zd1205_set_preamble
+    {standard input}:759    .text:000003f4 acquire_ctrl_of_phy_req
+    {standard input}:788    .text:00000410 release_ctrl_of_phy_req
+    {standard input}:822    .text:0000042c zd1205_dump_phy
+    {standard input}:894    .text:00000490 zd1205_dbg_port
+    {standard input}:927    .text:000004b4 zd1205_set_sc
+    {standard input}:978    .text:000004e8 zd1205_show_hash
+    {standard input}:1026   .text:00000508 zd1205_show_card_setting
+    {standard input}:1178   .text:000005b8 zd1205_zd_dbg_ioctl
+    {standard input}:1690   .text:00000984 zd1205_lb_mode
+
+UNDEFINED SYMBOLS
+set_bit
+printk
+zd1205_lock
+ShowQInfo
+zd1205_unlock
+freeSignalCount
+freeFdescCount
+zd_UpdateCardSetting
+ShowHashInfo
+zd1205_dump_data
+zd1205_sleep_reset
+zd1205_dump_rfds

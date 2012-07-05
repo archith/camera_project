@@ -1,0 +1,47 @@
+#
+# Makefile for the kernel hardware sensors drivers.
+#
+export-objs := mt9m111.o mt9v111.o ov9653.o tw9906.o
+MOD_LIST_NAME := SENSORS_MODULES
+O_TARGET := sensor.o
+
+obj-$(CONFIG_SENSORS_ADM1021)	+= adm1021.o
+obj-$(CONFIG_SENSORS_ADM1024)	+= adm1024.o
+obj-$(CONFIG_SENSORS_ADM1025)	+= adm1025.o
+obj-$(CONFIG_SENSORS_ADM1026)	+= adm1026.o
+obj-$(CONFIG_SENSORS_ADM9240)	+= adm9240.o
+obj-$(CONFIG_SENSORS_BT869)		+= bt869.o
+obj-$(CONFIG_SENSORS_CH700X)	+= ch700x.o
+obj-$(CONFIG_SENSORS_VT1622)    += vt1622.o
+obj-$(CONFIG_SENSORS_DDCMON)	+= ddcmon.o
+obj-$(CONFIG_SENSORS_DS1621)	+= ds1621.o
+obj-$(CONFIG_SENSORS_EEPROM)	+= eeprom.o
+obj-$(CONFIG_SENSORS_FSCPOS)	+= fscpos.o
+obj-$(CONFIG_SENSORS_FSCSCY)	+= fscscy.o
+obj-$(CONFIG_SENSORS_GL518SM)	+= gl518sm.o
+obj-$(CONFIG_SENSORS_GL520SM)	+= gl520sm.o
+obj-$(CONFIG_SENSORS_IT87)		+= it87.o
+obj-$(CONFIG_SENSORS_LM75)		+= lm75.o
+obj-$(CONFIG_SENSORS_LM78)		+= lm78.o
+obj-$(CONFIG_SENSORS_LM80)		+= lm80.o
+obj-$(CONFIG_SENSORS_LM85)		+= lm85.o
+obj-$(CONFIG_SENSORS_LM87)		+= lm87.o
+obj-$(CONFIG_SENSORS_LM92)		+= lm92.o
+obj-$(CONFIG_SENSORS_MAXILIFE)	+= maxilife.o
+obj-$(CONFIG_SENSORS_MTP008)	+= mtp008.o
+obj-$(CONFIG_SENSORS_PCF8574)	+= pcf8574.o
+obj-$(CONFIG_SENSORS_PCF8591)	+= pcf8591.o
+obj-$(CONFIG_SENSORS_SIS5595)	+= sis5595.o
+obj-$(CONFIG_SENSORS_SMSC47M1)	+= smsc47m1.o
+obj-$(CONFIG_SENSORS_THMC50)	+= thmc50.o
+obj-$(CONFIG_SENSORS_VIA686A)	+= via686a.o
+obj-$(CONFIG_SENSORS_VT1211)	+= vt1211.o
+obj-$(CONFIG_SENSORS_VT8231)	+= vt8231.o
+obj-$(CONFIG_SENSORS_W83781D)	+= w83781d.o
+obj-$(CONFIG_SENSORS_MT9M111)	+= mt9m111.o
+obj-$(CONFIG_SENSORS_MT9V111)	+= mt9v111.o
+obj-$(CONFIG_SENSORS_OV9653)	+= ov9653.o
+obj-$(CONFIG_SENSORS_TW9906)	+= tw9906.o
+
+include $(TOPDIR)/Rules.make
+

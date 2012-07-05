@@ -1,0 +1,32 @@
+Author:Derek
+Date:94/05/05
+
+enable Rdebug tool
+
+kernel
+cd linux-2.4.20/
+make menuconfig
+Loadable module support  ---> [*] Enable loadable module support 
+System Type              ---> <M> Rdebug Tool Module
+
+make
+make modules
+
+cd linux-2.4.20/arch/arm/mach-pl1091/utils/Rdebug/RdebugUI 
+make
+
+How to test
+booting  PL1091
+cp linux-2.4.20/arch/arm/mach-pl1091/utils/Rdebug/Rdebug.o             ---> PL1091
+cp linux-2.4.20/arch/arm/mach-pl1091/utils/Rdebug/RdebugUI/RdebugUI    ---> PL1091
+insmod Rdebug.o
+./RdebugUI -h  --->help message
+
+
+
+PS:
+writeb has some problem
+If use writeb to write 0x12 in register A.
+Then register A will be changed 0x12121212.
+
+Now use writel to replace writeb temorarily.

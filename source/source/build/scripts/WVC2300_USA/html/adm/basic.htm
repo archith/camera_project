@@ -1,0 +1,728 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var showit = "block";
+var hideit = "none";
+var na_var = "n/a";
+//var w_channel_sel; //weeder add to remember the primary wireless channel from server
+function show_hide(el,shownow)  // IE & NS6; shownow = true, false
+{
+        if (document.all)
+                document.all(el).style.display = (shownow) ? showit : hideit ;
+        else if (document.getElementById)
+                document.getElementById(el).style.display = (shownow) ? showit : hideit ;
+}
+
+/*function setWire()
+{
+    var cf = document.forms[0];
+	if ( cf.w_mode.selectedIndex == 1) //  infra
+	{
+		cf.w_channel.options[0].text = msg_auto_ch;
+		w_channel_sel = cf.w_channel.selectedIndex; //weeder add to remember the primary wireless channel from server
+		cf.w_channel.selectedIndex = 0;
+		cf.w_channel.disabled = true;
+		document.getElementById("CHANNEL_NO_TEXT").disabled = true;
+	}
+	else
+	{
+		cf.w_channel.options[0].text = 1;
+		cf.w_channel.selectedIndex = w_channel_sel; // weeder add to show the primary channel
+		cf.w_channel.disabled = false;
+		document.getElementById("CHANNEL_NO_TEXT").disabled = false;
+	}
+	
+}*/
+
+function setIP()
+{
+    var cf = document.forms[0];
+	var dFlag = (cf.iptype.selectedIndex == 1);
+	cf.ip1.disabled = cf.ip2.disabled = cf.ip3.disabled = cf.ip4.disabled = dFlag;
+	cf.mask1.disabled = cf.mask2.disabled = cf.mask3.disabled = cf.mask4.disabled = dFlag;
+	cf.gw1.disabled = cf.gw2.disabled = cf.gw3.disabled = cf.gw4.disabled = dFlag;
+	cf.dns1_1.disabled = cf.dns1_2.disabled = cf.dns1_3.disabled = cf.dns1_4.disabled = dFlag;
+	cf.dns2_1.disabled = cf.dns2_2.disabled = cf.dns2_3.disabled = cf.dns2_4.disabled = dFlag;
+	
+	document.getElementById("IP_ADD_TEXT").disabled = dFlag;
+	document.getElementById("IP_SUBNET").disabled = dFlag;
+	document.getElementById("GATEWAY_TEXT").disabled = dFlag;
+	document.getElementById("PRIMARY_DNS_TEXT").disabled = dFlag;
+	document.getElementById("SECOND_DNS_TEXT").disabled = dFlag;
+	
+}
+var maxdays = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+var minyear = 2000;
+var maxyear = 2030;
+
+
+function syncPC()
+{
+    var cf = document.forms[0];
+    var SysTime = new Date();
+
+	rALERT("Basic Setup",msg_datetime_pcsync);
+	cf.todo.value = "setdatetime";
+	
+	cf.h_yr.value = SysTime.getFullYear();
+	cf.h_mth.value = SysTime.getMonth() + 1;
+	cf.h_day.value = SysTime.getDate();
+	cf.h_hr.value = SysTime.getHours();
+	cf.h_min.value = SysTime.getMinutes();
+	cf.h_sec.value = SysTime.getSeconds();
+	cf.pctimezone.value = getGMTOffset();
+	
+	getServerTime();
+	
+//	submitDemo(cf);
+//	dataToHidden(cf); cf.submit();
+}
+
+function getGMTOffset()
+{
+  var SysTime = new Date();
+  var offSetMin = SysTime.getTimezoneOffset();
+  var offSetHr =  (offSetMin/60) * -1 ;
+  return offSetHr;
+}  
+
+
+
+var dlArray = [0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0];
+function setDLS() 
+{
+ 	var cf = document.forms[0];
+	var index = cf.timezone.selectedIndex;
+	if (index > -1)
+	{
+		if (dlArray[index] == 0 )
+		{
+			cf.dsave.disabled = true;
+			document.getElementById("DLS_text").disabled = true;
+			cf.dsave.checked = false;
+		}
+		else
+		{
+			cf.dsave.disabled = false;
+			document.getElementById("DLS_text").disabled = false;
+		}
+	}
+}
+
+function checkData()
+{
+ 	var cf = document.forms[0];
+	var msg = ""; msg1 = "";
+	msg+= checkBlank(cf.device, msg_cname);	
+	msg+= checkValid(cf.device, msg_cname, Vali_Stri, 16, false);
+//	msg+= checkBlank(cf.bonj, msg_bonj);		
+//	msg+= checkValid(cf.bonj, msg_bonj, Vali_Stri_Bonj, 32, false);
+
+	//---------------------------------------------------------
+	//Camera Name Validation, Cannot begin or end with a hyphen
+	msg+= checkHyphen(cf.device, msg_cname);
+	//Bonjour Name Validation, Cannot begin or end with a hyphen
+	//msg+= checkHyphen(cf.bonj, msg_bonj);
+
+	//---------------------------------------------------------
+	
+	if (cf.ntp.checked) 
+	{
+		msg+= checkBlank(cf.ntp_s,msg_ntp_s);
+		msg+= checkValid(cf.ntp_s, msg_ntp_s, Valid_Strs, 64, false);
+		if(cf.ntp_port.value != "123")
+		{ msg+= checkInt(cf.ntp_port, msg_ntp_port, 1024, 65535, cf.ntp_port.value == ""); }
+	}
+	
+	if (cf.iptype.selectedIndex == 0)  
+	{
+		msg+= checkIp(cf.ip1,cf.ip2,cf.ip3,cf.ip4,msg_ip_field,true);
+		msg+= checkNetMask(cf.mask1,cf.mask2,cf.mask3,cf.mask4,msg_mask_field);
+	   	msg+= checkIp(cf.gw1,cf.gw2,cf.gw3,cf.gw4,msg_gateway,false);
+		msg+= checkIp(cf.dns1_1,cf.dns1_2,cf.dns1_3,cf.dns1_4,msg_dns1,false);
+		msg+= checkIp(cf.dns2_1,cf.dns2_2,cf.dns2_3,cf.dns2_4,msg_dns2,false);
+	}
+		msg+= checkBlank(cf.essid, msg_ssid);
+
+	if (msg.length > 1)	
+	{
+		rALERT("Basic Setup",msg);
+		return false;
+	}
+	return true;	
+}
+
+function setData()
+{
+    var cf = document.forms[0];
+	transfer();
+	getServerTime();
+	dataToVisible(cf);
+
+//	index = getSelIndex(cf.w_channel,cf.h_w_ch.value,true);
+//	cf.w_channel.selectedIndex = index;
+
+	setIP();
+/*
+	if ( cf.w_mode.selectedIndex == 1) //  infra
+	{
+		cf.w_channel.options[0].text = msg_auto_ch;
+		w_channel_sel = cf.w_channel.selectedIndex; //weeder add to remember the primary wireless channel from server
+		cf.w_channel.selectedIndex = 0;
+		cf.w_channel.disabled = true;
+	}
+	else
+	{
+		w_channel_sel = cf.w_channel.selectedIndex;
+		cf.w_channel.disabled = false;
+	}
+*/
+	setDLS();
+	setntp();
+}
+
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+
+	if (!(checkData()))
+		return;
+/*
+	if(cf.w_mode.selectedIndex == 1)
+	{
+		cf.h_w_ch.value = cf.w_channel.options[w_channel_sel].text;
+	}
+	else
+	{
+		cf.h_w_ch.value = cf.w_channel.options[cf.w_channel.selectedIndex].text;
+	}
+*/
+	var SysTime = new Date();
+
+	cf.h_yr.value		= "";
+	cf.h_mth.value		= "";
+	cf.h_day.value		= "";
+	cf.h_hr.value		= "";
+	cf.h_min.value		= "";
+	cf.h_sec.value		= "";
+	cf.pctimezone.value	= getGMTOffset();
+
+	cf.h_iptype.value = (cf.iptype.selectedIndex == 0) ? "0" : "1";
+	cf.h_dns_type.value = (cf.iptype.selectedIndex == 1) ? "0" : "1";
+
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+function reloadScreen()
+{
+//RELEASE
+	location.href = "file.cgi?next_file=basic.htm";
+//DEMO
+//	location.href = "basic.htm";
+}
+
+
+var ServerTime = new Date();
+var delaytime = 1000;  // update display interval
+
+function getServerTime()
+{
+  var cf = document.forms[0];
+  var SysTime = new Date();
+  var dateStr = cf.h_mth.value + "/" + cf.h_day.value + "/" + cf.h_yr.value + " "  +
+                cf.h_hr.value + ":" + cf.h_min.value + ":" + cf.h_sec.value;
+  ServerTime.setTime(Date.parse(dateStr));
+  toffset = ServerTime - SysTime;
+//  toffset = 2345679; // demo
+  showDates();
+  setInterval("showDates();",delaytime);
+}
+
+function showDates()
+{
+    var SysTime = new Date();
+	ServerTime.setTime(SysTime.getTime() + toffset);
+	displayDate("serverTimer", ServerTime);
+//	displayDate("pcTimer", SysTime);
+}
+
+function displayDate(idname, dateObj)
+{
+    var cf = document.forms[0];
+	var M  = d2(dateObj.getMonth()+1);
+	var D  = d2(dateObj.getDate());
+//	var Y  = (dateObj.getFullYear() - 2000) + "";
+	var Y  = (dateObj.getFullYear()) + "";
+	var hh = d2(dateObj.getHours());
+	var mm = d2(dateObj.getMinutes());	
+	var ss = d2(dateObj.getSeconds());
+
+	if( Y.length < 2 )		
+		Y = "0" + Y;
+
+	var dateYMD =  "" +  Y + "/" + M + "/" + D + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateMDY =  "" +  M + "/" + D + "/" + Y + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateDMY =  "" +  D + "/" + M + "/" + Y + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateStr = dateMDY;
+	
+    if (document.all)
+          document.all(idname).innerHTML = dateStr;
+    else if (document.getElementById)
+          document.getElementById(idname).innerHTML = dateStr;
+}
+
+function d2(dv)  // put 0 in front if only 1 char or number
+{
+	var newDV = "" + dv;
+	if(newDV.length == 1)
+		newDV = "0" + newDV;
+	return newDV;
+}
+
+function setntp()
+{
+	var cf = document.forms[0];
+	if (cf.ntp.checked == false)
+	{
+		cf.ntp_s.disabled = cf.ntp_port.disabled = 1;
+		document.getElementById("NTP_SERVER_TEXT").disabled = 1;
+		document.getElementById("NTP_PORT_TEXT").disabled = 1;
+//		document.getElementById("CHANGE_TEXT").disabled = 0;
+	}
+	else
+	{
+		cf.ntp_s.disabled = cf.ntp_port.disabled = 0;	
+		document.getElementById("NTP_SERVER_TEXT").disabled = 0;
+		document.getElementById("NTP_PORT_TEXT").disabled = 0;
+//		document.getElementById("CHANGE_TEXT").disabled = 1;
+	}
+}
+
+function encode(input_field)
+{
+	if (input_field.value.indexOf('"') >= 0 )
+	return "&quot;";
+	if (input_field.value.indexOf("&") >= 0 )
+	return "&amp;";
+}
+
+function transfer()
+{
+	var cf = document.forms[0];
+	cf.desc.value = cf.trans.value;
+}
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('Basic Setup');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Basic Setup</div>
+ 	
+<form name="basic" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+ 
+     	<div class="newGroupBoxTitle" style="height:25px;">Device Settings</div>
+        
+        
+   
+        <table  cellspacing="0" cellpadding="0" border="0">
+<!--   
+      <tr>
+        <td nowrap>Device ID:</td>
+        <td nowrap>@model_name#</td>
+      </tr>
+-->
+      <tr>
+        <td  width="121px">Camera Name:</td>
+        <td nowrap><input type="text" size="16" maxlength="16" name="device" value="@device#" style="{width:200}" width=200>
+          <span style="color:#8e8e8e"> (Max 16 characters, only A-Z; a-z; 0-9;  "-"  are available.)</span></td>
+      </tr>
+      <tr>
+        <td nowrap>Description:</td>
+        <td nowrap>
+		<input type="text" size="25" maxlength="32" name="desc" style="{width:200}" width="200" value="">
+		<textarea name="trans" cols="32" rows="2" style="display:none">@desc#</textarea><span style="color:#8e8e8e">(It must not exceed 32 alphanumeric characters.)</span>
+		</td>
+      </tr>
+<!--      Cisco ask to remove Bonjour Name
+      <tr>
+        <td nowrap>Bonjour Name:</td>
+        <td nowrap>
+		<input type="text" size="25" maxlength="32" name="bonj" style="{width:200}" width="200" value="@bonj#">
+        <span style="color:#8e8e8e"> (Max 32 characters, only A-Z; a-z; 0-9;  "-";  " "  are available.)</span>
+		</td>
+      </tr>
+-->
+      <tr>
+       <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="Checkbox" name="LEDs" id="LEDs" value="LEDs"  style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("LEDs").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td >Enable LED Operations</td>
+         </tr>
+         </table>
+      </tr>
+      <tr>
+      <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+        <td width="121px">Current Date/Time:</td>
+        <td><span id="serverTimer"> </span></td>
+		
+<!--RELEASE-->
+ <td style="padding-left:3px;">
+		<span id="CHANGE_TEXT"><input name="button" type="button" class="newbutton" onClick="openDataSubWin('file.cgi?next_file=sys_time.htm', systime_sub)" value="Change"></span>
+        </td>
+<!--    -->
+<!--DEMO
+ <td style="padding-left:3px;">
+		<span id="CHANGE_TEXT"><input name="button" type="button" class="newbutton" onClick="openDataSubWin('sys_time.htm', bigsub)" value="Change"></span>
+        </td>
+<!--    -->
+        
+	  </tr>
+      </table></td>
+      <tr>
+        <td nowrap colspan="2" align="left"><table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td  width="121px"><div style="margin-left:1">Time Zone:</div></td>
+      
+        <td nowrap colspan=2><select name="timezone" size="1" style="width:420px" onChange="setDLS()">
+          <option value=0>(GMT-12:00) International Date Line West
+            <option value=1>(GMT-11:00) Midway Island, Samoa
+              <option value=2>(GMT-10:00) Hawaii
+                <option value=3>(GMT-09:00) Alaska
+                <option value=4>(GMT-08:00) Pacific Time (US &amp; Canada); Tijuana
+                <option value=5>(GMT-07:00) Arizona
+                <option value=6>(GMT-07:00) Chihuahua, La Paz, Mazatlan
+                <option value=7>(GMT-07:00) Mountain Time (US &amp; Canada)
+                <option value=8>(GMT-06:00) Central America
+                <option value=9>(GMT-06:00) Central Time (US &amp; Canada)
+                <option value=10>(GMT-06:00) Guadalajara, Mexico City,Monterrey
+                <option value=11>(GMT-06:00) Saskatchewan
+                <option value=12>(GMT-05:00) Bogota, Lima, Quito
+                <option value=13>(GMT-05:00) Eastern Time (US &amp; Canada)
+                <option value=14>(GMT-05:00) Indiana (East)
+                <option value=75>(GMT-04:30) Caracas
+                <option value=15>(GMT-04:00) Atlantic Time (Canada)
+                <option value=16>(GMT-04:00) La Paz
+                <option value=17>(GMT-04:00) Santiago
+                <option value=18>(GMT-03:30) Newfoundland
+                <option value=19>(GMT-03:00) Brasilia
+                <option value=20>(GMT-03:00) Buenos Aires, Georgetown
+                <option value=21>(GMT-03:00) Greenland
+                <option value=22>(GMT-02:00) Mid-Atlantic
+                <option value=23>(GMT-01:00) Azores
+                <option value=24>(GMT-01:00) Cape Verde Is.
+                <option value=25>(GMT) Casablanca, Monrovia
+                <option value=26>(GMT) Greenwich Mean Time: Dublin,Edinburgh,Lisbon,London
+                <option value=27>(GMT+01:00) Amsterdam, Berlin,Bern,Rome,Stockholm,Vienna
+                <option value=28>(GMT+01:00) Belgrade, Bratislava,Budapest,Ljubljana,Prague
+                <option value=29>(GMT+01:00) Brussels, Copenhagen, Madrid, Paris
+                <option value=30>(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb
+                <option value=31>(GMT+01:00) West Central Africa
+                <option value=32>(GMT+02:00) Athens, Istanbul, Minsk
+                <option value=33>(GMT+02:00) Bucharest
+                <option value=34>(GMT+02:00) Cairo
+                <option value=35>(GMT+02:00) Harare, Pretoria
+                <option value=36>(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+                <option value=37>(GMT+02:00) Jerusalem
+                <option value=38>(GMT+03:00) Baghdad
+                <option value=39>(GMT+03:00) Kuwait, Riyadh
+                <option value=40>(GMT+03:00) Moscow, St. Petersburg, Volgograd
+                <option value=41>(GMT+03:00) Nairobi
+                <option value=42>(GMT+03:30) Tehran
+                <option value=43>(GMT+04:00) Abu Dhabi, Muscat
+                <option value=44>(GMT+04:00) Baku, Tbilisi, Yerevan
+                <option value=45>(GMT+04:30) Kabul
+                <option value=46>(GMT+05:00) Ekaterinburg
+                <option value=47>(GMT+05:00) Islamabad, Karachi, Tashkent
+                <option value=48>(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi
+                <option value=49>(GMT+05:45) Kathmandu
+                <option value=50>(GMT+06:00) Almaty, Novosibirsk
+                <option value=51>(GMT+06:00) Astana, Dhaka
+                <option value=52>(GMT+06:00) Sri Jayawardenepura
+                <option value=53>(GMT+06:30) Rangoon
+                <option value=54>(GMT+07:00) Bangkok, Hanoi, Jakarta
+                <option value=55>(GMT+07:00) Krasnoyarsk
+                <option value=56>(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi
+                <option value=57>(GMT+08:00) Irkutsk, Ulaan Bataar
+                <option value=58>(GMT+08:00) Kuala Lumpur, Singapore
+                <option value=59>(GMT+08:00) Perth
+                <option value=60>(GMT+08:00) Taipei
+                <option value=61>(GMT+09:00) Osaka, Sapporo, Tokyo
+                <option value=62>(GMT+09:00) Seoul
+                <option value=63>(GMT+09:00) Yakutsk
+                <option value=64>(GMT+09:30) Adelaide
+                <option value=65>(GMT+09:30) Darwin
+                <option value=66>(GMT+10:00) Brisbane
+                <option value=67>(GMT+10:00) Canberra, Melbourne, Sydney
+                <option value=68>(GMT+10:00) Guam, Port Moresby
+                <option value=69>(GMT+10:00) Hobart
+                <option value=70>(GMT+10:00) Vladivostok
+                <option value=71>(GMT+11:00) Magadan, Solomon Is., New Caledonia
+                <option value=72>(GMT+12:00) Auckland, Wellington
+                <option value=73>(GMT+12:00) Fiji, Kamchatka, Marshall Is.
+                <option value=74>(GMT+13:00) Nuku'alofa
+                </select>
+        </td> 
+                 </tr>
+        </table></td>
+
+      </tr>
+      <tr>
+        <td align="left" colspan="2"><table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td width="21px"><input type="Checkbox" name="dsave" id="dsave" value="dsave" onFocus="if(this.disabled)this.blur;" style="margin-left:-3px">
+            <script>				 
+				 if(!isIE())
+					document.getElementById("dsave").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+            <td><div style="margin-left:1"><span id="DLS_text">Adjust for Daylight Saving Time.</span></div></td>
+          </table></td>
+      </tr>
+      <tr>
+        <td align="left" colspan="2"><table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td width="21px"><input type="Checkbox" name="ntp" id="ntp" value="ntp" onClick="setntp();" style="margin-left:-3px">
+            <script>				 
+				 if(!isIE())
+					document.getElementById("ntp").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+            <td>Check here if you want to update the time automatically
+              through the NTP server from the Internet.</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+
+    <table  cellspacing="0" cellpadding="0" border="0">
+        <td  width="121px"><div id="NTP_SERVER_TEXT">NTP Server Address:</div></td>
+
+        
+        <td nowrap><input type="text" size="40" maxlength="64" name="ntp_s" value="@ntp_s#" style="{width:150}" width=150></td>
+      </tr>
+      <tr>
+        <td nowrap><div id="NTP_PORT_TEXT">NTP Port:</div></td>
+        <td nowrap><input type="text" class="num" name="ntp_port" value="@ntp_port#" size="6" maxlength="5"> <span style="color:#8e8e8e">(123,1024-65535)</span></td>
+      </tr>
+    </table>
+    
+    
+    <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Network Settings</div>
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="121px" nowrap>Configuration Type: </td>
+        <td nowrap><SELECT name="iptype" size="1" onChange="setIP()">
+   <option value="0">Fixed IP Address</option>
+   <option value="1">Obtain Address Automatically (DHCP)</option>   
+   </select>
+        </td>
+      </tr>
+      <tr>
+        <td nowrap><span id="IP_ADD_TEXT">IP Address:</span></td>
+        <td nowrap><input type="text" class="num" name="ip1" value="@ip1#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+              <input type="text" class="num" name="ip2" value="@ip2#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="ip3" value="@ip3#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="ip4" value="@ip4#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()"></td>
+      </tr>
+      <tr>
+        <td nowrap><span id="IP_SUBNET">Subnet Mask:</span></td>
+        <td nowrap><input type="text" name="mask1" class="num" value="@mask1#"  size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+              <input type="text" name="mask2" class="num" value="@mask2#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="mask3" value="@mask3#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="mask4" value="@mask4#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()"></td>
+      </tr>
+      <tr>
+        <td nowrap><span id="GATEWAY_TEXT">Gateway :</span></td>
+        <td nowrap><input type="text" class="num" name="gw1" value="@gw1#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+              <input type="text" class="num" name="gw2" value="@gw2#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="gw3" value="@gw3#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="gw4" value="@gw4#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()"></td>
+      </tr>
+      <tr>
+        <td nowrap><span id="PRIMARY_DNS_TEXT">Primary DNS:</span></td>
+        <td nowrap><input type="text" class="num" name="dns1_1" value="@dns1_1#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+              <input type="text" class="num" name="dns1_2" value="@dns1_2#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="dns1_3" value="@dns1_3#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="dns1_4" value="@dns1_4#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()"></td>
+      </tr>
+      <tr>
+        <td nowrap><span id="SECOND_DNS_TEXT">Secondary DNS:</span></td>
+        <td nowrap><input type="text" class="num" name="dns2_1" value="@dns2_1#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+              <input type="text" class="num" name="dns2_2" value="@dns2_2#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="dns2_3" value="@dns2_3#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()">
+          .
+          <input type="text" class="num" name="dns2_4" value="@dns2_4#" size=3 maxlength=3 onFocus="if(this.disabled)this.blur()"></td>
+      </tr>
+    </table>
+ 
+ 
+     <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px; margin-left:1px">Wireless Settings</div>  
+
+    
+	<table cellspacing="0" cellpadding="0" border="0">   
+        <tr>
+       <td colspan="2">
+      <span style="color:#8e8e8e">(To switch to wireless, unplug the ethernet cable and power cycle the camera.)</span>
+      </td>
+      </tr>
+	</table>
+    
+    <table cellspacing="0" cellpadding="0" border="0">       
+      <tr>
+        <td width="121px" nowrap>SSID:</td>
+        <td nowrap><input type="text" name="essid" value="@essid#" size="20" maxlength="32" style="{width:110}" width=110></td>
+      </tr>
+      <!--tr>
+        <td nowrap><span id="CHANNEL_NO_TEXT">Channel No:</span></td>
+        <td nowrap><select name="w_channel" size=1 style="{width:110}" width=110 onFocus="if(this.disabled)this.blur()">
+          <option>1
+            <option>2
+              <option>3
+                <option>4
+                <option>5
+                <option>6
+                <option>7
+                <option>8
+                <option>9
+                <option>10
+                <option>11<script>
+				//RELEASE
+				var temp = @lan_ver#;
+				//DEMO			
+				//var temp = "1";	
+				
+				if(temp == "1")
+				{
+					document.write('<option>12'+'<option>13');
+				}				
+				</script></select></td>
+      </tr-->
+      <tr>
+      
+    <table cellspacing="0" cellpadding="0" border="0">      
+        <td  width="121px">Security: </td>
+        <td><span ID="secDIV" style="height:20px; vertical-align:middle">@st_wsec#</span></td>
+<td style="padding-left:8px;"> 
+                  <input name="button" type="button" class="lsbutton" onClick="openDataSubWin('file.cgi?next_file=Wsecurity.htm',wsec_sub)" value="Edit Security Settings"></td>  
+</table> 
+<!--
+   <td>Network Type: </td>
+    <td align="left"><span ID="secDIV" style="height:20px; vertical-align:middle">@st_wsec#</span></td>
+<td style="padding-left:8px;"> 
+                  <input name="button" type="button" class="lsbutton" onClick="openDataSubWin('file.cgi?next_file=Wsecurity.htm',wsec_sub)" value="Edit Security Settings"></td> 
+-->                       
+      </tr>
+    </table>
+ 
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	  <input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+	  <!--RELEASE       --> 
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=basic.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='basic.htm'">
+<!--    -->    
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+<input type="Hidden" name="h_timezone" value="@h_timezone#">
+<input type="Hidden" name="h_dsave" value="@h_dsave#">
+
+<input type="Hidden" name="pctimezone"	value=""		title="not set by CGI">
+<input type="hidden" name="h_yr"		value="@h_yr#"	title="">
+<input type="hidden" name="h_mth"		value="@h_mth#"	title="">
+<input type="hidden" name="h_day"		value="@h_day#"	title="">
+<input type="hidden" name="h_hr"		value="@h_hr#"	title="">
+<input type="hidden" name="h_min"		value="@h_min#"	title="">
+<input type="hidden" name="h_sec"		value="@h_sec#"	title="">
+
+<input type="Hidden" name="h_w_re" value="@h_w_re#">
+<input type="Hidden" name="h_w_ch" value="@h_w_ch#">
+<input type="Hidden" name="h_iptype" value="@h_iptype#">
+<input type="Hidden" name="h_dns_type" value="@h_dns_type#">
+<!--input type="Hidden" name="h_w_mode" value="@h_w_mode#"-->
+<!-- input type="Hidden" name="h_wmm" value="@h_wmm#" -->
+
+<input type="hidden" name="h_ntp" value="@h_ntp#" /> 
+<input type="hidden" name="h_LEDs" value="@h_LEDs#">
+
+
+
+<input type="Hidden" name="this_file" value="basic.htm">
+<input type="Hidden" name="next_file" value="basic.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+<input type="hidden" name="video_file" value="@video_file#">
+
+</form>
+</div> <!--  newContentArea end -->  
+</body>
+
+</html>

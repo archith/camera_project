@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#=================================================
+# Mount file systems
+#=================================================
+echo "Starting the boot scripts..."
+/bin/mount -t proc proc /proc
+/bin/mount -o remount -w %root% /
+/bin/hostname localhost
+
+/bin/mount -t ramfs none /mnt/ramdisk
+/bin/touch /mnt/ramdisk/resolv.conf
+/bin/mkdir /mnt/ramdisk/root
+/bin/mkdir /mnt/ramdisk/tmp
+/bin/mkdir -p /mnt/ramdisk/var/lib
+/bin/mkdir  /mnt/ramdisk/var/lock
+/bin/mkdir  /mnt/ramdisk/var/run
+/bin/mkdir  /mnt/ramdisk/var/tmp
+/bin/mkdir  /mnt/ramdisk/var/log
+
+# ---- Start Telnet Server (debug) ---- #
+/usr/sbin/telnetd &
+

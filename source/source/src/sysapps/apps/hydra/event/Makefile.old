@@ -1,0 +1,52 @@
+include ../Defs.mak
+
+#LDFLAGS	+= -L$(APPS_DIR)/cgi2/pond/bin -lpond
+#LDFLAGS	+= -lpthread
+CFLAGS		+= -I./inc
+
+MAIN_SRC = wait_event.c trigger.c clean.c signal_handle.c event.c videolog.c
+CONFIG_SRC = construct_event.c ui_config.c camera_api_config.c
+FILE_SRC = file_name.c build_file.c MP4API.c ASFAPI.c AVIAPI.c
+ACTION_SRC = smtp_notify.c ftp_notify.c output_notify.c im_notify.c http_notify.c client_notify.c
+ifeq ($(MOTION_JPG),yes)
+FILE_SRC += build_jpg.c
+endif
+EVENT_DIR = $(HYDRA_DIR)/event
+INC_DIR	= $(EVENT_DIR)/inc
+OBJ_DIR = $(EVENT_DIR)/obj
+
+LIB = libevent.a
+SRC = $(MAIN_SRC) $(CONFIG_SRC) $(FILE_SRC) $(ACTION_SRC)
+OBJ = $(SRC:.c=.o)
+HDR = $(patsubst %.h, $(INC_DIR)/%.h, $(wildcard *.h))
+#SUBDIR	= avi
+
+all:	inc obj $(HDR) $(OBJ)
+	@for i in $(SUBDIR); do	\
+		$(MAKE) -C $$i $@ || exit 1;\
+	done
+	$(AR) ro $(LIB) obj/*.o
+
+$(HDR):
+	ln -sf $(PWD)/$(@F) $(INC_DIR)/$(@F)
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+	install -D $@ obj/$@
+
+inc:
+	mkdir -p ./inc
+obj:
+	mkdir -p ./obj
+
+
+clean:
+	@for i in $(SUBDIR); do	\
+		$(MAKE) -C $$i $@ || exit 1;\
+	done
+	rm -f $(OBJ) $(LIB)
+	rm -rf ./inc ./obj
+
+gpl-clean:
+	rm -f $(SRC) *.c
+

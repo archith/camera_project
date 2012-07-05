@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function del_vlog(name)
+{
+	var cf = document.forms[0];
+	cf.h_del_file.value = name;
+	cf.todo.value = "delVlog";
+	cf.submit();
+}
+
+var vlog_file_list = "@vlog_data#";       //"a.asf\tb.asf\tc.asf\t"
+var vlog_elements = vlog_file_list.split("\t");
+
+function write_vlog_table() {
+	var msg = "";
+	msg += "<table class=\"std\">";
+
+	for(var i = 0; i < vlog_elements.length - 1; i++) {
+		msg += "<tr>";
+		msg += "<td class=\"more\" width=300>";
+		msg += "<a href=\"/vlog/";
+		msg += vlog_elements[i];
+		msg += "\" target=\"_blank\" class=\"more\">";
+		msg += vlog_elements[i];
+		msg += "</a>";
+		msg += "</td>";
+		msg += "<td class=\"more\" width=100>";
+		msg += "<input type=\"button\" name=\"adb20\" value=\"Delete\" class=\"ssbutton\" onClick=\"del_vlog(\'";
+		msg += vlog_elements[i];
+		msg += "\');\">";
+		msg += "</td>";
+		msg += "</tr>";
+	}
+	msg += "</table>";
+	document.write(msg);
+}
+
+function clearVLog(name)
+{
+	var cf = document.forms[0];
+	cf.h_del_file.value = name;
+	cf.todo.value = "clearVlog";
+	cf.submit();
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Video Log</div>
+ 	
+<FORM name="vlog" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+
+<SCRIPT LANGUAGE="JavaScript">write_vlog_table();</SCRIPT>
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="delete" value="Delete All" class="newbutton" onClick="clearVLog('all_vlog');"> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    <input type="Hidden" name="h_del_file" value="">
+
+<input type="Hidden" name="this_file" value="vlog.htm">
+<input type="Hidden" name="next_file" value="vlog.htm">
+<input type="Hidden" name="todo" value="reset">
+<input type="hidden" name="message" value="@message#">
+
+</FORM>
+</body>
+</div> <!--  newContentArea end -->  
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function init()
+{
+    var cf = document.forms[0];
+	dataToVisible(cf);
+	set_jab();
+}
+
+function set_jab()
+{
+	var cf = document.forms[0];
+	var dFlag = cf.jab_serv_en.checked;
+	if (!dFlag) 
+	{ 
+		cf.jab_serv_addr.disabled = 1;
+		cf.jab_login.disabled = 1;
+		cf.jab_pw.disabled = 1;
+		cf.send_jab_address.disabled = 1;
+		cf.n_message.disabled = 1;
+		
+		document.getElementById("JABBER_SERVER_TEXT").disabled = 1;
+		document.getElementById("LOGIN_ID_TEXT").disabled = 1;
+		document.getElementById("PASS_TEXT").disabled = 1;
+		document.getElementById("SEND_TO_TEXT").disabled = 1;
+		document.getElementById("MESSAGE_TEXT").disabled = 1;
+	}
+	else
+	{
+		cf.jab_serv_addr.disabled = 0;
+		cf.jab_login.disabled = 0;
+		cf.jab_pw.disabled = 0;
+		cf.send_jab_address.disabled = 0;
+		cf.n_message.disabled = 0;
+	
+		document.getElementById("JABBER_SERVER_TEXT").disabled = 0;
+		document.getElementById("LOGIN_ID_TEXT").disabled = 0;
+		document.getElementById("PASS_TEXT").disabled = 0;
+		document.getElementById("SEND_TO_TEXT").disabled = 0;
+		document.getElementById("MESSAGE_TEXT").disabled = 0;
+	}
+}
+
+function checkData() {
+    var cf = document.forms[0];
+	var msg = "";
+
+// jab
+	if(cf.jab_serv_en.checked)
+	{
+		if(cf.jab_serv_addr.value == "")
+		{ msg+= msg_jab_serv_addr_empty; }
+		else
+		{ msg+= checkValid(cf.jab_serv_addr, msg_jab_serv_addr_illegal_str, Valid_Strs, 64, false); }
+		
+		msg+= checkBlank(cf.jab_login, msg_blank_jab_name);
+		msg+= checkBlank(cf.jab_pw, msg_blank_jab_pw);
+			
+		if(cf.send_jab_address.value == "")
+		{ msg+= msg_send_jab_addr_empty; }
+		else
+		{ msg+= checkMailAdd(cf.send_jab_address, msg_send_jab_address); }
+		
+		if(cf.n_message.value.length > 384)
+		{ msg+= msg_message_size; }
+	}
+
+	if (msg.length > 1)	{
+		rALERT("Instant Messaging",msg);
+		return false;
+	}
+	
+	return true;
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+
+	if (!(checkData()))
+		return;
+
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+
+function limitText(limitField, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} 
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Instant Messaging');init();">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Instant Messaging</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px; margin-left:1">Jabber</div>
+        
+    <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td width="21">
+        <input type="checkbox" name="jab_serv_en" id="jab_serv_en" value="disable" onClick="set_jab();"  style="margin-left:-3"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("jab_serv_en").style.marginLeft="0px";
+				 </script>
+        <td width="128px">
+          Enable Jabber</td>
+       
+        </tr>
+        </table>
+
+ <table border="0" cellpadding="0" cellspacing="0" class="std">
+
+      <tr>
+        <td  width="86px" nowrap ><span id="JABBER_SERVER_TEXT">Jabber Server:</span></td>
+        <td><input type="text" name="jab_serv_addr" size="40" maxlength="64" value="@jab_serv_addr#" style="{width: 200}"></td>
+      </tr>
+      
+      <tr>
+        <td  width="86px" nowrap ><span id="LOGIN_ID_TEXT">Login ID:</span></td>
+        <td><input type="text" name="jab_login" size="25" maxlength="64" value="@jab_login#" style="{width: 200}"></td>
+      </tr>
+      
+      <tr>
+        <td  width="86px" nowrap ><span id="PASS_TEXT">Password:</span></td>
+        <td><input type="password" name="jab_pw" size="25" maxlength="32" value="@jab_pw#" style="{width: 200}"></td>
+      </tr>
+      <tr>
+        <td  width="86px" nowrap ><span id="SEND_TO_TEXT">Send To:</span></td>
+        <td><input type="text" name="send_jab_address" size=20 maxlength=48 style="{width:200}" value="@send_jab_address#"></td>
+      </tr>
+      
+      <tr>
+     
+      </tr>
+      
+      <tr>
+        <td  width="86px" nowrap valign="top"><span id="MESSAGE_TEXT">Message:</span></td>
+        <td><textarea cols="60" rows="3" name="n_message"   onKeyDown="limitText(this.form.n_message,256);" 
+onKeyUp="limitText(this.form.n_message,256);" style="width:300px">@n_message#</textarea></td>
+      </tr>
+    </table>
+
+
+
+
+
+</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE       --> 
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=im.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='im.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+<input type="Hidden" name="h_jab_serv_en" value="@h_jab_serv_en#">
+
+<input type="Hidden" name="this_file" value="im.htm">
+<input type="Hidden" name="next_file" value="im.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+
+
+</form>  
+</div> <!--  newContentArea end -->     
+</body>
+
+</html>

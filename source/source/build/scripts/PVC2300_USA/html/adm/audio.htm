@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function setData()
+{
+    var cf = document.forms[0];
+	dataToVisible(cf);
+	audio();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+		return;
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+    var msg = "";
+
+	if (msg.length > 1)
+    {
+        rALERT("Audio Settings",msg);
+        return false;
+    }
+    return true;
+}
+
+function audio()
+{
+    var cf = document.forms[0];
+	var dFlag = ( cf.en_aud.checked );
+	
+	if (!dFlag)
+	{
+		cf.en_slo[0].disabled = cf.en_slo[1].disabled = cf.en_slo[2].disabled = cf.en_slo[3].disabled = cf.mic.disabled = cf.speaker.disabled = true;
+		
+		document.getElementById("SIMPLEX_LISTEN_TEXT").disabled = true;
+		document.getElementById("ENABLE_MIC_TEXT").disabled = true;
+		document.getElementById("AUDIO_TYPE_TEXT").disabled = true;
+		document.getElementById("SIMPLEX_TALK_TEXT").disabled = true;
+		document.getElementById("ENABLE_SPEAKER_TEXT").disabled = true;
+		document.getElementById("HALF_DUPLEX_TEXT").disabled = true;
+		document.getElementById("FULL_DUPLEX_TEXT").disabled = true;
+		
+		cf.mic.checked = cf.speaker.checked = false;
+		en_mic();
+	}
+	else
+	{
+		cf.en_slo[0].disabled = cf.en_slo[1].disabled = cf.en_slo[2].disabled = cf.en_slo[3].disabled = cf.mic.disabled = cf.speaker.disabled = false;
+		
+		document.getElementById("SIMPLEX_LISTEN_TEXT").disabled = false;
+		document.getElementById("ENABLE_MIC_TEXT").disabled = false;
+		document.getElementById("AUDIO_TYPE_TEXT").disabled = false;
+		document.getElementById("SIMPLEX_TALK_TEXT").disabled = false;
+		document.getElementById("ENABLE_SPEAKER_TEXT").disabled = false;
+		document.getElementById("HALF_DUPLEX_TEXT").disabled = false;
+		document.getElementById("FULL_DUPLEX_TEXT").disabled = false;
+		
+		lot();   cf.mic.value = cf.h_mic.value;
+	}
+}
+
+function lot()
+{
+	var cf = document.forms[0];
+	var dFlag = ( cf.en_aud.checked );
+	if (dFlag)
+	{
+		if (cf.en_slo[0].checked)   
+		{ 
+			cf.mic.disabled = true;
+			cf.mic.checked = true;   en_mic();
+			cf.speaker.checked = false;
+			cf.speaker.disabled = true;
+		}
+		else if (cf.en_slo[1].checked)
+		{  	
+			cf.mic.disabled = true;
+			cf.mic.checked = false;   en_mic();
+			cf.speaker.checked = true;
+			cf.speaker.disabled = true;
+		}
+		else if (cf.en_slo[2].checked)
+		{
+			cf.mic.checked = true;   en_mic();
+			cf.mic.disabled = true;
+			cf.speaker.checked = true;
+			cf.speaker.disabled = true;
+		}
+		else
+		{
+			cf.mic.checked = true;   en_mic();
+			cf.mic.disabled = true;
+			cf.speaker.checked = true;
+			cf.speaker.disabled = true;
+		}
+	}
+}
+
+function en_mic()
+{
+    var cf = document.forms[0];
+	var dFlag = ( cf.mic.checked );
+	cf.enco_aud.disabled = !dFlag; 
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('Audio Settings')">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Audio Settings</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+<table border="0" >
+<tr>
+<td>
+<table cellpadding="0" cellspacing="0">
+<tr>
+ <td width="21">
+ <input type="checkbox" name="en_aud" value="disable" onClick="audio();" style="margin-left:-3px"></td>
+ <script>
+				 
+				 if(!isIE())
+					document.getElementById("en_aud").style.marginLeft="0px";
+
+				 </script>
+ <td > Enable Audio 
+ </td>
+ </tr>
+ </table>
+ </td>
+</tr>
+<tr>
+ <td class="sp1" colspan="2">
+ <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+ <input type="radio" name="en_slo" id="en_slo1" value="0" onClick="lot();" style="margin-left:-3px">
+ <script>				 
+				 if(!isIE())
+					document.getElementById("en_slo1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+ <td><span id="SIMPLEX_LISTEN_TEXT"> Simplex - Listen Only </span></td>
+ </tr>
+ </table>
+ 
+ </td>
+ 
+ <td width="60px">
+ <div style="width:40px"></div>
+ </td>
+ 
+
+ <td nowrap >
+ <table cellpadding="0" cellspacing="0">
+<tr>
+ <td width="21">
+ <input type="checkbox" name="mic" id="mic" value="disable" onClick="en_mic();" style="margin-left:-3">
+ <script>				 
+				 if(!isIE())
+					document.getElementById("mic").style.marginLeft="0px";
+				 </script>
+ </td>
+ <td><span id="ENABLE_MIC_TEXT"> Enable Microphone</span></td>
+ </tr>
+ </table>
+ </td>
+ 
+
+ 
+</tr>
+<tr>
+ <td class="sp1" colspan="2">
+ <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+ <input type="radio" name="en_slo" id="en_slo2" value="1" onClick="lot();" style="margin-left:-3px">
+ <script>				 
+				 if(!isIE())
+					document.getElementById("en_slo2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+ <td><span id="SIMPLEX_TALK_TEXT"> Simplex - Talk Only </span></td>
+ </tr>
+ </table>
+ 
+ </td>
+ 
+  <td width="60px">
+ <div style="width:40px"></div>
+ </td>
+ 
+ <td>
+ <table cellpadding="0" cellspacing="0">
+ <tr>
+ <td><span id="AUDIO_TYPE_TEXT" style="margin-left:1">Audio Type:</span></td>
+ <td style="padding-left:7">	<select name="enco_aud" size="1">
+	  <option value="0">G.711 A-Law &nbsp;</option>
+	  <option value="1">G.711 u-Law &nbsp;</option>
+	  <option value="2">G.726 &nbsp;</option>
+	 </select>
+ </td>
+ </tr>
+ </table>
+ </td>
+ 
+</tr>
+<tr>
+ <td colspan="2">
+ <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+ <input type="radio" name="en_slo" id="en_slo3" value="2" onClick="lot();" style="margin-left:-3px">
+ <script>				 
+				 if(!isIE())
+					document.getElementById("en_slo3").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+ <td><span id="HALF_DUPLEX_TEXT"> 
+ Half Duplex - Talk or Listen (Not simultaneously)</span></td>
+ 
+ 
+
+ 
+ 
+ </tr>
+ </table>
+ 
+ </td>
+ 
+   <td width="60px">
+ <div style="width:40px"></div>
+ </td>
+ 
+ 
+ <td >
+
+ <table cellpadding="0" cellspacing="0">
+ <tr>
+ <td>
+ <input type="checkbox" name="speaker" id="speaker" value="disable" style="margin-left:-3"></td>
+ <script>				 
+				 if(!isIE())
+					document.getElementById("speaker").style.marginLeft="0px";
+				 </script>
+ <td style="padding-left:1"><span id="ENABLE_SPEAKER_TEXT"> Enable Speaker </span>
+ </td>
+ </tr>
+ </table>
+ </td>
+ 
+</tr>
+<tr>
+ <td colspan="2">
+ <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+ <input type="radio" name="en_slo" id="en_slo4" value="3" onClick="lot();" style="margin-left:-3px"> 
+ <script>				 
+				 if(!isIE())
+					document.getElementById("en_slo4").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+ <td><span id="FULL_DUPLEX_TEXT">
+ Full Duplex - Talk and Listen (Can be simultaneously) </span></td>
+ </tr>
+ </table>
+ 
+ </td>
+</tr>
+
+
+
+</table>
+
+
+
+
+</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE -->       
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=audio.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='audio.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="h_v_mode" value="@h_v_mode#">
+
+<input type="hidden" name="h_en_aud" value="@h_en_aud#">
+
+<input type="hidden" name="h_en_slo" value="@h_en_slo#">
+
+<input type="hidden" name="h_mic" value="@h_mic#">
+<input type="hidden" name="h_enco_aud" value="@h_enco_aud#">
+<input type="Hidden" name="h_speaker" value="@h_speaker#">
+
+<input type="Hidden" name="this_file" value="audio.htm">
+<input type="Hidden" name="next_file" value="audio.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+</form>   
+</div> <!--  newContentArea end -->    
+</body>
+
+</html>

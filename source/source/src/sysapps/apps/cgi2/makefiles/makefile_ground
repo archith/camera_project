@@ -1,0 +1,22 @@
+CROSS	= arm-linux-
+SRCS	= $(wildcard *.c)
+OBJS	= $(SRCS:.c=.o)
+AR	= $(CROSS)ar
+CC	= $(CROSS)gcc
+LD	= $(CROSS)ld
+STRIP	= $(CROSS)strip
+
+#DEBUG_UTIL = yes
+
+
+ifeq ($(CROSS),)
+	CFLAGS	+= -O0 -Werror -I. -g #-Wall
+else
+	CFLAGS	+= -O0 -Werror -I. -Wall
+endif
+
+PWD	= ${shell pwd}
+BASE    = ${shell basename $(PWD)}
+
+include $(PROJ_CGI2)/makefiles/makefile_debug
+

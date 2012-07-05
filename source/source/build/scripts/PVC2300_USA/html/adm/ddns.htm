@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function connDDNS()
+{
+	var siteA = new Array("http://www.dyndns.com/services/dns/dyndns/","http://www.tzo.com","http://www.3322.org");
+	var selSite = siteA[document.forms[0].ddnsp.selectedIndex];
+	if(selSite.length > 2)
+		window.open(selSite,"_blank");
+	else rALERT("DDNS",msg_selsite);
+}
+
+function setData()
+{
+	var cf = document.forms[0];
+	cf.h_ddnsp.value == cf.ddnsp.options[cf.ddnsp.selectedIndex].value;
+	en_DDNS();  
+}
+
+function SaveAll()
+{
+	var cf = document.forms[0];
+	var msg = "";
+	if (cf.ddns.checked)
+	{
+		msg+= checkBlank(cf.host_dom,msg_ddns_host);
+		msg+= checkValid(cf.host_dom, msg_ddns_host, Valid_Strs, 60, false);
+		msg+= checkBlank(cf.ddns_name,msg_daname);
+		msg+= checkValid(cf.ddns_name, msg_daname, Valid_Strdn, 40, false);
+		msg+= checkBlank(cf.ddns_pwd,msg_dpw);
+		msg+= checkValid(cf.ddns_pwd, msg_dpw, Valid_Stri, 22, false);
+		if(msg.length > 0)
+		{ rALERT("DDNS",msg); return; }
+		
+		var str = cf.host_dom.value;
+		var temp = 1;
+		if (!checkHostName(str))
+		{			
+			temp = 0;
+		}    	
+		else
+		{
+			temp = 1;
+		}
+	 
+		if (temp==0)
+		{
+			rALERT("DDNS",msg_v_ddns_hname);//alert(msg_v_char);  	
+			cf.host_dom.value = "";
+			return false;
+		}
+		else if(cf.host_dom.value == "") 
+		{
+			rALERT("DDNS",msg_v_hname);//alert(msg_v_hname);
+			return false;
+		}
+		
+		cf.h_ddns.value = ( cf.ddns.checked ) ? "enable" : "disable" ;
+		cf.h_ddnsp.value = cf.ddnsp.options[cf.ddnsp.selectedIndex].value;
+		cf.h_ddnschk.value = cf.ddnschk.options[cf.ddnschk.selectedIndex].value;
+		cf.h_ddnshr.value = cf.ddnshr.options[cf.ddnshr.selectedIndex].value;
+		cf.h_ddnsmin.value = cf.ddnsmin.options[cf.ddnsmin.selectedIndex].value;
+		cf.todo.value = "save";
+		dataToHidden(cf); cf.submit();
+	}
+	else
+	{
+		cf.h_ddns.value = ( cf.ddns.checked ) ? "enable" : "disable" ;
+		cf.todo.value = "save";
+		dataToHidden(cf); cf.submit();
+	}
+
+}
+
+function init()
+{
+  var cf = document.forms[0];
+  dataToVisible(cf);
+  setData();
+  showMsg('DDNS');
+}
+
+
+function en_DDNS()
+{
+ 	var cf = document.forms[0];
+	if(cf.ddns.checked == true)
+	{
+		cf.ddnsp.disabled = 0;
+		cf.connect_ddns.disabled =0;
+		cf.host_dom.disabled = 0;
+		cf.ddns_name.disabled = 0;
+		cf.ddns_pwd.disabled = 0;
+		cf.ddnschk.disabled = 0;
+		cf.ddnshr.disabled = 0;
+		cf.ddnsmin.disabled = 0;
+		
+		document.getElementById("SERVICE_TEXT").disabled = 0;
+		document.getElementById("HOST_TEXT").disabled = 0;
+		document.getElementById("ACCOUNT_TEXT").disabled = 0;
+		document.getElementById("PASS_TEXT").disabled = 0;
+		document.getElementById("CHECK_WAN_TEXT").disabled = 0;
+		document.getElementById("STRAT_TEXT").disabled = 0;
+		document.getElementById("FORMAT_TEXT").disabled = 0;
+		document.getElementById("SPOT_TEXT").disabled = 0;
+		
+  }
+  if (cf.ddns.checked == false)
+  {
+  	cf.ddnsp.disabled = 1;
+		cf.connect_ddns.disabled =1;
+		cf.host_dom.disabled = 1;
+		cf.ddns_name.disabled = 1;
+		cf.ddns_pwd.disabled = 1;
+		cf.ddnschk.disabled = 1;
+		cf.ddnshr.disabled = 1;
+		cf.ddnsmin.disabled = 1;
+		
+		document.getElementById("SERVICE_TEXT").disabled = 1;
+		document.getElementById("HOST_TEXT").disabled = 1;
+		document.getElementById("ACCOUNT_TEXT").disabled = 1;
+		document.getElementById("PASS_TEXT").disabled = 1;
+		document.getElementById("CHECK_WAN_TEXT").disabled = 1;
+		document.getElementById("STRAT_TEXT").disabled = 1;
+		document.getElementById("FORMAT_TEXT").disabled = 1;
+		document.getElementById("SPOT_TEXT").disabled = 1;
+		
+  }
+  set_DDNS();
+}
+
+function set_DDNS()
+{
+	var cf = document.forms[0];
+	var dnfalg = cf.ddns.checked;   
+	show_hide("dd_1", (dnfalg));
+}
+
+function setEndMin()
+{
+    var cf = document.forms[0];
+	if (cf.ddnshr.options[cf.ddnshr.selectedIndex].value == "24")
+	{
+		cf.ddnsmin.selectedIndex = getSelIndex(cf.ddnsmin, "0");
+		cf.ddnsmin.disabled = true;
+	}
+	else
+		cf.ddnsmin.disabled = false;
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="init();">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">DDNS</div>
+ 	
+
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px;">DDNS</div>
+	<table cellpadding="0" cellspacing="0">
+        <tr>
+	   <td width="21px">
+	   <input type="checkbox" name="ddns" id="ddns" value="@h_ddns#" onClick="en_DDNS();" style="margin-left:-3px">
+       <script>				 
+				 if(!isIE())
+					document.getElementById("ddns").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+       <td>Enable DDNS</td>
+	</tr>
+    </table>
+	
+    <table cellpadding="0" cellspacing="0" border="0">
+	<tr>
+	   <td  width="138px" nowrap height="30"><span id="SERVICE_TEXT">Service Provider:</span></td>
+	   <td nowrap>
+	     <select name="ddnsp" size="1" onChange="">
+           <option value="0">DynDNS</option>
+           <option value="1">TZO</option>
+           <option value="2">3322</option>
+         </select>
+		 </td>
+	     <td nowrap id="dd_1" style="padding-left:7px"> 
+		 <input type="button" name="connect_ddns" class="msbutton" value="Web Site" onClick="connDDNS()">
+		 </td>
+	</tr>
+	</table>
+    <table cellpadding="0" cellspacing="0">
+	<tr>
+	 <td nowrap class="lc"><span id="HOST_TEXT">Host Name: </span></td>
+	 <td nowrap>
+	 <input type="text" name="host_dom" disabled="disabled" value="@host_dom#" size="32" maxlength="60" onFocus="if(this.disabled)this.blur()">
+	 </td>
+	</tr>
+	
+	<tr>
+	 <td nowrap><span id="ACCOUNT_TEXT">Account: </span></td>
+	 <td nowrap>
+	 <input type="text" name="ddns_name" disabled="disabled" value="@ddns_name#" size="32" maxlength="40" onFocus="if(this.disabled)this.blur()">
+	 </td>
+	</tr>
+	
+	<tr>
+	 <td nowrap><span id="PASS_TEXT">Password: </span></td>
+	 <td nowrap>
+	 <input type="password" name="ddns_pwd" disabled="disabled" value="@ddns_pwd#" size="32" maxlength="22" onFocus="if(this.disabled)this.blur()">
+	 </td>
+	</tr>
+	
+	<tr>
+	 <td  width="138px" nowrap><span id="CHECK_WAN_TEXT">Check WAN IP Address: </span></td>
+	 <td nowrap>
+	<select name="ddnschk" size="1" onFocus="if(this.disabled)this.blur()">
+        <option value="1">Every 10 mins</option>
+        <option value="2">Every 30 mins</option>
+        <option value="3">Every Hour</option>
+        <option value="4">Every 12 Hrs</option>
+        <option value="5">Every 24 Hrs</option>
+	</select>
+    </td>
+    <tr>
+    <td>
+	<span id="STRAT_TEXT">
+	 Starting At</span>
+     </td>
+     <td>
+	<select name="ddnshr" size="1" onChange="setEndMin()">
+	 <option value="0">00</option>
+	 <option value="1">01</option>
+	 <option value="2">02</option>
+	 <option value="3">03</option>
+	 <option value="4">04</option>
+	 <option value="5">05</option>
+	 <option value="6">06</option>
+	 <option value="7">07</option>
+	 <option value="8">08</option>
+	 <option value="9">09</option>
+	 <option value="10">10</option>
+	 <option value="11">11</option>
+	 <option value="12">12</option>
+	 <option value="13">13</option>
+	 <option value="14">14</option>
+	 <option value="15">15</option>
+	 <option value="16">16</option>
+	 <option value="17">17</option>
+	 <option value="18">18</option>
+	 <option value="19">19</option>
+	 <option value="20">20</option>
+	 <option value="21">21</option>
+	 <option value="22">22</option>
+	 <option value="23">23</option>
+	 </select><span id="SPOT_TEXT"> :</span>
+	<select name="ddnsmin" size="1">
+	 <option value="0">00</option>
+	 <option value="1">01</option>
+	 <option value="2">02</option>
+	 <option value="3">03</option>
+	 <option value="4">04</option>
+	 <option value="5">05</option>
+	 <option value="6">06</option>
+	 <option value="7">07</option>
+	 <option value="8">08</option>
+	 <option value="9">09</option>
+	 <option value="10">10</option>
+	 <option value="11">11</option>
+	 <option value="12">12</option>
+	 <option value="13">13</option>
+	 <option value="14">14</option>
+	 <option value="15">15</option>
+	 <option value="16">16</option>
+	 <option value="17">17</option>
+	 <option value="18">18</option>
+	 <option value="19">19</option>
+	 <option value="20">20</option>
+	 <option value="21">21</option>
+	 <option value="22">22</option>
+	 <option value="23">23</option>
+	 <option value="24">24</option>
+	 <option value="25">25</option>
+	 <option value="26">26</option>
+	 <option value="27">27</option>
+	 <option value="28">28</option>
+	 <option value="29">29</option>
+	 <option value="30">30</option>
+	 <option value="31">31</option>
+	 <option value="32">32</option>
+	 <option value="33">33</option>
+	 <option value="34">34</option>
+	 <option value="35">35</option>
+	 <option value="36">36</option>
+	 <option value="37">37</option>
+	 <option value="38">38</option>
+	 <option value="39">39</option>
+	 <option value="40">40</option>
+	 <option value="41">41</option>
+	 <option value="42">42</option>
+	 <option value="43">43</option>
+	 <option value="44">44</option>
+	 <option value="45">45</option>
+	 <option value="46">46</option>
+	 <option value="47">47</option>
+	 <option value="48">48</option>
+	 <option value="49">49</option>
+	 <option value="50">50</option>
+	 <option value="51">51</option>
+	 <option value="52">52</option>
+	 <option value="53">53</option>
+	 <option value="54">54</option>
+	 <option value="55">55</option>
+	 <option value="56">56</option>
+	 <option value="57">57</option>
+	 <option value="58">58</option>
+	 <option value="59">59</option>
+	</select><span id="FORMAT_TEXT"> (hh:mm)</span>
+	</td>
+	</tr>
+	</table>
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE       --> 
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=ddns.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='ddns.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    
+<input type="hidden" name="h_ddns" value="@h_ddns#">
+<input type="hidden" name="h_ddnsp" value="@h_ddnsp#">
+
+<input type="hidden" name="h_ddnschk" value="@h_ddnschk#">
+<input type="hidden" name="h_ddnshr" value="@h_ddnshr#">
+<input type="hidden" name="h_ddnsmin" value="@h_ddnsmin#">
+
+<input type="Hidden" name="this_file" value="ddns.htm">
+<input type="Hidden" name="next_file" value="ddns.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+</form>
+</div> <!--  newContentArea end -->  
+</body>
+</html>

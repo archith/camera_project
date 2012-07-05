@@ -1,0 +1,37 @@
+Original Open Source files are listed as below:
+	ntp-4.1.71.tar.tar
+
+fmacro.h, fntp.c and fntp.h are extracted and modified from ntp-4.1.71.
+
+GPL reference information
+fmacro.h(ntp.h, ntp_fp.h)
+	#define PKT_MODE(li_vn_mode) 		in ntp-4.1.71/include/ntp.h
+	#define PKT_VERSION(li_vn_mode) 	in ntp-4.1.71/include/ntp.h
+	#define PKT_LEAP(li_vn_mode)		in ntp-4.1.71/include/ntp.h
+	..........
+	#define LFPTOD(v, d)			in ntp-4.1.71/include/ntp_fp.h
+	.........
+
+fntp.c(emalloc.c, recvbuff.c, ntpdate.c, syssignal.c, decodenetnum.c)
+	static void * emalloc(u_int size)			in ntp-4.1.71/libntp/emalloc.c
+	static void initialise_buffer(struct recvbuf *buff)	in ntp-4.1.71/libntp/recvbuff.c
+	static void alarming(int sig)				in ntp-4.1.71/ntpdate/ntpdate.c
+	static void signal_no_reset(int sig,void (*func)(int))	in ntp-4.1.71/libntp/syssignal.c
+	static void init_recvbuff(int nbufs)			in ntp-4.1.71/libntp/recvbuff.c
+	static void create_buffers(void)			in ntp-4.1.71/libntp/recvbuff.c
+	static int decodenetnum(const char *num, u_int32 *netnum)
+								in ntp-4.1.71/libntp/decodenetnum.c
+	static void addserver(char *serv)			in ntp-4.1.71/ntpdate/ntpdate.c
+	static void add_full_recv_buffer(struct recvbuf *rb)	in ntp-4.1.71/libntp/recvbuff.c
+	struct recvbuf * get_free_recv_buffer(void)		in ntp-4.1.71/libntp/recvbuff.c
+	..........
+
+fntp.h(recvbuff.h, ntpdate.h, ntp.h)
+	#define recv_pkt			in ntp-4.1.71/include/recvbuff.h
+	#define recv_buffer			in ntp-4.1.71/include/recvbuff.h
+	..........
+	struct server				in ntp-4.1.71/ntpdate/ntpdate.h
+	struct pkt				in ntp-4.1.71/include/ntp.h
+	..........
+
+

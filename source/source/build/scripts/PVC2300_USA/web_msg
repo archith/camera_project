@@ -1,0 +1,63 @@
+[COMMON]
+NTPWait=Connecting to the NTP server, please wait......
+DLSav=Adjust daylight saving automatically, please wait......
+ChangeIPMsg=Camera's IP address may change. Please use the Windows utility to locate the camera and configure it correctly for your environment. You should now close this Browser window.
+IMQQQ=Error: Unable to set DDNS client new user configuration %s %d
+UpgFileErr=Error: Upgrade file format error
+UpgReadErr=Error: Unable to read upgrade file
+FailedCFG=Error: Configure file format error
+TooManyUsersErr=Error: Too many users
+DeviceBusy=Error: Device is busy now! Try it later.
+
+[SMTP]
+smtpserver=Invalid smtp server address
+popserver=Invalid pop server address
+username=Invalid smtp account
+passwd=Invalid smtp password
+address=Invalid e-mail address
+testfailure=SMTP Server Test Failed.
+testsuccess=SMTP Server Test Passed. E-mail was successfully sent.
+
+[FTP]
+server=Invalid ftp server address
+username=Invalid ftp login name
+passwd=Invalid ftp password
+
+[SCHEDULE]
+interval=Invalid schedule interval
+warnadd=Cannot add an existent schedule again
+warndel=Cannot delete a nonexistent schedule
+
+[USER]
+admid=The usernames of User %d and Admin conflict
+vwrid=The usernames of User %d and Viewer conflict
+usrid=The usernames of User %d and User %d conflict
+
+[PORT]
+conflict=Ports conflict
+inuse=This port is currently in use by another process
+
+[BULK_OPS]
+read=Error: Read %s failure
+check=Error: Check %s failure
+write=Error: Write %s failure
+run=Error: Run %s failure
+port_conflict=Error: Port Conflict
+
+[UPNP]
+friendlyName=PVC2300
+manufacturer=Cisco
+manufacturerURL=http://www.cisco.com
+modelName=Internet Video Camera
+modelNumber=PVC2300
+DeviceType=Internet_Video_Camera
+
+[IMAGE]
+LogoFileError=Logo Upload Failure
+LogoFileSuccess=Logo Upload Success
+
+[HTTPD]
+passthrough_max=<HTML><HEAD><TITLE>503 Service Unavailable</TITLE></HEAD><BODY style="background-color:transparent;><font face="arial"><P>There are too many connections in use right now.<BR>Please try again later.<BR></P></BODY></HTML>
+srv_busy=<HTML><HEAD><TITLE>Server busy</TITLE></HEAD><body onLoad="" bgcolor="#f2f2f2" style="background-color:transparent;"><font face="arial"><P>Device is busy, another administrator is managing the device.</P></BODY></HTML>
+
+

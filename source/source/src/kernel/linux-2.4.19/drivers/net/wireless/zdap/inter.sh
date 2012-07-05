@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#/usr/local/arm/2.95.3/bin/arm-linux-gcc -D__KERNEL__ -I/root/Faraday/linux-dist/arm-linux-2.4.19/include -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -Uarm -fno-common -pipe -mapcs-32 -D__LINUX_ARM_ARCH__=4 -march=armv4  -mshort-load-bytes -msoft-float -nostdinc -I /usr/local/arm/2.95.3/lib/gcc-lib/arm-linux/2.95.3/include -DKBUILD_BASENAME=zd1205  -gdwarf-2 -c -Wa,-a,-ad zd1205.c >& zd1205_log
+
+/usr/local/arm/2.95.3/bin/arm-linux-gcc -D__KERNEL__ -I/root/Faraday/linux-dist/arm-linux-2.4.19/include -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -Uarm -fno-common -pipe -mapcs-32 -D__LINUX_ARM_ARCH__=4 -march=armv4  -mshort-load-bytes -msoft-float -nostdinc -I /usr/local/arm/2.95.3/lib/gcc-lib/arm-linux/2.95.3/include -DKBUILD_BASENAME=zd1205  -gdwarf-2 -c -Wa,-a,-ad zddebug.c >& zd1205_log

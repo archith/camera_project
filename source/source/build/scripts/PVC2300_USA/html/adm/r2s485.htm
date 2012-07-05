@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function setData()
+{
+    var cf = document.forms[0];
+	var index = 0;
+	dataToVisible(cf);
+	en_485();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+		return;
+	cf.todo.value = "save";
+	dataToHidden(cf);
+	cf.h_seq_list.value = getOptionList(cf.seq_list, "value");
+	cf.submit();
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+    var msg = "";
+
+	if((cf.en485.checked))   //  && (index != 1)
+	{ msg+= checkInt(cf.p_ad,msg_p_ad, 1, 255,  cf.p_ad.value == ""); }
+
+	if (msg.length > 1)
+    {
+        rALERT("RS-485",msg);
+        return false;
+    }
+
+    return true;
+}
+
+////////////////////////////////////////////////////
+
+function en_485()
+{
+    var cf = document.forms[0];
+
+	if (!cf.en485.checked)
+	{
+		cf.baud.disabled = cf.data.disabled = cf.stopb.disabled = cf.parity.disabled = cf.plpt.disabled = cf.p_ad.disabled
+		= cf.preset_list.disabled = cf.seq_list.disabled = cf.fw.disabled = cf.del.disabled   //  = cf.timer.disabled
+		= 1;
+		
+		document.getElementById("BAUD_TEXT").disabled = 1;
+		document.getElementById("DATA_BITS_TEXT").disabled = 1;
+		document.getElementById("PARITY_TEXT").disabled = 1;
+		document.getElementById("STOP_BITS_TEXT").disabled = 1;
+		document.getElementById("ADDRESS_TEXT").disabled = 1;
+		
+	}
+	else
+	{
+		cf.baud.disabled = cf.data.disabled = cf.stopb.disabled = cf.parity.disabled = cf.plpt.disabled = cf.p_ad.disabled
+		= cf.preset_list.disabled = cf.seq_list.disabled = cf.fw.disabled = cf.del.disabled   //  = cf.timer.disabled
+		= 0;
+		
+		document.getElementById("BAUD_TEXT").disabled = 0;
+		document.getElementById("DATA_BITS_TEXT").disabled = 0;
+		document.getElementById("PARITY_TEXT").disabled = 0;
+		document.getElementById("STOP_BITS_TEXT").disabled = 0;
+		document.getElementById("ADDRESS_TEXT").disabled = 0;
+		
+		setSequenceList();
+	}
+	set_485();
+}
+
+function set_485()
+{
+	var cf = document.forms[0];
+	var dnfalg = cf.en485.checked;   
+	show_hide("rs_1", (dnfalg));  show_hide("rs_2", (dnfalg));  show_hide("rs_3", (dnfalg));  show_hide("rs_4", (dnfalg));  show_hide("rs_5", (dnfalg));
+}
+
+////////////////////////////////////////////////////
+
+var MaxPositions = 20;
+var separator = ";";
+
+function setSequenceList()
+{
+    var cf = document.forms[0];
+	var listA =  cf.h_seq_list.value.split(separator);
+	var itemA; 
+	var textStr;
+	var indexP;   // , indexT
+	cf.seq_list.options.length = 0;
+	for (var i = 0; i < listA.length; i++)
+	{
+		itemA = listA[i].split(",");
+		if(itemA.length == 2)
+		{
+			indexP = getSelIndex(cf.preset_list, itemA[0], true);
+			//indexT = getSelIndex(cf.timer, itemA[1], true);
+			textStr = cf.preset_list.options[indexP].text;   //  + " (" + cf.timer.options[indexT].text + ")"
+			addOption(cf.seq_list, textStr, listA[i]) ;
+		}
+	}
+}
+
+function addPreset()
+{
+    var cf = document.forms[0];
+    var indexAdd = cf.preset_list.selectedIndex;
+    if(!chkSelected(cf.preset_list, msg_select_preset))
+        return;
+    if( cf.seq_list.options.length >= MaxPositions )
+    {
+        rALERT("RS-485",addstr(msg_cycle_limit, MaxPositions));
+        return;
+    }
+	if(cf.preset_list.options[indexAdd].text.charAt(3)=="")
+	{
+		rALERT("RS-485",msg_add_blank);
+		return;
+	}
+	addOption( cf.seq_list, cf.preset_list.options[indexAdd].text,   //  + " (" + cf.timer.options[cf.timer.selectedIndex].text + ")"
+	cf.preset_list.options[indexAdd].value + "," + 30 );   //  + "," + cf.timer.options[cf.timer.selectedIndex].value 
+}
+
+
+function delPreset()
+{
+    var cf = document.forms[0];
+	if(chkSelected(cf.seq_list, msg_select_preset))
+		 delOption(cf.seq_list, cf.seq_list.selectedIndex);
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('RS-485');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">RS-485</div>
+ 	
+
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+<table class="std"  cellspacing="0" cellpadding="0">
+	<tr>
+	 <td width="21px"><input type="checkbox" name="en485" id="en485" value="disable" onClick="en_485();" style="margin-left:-3px"></td>
+     <script>				 
+				 if(!isIE())
+					document.getElementById("en485").style.marginLeft="0px";
+				 </script>
+     <td><b>Enable RS485</b> (for Pelco D Protocol Devices only)</td>
+	</tr>
+	</table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Port Settings</div>
+    <table class="std" cellspacing="0" cellpadding="0">
+	<tr>
+	 <td  width="68px" nowrap class="lc"><span id="BAUD_TEXT">Baud Rate: </span></td>
+	 <td nowrap="nowrap" ><select name="baud" size="1" onChange="">
+   <option value="7">115200 bps</option>
+   <option value="6">57600 bps</option>
+   <option value="5">38400 bps</option>
+   <option value="4">19200 bps</option>
+   <option value="3">9600 bps</option>
+   <option value="2">4800 bps</option>
+   <option value="1">2400 bps</option>
+   <option value="0">1200 bps</option>
+ </select>	</td>
+	</tr>
+	
+	<tr>
+	 <td nowrap class="lc"><span id="DATA_BITS_TEXT">Data Bits: </span></td>
+	 <td nowrap="nowrap">
+	  <select name="data" size="1" onChange="">
+    <option value="1">8</option>
+    <option value="0">7</option>
+  </select>&nbsp;	 </td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc"><span id="PARITY_TEXT">Parity: </span></td>
+	 <td nowrap="nowrap"><select name="parity" size="1" onChange="">
+    <option value=2>None</option>
+    <option value=1>Even</option>
+    <option value=0>Odd</option>
+    <option value=3>Mark</option>
+    <option value=4>Space</option>
+  </select>	 </td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc"><span id="STOP_BITS_TEXT">Stop Bits: </span></td>
+	 <td nowrap colspan="2"> 
+	 <select name="stopb" size="1" onChange="">
+    <option value=1>1</option>
+    <option value=2>2</option>
+  </select></td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc"><span id="ADDRESS_TEXT">Address: </span></td>
+	 <td nowrap colspan="2"> 
+	 <input type="text" class="num" name="p_ad" value="@p_ad#" size=3 maxlength=3 style="{width: 40}" onFocus="if(this.disabled)this.blur()"></td>
+	</tr>
+	<!-- tr>
+	 <td nowrap class="lc">Flow Control: </td>
+	 <td nowrap colspan="2"> 
+	 <INPUT type="radio" name="flow" value="0" onClick=""> On &nbsp;
+  <INPUT type="radio" name="flow" value="1" onClick=""> Off  &nbsp; </td>
+	</tr -->
+	</table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    <div id="rs_1">
+ 	<div class="newGroupBoxTitle" style="height:25px;">Preset Position</div></div>
+    <div id="rs_2">
+	<table class="std" cellspacing="0" cellpadding="0">
+	<tr>
+	 <td nowrap="nowrap" valign="top">
+<!--	DEMO
+ 		<input name="plpt" type="button" class="lsbutton" onClick="location.href='rs485_pt.htm'" value="Set Preset Position">
+<!--	-->  
+<!--	RELEASE	-->     
+ 		<input name="plpt" type="button" class="lsbutton" onClick="location.href='file.cgi?next_file=r2s485_pt.htm'" value="Set Preset Position">
+<!--	-->        
+	 </td>
+     
+	</tr>
+	</table>
+	</div>
+    <div id="rs_5">
+        <hr class="newHR"></div>
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Patrol Sequence</div>
+    <table border="0" cellspacing="0" cellpadding="0" class="std">
+
+ <tr>
+<td valign="top" align="left">
+<div align="center">Preset</div>
+<div style="padding-top:2px">
+<select name="preset_list" style="width:140px" size="9">
+ <option value="1">1) @preset1#</option>
+ <option value="2">2) @preset2#</option>
+ <option value="3">3) @preset3#</option>
+ <option value="4">4) @preset4#</option>
+ <option value="5">5) @preset5#</option>
+ <option value="6">6) @preset6#</option>
+ <option value="7">7) @preset7#</option>
+ <option value="8">8) @preset8#</option>
+ <option value="9">9) @preset9#</option>
+</select></div></td>
+
+ <td align="center" valign="top" width="90">
+ <!-- div style="padding-top:25px">Time</div>
+ 
+ <div style="padding-top: 2px; padding-left: 8px;">
+ <select name="timer" size="1">
+ <option value="5">&nbsp; 5 sec</option>
+ <option value="10">10 sec</option>
+ <option value="20">20 sec</option>
+ <option value="30">30 sec</option>
+ <option value="40">40 sec</option>
+ <option value="50">50 sec</option>
+ <option value="60">60 sec</option>
+ </select>
+ </div  -->
+ <div style="padding-top: 25px" id="rs_3">     <!-- 8px -->
+ &nbsp;<INPUT type="button" class="newbutton" name="fw" value="Add &gt;&gt;" onClick="return addPreset();">
+ </div>
+  <div style="padding-top: 55px" id="rs_4">     <!-- 40px -->
+ &nbsp;<input type="button" class="newbutton" name="del" value="Remove" onClick="delPreset()">
+ </div>
+
+ </td>
+
+ <td valign="top" align="left">
+ <div align="center">Sequence</div>
+<div style="padding-top:2px" style="padding-left:5">
+<select name="seq_list" size="9" style="width:200px">
+</select></div>
+</td>
+ </tr>
+</table>
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=rs485.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='rs485.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="" value="" title="not set by CGI">
+<input type="Hidden" name="h_" value="@h_#">
+
+<input type="Hidden" name="h_en485" value="@h_en485#">
+<input type="Hidden" name="h_baud" value="@h_baud#">
+<input type="Hidden" name="h_data" value="@h_data#">
+<input type="Hidden" name="h_stopb" value="@h_stopb#">
+<input type="Hidden" name="h_parity" value="@h_parity#">
+
+
+<input type="hidden" name="h_preset_list" value="1">  <!-- sets default value only  --> 
+<!-- input type="hidden" name="h_timer" value="30">       < sets default value only  --> 
+<input type="hidden" name="h_seq_list" value="@h_seq_list#">  <!-- numbers (1 ~ 9) separated by \t -->
+
+
+<input type="Hidden" name="this_file" value="r2s485.htm">
+<input type="Hidden" name="next_file" value="r2s485.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+
+
+</form>
+</div> <!--  newContentArea end -->       
+</body>
+
+</html>

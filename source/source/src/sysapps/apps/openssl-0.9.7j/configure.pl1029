@@ -1,0 +1,5 @@
+./Configure --prefix=$PROJ_ROOT threads shared -DPL_OPENSSL -I$PROJ_ROOT/include -L$PROJ_ROOT/lib -laes linux-elf-arm
+
+make depend
+
+make

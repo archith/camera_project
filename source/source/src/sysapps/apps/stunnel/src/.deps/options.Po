@@ -1,0 +1,438 @@
+options.o options.o: options.c common.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/pthread.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/features.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_config.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/cdefs.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sched.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/types.h \
+  /opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/stddef.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/kernel_types.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/pthreadtypes.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sched.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/time.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/time.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_clk_tck.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/signal.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigset.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/initspin.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigthread.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/types.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/endian.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/endian.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/select.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/select.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/sysmacros.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/stdio.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_stdio.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/wchar.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/wchar.h \
+  /opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/stdarg.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/stdio_lim.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/errno.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/errno.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/errno_values.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/stdlib.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/alloca.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/string.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/ctype.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_touplow.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/stat.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/stat.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/syslog.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/syslog.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/signum.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/siginfo.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/wordsize.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigaction.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigcontext.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/asm/sigcontext.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigstack.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/wait.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/resource.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/resource.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/waitflags.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/waitstatus.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/unistd.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix_opt.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/confname.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/getopt.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/poll.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/poll.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/poll.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/pwd.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/grp.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/fcntl.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/fcntl.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/netinet/in.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/stdint.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/socket.h \
+  /opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/limits.h \
+  /opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/syslimits.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/limits.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix1_lim.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/local_lim.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/linux/limits.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix2_lim.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/sockaddr.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/asm/socket.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/asm/sockios.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/in.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/byteswap.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/socket.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/uio.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/uio.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/arpa/inet.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/time.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/ioctl.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/ioctls.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/asm/ioctls.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/asm/ioctl.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/ioctl-types.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/sys/ttydefaults.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/netinet/tcp.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/netdb.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/rpc/netdb.h \
+  /opt/uc_arm/arm-linux-uclibc/sys-include/bits/netdb.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/lhash.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/bio.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/crypto.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/stack.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/safestack.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/opensslv.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/symhacks.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/e_os2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/opensslconf.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/comp.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/x509.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/buffer.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/evp.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ossl_typ.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md4.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md5.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/sha.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ripemd.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/des.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/des_old.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ui_compat.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ui.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc4.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc5.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/blowfish.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/cast.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/idea.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/mdc2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/aes.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rsa.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/asn1.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/bn.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/dsa.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/dh.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/objects.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/obj_mac.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/x509_vfy.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pkcs7.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/kssl.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pem.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pem2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl2.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl3.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/tls1.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl23.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/err.h \
+  /home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rand.h \
+  prototypes.h
+
+common.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/pthread.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/features.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_config.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/cdefs.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sched.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/types.h:
+
+/opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/stddef.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/kernel_types.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/pthreadtypes.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sched.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/time.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/time.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_clk_tck.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/signal.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigset.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/initspin.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigthread.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/types.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/endian.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/endian.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/select.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/select.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/sysmacros.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/stdio.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_stdio.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/wchar.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/wchar.h:
+
+/opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/stdarg.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/stdio_lim.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/errno.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/errno.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/errno_values.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/stdlib.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/alloca.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/string.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/ctype.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/uClibc_touplow.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/stat.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/stat.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/syslog.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/syslog.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/signum.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/siginfo.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/wordsize.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigaction.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigcontext.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/asm/sigcontext.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sigstack.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/wait.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/resource.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/resource.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/waitflags.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/waitstatus.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/unistd.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix_opt.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/confname.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/getopt.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/poll.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/poll.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/poll.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/pwd.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/grp.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/fcntl.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/fcntl.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/netinet/in.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/stdint.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/socket.h:
+
+/opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/limits.h:
+
+/opt/uc_arm/lib/gcc-lib/arm-linux-uclibc/3.3.4/include/syslimits.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/limits.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix1_lim.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/local_lim.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/linux/limits.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/posix2_lim.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/sockaddr.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/asm/socket.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/asm/sockios.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/in.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/byteswap.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/socket.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/uio.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/uio.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/arpa/inet.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/time.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/ioctl.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/ioctls.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/asm/ioctls.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/asm/ioctl.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/ioctl-types.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/sys/ttydefaults.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/netinet/tcp.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/netdb.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/rpc/netdb.h:
+
+/opt/uc_arm/arm-linux-uclibc/sys-include/bits/netdb.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/lhash.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/bio.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/crypto.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/stack.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/safestack.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/opensslv.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/symhacks.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/e_os2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/opensslconf.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/comp.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/x509.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/buffer.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/evp.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ossl_typ.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md4.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/md5.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/sha.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ripemd.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/des.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/des_old.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ui_compat.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ui.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc4.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rc5.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/blowfish.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/cast.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/idea.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/mdc2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/aes.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rsa.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/asn1.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/bn.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/dsa.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/dh.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/objects.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/obj_mac.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/x509_vfy.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pkcs7.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/kssl.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pem.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/pem2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl2.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl3.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/tls1.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/ssl23.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/err.h:
+
+/home/konchi/2300/gpl/wvc/source/src/sysapps/apps/openssl-0.9.7j/include/openssl/rand.h:
+
+prototypes.h:

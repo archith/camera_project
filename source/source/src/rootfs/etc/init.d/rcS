@@ -1,0 +1,160 @@
+#!/bin/sh
+
+#=================================================
+# Mount file systems
+#=================================================
+echo "Starting the boot scripts..."
+/bin/mount -t proc proc /proc
+/bin/mount -o remount -w %root% /
+/bin/hostname localhost
+
+/bin/mount -t ramfs none /mnt/ramdisk
+/bin/touch /mnt/ramdisk/resolv.conf
+/bin/mkdir /mnt/ramdisk/root
+/bin/mkdir /mnt/ramdisk/tmp
+/bin/mkdir -p /mnt/ramdisk/var/lib
+/bin/mkdir  /mnt/ramdisk/var/lock
+/bin/mkdir  /mnt/ramdisk/var/run
+/bin/mkdir  /mnt/ramdisk/var/tmp
+
+cd /tmp;mknod -m 0600 console c 5 1;
+/bin/mknod /dev/watchdog c 10 130
+
+# create directory for video log
+#/bin/mount -t tmpfs -o size=16M,nr_inodes=10k,mode=700 tmpfs /usr/local/www/vlog
+/bin/mkdir  /mnt/ramdisk/tmp/vlog
+/bin/mkdir -p /tmp/vlog/file
+/bin/mkdir -p /tmp/vlog/temp
+
+#/bin/dd if=/dev/zero of=/tmp/minix.img bs=1024 count=10240
+#/sbin/mkfs.minix /tmp/minix.img
+#/bin/mknod /dev/ramdisk b 1 11
+#/bin/dd if=/tmp/minix.img of=/dev/ramdisk bs=1024 count=10240
+#/bin/mount -t minix /dev/ramdisk /mnt/vlog
+#/bin/mkdir -p /mnt/vlog/file
+#/bin/mkdir -p /mnt/vlog/temp
+#rm /tmp/minix.img
+
+# ---- Run Watchdog ---- #
+/sbin/insmod watchdog 
+
+# ---- Read Configure File From FLASH ---- #
+/usr/local/bin/r_flash
+
+# ---- Set LED Driver ---- #
+/sbin/insmod leds
+
+# ---- Insert H/W AES driver ---- #
+/sbin/insmod crypt.o
+
+# Set LED to Device (Ready BLINK, others OFF) 
+/usr/local/bin/do_leds 0 2
+/usr/local/bin/do_leds 1 1
+#/usr/local/bin/do_leds 2 1
+
+# ---- Set Push Button ---- #
+/sbin/insmod switchs
+
+# ---- Set Reset Button ---- #
+/sbin/insmod reset
+
+#-- copy reset to /tmp---#
+/bin/cp /usr/local/bin/reboot /tmp/
+
+# ---- Set Crond ---- #
+/usr/sbin/crond &
+
+#---  Detect push botton ---#
+/usr/local/bin/read_push &
+
+#-- Run dhcpcd renew daemon --*/
+/usr/local/bin/simplemount
+
+# ---- Start Qset daemon ---- #
+#/usr/local/bin/nc_qset3 &
+
+# ---- Set Network ---- #
+echo "/sbin/ifconfig lo"
+/sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0 broadcast 127.255.255.255
+/sbin/route add -net 127.0.0.0 netmask 255.0.0.0 lo
+
+# --- insmod  DM9102 --- #
+/sbin/insmod dmfe
+/sbin/ifconfig eth0 up
+/sbin/ifconfig eth0 192.168.1.99
+
+# ---- Run rc.sethost ---- #
+/etc/rc.sethost 
+
+# --- insmod  Ralink  --- #
+#/sbin/insmod rt61.o
+#/sbin/ifconfig ra0 up
+
+# ---- RUN Syslogd ----- #
+/usr/local/bin/syslogd &
+
+# ---- Start Qset daemon ---- #
+/usr/local/bin/nc_qset &
+
+# ---- insert module needed by https server ---- #
+cp -f /usr/local/bin/Cisco.cert.pem /mnt/ramdisk/Cisco.cert.pem
+cp -f /usr/local/bin/Cisco.key.pem /mnt/ramdisk/Cisco.key.pem
+
+# ---- http/https server ----- #
+/usr/local/bin/auth
+/usr/local/bin/webd -c -r all
+
+# ---- Set LED To Device (Ready ON) ----- #
+/usr/local/bin/do_leds 0 0
+
+# ---- LED operation ---- #
+/usr/local/bin/ledoff &
+
+/sbin/insmod topro.o
+/sbin/insmod plsensor-1.2.11.o
+/sbin/insmod plmedia-1.2.11.1.o
+
+# ---- io port ---- #
+/sbin/insmod ioport.o
+/usr/local/bin/io_init
+
+# ---- hydra ---- #
+/usr/local/bin/hydra &
+
+#-- ccdc ---#
+/usr/local/bin/ccdc_daemon &
+
+# ----  Streaming Server ---- #
+/usr/local/bin/dsp_dae &
+#/usr/sbin/telnetd &
+
+# ---- IP filter start up ---#
+/usr/sbin/ipfilter &
+
+# --- Set AC97 Gain Boost --- #
+/usr/local/bin/ac97preset
+
+#---run bulk_ops if need ---#
+/usr/local/bin/boot_run_bulk
+
+# ---- Set DDNS (Register to the server) ---- #
+/usr/local/bin/ddnsinit &
+
+# ----- RUN upnp_traversal ---- #
+/usr/local/bin/upnp_traversal &
+
+# ---- RUN upnp discovery ----- #
+/usr/local/bin/upnp_discovery &
+
+# ---- RUN instant message (jabber) ----- #
+/usr/local/bin/jabberlog &
+
+# ---- RUN Bonjour ----- #
+/usr/local/bin/mDNSResponderPosix &
+
+# ---- RUN regular video recording through samba client ----#
+/usr/local/bin/smbc_rec &
+
+# ---- startup cdp ----- #
+/usr/local/bin/rc cdp start
+

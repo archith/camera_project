@@ -1,0 +1,37 @@
+
+
+td.control
+{
+	padding-left: 6px;
+	border: 0px;
+	width: 160px;
+}
+td.control2
+{
+	padding-left: 6px;
+	border: 0px;
+	padding-top: 7px;
+}
+
+td.control3
+{
+	padding-left: 6px;
+	border: 0px;
+	padding-bottom: 9px;
+}
+
+.ind
+{
+	display:block;margin:0;padding:0px;width:85px;height:24px;background-image:url(../buttons/vol.gif);background-repeat:no-repeat;
+}
+.value
+{
+	background-image: url(../buttons/x.gif);
+	background-repeat: repeat-x;
+	width: 0px;
+	height: 0px;
+}
+.sli
+{
+	display:block;margin:0;padding:0px;width:85px;height:12px;background-image:url(../buttons/volume.gif);background-repeat:no-repeat;
+}

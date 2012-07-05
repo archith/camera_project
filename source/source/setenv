@@ -1,0 +1,105 @@
+#!/bin/sh
+
+#
+# to check if this shell name is setenv
+#
+
+# project top directory
+PROJ_ROOT="`pwd -LP`"
+
+# project development root
+PROJ_DEVEL_ROOT="/opt/uc_arm"
+PROJ_GPL_TOOLCHAIN=${PROJ_ROOT}/../toolchain
+
+if [ ! -d ${PROJ_DEVEL_ROOT} ] && [ ! -d ${PROJ_GPL_TOOLCHAIN} ] ; then
+	echo "Must install toolchain before enter pl1029 project"
+	return -1
+fi
+if [ ! -d ${PROJ_DEVEL_ROOT} ]; then
+	PROJ_DEVEL_ROOT=${PROJ_GPL_TOOLCHAIN}/uc_arm
+fi
+
+if [ "$(basename $0)" = "setenv" ] ; then
+  echo "You must source this script, not run it!" 1>&2
+  return -1
+fi
+
+usage()
+{
+	echo "usage:       . ./setenv"
+	echo "      or     . ./setenv <special_model_name> <camera_domain>"
+	echo "      <special_model_name>:    WVC2300 USA"
+	echo "      <special_model_name>:    PVC2300 USA"
+	
+}
+
+if [ "$1" != "" -a "$1" != "WVC2300"  -a "$1" != "PVC2300" -a "$1" != "WVC2300C" ]; then
+	usage
+	return -1
+fi
+
+
+#
+# project-specifi settings
+#
+
+#
+# to check if this shell is executed from the project directory whose parent
+# directory name which is the same as project name
+#
+SETCOLOR_CHANGE="echo -en \\033[1;32m"
+SETCOLOR_NORMAL="echo -en \\033[0;39m"
+
+# project image directory
+PROJ_BIN=${PROJ_ROOT}/bin
+
+# project image directory
+PROJ_IMG=${PROJ_ROOT}/img
+
+# project installation root
+PROJ_INSTALL=${PROJ_IMG}/fs/shadow_root
+
+# project kernel module installation root
+PROJ_KMODULE=${PROJ_ROOT}/lib/modules/2.4.19-pl1029
+
+# prefix of toolchain wrapper
+PL_WRAPPER_PREFIX=arm-linux-uclibc-
+
+# to add executable-lookup paths for this project
+PATH=${PROJ_DEVEL_ROOT}/bin:$PATH
+
+# specify model name
+if [ "$1" = "" ]; then
+	MODEL=WVC2300;
+else
+	MODEL=$1;
+fi
+if [ "$2" = "" ]; then
+	PROJ_DOMAIN=USA;
+else
+	PROJ_DOMAIN=$2;
+fi
+
+
+export PROJ_ROOT PROJ_IMG PROJ_INSTALL PROJ_KMODULE PROJ_DEVEL_ROOT PL_WRAPPER_PREFIX PATH PS1 MODEL PROJ_DOMAIN 
+export PROJ_CGI2=${PROJ_ROOT}/src/sysapps/apps/cgi2
+echo 
+echo PROJ_ROOT=$PROJ_ROOT
+echo PROJ_BIN=$PROJ_BIN
+echo PROJ_IMG=$PROJ_IMG
+echo PROJ_INSTALL=$PROJ_INSTALL
+echo PROJ_KMODULE=$PROJ_KMODULE
+echo PROJ_DEVEL_ROOT=$PROJ_DEVEL_ROOT
+echo PATH=$PATH
+echo MODEL=$MODEL
+echo PROJ_DOMAIN=$PROJ_DOMAIN
+
+echo
+$SETCOLOR_CHANGE
+echo -n "!!!!!! The \"PROJ_ROOT\" MUST be the root dir of your BSP source !!!!!!"
+$SETCOLOR_NORMAL
+echo
+echo
+echo do global setting
+make -C build/scripts
+

@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function reloadScrn()
+{ location.href='file.cgi?next_file=status_syslog.htm' }
+
+function clearLog() 
+{
+	var cf = document.forms[0];
+	cf.todo.value = "clearlog";
+	dataToHidden(cf); cf.submit();
+}
+
+function init()
+{
+    var cf = document.forms[0];
+	dataToVisible(cf);
+	set_system();
+}
+
+function set_system()
+{
+	var cf = document.forms[0];
+	var dFlag = cf.log_sys.checked;
+	if (!dFlag) 
+	{ cf.syslog_serv_en.disabled = cf.syslog_serv_addr.disabled = cf.syslog_port.disabled = 1; 
+	document.getElementById("ENABLE_SYSLOG_TEXT").disabled = 1;
+	document.getElementById("SYSLOG_ADDRESS_TEXT").disabled = 1;
+	document.getElementById("PORT_TEXT").disabled = 1;
+	
+	}
+	else
+	{ cf.syslog_serv_en.disabled = cf.syslog_serv_addr.disabled = cf.syslog_port.disabled = 0;  set_syslog(); 
+	
+	document.getElementById("ENABLE_SYSLOG_TEXT").disabled = 0;	
+	//document.getElementById("SYSLOG_ADDRESS_TEXT").disabled = 0;
+	//document.getElementById("PORT_TEXT").disabled = 0;
+	
+	}	
+}
+
+
+function set_syslog()
+{
+	var cf = document.forms[0];
+	var dFlag = cf.syslog_serv_en.checked;
+	if (!dFlag) 
+	{ 
+		cf.syslog_serv_addr.disabled = cf.syslog_port.disabled = 1; 
+	
+		document.getElementById("SYSLOG_ADDRESS_TEXT").disabled = 1;
+		document.getElementById("PORT_TEXT").disabled = 1;
+	
+	}
+	else
+	{
+		cf.syslog_serv_addr.disabled = cf.syslog_port.disabled = 0;  
+	
+		document.getElementById("SYSLOG_ADDRESS_TEXT").disabled = 0;
+		document.getElementById("PORT_TEXT").disabled = 0;
+	}	
+}
+
+function checkData() {
+    var cf = document.forms[0];
+	var msg = "";
+
+//syslog
+	if(cf.log_sys.checked)
+	{
+		if(cf.syslog_serv_en.checked)
+		{
+			msg+= checkBlank(cf.syslog_serv_addr,msg_syslog_serv_addr);
+			msg+= checkValid(cf.syslog_serv_addr, msg_syslog_serv_addr, Valid_Strs, 64, false);
+			if(cf.syslog_port.value != "514")
+			{ msg+= checkInt(cf.syslog_port, msg_syslog_port, 1024, 65535, cf.syslog_port.value == ""); }
+		}
+	}
+
+	if (msg.length > 1)	{
+		rALERT("Log",msg);
+		return false;
+	}
+	
+	return true;
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+
+	if (!(checkData()))
+		return;
+
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Syslog & Log');init();">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+<div width="100%" class="newContentTitle">Syslog & Log</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+        <div class="newGroupBoxTitle" style="height:25px;">Log Type</div>
+        <table border="0" cellpadding="0" cellspacing="0" class="std">
+      <tr>
+ <td width="21"><input type="checkbox" name="log_sys" id="log_sys" value="disable" onClick="set_system();"  style="margin-left:-3"></td>
+ <script>				 
+				 if(!isIE())
+					document.getElementById("log_sys").style.marginLeft="0px";
+				 </script>
+ <td> System Log</td>
+ <td width="8"> </td>
+        <td  width="21"><input type="checkbox" name="log_ftp" id="log_ftp" value="disable" onClick=""  style="margin-left:-3"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("log_ftp").style.marginLeft="0px";
+				 </script>
+        <td> FTP Log</td>
+         <td width="8"> </td>
+        <td  width="21"><input type="checkbox" name="log_smtp" id="log_smtp" value="disable" onClick=""  style="margin-left:-3"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("log_smtp").style.marginLeft="0px";
+				 </script>
+        <td> SMTP Log</td>
+         <td width="8"> </td>
+        <td  width="21"><input type="checkbox" name="log_im" id="log_im" value="disable" onClick=""  style="margin-left:-3"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("log_im").style.marginLeft="0px";
+				 </script>
+        <td> IM Log</td>
+      </tr>
+    </table>
+    
+     <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	
+
+ 	<div class="newGroupBoxTitle" style="height:25px;">Syslog Server</div>
+    
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+        <td width="21"><input type="checkbox" name="syslog_serv_en" id="syslog_serv_en" value="disable" onClick="set_syslog();" style="margin-left:-3"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("syslog_serv_en").style.marginLeft="0px";
+				 </script>
+        <td width="265">
+          <span id="ENABLE_SYSLOG_TEXT">Enable Syslog Server:</span></td>
+          </tr>
+          </table>
+          </td>
+      <table border="0" cellpadding="0" cellspacing="0" class="std">
+      
+      <tr>
+        <td width="134px" nowrap class="lc"><span id="SYSLOG_ADDRESS_TEXT">Syslog Server Address:</span></td>
+        <td nowrap><input type="text" name="syslog_serv_addr" size="40" maxlength="64" value="@syslog_serv_addr#">
+        </td>
+      </tr>
+      <tr>
+        <td nowrap class="lc"><span id="PORT_TEXT">Syslog Port:</span></td>
+        <td nowrap><input type="text" class="num" name="syslog_port" value="@syslog_port#" size="6" maxlength="5"> <span style="color:#8e8e8e">(514,1024-65535)</span>
+        </td>
+      </tr>
+    </table>
+     <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Log List</div>
+    <table border="0" cellpadding="0" cellspacing="0" class="std">
+      <tr>
+        <td nowrap><textarea rows="10" cols="50" name="s_list" class="smallnum" wrap=OFF>@sys_log#</textarea>
+              <br><br><br><br><br><br><br><br>
+<!--              <input name="button" type="button" class="newbutton" onClick="reloadScrn()" value="Refresh">-->
+              <input name="button" type="button" class="newbutton" onClick="clearLog()" value="Clear Log">
+        </td>
+      </tr>
+      
+    </table>
+
+
+
+
+	</div><!-- formpane end-->
+            <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=status_syslog.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='status_syslog.htm'">
+<!--    --> 
+	</div>
+
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="h_syslog_serv_en" value="@h_syslog_serv_en#">
+
+<input type="Hidden" name="h_log_sys" value="@h_log_sys#">
+<input type="Hidden" name="h_log_ftp" value="@h_log_ftp#">
+<input type="Hidden" name="h_log_smtp" value="@h_log_smtp#">
+<input type="Hidden" name="h_log_im" value="@h_log_im#">
+
+<input type="Hidden" name="this_file" value="status_syslog.htm">
+<input type="Hidden" name="next_file" value="status_syslog.htm">
+<input type="Hidden" name="todo" value="reset">
+<input type="hidden" name="message" value="@message#">
+    
+</form>  
+</div> <!--  newContentArea end -->     
+</body>
+
+</html>

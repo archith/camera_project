@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+var fill = "@tlsu_ca#";     // @tlsu_ca#
+
+var global_var = "";
+
+function ca_up()
+{
+	var cf = document.forms[0];
+	
+	if(fill != "")
+	{
+		if(cf.upfilename.value.length == 0)
+		{
+			rALERT("Wireless Security",NoCertificate_msg);
+			return;
+		}
+		else
+		{
+			global_var = "tlsu";
+			rConfirm("Wireless Security",ca_msg);
+		}
+		/*
+		if (!rConfirm("Wireless Security",ca_msg))
+		return;   cf.submit();
+		//{ LimitAttach(cf, cf.upfilename.value); }
+		*/
+	}
+	else
+	{
+		if(cf.upfilename.value.length == 0)
+		{
+			rALERT("Wireless Security",NoCertificate_msg);
+			return;
+		}
+		else
+		{
+			global_var = "tlsu";
+			rConfirm("Wireless Security",ca_msg);
+		}
+		/*
+		if (!rConfirm("Wireless Security",fill_msg))
+		return;   cf.submit();
+		//{ LimitAttach(cf, cf.upfilename.value); }
+		*/
+	}
+}
+
+/*extArray = new Array(".cer", ".crt", ".der");
+function LimitAttach(form, file)
+{
+	var cf = document.forms[0];
+	allowSubmit = false;
+	if (!file) return;
+	while (file.indexOf("\\") != -1)
+	file = file.slice(file.indexOf("\\") + 1);
+	ext = file.slice(file.indexOf(".")).toLowerCase();
+	for (var i = 0; i < extArray.length; i++) {
+	if (extArray[i] == ext) { allowSubmit = true; break; }
+	}
+	if (allowSubmit)
+	{
+		if(!confirm(up_img_msg))  return;
+		cf.submit();
+		//window.parent.location.href='file.cgi?next_file=Wsecurity.htm';
+		//window.parent.sub();
+	}
+	else
+	alert(up_img_f1 + (extArray.join("  ")) + up_img_f2 + up_img_f3);
+}*/
+
+function cc()
+{
+	location.href='file.cgi?next_file=Wsecurity.htm';
+}
+// End Script -->
+</script>
+</head>
+<body  marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Basic Setup');">
+<form marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" name="upg_tlsu" method="post" action="upg_tlsu.cgi" ENCTYPE="multipart/form-data">
+<table marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" border="0" cellSpacing="0" cellPadding="0" width="340">
+	<tr>
+	<td bgColor="#f2f2f2" class="boldhead" valign="top"> </td>
+	<td valign="top">
+	<input type="file" name="upfilename" value="" size="23" maxlength="255"><nobr>
+	<input type="button" name="Upload" value="Upload" class="newbutton" onClick="ca_up()">
+	</td>
+	</tr>
+</table>
+<input type="hidden" name="message" value="@message#">
+</form>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<link REL="stylesheet" TYPE="text/css" HREF="help.css">
+<script language="javascript" type="text/javascript">
+
+</SCRIPT>
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 12pt;
+	font-weight: bold;
+}
+-->
+</style>
+</HEAD>
+
+<BODY>
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+
+<!--<form name="dummy">-->
+<table border="0" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px">
+<tr>
+<td width="100%">&nbsp;</td>
+</tr>
+
+<tr>
+<td>
+ <!-- org table-->
+
+<!-- Start Help Content -->
+<!--<h1>Event</h1><br>
+<p>This page is used to set up the Internet Camera applications functions. Operating Mode 
+allows you to configure Event Trigger settings as you desired.</p>
+
+<p>A trigged event is a set of parameters describing how and when the Network Camera will perform certain triggered actions, according to requirements.
+<br>
+The most common kind of event type will upload video or snapshot files to a specified destination (E-mail account or FTP server). Other actions performed by event types can include the activation of an output port.
+<p><B>Notes:</B>
+<UL>
+<LI>It is important to note that adding a new event will 
+stop any event that is currently running. A scheduled event 
+will automatically resume, if the time is still within the 
+scheduled period. A triggered event will need to be 
+re-triggered. 
+<LI>The Network Camera can be configured for up to 10 events.<BR><BR></LI></UL>
+
+<p></p>
+</td>
+<tr>
+<td>
+-->
+<table width="100%">
+<tr>
+  <th class="help">Help - Event</th>
+</tr>
+<tr>
+ <td><hr size=2></td>
+</tr>
+</table>
+
+<p><b> Event Schedule</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Event Schedule</td>
+   <td >The Event Schedule displays the effective time  frame and start/end times for scheduled events. &nbsp;It contains a current profile of the event  schedules. You can delete an existing event schedule. </td>
+</tr>
+</table>
+<p><b> New Schedule</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+  
+  <tr>
+    <td class="itemhead" valign="top">Effective Time Frame</td>
+    <td ><p>From the drop-down list,  select the event time frame. Available options are every day, weekdays, or a  specific day of the week.</p>
+      <ul>
+        <li><strong>Start  Time&mdash;</strong>Select the event start time in hours and minutes. Use the  24-hour time format.</li>
+        <li><strong>End Time&mdash;</strong>Select  the event end time in hours and minutes. Use the 24-hour time format.</li>
+      </ul>
+      Click <strong>Add</strong> to add a new schedule or <strong>Clear</strong> to clear options and enter a new  schedule.</td>
+  </tr>
+</table>
+
+<br><hr size=2>
+
+<p><strong>Trigger Event</strong> <br>
+A triggered event type is  activated when a specific internal or external trigger condition is met. These  triggers are: 
+<ul type="disc">
+  <li>A signal from a device connected       to an input on the network camera. For example, a signal from a door       switch. </li>
+<li>
+When  movement is detected in a previously configured motion detection window.</li></ul>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable</td>
+   <td >Check the box to perform all of the event(s)  that are configured and scheduled.</td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">Interval</td>
+   <td >Defaults to zero minutes before detecting the  next event (* &quot;0 sec&quot; = No Delay). Select the desired interval before  detecting the next event.</td>
+</tr>
+  <tr>
+    <td class="itemhead" valign="top">Triggered by</td>
+    <td ><p>Check the box to select a  trigger option:</p>
+      <ul>
+        <li><strong>Input 1/2&mdash;</strong>Describes the states  that the input(s) must be in for an event to be triggered. Only one input can  be used. Also note that the states for all the inputs used must first be  reached before the event will be triggered.</li><br>
+      <li>
+      <strong>Motion Detection&mdash;</strong>Movement  in a motion detection window can be used to trigger events.</li><br>
+      </ul></td>
+  </tr>
+<tr>
+    <td class="itemhead" valign="top">Action(s)</td>
+    <td ><p>Select one or more actions  to perform once a trigger event occurs. Choose from the following options:</p>
+      <ul>
+        <li><strong>E-mail</strong><strong>&mdash;</strong>If checked, an e-mail with attachment will be delivered to  the SMTP server when an alert is detected. E-mail alerts require pre-configured  e-Mail settings in the Applications &gt; Mail window<strong>.</strong></li>
+        <li><strong>FTP</strong><strong>&mdash;</strong>If checked, an FTP upload with attachment will be activated  to the FTP server when an alert is detected. A secondary server may also be  specified, if required. This will be used if the primary server is  unavailable.&nbsp; FTP alerts require  pre-configured FTP settings in the Applications &gt; FTP window.</li>
+      </ul>
+      <ul type="disc">
+        <li><strong>SMB/CIFS</strong><strong>&mdash;</strong>If checked, attachments are uploaded to a NAS       device when an alert is detected. The following SMB/CIFS settings will be       visible when SMB/CIFS is enabled.</li>
+      </ul>
+      <ul>
+        <p><strong>- Enable SMB/CIFS&mdash;</strong>Check the box to enable SMB/CIFS alerts. Alerts are  recorded and sent to the SMB server. 
+        <p><strong>- SMB/CIFS Server&mdash;</strong>Enter the server hostname or IP address.
+        <p><strong>- Upload Path&mdash;</strong>Enter the folder name to upload alert notification to a SMB  server.
+        <p><strong>- Login Name&mdash;</strong>Enter user&rsquo;s login name for SMB server.
+        <p><strong>- Password&mdash;</strong>Enter  user&rsquo;s password for SMB server.
+      </ul>
+      <ul type="disc">
+        <li><strong>Output 1 / 2</strong><strong>&mdash;</strong>If checked, the output port(s) state will be       activated when an alert is detected . Output port(s) alerts require       pre-configured I/O port setting in the Applications &gt; I/O <strong>Ports       window</strong>. </li>
+      <li>
+      <strong>Instant  Messaging</strong><strong>&mdash;</strong>If  checked, an instant message will be delivered to the Jabber server when an  alert is detected. Jabber alerts require pre-configured Jabber settings in &nbsp;the Applications &gt; Instant Messaging  window.</li>
+      </ul></td>
+  </tr>
+  <tr>
+    <td class="itemhead" valign="top"><p>Event  attachment</p></td>
+    <td ><ul>
+      <li><strong>Overwrite/Replace oldest video file&mdash;</strong>Check the  box to overwrite and replace the oldest video clip with the current recording  when detecting device&rsquo;s SDRAM is full.</li>
+      <li><strong>Attachment Type</strong>&mdash;From the drop-down  list, select the type of attachment:</li><br>
+      <strong>JPEG  Image</strong>&mdash;Select to send image captures.
+      <p><strong>- Frame  Rate&mdash;</strong>Select the desired capture rate for the JPEG image(s).<br>
+      <strong>- Pre/Post  Capture&mdash;</strong>Select the desired length. The snapshot(s) of the JPEG  image depends on this setting, and also the file size and degree of  compression.</p><br>
+      <strong>Video</strong>&mdash;Select  to send video captures. Video Format (MPEG-4 Mode Only)
+      <p><strong>- File  Type&mdash;</strong>Select the format for the video file.<br>
+      <strong> &nbsp;&nbsp;&nbsp;&nbsp;-ASX</strong><br>
+      <strong> &nbsp;&nbsp;&nbsp;-MP4</strong><br>
+      <strong> &nbsp;&nbsp;&nbsp;-3GP</strong><br><br>
+      <strong>- Pre/Post  Capture&mdash;</strong>Select the desired length. The size of the file depends  on this setting, and also the video size and degree of compression.</p>
+    </ul></td>
+  <!--</tr>
+  <tr>
+    <td class="itemhead" valign="top">&nbsp;</td>
+    <td >&nbsp;</td>-->
+  </tr>
+
+
+  
+  </table>
+
+<!-- End Help Content -->
+
+
+</td>
+</tr>
+
+</table>
+<!--</FORM>-->
+</div><!-- Content Area End -->
+    
+<script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+</BODY></HTML>

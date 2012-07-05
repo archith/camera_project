@@ -1,0 +1,112 @@
+[login]
+1=Successful admin user login.
+2=Successful view only user login.
+3=Unsuccessful login attempt.
+
+[system]
+1=System: Device error (%s).
+2=System: Invalid upgrade file
+3=System: Reset to factory defaults.
+4=System: Device is busy.
+5=System: Cancel upgrade process
+
+[alert]
+1=Alert: Detected motion.
+2=Alert: Input Port (%d) triggered.
+
+[periodic sending]
+1=Periodic sending: Triggered
+
+[network]
+1=Network: Failed to get the IP address. Camera set to default IP address.
+2=Network: Wireless activated.
+3=Network: Lan activated.
+
+[DDNS]
+1=DDNS: Failed to connect to DDNS server.
+2=DDNS: Failed to update IP address.
+3=DDNS: Registration OK.
+4=DDNS: Registration failed.
+5=DDNS: No need to update IP address.
+6=DDNS: Update IP address OK.
+7=DDNS: Update fail incorrect user name / password.
+
+[http]
+1=HTTP: Video start (%s).
+2=HTTP: Video end (%s).
+
+[rtsp]
+1=RTSP: Video start (%s).
+2=RTSP: Video end (%s).
+
+[ftp]
+1=FTP: Upload file successfully [host: %s].
+2=FTP: Unknown FTP server [host: %s].
+3=FTP: Login failed [host: %s].
+4=FTP: No such remote path [host: %s].
+5=FTP: Upload file failed [host: %s].
+6=FTP: Error during the connection or timeout [host: %s].
+
+[smtp]
+1=SMTP: Send E-mail OK [host: %s].
+2=SMTP: Unknown SMTP server [host: %s].
+3=SMTP: Error during the connection or timeout [host: %s].
+4=SMTP: SMTP authentication failed [host: %s].
+5=SMTP: POP before SMTP authentication failed [host: %s].
+6=SMTP: All recipients were rejected. [host: %s].
+7=SMTP: Invalid sender address [host: %s].
+
+[output]
+1=output: Set output port %d to high OK.
+2=output: Set output port %d to low OK.
+3=output: Set output port %d to pulse OK.
+4=output: Failed to set output port %d.
+
+[NTP]
+1=NTP: Synchronization OK.
+2=NTP: Failed to connect to the NTP server.
+3=NTP: Failed to synchronize data & time with the NTP server.
+4=NTP: No NTP server specified.
+
+[DHCP]
+1=DHCP: Lease renewal successful.
+2=DHCP: Lease renewal unsuccessful.
+3=DHCP: Lease release successful.
+4=DHCP: Lease release unsuccessful.
+5=DHCP: Timeout error renewing DHCP lease.
+
+[UPnP]
+1=UPnP: UPnP Start
+2=UPnP: UPnP Stop
+3=UPnP: SecurityCam Start
+4=UPnP: SecurityCam Stop
+5=UPnP: Traversal Start
+6=UPnP: Traversal Stop
+7=UPnP: ControlPoint Start
+8=UPnP: ControlPoint Stop
+
+[Log]
+1=LOG: Log File is full. Start to wrap around.
+2=LOG: Clear all messages
+
+[IM]
+1=IM: Authentication failed
+2=IM: Can't connect to server
+3=IM: Server disconnected
+4=IM: Login successfully
+5=IM: Send message OK.
+
+[DST]
+1=DST: Adjust DST %d hour automatically.
+2=DST: DST begin.
+3=DST: DST end.
+
+[SAMBA]
+1=SAMBA: File uploaded successfully.
+2=SAMBA: Failed to upload file.
+3=SAMBA: Unknown SAMBA server.
+4=SAMBA: Permission denied.
+5=SAMBA: No such remote path.
+6=SAMBA: start to record video.
+7=SAMBA: stop to record video.
+8=SAMBA: Error during the connection or timeout.

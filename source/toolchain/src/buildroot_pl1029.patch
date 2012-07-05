@@ -1,0 +1,994 @@
+diff -uNrBb buildroot.orig/config.arm.pl1029 buildroot.pl1029/config.arm.pl1029
+--- buildroot.orig/config.arm.pl1029	Thu Jan  1 00:00:00 1970
++++ buildroot.pl1029/config.arm.pl1029	Wed Mar 22 10:35:45 2006
+@@ -0,0 +1,215 @@
++#
++# Automatically generated make config: don't edit
++#
++BR2_HAVE_DOT_CONFIG=y
++BR2_arm=y
++# BR2_armeb is not set
++# BR2_cris is not set
++# BR2_i386 is not set
++# BR2_m68k is not set
++# BR2_mips is not set
++# BR2_mipsel is not set
++# BR2_powerpc is not set
++# BR2_sh3 is not set
++# BR2_sh3eb is not set
++# BR2_sh4 is not set
++# BR2_sh4eb is not set
++# BR2_sparc is not set
++BR2_ARCH="arm"
++
++#
++# Build options
++#
++BR2_WGET="wget --passive-ftp"
++# BR2_TAR_VERBOSITY is not set
++BR2_STAGING_DIR="/opt/prolific/uc_arm"
++BR2_JLEVEL=1
++
++#
++# Toolchain Options
++#
++
++#
++# Kernel Header Options
++#
++BR2_KERNEL_HEADERS_2_4_19=y
++# BR2_KERNEL_HEADERS_2_4_25 is not set
++# BR2_KERNEL_HEADERS_2_4_27 is not set
++# BR2_KERNEL_HEADERS_2_6_8 is not set
++# BR2_KERNEL_HEADERS_2_6_9 is not set
++BR2_DEFAULT_KERNEL_HEADERS="2.4.19"
++
++#
++# uClibc Options
++#
++# BR2_UCLIBC_VERSION_SNAPSHOT is not set
++# BR2_ENABLE_LOCALE is not set
++
++#
++# Binutils Options
++#
++# BR2_BINUTILS_VERSION_2_14_90_0_6 is not set
++# BR2_BINUTILS_VERSION_2_14_90_0_7 is not set
++# BR2_BINUTILS_VERSION_2_14_90_0_8 is not set
++# BR2_BINUTILS_VERSION_2_15 is not set
++# BR2_BINUTILS_VERSION_2_15_90_0_1 is not set
++# BR2_BINUTILS_VERSION_2_15_90_0_1_1 is not set
++# BR2_BINUTILS_VERSION_2_15_90_0_2 is not set
++# BR2_BINUTILS_VERSION_2_15_90_0_3 is not set
++# BR2_BINUTILS_VERSION_2_15_91_0_1 is not set
++# BR2_BINUTILS_VERSION_2_15_91_0_2 is not set
++# BR2_BINUTILS_VERSION_2_15_92_0_2 is not set
++# BR2_BINUTILS_VERSION_2_15_94_0_1 is not set
++BR2_BINUTILS_VERSION_2_15_94_0_2=y
++BR2_BINUTILS_VERSION="2.15.94.0.2"
++
++#
++# Gcc Options
++#
++# BR2_GCC_VERSION_2_95 is not set
++# BR2_GCC_VERSION_3_3_3 is not set
++BR2_GCC_VERSION_3_3_4=y
++# BR2_GCC_VERSION_3_3_5 is not set
++# BR2_GCC_VERSION_3_4_0 is not set
++# BR2_GCC_VERSION_3_4_1 is not set
++# BR2_GCC_VERSION_3_4_2 is not set
++# BR2_GCC_VERSION_3_4_3 is not set
++BR2_GCC_VERSION="3.3.4"
++BR2_GCC_USE_SJLJ_EXCEPTIONS="--enable-sjlj-exceptions"
++BR2_EXTRA_GCC_CONFIG_OPTIONS=""
++# BR2_INSTALL_LIBSTDCPP is not set
++
++#
++# Ccache Options
++#
++# BR2_CCACHE is not set
++
++#
++# Gdb Options
++#
++# BR2_PACKAGE_GDB is not set
++# BR2_PACKAGE_GDB_SERVER is not set
++
++#
++# Common Toolchain Options
++#
++BR2_ENABLE_MULTILIB=y
++BR2_LARGEFILE=y
++BR2_SOFT_FLOAT=y
++BR2_TARGET_OPTIMIZATION="-Os -pipe"
++
++#
++# Package Selection for the target
++#
++
++#
++# The default minimal system
++#
++# BR2_PACKAGE_BUSYBOX is not set
++
++#
++# The minimum needed to build a uClibc development system
++#
++# BR2_PACKAGE_BASH is not set
++# BR2_PACKAGE_BZIP2 is not set
++# BR2_PACKAGE_COREUTILS is not set
++# BR2_PACKAGE_DIFFUTILS is not set
++# BR2_PACKAGE_ED is not set
++# BR2_PACKAGE_FINDUTILS is not set
++# BR2_PACKAGE_FLEX is not set
++# BR2_PACKAGE_GAWK is not set
++# BR2_PACKAGE_GCC_TARGET is not set
++# BR2_PACKAGE_CCACHE_TARGET is not set
++# BR2_PACKAGE_GREP is not set
++# BR2_PACKAGE_MAKE is not set
++# BR2_PACKAGE_PATCH is not set
++# BR2_PACKAGE_SED is not set
++# BR2_PACKAGE_TAR is not set
++
++#
++# Other stuff
++#
++# BR2_PACKAGE_AUTOCONF is not set
++# BR2_PACKAGE_AUTOMAKE is not set
++# BR2_PACKAGE_BERKELEYDB is not set
++# BR2_PACKAGE_BISON is not set
++# BR2_PACKAGE_BOA is not set
++# BR2_PACKAGE_BRIDGE is not set
++# BR2_PACKAGE_CONFIG is not set
++# BR2_PACKAGE_CUSTOMIZE is not set
++# BR2_PACKAGE_DHCP_RELAY is not set
++# BR2_PACKAGE_DISTCC is not set
++# BR2_PACKAGE_DNSMASQ is not set
++# BR2_PACKAGE_DROPBEAR_SSHD is not set
++# BR2_PACKAGE_FAKEROOT is not set
++# BR2_PACKAGE_FILE is not set
++# BR2_PACKAGE_GETTEXT is not set
++# BR2_PACKAGE_GZIP is not set
++# BR2_PACKAGE_HOSTAP is not set
++# BR2_PACKAGE_HOTPLUG is not set
++# BR2_PACKAGE_IPROUTE2 is not set
++# BR2_PACKAGE_IPTABLES is not set
++# BR2_PACKAGE_JPEG is not set
++# BR2_PACKAGE_LESS is not set
++BR2_PACKAGE_LIBFLOAT=y
++# BR2_PACKAGE_LIBGLIB12 is not set
++# BR2_PACKAGE_LIBMAD is not set
++# BR2_PACKAGE_LIBPNG is not set
++# BR2_PACKAGE_LIBTOOL is not set
++# BR2_PACKAGE_LINKS is not set
++# BR2_PACKAGE_LINUX is not set
++# BR2_PACKAGE_LRZSZ is not set
++# BR2_PACKAGE_LTP-TESTSUITE is not set
++# BR2_PACKAGE_LTRACE is not set
++# BR2_PACKAGE_LZO is not set
++# BR2_PACKAGE_M4 is not set
++# BR2_PACKAGE_MICROCOM is not set
++# BR2_PACKAGE_MICROWIN is not set
++# BR2_PACKAGE_MKDOSFS is not set
++# BR2_PACKAGE_MKE2FS is not set
++# BR2_PACKAGE_MPG123 is not set
++# BR2_PACKAGE_MROUTED is not set
++# BR2_PACKAGE_NANO is not set
++# BR2_PACKAGE_NCURSES is not set
++# BR2_PACKAGE_NETKITBASE is not set
++# BR2_PACKAGE_NETKITTELNET is not set
++# BR2_PACKAGE_NETSNMP is not set
++# BR2_PACKAGE_NEWT is not set
++# BR2_PACKAGE_NTP is not set
++# BR2_PACKAGE_OPENSSH is not set
++# BR2_PACKAGE_OPENSSL is not set
++# BR2_PACKAGE_OPENVPN is not set
++# BR2_PACKAGE_PCIUTILS is not set
++# BR2_PACKAGE_PCMCIA is not set
++# BR2_PACKAGE_PORTAGE is not set
++# BR2_PACKAGE_PORTMAP is not set
++# BR2_PACKAGE_PPPD is not set
++# BR2_PACKAGE_PROCPS is not set
++# BR2_PACKAGE_PYTHON is not set
++# BR2_PACKAGE_RAIDTOOLS is not set
++# BR2_PACKAGE_RSYNC is not set
++# BR2_PACKAGE_RXVT is not set
++# BR2_PACKAGE_SFDISK is not set
++# BR2_PACKAGE_SLANG is not set
++# BR2_PACKAGE_SOCAT is not set
++# BR2_PACKAGE_STRACE is not set
++# BR2_PACKAGE_TINYLOGIN is not set
++# BR2_PACKAGE_TINYX is not set
++# BR2_PACKAGE_TN5250 is not set
++# BR2_PACKAGE_TTCP is not set
++# BR2_PACKAGE_UDHCP is not set
++# BR2_PACKAGE_UTIL-LINUX is not set
++# BR2_PACKAGE_VALGRIND is not set
++# BR2_PACKAGE_VTUN is not set
++# BR2_PACKAGE_WGET is not set
++# BR2_PACKAGE_WHICH is not set
++# BR2_PACKAGE_WTOOLS is not set
++BR2_PACKAGE_ZLIB=y
++
++#
++# Target Options
++#
++# BR2_TARGET_ROOTFS_CRAMFS is not set
++BR2_TARGET_ROOTFS_EXT2=y
++# BR2_TARGET_ROOTFS_JFFS2 is not set
++# BR2_TARGET_ROOTFS_SQUASHFS is not set
+diff -uNrBb buildroot.orig/package/busybox/.config buildroot.pl1029/package/busybox/.config
+--- buildroot.orig/package/busybox/.config	Thu Jan  1 00:00:00 1970
++++ buildroot.pl1029/package/busybox/.config	Thu Mar  9 06:49:40 2006
+@@ -0,0 +1,463 @@
++#
++# Automatically generated make config: don't edit
++#
++HAVE_DOT_CONFIG=y
++
++#
++# General Configuration
++#
++# CONFIG_FEATURE_BUFFERS_USE_MALLOC is not set
++CONFIG_FEATURE_BUFFERS_GO_ON_STACK=y
++# CONFIG_FEATURE_BUFFERS_GO_IN_BSS is not set
++CONFIG_FEATURE_VERBOSE_USAGE=y
++# CONFIG_FEATURE_INSTALLER is not set
++# CONFIG_LOCALE_SUPPORT is not set
++# CONFIG_FEATURE_DEVFS is not set
++CONFIG_FEATURE_DEVPTS=y
++# CONFIG_FEATURE_CLEAN_UP is not set
++CONFIG_FEATURE_SUID=y
++# CONFIG_FEATURE_SUID_CONFIG is not set
++# CONFIG_SELINUX is not set
++
++#
++# Build Options
++#
++# CONFIG_STATIC is not set
++CONFIG_LFS=y
++# USING_CROSS_COMPILER is not set
++EXTRA_CFLAGS_OPTIONS=""
++
++#
++# Installation Options
++#
++# CONFIG_INSTALL_NO_USR is not set
++PREFIX="./_install"
++
++#
++# Archival Utilities
++#
++# CONFIG_AR is not set
++CONFIG_BUNZIP2=y
++# CONFIG_CPIO is not set
++# CONFIG_DPKG is not set
++# CONFIG_DPKG_DEB is not set
++CONFIG_GUNZIP=y
++# CONFIG_FEATURE_GUNZIP_UNCOMPRESS is not set
++CONFIG_GZIP=y
++# CONFIG_RPM2CPIO is not set
++# CONFIG_RPM is not set
++CONFIG_TAR=y
++CONFIG_FEATURE_TAR_CREATE=y
++CONFIG_FEATURE_TAR_BZIP2=y
++# CONFIG_FEATURE_TAR_FROM is not set
++CONFIG_FEATURE_TAR_GZIP=y
++# CONFIG_FEATURE_TAR_COMPRESS is not set
++# CONFIG_FEATURE_TAR_OLDGNU_COMPATABILITY is not set
++CONFIG_FEATURE_TAR_GNU_EXTENSIONS=y
++# CONFIG_FEATURE_TAR_LONG_OPTIONS is not set
++# CONFIG_UNCOMPRESS is not set
++CONFIG_UNZIP=y
++
++#
++# Common options for cpio and tar
++#
++# CONFIG_FEATURE_UNARCHIVE_TAPE is not set
++
++#
++# Coreutils
++#
++CONFIG_BASENAME=y
++# CONFIG_CAL is not set
++CONFIG_CAT=y
++CONFIG_CHGRP=y
++CONFIG_CHMOD=y
++CONFIG_CHOWN=y
++CONFIG_CHROOT=y
++CONFIG_CMP=y
++CONFIG_CP=y
++CONFIG_CUT=y
++CONFIG_DATE=y
++CONFIG_FEATURE_DATE_ISOFMT=y
++CONFIG_DD=y
++CONFIG_DF=y
++CONFIG_DIRNAME=y
++CONFIG_DOS2UNIX=y
++CONFIG_UNIX2DOS=y
++CONFIG_DU=y
++CONFIG_FEATURE_DU_DEFALT_BLOCKSIZE_1K=y
++CONFIG_ECHO=y
++CONFIG_FEATURE_FANCY_ECHO=y
++CONFIG_ENV=y
++CONFIG_EXPR=y
++CONFIG_FALSE=y
++# CONFIG_FOLD is not set
++CONFIG_HEAD=y
++# CONFIG_FEATURE_FANCY_HEAD is not set
++CONFIG_HOSTID=y
++CONFIG_ID=y
++CONFIG_INSTALL=y
++# CONFIG_LENGTH is not set
++CONFIG_LN=y
++CONFIG_LOGNAME=y
++CONFIG_LS=y
++CONFIG_FEATURE_LS_FILETYPES=y
++CONFIG_FEATURE_LS_FOLLOWLINKS=y
++CONFIG_FEATURE_LS_RECURSIVE=y
++CONFIG_FEATURE_LS_SORTFILES=y
++CONFIG_FEATURE_LS_TIMESTAMPS=y
++CONFIG_FEATURE_LS_USERNAME=y
++CONFIG_FEATURE_LS_COLOR=y
++CONFIG_MD5SUM=y
++CONFIG_MKDIR=y
++# CONFIG_MKFIFO is not set
++CONFIG_MKNOD=y
++CONFIG_MV=y
++# CONFIG_OD is not set
++# CONFIG_PRINTF is not set
++CONFIG_PWD=y
++# CONFIG_REALPATH is not set
++CONFIG_RM=y
++CONFIG_RMDIR=y
++# CONFIG_SEQ is not set
++CONFIG_SHA1SUM=y
++CONFIG_SLEEP=y
++# CONFIG_FEATURE_FANCY_SLEEP is not set
++CONFIG_SORT=y
++CONFIG_STTY=y
++CONFIG_SYNC=y
++CONFIG_TAIL=y
++CONFIG_FEATURE_FANCY_TAIL=y
++CONFIG_TEE=y
++CONFIG_FEATURE_TEE_USE_BLOCK_IO=y
++CONFIG_TEST=y
++
++#
++# test (forced enabled for use with shell)
++#
++CONFIG_FEATURE_TEST_64=y
++CONFIG_TOUCH=y
++# CONFIG_TR is not set
++CONFIG_TRUE=y
++CONFIG_TTY=y
++CONFIG_UNAME=y
++CONFIG_UNIQ=y
++CONFIG_USLEEP=y
++CONFIG_UUDECODE=y
++CONFIG_UUENCODE=y
++# CONFIG_WATCH is not set
++CONFIG_WC=y
++# CONFIG_WHO is not set
++CONFIG_WHOAMI=y
++CONFIG_YES=y
++
++#
++# Common options for cp and mv
++#
++CONFIG_FEATURE_PRESERVE_HARDLINKS=y
++
++#
++# Common options for ls and more
++#
++CONFIG_FEATURE_AUTOWIDTH=y
++
++#
++# Common options for df, du, ls
++#
++CONFIG_FEATURE_HUMAN_READABLE=y
++
++#
++# Common options for md5sum, sha1sum
++#
++CONFIG_FEATURE_MD5_SHA1_SUM_CHECK=y
++
++#
++# Console Utilities
++#
++CONFIG_CHVT=y
++CONFIG_CLEAR=y
++CONFIG_DEALLOCVT=y
++# CONFIG_DUMPKMAP is not set
++# CONFIG_LOADFONT is not set
++# CONFIG_LOADKMAP is not set
++CONFIG_OPENVT=y
++CONFIG_RESET=y
++# CONFIG_SETKEYCODES is not set
++
++#
++# Debian Utilities
++#
++CONFIG_MKTEMP=y
++# CONFIG_PIPE_PROGRESS is not set
++CONFIG_READLINK=y
++CONFIG_RUN_PARTS=y
++CONFIG_START_STOP_DAEMON=y
++CONFIG_WHICH=y
++
++#
++# Editors
++#
++# CONFIG_AWK is not set
++# CONFIG_PATCH is not set
++CONFIG_SED=y
++CONFIG_VI=y
++CONFIG_FEATURE_VI_COLON=y
++CONFIG_FEATURE_VI_YANKMARK=y
++CONFIG_FEATURE_VI_SEARCH=y
++CONFIG_FEATURE_VI_USE_SIGNALS=y
++CONFIG_FEATURE_VI_DOT_CMD=y
++CONFIG_FEATURE_VI_READONLY=y
++CONFIG_FEATURE_VI_SETOPTS=y
++CONFIG_FEATURE_VI_SET=y
++CONFIG_FEATURE_VI_WIN_RESIZE=y
++CONFIG_FEATURE_VI_OPTIMIZE_CURSOR=y
++
++#
++# Finding Utilities
++#
++CONFIG_FIND=y
++CONFIG_FEATURE_FIND_MTIME=y
++CONFIG_FEATURE_FIND_PERM=y
++CONFIG_FEATURE_FIND_TYPE=y
++CONFIG_FEATURE_FIND_XDEV=y
++# CONFIG_FEATURE_FIND_NEWER is not set
++# CONFIG_FEATURE_FIND_INUM is not set
++CONFIG_GREP=y
++CONFIG_FEATURE_GREP_EGREP_ALIAS=y
++CONFIG_FEATURE_GREP_FGREP_ALIAS=y
++CONFIG_FEATURE_GREP_CONTEXT=y
++CONFIG_XARGS=y
++# CONFIG_FEATURE_XARGS_SUPPORT_CONFIRMATION is not set
++CONFIG_FEATURE_XARGS_SUPPORT_QUOTES=y
++CONFIG_FEATURE_XARGS_SUPPORT_TERMOPT=y
++CONFIG_FEATURE_XARGS_SUPPORT_ZERO_TERM=y
++
++#
++# Init Utilities
++#
++CONFIG_INIT=y
++CONFIG_FEATURE_USE_INITTAB=y
++CONFIG_FEATURE_INITRD=y
++# CONFIG_FEATURE_INIT_COREDUMPS is not set
++CONFIG_FEATURE_EXTRA_QUIET=y
++CONFIG_HALT=y
++CONFIG_POWEROFF=y
++CONFIG_REBOOT=y
++# CONFIG_MESG is not set
++
++#
++# Login/Password Management Utilities
++#
++# CONFIG_USE_BB_PWD_GRP is not set
++CONFIG_ADDGROUP=y
++CONFIG_DELGROUP=y
++CONFIG_ADDUSER=y
++CONFIG_DELUSER=y
++CONFIG_GETTY=y
++# CONFIG_FEATURE_U_W_TMP is not set
++CONFIG_LOGIN=y
++CONFIG_FEATURE_SECURETTY=y
++CONFIG_PASSWD=y
++CONFIG_SU=y
++CONFIG_SULOGIN=y
++CONFIG_VLOCK=y
++
++#
++# Common options for adduser, deluser, login, su
++#
++CONFIG_FEATURE_SHADOWPASSWDS=y
++
++#
++# Miscellaneous Utilities
++#
++# CONFIG_ADJTIMEX is not set
++# CONFIG_CROND is not set
++# CONFIG_CRONTAB is not set
++CONFIG_DC=y
++# CONFIG_DEVFSD is not set
++# CONFIG_LAST is not set
++# CONFIG_HDPARM is not set
++# CONFIG_MAKEDEVS is not set
++CONFIG_MT=y
++# CONFIG_RX is not set
++CONFIG_STRINGS=y
++CONFIG_TIME=y
++# CONFIG_WATCHDOG is not set
++
++#
++# Linux Module Utilities
++#
++CONFIG_INSMOD=y
++CONFIG_FEATURE_2_4_MODULES=y
++# CONFIG_FEATURE_2_6_MODULES is not set
++# CONFIG_FEATURE_INSMOD_VERSION_CHECKING is not set
++# CONFIG_FEATURE_INSMOD_KSYMOOPS_SYMBOLS is not set
++# CONFIG_FEATURE_INSMOD_LOADINKMEM is not set
++# CONFIG_FEATURE_INSMOD_LOAD_MAP is not set
++CONFIG_LSMOD=y
++CONFIG_FEATURE_QUERY_MODULE_INTERFACE=y
++CONFIG_MODPROBE=y
++CONFIG_RMMOD=y
++CONFIG_FEATURE_CHECK_TAINTED_MODULE=y
++
++#
++# Networking Utilities
++#
++# CONFIG_FEATURE_IPV6 is not set
++# CONFIG_ARPING is not set
++# CONFIG_FTPGET is not set
++# CONFIG_FTPPUT is not set
++CONFIG_HOSTNAME=y
++# CONFIG_HTTPD is not set
++CONFIG_IFCONFIG=y
++CONFIG_FEATURE_IFCONFIG_STATUS=y
++# CONFIG_FEATURE_IFCONFIG_SLIP is not set
++# CONFIG_FEATURE_IFCONFIG_MEMSTART_IOADDR_IRQ is not set
++# CONFIG_FEATURE_IFCONFIG_HW is not set
++# CONFIG_FEATURE_IFCONFIG_BROADCAST_PLUS is not set
++CONFIG_IFUPDOWN=y
++# CONFIG_FEATURE_IFUPDOWN_IP is not set
++CONFIG_FEATURE_IFUPDOWN_IP_BUILTIN=y
++CONFIG_FEATURE_IFUPDOWN_IPV4=y
++# CONFIG_FEATURE_IFUPDOWN_IPV6 is not set
++# CONFIG_FEATURE_IFUPDOWN_IPX is not set
++# CONFIG_FEATURE_IFUPDOWN_MAPPING is not set
++# CONFIG_INETD is not set
++# CONFIG_IP is not set
++# CONFIG_IPCALC is not set
++# CONFIG_IPADDR is not set
++# CONFIG_IPLINK is not set
++# CONFIG_IPROUTE is not set
++# CONFIG_IPTUNNEL is not set
++# CONFIG_NAMEIF is not set
++# CONFIG_NC is not set
++CONFIG_NETSTAT=y
++CONFIG_NSLOOKUP=y
++CONFIG_PING=y
++CONFIG_FEATURE_FANCY_PING=y
++CONFIG_ROUTE=y
++CONFIG_TELNET=y
++CONFIG_FEATURE_TELNET_TTYPE=y
++# CONFIG_FEATURE_TELNET_AUTOLOGIN is not set
++# CONFIG_TELNETD is not set
++# CONFIG_TFTP is not set
++# CONFIG_TRACEROUTE is not set
++# CONFIG_VCONFIG is not set
++CONFIG_WGET=y
++CONFIG_FEATURE_WGET_STATUSBAR=y
++CONFIG_FEATURE_WGET_AUTHENTICATION=y
++# CONFIG_FEATURE_WGET_IP6_LITERAL is not set
++
++#
++# udhcp Server/Client
++#
++CONFIG_UDHCPD=y
++CONFIG_UDHCPC=y
++CONFIG_DUMPLEASES=y
++CONFIG_FEATURE_UDHCP_SYSLOG=y
++# CONFIG_FEATURE_UDHCP_DEBUG is not set
++
++#
++# Process Utilities
++#
++CONFIG_FREE=y
++CONFIG_KILL=y
++CONFIG_KILLALL=y
++CONFIG_PIDOF=y
++CONFIG_PS=y
++# CONFIG_RENICE is not set
++# CONFIG_TOP is not set
++CONFIG_UPTIME=y
++# CONFIG_SYSCTL is not set
++
++#
++# Another Bourne-like Shell
++#
++CONFIG_FEATURE_SH_IS_ASH=y
++# CONFIG_FEATURE_SH_IS_HUSH is not set
++# CONFIG_FEATURE_SH_IS_LASH is not set
++# CONFIG_FEATURE_SH_IS_MSH is not set
++# CONFIG_FEATURE_SH_IS_NONE is not set
++CONFIG_ASH=y
++
++#
++# Ash Shell Options
++#
++CONFIG_ASH_JOB_CONTROL=y
++CONFIG_ASH_ALIAS=y
++CONFIG_ASH_MATH_SUPPORT=y
++CONFIG_ASH_MATH_SUPPORT_64=y
++# CONFIG_ASH_GETOPTS is not set
++# CONFIG_ASH_CMDCMD is not set
++# CONFIG_ASH_MAIL is not set
++CONFIG_ASH_OPTIMIZE_FOR_SIZE=y
++# CONFIG_ASH_RANDOM_SUPPORT is not set
++# CONFIG_HUSH is not set
++# CONFIG_LASH is not set
++# CONFIG_MSH is not set
++
++#
++# Bourne Shell Options
++#
++# CONFIG_FEATURE_SH_EXTRA_QUIET is not set
++# CONFIG_FEATURE_SH_STANDALONE_SHELL is not set
++CONFIG_FEATURE_COMMAND_EDITING=y
++CONFIG_FEATURE_COMMAND_HISTORY=15
++CONFIG_FEATURE_COMMAND_SAVEHISTORY=y
++CONFIG_FEATURE_COMMAND_TAB_COMPLETION=y
++# CONFIG_FEATURE_COMMAND_USERNAME_COMPLETION is not set
++CONFIG_FEATURE_SH_FANCY_PROMPT=y
++
++#
++# System Logging Utilities
++#
++CONFIG_SYSLOGD=y
++CONFIG_FEATURE_ROTATE_LOGFILE=y
++# CONFIG_FEATURE_REMOTE_LOG is not set
++# CONFIG_FEATURE_IPC_SYSLOG is not set
++CONFIG_KLOGD=y
++CONFIG_LOGGER=y
++
++#
++# Linux System Utilities
++#
++CONFIG_DMESG=y
++# CONFIG_FBSET is not set
++# CONFIG_FDFLUSH is not set
++CONFIG_FDFORMAT=y
++CONFIG_FDISK=y
++FDISK_SUPPORT_LARGE_DISKS=y
++CONFIG_FEATURE_FDISK_WRITABLE=y
++# CONFIG_FEATURE_AIX_LABEL is not set
++# CONFIG_FEATURE_SGI_LABEL is not set
++# CONFIG_FEATURE_SUN_LABEL is not set
++# CONFIG_FEATURE_OSF_LABEL is not set
++# CONFIG_FEATURE_FDISK_ADVANCED is not set
++# CONFIG_FREERAMDISK is not set
++# CONFIG_FSCK_MINIX is not set
++# CONFIG_MKFS_MINIX is not set
++CONFIG_GETOPT=y
++CONFIG_HEXDUMP=y
++CONFIG_HWCLOCK=y
++CONFIG_FEATURE_HWCLOCK_LONGOPTIONS=y
++# CONFIG_LOSETUP is not set
++# CONFIG_MKSWAP is not set
++CONFIG_MORE=y
++CONFIG_FEATURE_USE_TERMIOS=y
++CONFIG_PIVOT_ROOT=y
++CONFIG_RDATE=y
++CONFIG_SWAPONOFF=y
++CONFIG_MOUNT=y
++CONFIG_NFSMOUNT=y
++CONFIG_UMOUNT=y
++# CONFIG_FEATURE_MOUNT_FORCE is not set
++
++#
++# Common options for mount/umount
++#
++CONFIG_FEATURE_MOUNT_LOOP=y
++# CONFIG_FEATURE_MTAB_SUPPORT is not set
++
++#
++# Debugging Options
++#
++# CONFIG_DEBUG is not set
+diff -uNrBb buildroot.orig/package/busybox/busybox.config buildroot.pl1029/package/busybox/busybox.config
+--- buildroot.orig/package/busybox/busybox.config	Sun Jan  9 08:01:03 2005
++++ buildroot.pl1029/package/busybox/busybox.config	Thu Mar  9 06:50:12 2006
+@@ -130,11 +130,11 @@
+ CONFIG_TEE=y
+ CONFIG_FEATURE_TEE_USE_BLOCK_IO=y
+ CONFIG_TEST=y
+-CONFIG_FEATURE_TEST_64=y
+ 
+ #
+ # test (forced enabled for use with shell)
+ #
++CONFIG_FEATURE_TEST_64=y
+ CONFIG_TOUCH=y
+ # CONFIG_TR is not set
+ CONFIG_TRUE=y
+@@ -189,7 +189,6 @@
+ CONFIG_MKTEMP=y
+ # CONFIG_PIPE_PROGRESS is not set
+ CONFIG_READLINK=y
+-CONFIG_FEATURE_READLINK_FOLLOW=y
+ CONFIG_RUN_PARTS=y
+ CONFIG_START_STOP_DAEMON=y
+ CONFIG_WHICH=y
+@@ -448,7 +447,7 @@
+ CONFIG_RDATE=y
+ CONFIG_SWAPONOFF=y
+ CONFIG_MOUNT=y
+-# CONFIG_NFSMOUNT is not set
++CONFIG_NFSMOUNT=y
+ CONFIG_UMOUNT=y
+ # CONFIG_FEATURE_MOUNT_FORCE is not set
+ 
+diff -uNrBb buildroot.orig/package/libfloat/Makefile.in buildroot.pl1029/package/libfloat/Makefile.in
+--- buildroot.orig/package/libfloat/Makefile.in	Thu Oct 14 09:39:20 2004
++++ buildroot.pl1029/package/libfloat/Makefile.in	Wed Mar 22 10:41:09 2006
+@@ -1,3 +1,3 @@
+-#ifeq ($(strip $(BR2_PACKAGE_LIBFLOAT)),y)
+-#TARGETS+=libfloat
+-#endif
++ifeq ($(strip $(BR2_PACKAGE_LIBFLOAT)),y)
++TARGETS+=libfloat
++endif
+diff -uNrBb buildroot.orig/package/zlib/zlib.mk buildroot.pl1029/package/zlib/zlib.mk
+--- buildroot.orig/package/zlib/zlib.mk	Sat Oct  9 21:19:47 2004
++++ buildroot.pl1029/package/zlib/zlib.mk	Mon Mar  6 08:51:05 2006
+@@ -3,7 +3,7 @@
+ # zlib
+ #
+ #############################################################
+-ZLIB_VER=1.2.1
++ZLIB_VER=1.2.3
+ ZLIB_SOURCE=zlib-$(ZLIB_VER).tar.bz2
+ ZLIB_SITE=http://aleron.dl.sourceforge.net/sourceforge/libpng
+ ZLIB_DIR=$(BUILD_DIR)/zlib-$(ZLIB_VER)
+diff -uNrBb buildroot.orig/toolchain/gcc/gcc-uclibc-3.x.mk buildroot.pl1029/toolchain/gcc/gcc-uclibc-3.x.mk
+--- buildroot.orig/toolchain/gcc/gcc-uclibc-3.x.mk	Sat Dec 11 11:23:43 2004
++++ buildroot.pl1029/toolchain/gcc/gcc-uclibc-3.x.mk	Wed Mar 22 15:32:40 2006
+@@ -121,7 +121,9 @@
+ 	#rm -f $(STAGING_DIR)/bin/gccbug $(STAGING_DIR)/bin/gcov
+ 	#rm -rf $(STAGING_DIR)/info $(STAGING_DIR)/man $(STAGING_DIR)/share/doc $(STAGING_DIR)/share/locale
+ 
+-gcc_initial: uclibc-configured binutils $(STAGING_DIR)/bin/$(REAL_GNU_TARGET_NAME)-gcc
++gcc_with_libfloat: $(STAGING_DIR)/lib/libfloat.so
++
++gcc_initial: uclibc-configured binutils $(STAGING_DIR)/bin/$(REAL_GNU_TARGET_NAME)-gcc gcc_with_libfloat
+ 
+ gcc_initial-clean:
+ 	rm -rf $(GCC_BUILD_DIR1)
+@@ -191,7 +193,7 @@
+ 	# Now for the ugly 3.3.x soft float hack...
+ 	#
+ ifeq ($(BR2_SOFT_FLOAT),y)
+-ifeq ($(findstring 3.3.,$(GCC_VERSION)),3.3.)
++ifeq ($(findstring 3.3.4,$(GCC_VERSION)),3.3.4)
+ 	# Make sure we have a soft float specs file for this arch
+ 	if [ ! -f toolchain/gcc/$(GCC_VERSION)/specs-$(ARCH)-soft-float ] ; then \
+ 		echo soft float configured but no specs file for this arch ; \
+@@ -216,7 +218,8 @@
+ 	-$(STRIP) $(STAGING_DIR)/$(REAL_GNU_TARGET_NAME)/lib/libgcc_s.so.1
+ 	-cp -a $(STAGING_DIR)/$(REAL_GNU_TARGET_NAME)/lib/libgcc_s* $(TARGET_DIR)/lib/
+ 
+-gcc: uclibc-configured binutils gcc_initial $(LIBFLOAT_TARGET) uclibc \
++
++gcc: uclibc-configured binutils gcc_initial uclibc \
+ 	$(TARGET_DIR)/lib/libgcc_s.so.1 $(GCC_BUILD_DIR2)/.installed $(GCC_TARGETS)
+ 
+ gcc-source: $(DL_DIR)/$(GCC_SOURCE)
+diff -uNrBb buildroot.orig/toolchain/kernel-headers/Config.in buildroot.pl1029/toolchain/kernel-headers/Config.in
+--- buildroot.orig/toolchain/kernel-headers/Config.in	Wed Oct 27 08:55:52 2004
++++ buildroot.pl1029/toolchain/kernel-headers/Config.in	Thu Mar  9 02:12:59 2006
+@@ -6,12 +6,15 @@
+ 
+ choice
+ 	prompt "Kernel Headers"
+-	default BR2_KERNEL_HEADERS_2_4_27
++	default BR2_KERNEL_HEADERS_2_4_19
+ 	help
+ 	  Select the version of kernel header files you wish to use.
+ 	  You must select the correct set of header files to match
+ 	  the kernel you intend to use on your target system.
+ 
++	config BR2_KERNEL_HEADERS_2_4_19
++		bool "Linux 2.4.19 kernel headers"
++
+ 	config BR2_KERNEL_HEADERS_2_4_25
+ 		bool "Linux 2.4.25 kernel headers"
+ 
+@@ -28,6 +31,7 @@
+ 
+ config BR2_DEFAULT_KERNEL_HEADERS
+ 	string
++	default "2.4.19"    if BR2_KERNEL_HEADERS_2_4_19
+ 	default "2.4.25"    if BR2_KERNEL_HEADERS_2_4_25
+ 	default "2.4.27"    if BR2_KERNEL_HEADERS_2_4_27
+ 	default "2.6.8"	    if BR2_KERNEL_HEADERS_2_6_8
+diff -uNrBb buildroot.orig/toolchain/kernel-headers/kernel-headers.mk buildroot.pl1029/toolchain/kernel-headers/kernel-headers.mk
+--- buildroot.orig/toolchain/kernel-headers/kernel-headers.mk	Sat Dec 11 09:56:57 2004
++++ buildroot.pl1029/toolchain/kernel-headers/kernel-headers.mk	Thu Mar  9 02:13:42 2006
+@@ -12,6 +12,15 @@
+ LINUX_HEADERS_SITE:=127.0.0.1
+ LINUX_HEADERS_SOURCE:=unspecified-kernel-headers
+ 
++ifeq ("$(strip $(DEFAULT_KERNEL_HEADERS))","2.4.19")
++VERSION:=2
++PATCHLEVEL:=4
++SUBLEVEL:=19
++LINUX_HEADERS_SITE:=http://www.uclibc.org/downloads/toolchain
++LINUX_HEADERS_SOURCE:=linux-libc-headers-2.4.19.tar.bz2
++LINUX_HEADERS_UNPACK_DIR:=$(TOOL_BUILD_DIR)/linux-libc-headers-2.4.19
++endif
++
+ ifeq ("$(strip $(DEFAULT_KERNEL_HEADERS))","2.4.25")
+ VERSION:=2
+ PATCHLEVEL:=4
+diff -uNrBb buildroot.orig/toolchain/uClibc/uClibc.config buildroot.pl1029/toolchain/uClibc/uClibc.config
+--- buildroot.orig/toolchain/uClibc/uClibc.config	Thu Dec 23 00:05:32 2004
++++ buildroot.pl1029/toolchain/uClibc/uClibc.config	Wed Mar 22 10:38:06 2006
+@@ -2,7 +2,7 @@
+ # Automatically generated make config: don't edit
+ #
+ # TARGET_alpha is not set
+-# TARGET_arm is not set
++TARGET_arm=y
+ # TARGET_bfin is not set
+ # TARGET_cris is not set
+ # TARGET_e1 is not set
+@@ -17,20 +17,39 @@
+ # TARGET_nios2 is not set
+ # TARGET_powerpc is not set
+ # TARGET_sh is not set
++# TARGET_sh64 is not set
+ # TARGET_sparc is not set
+ # TARGET_v850 is not set
++# TARGET_x86_64 is not set
+ 
+ #
+ # Target Architecture Features and Options
+ #
+ HAVE_ELF=y
+-TARGET_ARCH="none"
++ARCH_SUPPORTS_LITTLE_ENDIAN=y
++TARGET_ARCH="arm"
++ARCH_SUPPORTS_BIG_ENDIAN=y
++CONFIG_GENERIC_ARM=y
++# CONFIG_ARM610 is not set
++# CONFIG_ARM710 is not set
++# CONFIG_ARM720T is not set
++# CONFIG_ARM920T is not set
++# CONFIG_ARM922T is not set
++# CONFIG_ARM926T is not set
++# CONFIG_ARM1136JF_S is not set
++# CONFIG_ARM_SA110 is not set
++# CONFIG_ARM_SA1100 is not set
++# CONFIG_ARM_XSCALE is not set
++ARCH_LITTLE_ENDIAN=y
++# ARCH_BIG_ENDIAN is not set
+ # ARCH_HAS_NO_MMU is not set
++ARCH_HAS_MMU=y
+ UCLIBC_HAS_FLOATS=y
+-HAS_FPU=y
++# HAS_FPU is not set
++UCLIBC_HAS_SOFT_FLOAT=y
+ DO_C99_MATH=y
+-WARNINGS="-Wall"
+-KERNEL_SOURCE="/usr/src/linux"
++KERNEL_SOURCE="/opt/proj/port/buildroot/toolchain_build_arm_nofpu/linux"
++C_SYMBOL_PREFIX=""
+ HAVE_DOT_CONFIG=y
+ 
+ #
+@@ -47,12 +66,14 @@
+ LDSO_CACHE_SUPPORT=y
+ # LDSO_PRELOAD_FILE_SUPPORT is not set
+ LDSO_BASE_FILENAME="ld.so"
++# LDSO_RUNPATH is not set
++# DL_FINI_CRT_COMPAT is not set
+ UCLIBC_CTOR_DTOR=y
+-# UCLIBC_PROPOLICE is not set
+ # HAS_NO_THREADS is not set
+ UCLIBC_HAS_THREADS=y
+ PTHREADS_DEBUG_SUPPORT=y
+ UCLIBC_HAS_LFS=y
++UCLIBC_STATIC_LDCONFIG=y
+ # MALLOC is not set
+ # MALLOC_SIMPLE is not set
+ MALLOC_STANDARD=y
+@@ -70,7 +91,7 @@
+ #
+ # Networking Support
+ #
+-UCLIBC_HAS_IPV6=y
++# UCLIBC_HAS_IPV6 is not set
+ UCLIBC_HAS_RPC=y
+ UCLIBC_HAS_FULL_RPC=y
+ 
+@@ -84,10 +105,11 @@
+ # UCLIBC_HAS_CTYPE_UNSAFE is not set
+ UCLIBC_HAS_CTYPE_CHECKED=y
+ # UCLIBC_HAS_CTYPE_ENFORCED is not set
+-UCLIBC_HAS_WCHAR=y
++# UCLIBC_HAS_WCHAR is not set
+ # UCLIBC_HAS_LOCALE is not set
+ UCLIBC_HAS_HEXADECIMAL_FLOATS=y
+ UCLIBC_HAS_GLIBC_CUSTOM_PRINTF=y
++# USE_OLD_VFPRINTF is not set
+ UCLIBC_PRINTF_SCANF_POSITIONAL_ARGS=9
+ UCLIBC_HAS_SCANF_GLIBC_A_FLAG=y
+ # UCLIBC_HAS_STDIO_BUFSIZ_NONE is not set
+@@ -100,6 +122,7 @@
+ UCLIBC_HAS_STDIO_BUILTIN_BUFFER_NONE=y
+ # UCLIBC_HAS_STDIO_BUILTIN_BUFFER_4 is not set
+ # UCLIBC_HAS_STDIO_BUILTIN_BUFFER_8 is not set
++# UCLIBC_HAS_STDIO_SHUTDOWN_ON_ABORT is not set
+ UCLIBC_HAS_STDIO_GETC_MACRO=y
+ UCLIBC_HAS_STDIO_PUTC_MACRO=y
+ UCLIBC_HAS_STDIO_AUTO_RW_TRANSITION=y
+@@ -108,9 +131,9 @@
+ UCLIBC_HAS_GLIBC_CUSTOM_STREAMS=y
+ UCLIBC_HAS_PRINTF_M_SPEC=y
+ UCLIBC_HAS_ERRNO_MESSAGES=y
+-# UCLIBC_HAS_SYS_ERRLIST is not set
++UCLIBC_HAS_SYS_ERRLIST=y
+ UCLIBC_HAS_SIGNUM_MESSAGES=y
+-# UCLIBC_HAS_SYS_SIGLIST is not set
++UCLIBC_HAS_SYS_SIGLIST=y
+ UCLIBC_HAS_GNU_GETOPT=y
+ 
+ #
+@@ -118,7 +141,7 @@
+ #
+ UCLIBC_HAS_REGEX=y
+ # UCLIBC_HAS_WORDEXP is not set
+-UCLIBC_HAS_FTW=y
++# UCLIBC_HAS_FTW is not set
+ UCLIBC_HAS_GLOB=y
+ 
+ #
+@@ -136,8 +159,11 @@
+ #
+ # uClibc development/debugging options
+ #
++CROSS_COMPILER_PREFIX=""
+ # DODEBUG is not set
++# DODEBUG_PT is not set
+ # DOASSERTS is not set
+ # SUPPORT_LD_DEBUG is not set
+ # SUPPORT_LD_DEBUG_EARLY is not set
++WARNINGS="-Wall"
+ # UCLIBC_MJN3_ONLY is not set
+diff -uNrBb buildroot.orig/toolchain/uClibc/uclibc-libfloat.patch buildroot.pl1029/toolchain/uClibc/uclibc-libfloat.patch
+--- buildroot.orig/toolchain/uClibc/uclibc-libfloat.patch	Thu Jan  1 00:00:00 1970
++++ buildroot.pl1029/toolchain/uClibc/uclibc-libfloat.patch	Wed Mar 22 10:37:37 2006
+@@ -0,0 +1,12 @@
++diff -urN uClibc-0.9.28/Rules.mak uClibc-0.9.28-pl1029/Rules.mak
++--- uClibc-0.9.28/Rules.mak	2005-08-18 06:49:49.000000000 +0800
+++++ uClibc-0.9.28-pl1029/Rules.mak	2006-03-21 10:18:46.679505100 +0800
++@@ -270,7 +270,7 @@
++ ifeq ($(strip $(TARGET_ARCH)),arm)
++ # No longer needed with current toolchains, but leave it here for now.
++ # If anyone is actually still using gcc 2.95 (say), they can uncomment it.
++-#    LDADD_LIBFLOAT=-lfloat
+++    LDADD_LIBFLOAT=-lfloat
++ endif
++ endif
++ 
+diff -uNrBb buildroot.orig/toolchain/uClibc/uclibc.mk buildroot.pl1029/toolchain/uClibc/uclibc.mk
+--- buildroot.orig/toolchain/uClibc/uclibc.mk	Wed Dec 22 05:22:03 2004
++++ buildroot.pl1029/toolchain/uClibc/uclibc.mk	Wed Mar 22 10:39:54 2006
+@@ -13,8 +13,8 @@
+ else
+ # Note: 0.9.26 has known problems.  So best use a snapshot until .27 is out.
+ # Anticipate the change.
+-UCLIBC_DIR:=$(TOOL_BUILD_DIR)/uClibc-0.9.27
+-UCLIBC_SOURCE:=uClibc-0.9.27.tar.bz2
++UCLIBC_DIR:=$(TOOL_BUILD_DIR)/uClibc-0.9.28
++UCLIBC_SOURCE:=uClibc-0.9.28.tar.bz2
+ UCLIBC_SITE:=http://www.uclibc.org/downloads
+ endif
+ 
+@@ -43,6 +43,7 @@
+ 	touch $(UCLIBC_DIR)/.unpacked
+ 
+ $(UCLIBC_DIR)/.configured: $(UCLIBC_DIR)/.unpacked
++	(cd $(UCLIBC_DIR)/ ; patch -p1 < ../../toolchain/uClibc/uclibc-libfloat.patch)
+ 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(UCLIBC_DIR)/Rules.mak
+ ifeq ($(BR2_ENABLE_LOCALE),y)
+ 	cp toolchain/uClibc/uClibc.config-locale $(UCLIBC_DIR)/.config

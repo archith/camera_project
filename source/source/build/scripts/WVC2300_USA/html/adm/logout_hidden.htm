@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Logout </title>
+</head>
+
+<script language="JavaScript">
+
+function admin_logout()
+{
+	var i;
+	document.forms["logout"].submit();
+	for (i=0; i<2000000; i++);
+}
+
+</script>
+
+<body onUnload="admin_logout();">
+<p align='center'>Can't see it.</p>
+	<form name="logout" action="file.cgi" method="GET">
+		<input type="hidden" name="adm_todo" value="logout">
+	</form>
+</body>
+</html>

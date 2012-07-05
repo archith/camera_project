@@ -1,0 +1,27 @@
+# Comment/uncomment the following line to enable/disable debugging
+
+CC := arm-linux-gcc
+LD := arm-linux-ld
+
+LINUX_SRC=/usr/src/arm-linux/arm-linux-2.4.19
+
+WFLAGS := -Wall -Wstrict-prototypes -Wno-trigraphs -Wno-unused
+CFLAGS := -D__NO_VERSION__ -D__KERNEL__ -DMODULE -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -include $(LINUX_SRC)/include/linux/modversions.h $(WFLAGS)
+
+OBJS = zd1205.o zdasocsvc.o zdauthreq.o zdauthrsp.o \
+            zdmmrx.o zdshared.o zdhci.o zdglobal.o zdencrypt.o \
+            zdpmfilter.o zdpsmon.o zdsynch.o zdbuf.o zd1205_proc.o \
+            zdhw.o zddebug.o zdtkipseed.o zdmic.o mlme_zydas/mlme_zydas.o
+
+all: zdclient.o
+	@touch config.mk
+	
+zdclient.o: subdir $(OBJS)
+	$(LD) -r $(OBJS) -o zdclient.o
+		
+subdir:
+	make -C mlme_zydas -f Makefile.module
+
+clean:
+	rm -f *.o *~ core mlme_zydas/*.o
+

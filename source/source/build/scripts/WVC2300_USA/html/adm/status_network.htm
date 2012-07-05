@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+/*
+function setDefault()
+{
+  var cf = document.forms[0];
+  if (rConfirm("Network",resetDefault_msg))
+  {
+  	cf.todo.value = "reset";
+	dataToHidden(cf); cf.submit();
+  }
+}
+
+function cfRestart()
+{
+  var cf = document.forms[0];
+  if (rConfirm("Network",restart_msg))
+  {
+  	cf.todo.value = "restart";
+	dataToHidden(cf); cf.submit();
+  }
+}*/
+
+function reloadScrn()
+{
+  var cf = document.forms[0];
+  	cf.s_list.value = "";
+	cf.todo.value = "reload";
+	dataToHidden(cf); cf.submit();
+}
+
+function clearLog() 
+{
+	var cf = document.forms[0];
+	cf.todo.value = "clearlog";
+	dataToHidden(cf); cf.submit();
+}
+
+/*
+function getImageType(){
+	var mode = "@h_v_mode#";
+	if(mode == "mpeg")
+		return "MPEG-4";
+	else
+		return "MJPEG";
+}
+*/
+
+// MPEG-4
+function getResolutionM(){
+	var res = "@h_resolution#";
+	if(res == "120")
+		return "160*120";
+	else if(res =="640")
+		return "640*480";
+	else
+		return "320*240";
+}
+
+function getQualityM()
+{
+	var bq = "@h_bwopt#";
+	var b = "@h_bitrate#";
+	var q = "@h_compression#";
+	if(bq == "1")
+	{
+		if(q == "1")
+			return "Very High";
+		else if(q == "2")
+			return "High";
+		else if(q == "4")
+			return "Low";
+		else if(q == "5")
+			return "Very Low";
+		else
+			return "Normal";
+	}
+	else
+	{
+		if(b == "0")
+			return "64 Kbps";
+		else if(b == "1")
+			return "128 Kbps";
+		else if(b == "2")
+			return "256 Kbps";
+		else if(b == "3")
+			return "384 Kbps";
+		else if(b == "4")
+			return "512 Kbps";
+		else if(b == "5")
+			return "768 Kbps";
+		else if(b == "6")
+			return "1 Mbps";
+		else
+			return "1.2 Mbps";
+	}
+}
+//
+
+// MJPEG
+function getResolutionJ(){
+	var res = "@h_j_resolution#";
+	if(res == "120")
+		return "160*120";
+	else if(res =="640")
+		return "640*480";
+	else
+		return "320*240";
+}
+
+function getQualityJ(){
+	var res = "@h_j_compression#";
+	if(res == "1")
+		return "Very High";
+	else if(res == "2")
+		return "High";
+	else if(res == "4")
+		return "Low";
+	else if(res == "5")
+		return "Very Low";
+	else
+		return "Normal";
+}
+//
+
+function showText(txt) {
+	document.write(txt);
+}
+
+
+function init() {
+	var cf = document.forms[0];
+	dataToVisible(cf);
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Network');init();">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Network</div>
+
+     <div id="formpane" class="newFormPane_noForm">
+<form name="formname" method="post" action="file.cgi">
+	
+     	<div class="newGroupBoxTitle" style="height:25px;">Network</div>
+        <table cellpadding="0" cellspacing="0">
+	<tr>
+	 <td nowrap class="lc">Network Type:</td>
+	 <td nowrap>@conn_type#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">IP Address:</td>
+	 <td nowrap>@ip#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">Subnet Mask:</td>
+	 <td nowrap>@mask#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">Gateway:</td>
+	 <td nowrap>@gw#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">Primary DNS:</td>
+	 <td nowrap>@dns1_ip#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc" width="97px">Secondary DNS:</td>
+	 <td nowrap>@dns2_ip#</td>
+	</tr>
+	</table>
+    
+     <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Wireless</div>
+    <table cellpadding="0" cellspacing="0">
+	<tr>
+	 <td width="97px" nowrap class="lc">SSID:</td>
+	 <td nowrap>@curr_ssid#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">Channel:</td>
+	 <td nowrap>@curr_channel#</td>
+	</tr>
+	<tr>
+	 <td nowrap class="lc">Security:</td>
+	 <td nowrap>@st_wsec#</td>
+	</tr>
+	</table>
+
+
+
+
+ 	<br>
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    
+<input type="Hidden" name="this_file" value="status_network.htm">
+<input type="Hidden" name="next_file" value="status_network.htm">
+<input type="Hidden" name="todo" value="reset">
+<input type="hidden" name="message" value="@message#">
+
+</form>   
+</div>
+</div> <!--  newContentArea end -->    
+</body>
+
+</html>

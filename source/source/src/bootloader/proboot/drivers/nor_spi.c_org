@@ -1,0 +1,262 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <io.h>
+#include <nor_spi.h>
+#include <dma.h>
+#include <cache.h>
+
+int spi_init ()
+{
+	disable_DMA();
+	software_reset();
+	interrupt_mask(0x00);
+	return 1;
+}
+
+int spi_sector_erase(int addr){
+	int stat=0;
+	int loop=0;
+	//interrupt_mask(0xFF);
+	dprintf("Sector Erase : %8x \n",addr);
+	dprintf("sector erase 1.: WREN \n");
+	writel(MXIC_WREN,DATA_CFG1);
+	dprintf("sector erase 2.: WAIT INT \n");
+	if(!wait_INTR(INT_CMD,0)) return 0;
+	dprintf("sector erase 3.: BE \n");
+	writel(addr,NOR_ADDR_REG);
+	writel(MXIC_BE,DATA_CFG1);
+	dprintf("sector erase 4.: READ STATUS\n");
+	dprintf("sector erasing");
+	do{
+		dprintf(".");
+		sleep(1);
+		stat=readb(CTRL_ST_REG);
+		loop++;
+		if(loop>MAXWAIT){
+			printf("[ERROR] ERASE : wait large than MAXWAIT \n");
+			return 0;
+		}
+		if((stat&INT_TIMEOUT)==0){
+			printf("[ERROR] ERASE : INT_TIMEOUT , total polling %d times\n",loop);
+			return 0;
+		}
+	}while((stat&INT_CMD)!=0);
+	return 1;	
+}
+
+int spi_read_id(){ // to READ Device ID
+	dprintf("SPI Read ID\n");
+	int id;
+	writel(MXIC_RDID,DATA_CFG1);
+	id=readw(PIO_DATA_REG);
+	return id;
+}
+
+
+int spi_dma_write(int addr,char *src,int size){
+	dprintf("spi_dma_write to nor=0x%8x, from mem=0x%8x, %d bytes\n",addr,src,size);
+	if(size<=0) return 1;
+	/* only support line base (4DW = 16bytes) , pre-padding by your self */
+	if((size&0x0F)!=0){
+		printf("DMA ERR: size must be 16x\n");
+		return 0; 
+	}
+	if((addr&0x0F)!=0){
+		printf("DMA ERR: nor addr must be 16x\n");
+		return 0; 
+	}
+	if(((int)(src)&0x0F)!=0){
+		printf("DMA ERR: src addr must be 16x\n");
+		return 0; 
+	}
+	int i,icopy=0;
+	unsigned char * dma_up_bufp = (unsigned char *)(LINE_ALIGN(src));
+//	interrupt_mask(0xFF);
+	while(size>0){
+		if (MAX_FLASH_WRITE>0){
+			if(MAX_FLASH_WRITE>size) icopy=size;
+			else icopy=MAX_FLASH_WRITE;
+		}
+		else{ // without write limit
+			icopy=size;
+		}
+		i=readb(INTR_S_REG); // read clear Flash INT
+		//
+
+		/* request dma channel */
+		dprintf("dma_write 1 : SETUP DMAC\n");
+		disable_DMAC();
+		setup_dma(DMA_PL_NORFLASH, DN_STREAM, dma_up_bufp, icopy);
+		//
+		cache_flush();
+		/* start nor flash */
+		dprintf("dma_write 2 : WREN\n");
+		writel(MXIC_WREN,DATA_CFG1);
+		if(!wait_INTR(INT_CMD,0)) return 0;
+
+		dprintf("\ndma_write 3 : START NOR FLASH DMA\n");
+		writel(addr,NOR_ADDR_REG);//start address
+		writel((0x80000000|icopy),DMA_S_REG);
+		dprintf("DMA_S_REG=%8x\n",readl(DMA_S_REG));
+		//
+		if(!wait_INTR(INT_DMA,0)){
+			printf("Err: DMA Write Time Out\n");
+			disable_DMA();
+			disable_DMAC();
+			return 0;
+		}   
+		/*
+		if(!wait_DMAC()){
+			printf("Err: DMAc Time Out\n");
+			disable_DMA();
+			disable_DMAC();
+			return 0;
+		} 
+		*/  
+		dma_up_bufp+=icopy;
+		addr+=icopy;
+		size-=icopy;
+		dprintf("DMA wrote : %dbytes \n",icopy);
+	}
+	disable_DMA();
+	disable_DMAC();
+	dprintf("DMA write 4.: WRITE DONE!\n");
+	interrupt_mask(0x00);
+	return 1;
+}
+
+
+int spi_dma_read(int addr,char *dest,int size){
+	dprintf("spi_dma_read from flash=0x%8x, to mem=0x%8x, size=%d bytes\n",addr,dest,size);
+	if(size<=0) return 1;
+	/* only support line base (4DW = 16bytes) , pre-padding by your self */
+	if((size&0x0F)!=0){
+		printf("DMA ERR: size must be 16x\n");
+		return 0; 
+	}
+	if((addr&0x0F)!=0){
+		printf("DMA ERR: nor addr must be 16x\n");
+		return 0; 
+	}
+	int i,icopy=0;
+	unsigned char * dma_up_bufp = (unsigned char *)(LINE_ALIGN(dest));
+//	interrupt_mask(0xFF);
+	while(size>0){
+		if (MAX_FLASH_READ>0){
+			if(MAX_FLASH_READ>size) icopy=size;
+			else icopy=MAX_FLASH_READ;
+		}
+		else{ // without read limit
+			icopy=size;
+		}
+		i=readb(INTR_S_REG); // clear Flash INT
+		//
+		cache_flush();
+		/* request dma channel */
+		dprintf("dma_read 1 : SETUP DMAC\n");
+		disable_DMAC();
+		setup_dma(DMA_PL_NORFLASH, UP_STREAM, dma_up_bufp, icopy);
+
+		/* start nor flash */
+		dprintf("dma_read 2 : START NOR FLASH DMA\n");
+		writel(addr,NOR_ADDR_REG);//start address
+		writel((0x40000000|icopy),DMA_S_REG);//start address
+		dprintf("DMA_S_REG=%8x\n",readl(DMA_S_REG));
+
+		/* check nor flash controller finish */
+		if(!wait_INTR(INT_DMA,0)){
+			printf("Err: DMA Read Time Out\n");
+			disable_DMA();
+			disable_DMAC();
+			return 0;
+		}    
+		if(!wait_DMAC()){
+			printf("Err: DMAc Time Out\n");
+			disable_DMA();
+			disable_DMAC();
+			return 0;
+		}   
+		dma_up_bufp+=icopy;
+		addr+=icopy;
+		size-=icopy;
+		dprintf("DMA read : %dbytes \n",icopy);
+	}
+	disable_DMA();
+	disable_DMAC();
+	dprintf("DMA read 3.: READ DONE!\n");
+	interrupt_mask(0x00);
+	return 1;
+}
+
+int spi_pio_write(int addr,char *src,int size){
+	if(size<=0) return 1;
+	dprintf("PIO WRITE (PP) : addr=0x%8x , length=%d\n",addr,size);
+	char *data;
+	data = (char *) src;
+	//int chk1=0,chk2=0; // for read back check
+	int icopy=0,itotal=0;
+	while(size>0){
+		dprintf("pio write 1.: WREN \n");
+		writel(MXIC_WREN,DATA_CFG1);
+		if(!wait_INTR(INT_CMD,0)) return 0;
+		dprintf("pio write 2.: ADDR \n");
+		writel(addr,NOR_ADDR_REG);
+		dprintf("pio write 3.: DATA \n");
+		//chk1=0; // must clean
+		//chk2=0; // must clean
+		if(size>=4){
+			writel(readl(data),PIO_DATA_REG);
+			//chk1=wordAddr(data);
+			dprintf("pio write 4.: PP \n");
+			writel(MXIC_PP,DATA_CFG1);
+			icopy=4;
+		}else if(size>=1){
+			writeb(readb(data),PIO_DATA_REG);
+			//chk1=byteAddr(data);
+			dprintf("pio write 4.: PP \n");
+			writeb(MXIC_PP,DATA_CFG1);
+			icopy=1;
+		}else {return 0;}	
+		dprintf("PIO WRITE (PP) : addr=0x%8x , icopy=%d\n",addr,icopy);
+		if(!wait_INTR(INT_CMD,0)) return 0;
+
+		data+=icopy;
+		size-=icopy;
+		itotal+=icopy;
+		addr+=icopy;
+		dprintf("pio wrote %d bytes \r",itotal);
+
+	}
+	dprintf("\npio write 4.: PP DONE!\n");
+	return 1;
+}
+
+int spi_pio_read(int addr,char *dest,int size){
+	if(size<=0) return 1;
+	dprintf("PIO READ DATA : addr=0x%8x , length=%d\n",addr,size);
+	dprintf("pio read 1.: READ \n");
+	char *data;
+	data = (char *) dest;
+	int icopy=0,tmp;
+	while(size>0){
+		tmp=readb(INTR_S_REG); // clear Flash INT
+		writel(addr,NOR_ADDR_REG);
+		writel(MXIC_READ,DATA_CFG1);
+		if(!wait_INTR(INT_CMD,0)) return 0;
+		if(size>=4){
+			writel(readl(PIO_DATA_REG),data);
+			icopy=4;
+		}else if(size>=1){
+			writeb(readb(PIO_DATA_REG),data);
+			icopy=1;
+		}else {return 0;}	
+		//memcpy(data, PIO_DATA_REG, icopy);
+		data+=icopy;
+		addr+=icopy;
+		size-=icopy;
+		dprintf("pio need : %dbytes \r",size);
+	}
+	dprintf("\npio read 2.: READ DONE!\n");
+	return 1;
+}

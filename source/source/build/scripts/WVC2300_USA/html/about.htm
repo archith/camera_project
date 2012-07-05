@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+    <title>WVC2300 Wireless Internet Camera</title>
+
+
+    <LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css"> 
+    
+
+ <style type="text/css">
+ /* About Area*/
+.newAboutBrandingName   {padding-left:20px;padding-top:120px;font-family:Arial;font-size:14px;font-size:expression(Math.round(14*fontScale)+"px");color:#ffffff;}
+.newAboutProductName	 {padding-left:20px;font-family:Arial;font-size:22px;font-size:expression(Math.round(22*fontScale)+"px");color:#ffffff;}
+.newAboutVersionInfo   {padding-left:20px;padding-top:0px;font-family:Arial;font-size:11px;font-size:expression(Math.round(11*fontScale)+"px");color:#ffffff;font-weight:bold;}
+.newAboutPIDInfo   {padding-left:20px;padding-top:30px;font-family:Arial;font-size:11px;font-size:expression(Math.round(11*fontScale)+"px");color:#ffffff;font-weight:bold;}
+.newAboutVIDInfo   {padding-left:20px;padding-top:0px;font-family:Arial;font-size:11px;font-size:expression(Math.round(11*fontScale)+"px");color:#ffffff;font-weight:bold;}
+.newAboutSNInfo   {padding-left:20px;padding-top:0px;font-family:Arial;font-size:11px;font-size:expression(Math.round(11*fontScale)+"px");color:#ffffff;font-weight:bold;}
+.newAboutLicenseInfo   {padding-left:20px;padding-top:15px;font-family:Arial;font-size:10px;font-size:expression(Math.round(10*fontScale)+"px");color:#ffffff;font-weight:bold;}
+.newAboutCopyright     {padding-left:18px;padding-top:30px;padding-bottom:15px;font-family:Arial;font-size:10px;font-size:expression(Math.round(10*fontScale)+"px");color:#ffffff;}
+.newAboutLogo          {}
+.newLayoutCopyright   {padding-left:15px;line-height:36px;font-family:arial;color:#ffffff;font-weight:normal;}
+
+ </style>    
+     <script>
+        var fontScale=1;
+function fixpng(idd, img)
+{									
+    if (navigator.userAgent.indexOf("MSIE 6") ==  - 1)
+        return ;
+        
+    var cf = new Array();
+        cf.push(img);
+    for (var i = 0; i <cf.length; i++)
+    {
+			 var ssrc=cf[i].src;
+			 var swidth=cf[i].width;
+			 var sheight=cf[i].height;
+        if (ssrc.toLowerCase().indexOf(".png") ==  - 1)
+            continue;
+        cf[i].style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + ssrc + "');";
+        cf[i].src ="../images/spacer.gif";
+        
+        cf[i].style.width=swidth;
+        cf[i].style.height=sheight;
+         
+    }
+
+};
+function ViewTop(obj)
+{
+    var viewsTop = 0;
+
+        while(obj != null )
+        {
+           // alert("obj=" + obj + "obj.offsetTop =" + obj.offsetTop + "obj.offsetParent=" +obj.offsetParent);
+            viewsTop += obj.offsetTop * 1 ;
+            obj = obj.offsetParent;
+        }
+
+    return viewsTop;
+};
+function newResizeWindowToContent()
+{
+
+        var obj = null;
+        for (var i = document.body.childNodes.length - 1; i >= 0; i--)
+        if (document.body.childNodes[i].tagName != null &&
+            document.body.childNodes[i].tagName.toLowerCase() != "script")
+        {
+            obj = document.body.childNodes[i];
+            if (obj.offsetHeight > 0)
+                break;
+        }
+        var viewTop = ViewTop(obj);
+        var neededHeight = viewTop + (obj.offsetHeight * 1);
+        var deltaHeight = neededHeight - window.document.body.offsetHeight;
+        window.resizeBy(0, deltaHeight);
+        window.moveBy(0,  - 1 * deltaHeight / 2);
+
+};
+
+function newResizeCopyright()
+{
+};
+
+        </script>
+    </head>
+  <body>
+
+      <div class="newBackground"><img class="newBackgroundImage" src="../images/pageBackground.jpg" title="" alt=""/></div>
+      <div class="newAboutBrandingName">Cisco Small Business</div>
+      <div class="newAboutProductName">WVC2300 Wireless Internet Camera</div>
+        <div class="newAboutVersionInfo">@ver#</div>
+      <div class="newAboutPIDInfo">Product ID:&nbsp;&nbsp;&nbsp;@u_pid#</div>
+      <div class="newAboutVIDInfo">Version ID:&nbsp;&nbsp;&nbsp;@u_vid#</div>
+      <div class="newAboutSNInfo">Serial Number:&nbsp;&nbsp;&nbsp;@u_serialno#</div>
+<!--        <div class="newAboutLicenseInfo"><nobr>This product is licensed to:<br/>Cisco SBBU</nobr></div>-->
+		&nbsp;<br>&nbsp;
+      <table><tr><td valign="bottom" width="100%">
+
+
+
+        <div id="newAboutCopyright" class="newAboutCopyright">
+          Copyright 2009-2010 Cisco Systems Inc<br/>
+          All rights reserved
+        </div><script>setTimeout("newResizeCopyright()",100);</script>
+      </td><td valign="bottom"><img onload="fixpng(null,this);newResizeWindowToContent()" id="newAboutLogoImage" src="../images/cisco_logo_header.gif" title="Cisco" alt="Cisco"/></td></tr></table><script>if (document.addEventListener)  window.addEventListener('load', newResizeWindowToContent, false);else if (document.attachEvent)  window.attachEvent('onload', newResizeWindowToContent);</script>
+
+  </body>
+</html>
+

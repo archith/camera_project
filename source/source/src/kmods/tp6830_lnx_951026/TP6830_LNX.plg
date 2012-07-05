@@ -1,0 +1,45 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: TP6830_LNX - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\hcchang\LOCALS~1\Temp\RSP381.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/TP6830_LNX.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Linux\Access\6830_lnx\pwc-ctrl.c"
+"D:\Linux\Access\6830_lnx\pwc-if.c"
+"D:\Linux\Access\6830_lnx\pwc-misc.c"
+"D:\Linux\Access\6830_lnx\pwc-uncompress.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\hcchang\LOCALS~1\Temp\RSP381.tmp" 
+Creating temporary file "C:\DOCUME~1\hcchang\LOCALS~1\Temp\RSP382.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/TP6830_LNX.pdb" /debug /machine:I386 /out:"Debug/TP6830_LNX.exe" /pdbtype:sept 
+".\Debug\pwc-ctrl.obj"
+".\Debug\pwc-if.obj"
+".\Debug\pwc-misc.obj"
+".\Debug\pwc-uncompress.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\hcchang\LOCALS~1\Temp\RSP382.tmp"
+<h3>Output Window</h3>
+Compiling...
+pwc-ctrl.c
+d:\linux\access\6830_lnx\pwc-ctrl.c(37) : fatal error C1083: Cannot open include file: 'asm/errno.h': No such file or directory
+pwc-if.c
+d:\linux\access\6830_lnx\pwc-if.c(51) : fatal error C1083: Cannot open include file: 'linux/errno.h': No such file or directory
+pwc-misc.c
+d:\linux\access\6830_lnx\pwc-misc.c(20) : fatal error C1083: Cannot open include file: 'linux/slab.h': No such file or directory
+pwc-uncompress.c
+d:\linux\access\6830_lnx\pwc-uncompress.c(27) : fatal error C1083: Cannot open include file: 'asm/types.h': No such file or directory
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+TP6830_LNX.exe - 4 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

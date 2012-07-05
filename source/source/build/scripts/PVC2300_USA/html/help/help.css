@@ -1,0 +1,101 @@
+H1 {
+	FONT-SIZE: 14pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: Arial;
+}
+
+H3 {
+	FONT: bold 13pt Verdana,Arial,Helvetica,sans-serif; COLOR: white
+}
+
+
+table.MsoNormalTable {
+    mso-style-parent:""; font-size:10.0pt; font-family:"Times New Roman";
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none;
+	BORDER-BOTTOM: medium none; BORDER-COLLAPSE: collapse
+}
+TH {
+	FONT: bold 10pt Arial,Helvetica,sans-serif; COLOR: white;
+}
+th.bar {
+	background: #5272b3;
+	text-align: center;
+}
+
+td.blue {
+	background-color: #5272b3
+}
+td.h_logo {
+	background: #5272b3 url(../../l1_head.gif) no-repeat center;
+}
+td.gray {
+	background-color: #f2f2f2
+}
+td.HelpHomeStyle {
+    BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid;
+	PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: windowtext 1pt solid; WIDTH: 400pt;
+	PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 1pt solid
+}
+
+td.leftstyle {
+    BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid;
+	PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: windowtext 1pt solid; WIDTH: 95.4pt;
+	PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 1pt solid
+}
+td.rightstyle {
+    BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 1pt solid;
+	PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: medium none; WIDTH: 343pt;
+	PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 1pt solid
+}
+B {
+	FONT-WEIGHT: bold
+}
+.num {
+	FONT: 8pt Courier,serif; COLOR: black
+}
+.tt {
+	FONT: 8pt Courier,serif; COLOR: black
+}
+.headrow {
+	FONT: bold 8pt Arial,Helvetica,sans-serif; COLOR: black
+}
+.slbutton {
+	color: #ffffff;
+	background: #617dc6;
+	font-family: Arial,Helvetica;
+	font-size: 8pt;
+	font-weight: 700;
+	padding-bottom: 2px;
+	width: 100px;
+	border-width: 0px;
+}
+
+.bbutton
+{
+	border-style:none;
+	height: 24px;
+	width:80px;
+	color: white;
+	font:  bold 10pt Arial,Helevtical,Sans-Serif;
+	text-align:center;
+	padding-bottom:6px;
+}
+
+
+
+div.morespace {
+	padding-top: 4px;
+}
+	
+	
+b.help  { color: black;  font: bold 10pt    Arial,Helvetica,sans-serif; }	
+TH.help { color: black; font: bold 10pt Arial,Helvetica,sans-serif;  text-align:left;}
+TD.help { color: black; font: bold 10pt Arial,Helvetica,sans-serif;}
+A.helplink      { color: #FF9933; font-weight: bold;}
+
+td.itemhead
+{
+	width: 100px;
+	vertical-align: top;
+}
+
+BODY, P, TABLE, TD, UL, OL, LI, DD 
+        { color: black;   font: normal 9pt    Arial,Helvetica,sans-serif; }

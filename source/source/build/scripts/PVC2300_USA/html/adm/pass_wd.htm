@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var TooBig = false;
+var msgTooBig = "";
+
+if (document.layers) document.captureEvents(Event.KEYPRESS);
+document.onkeypress = checkKey;
+
+function checkKey(evt) 
+{
+  evt = (evt) ? evt : ((window.event) ? window.event : null)
+  if (evt) 
+	    lastkeypressed = (evt.keyCode) ? evt.keyCode : (evt.which ) ? evt.which : null;
+//  window.status = lastkeypressed;
+  if ( (lastkeypressed != 13) && (lastkeypressed != 8) && (lastkeypressed != 9)  && (TooBig) )
+  {
+  	if (msgTooBig.length > 2 )
+    	rALERT("Maintenance",msgTooBig);
+  }
+}
+
+function chkPsize(csize,maxsize,msg)
+{
+	if (csize == maxsize)  // measured before this keystroke
+	{
+		TooBig = true;
+		msgTooBig = msg;
+	}
+	else 
+	{
+		TooBig = false;
+		msgTooBig = "";
+	}
+}
+
+function checkData()
+{
+  var cf = document.user_form;
+  if ( cf.admpw.value != cf.admpwv.value )
+  {
+  	rALERT("Maintenance",msg_passNoMatch);
+	return false;
+  }
+  return true;
+}
+
+
+function SaveAll()
+{
+  var cf = document.forms[0];
+
+  if (!checkData()) 
+    return;
+  dataToHidden(cf); cf.submit();
+}
+
+var global_var = "";
+
+function setDefault() {
+	
+	global_var="setDefault";
+	
+	rConfirm("Maintenance",resetDefault_msg);
+	/*		 
+	if(rConfirm("Maintenance",resetDefault_msg)) {
+		var cf = document.forms[0];
+		cf.method = "get";
+		cf.enctype = "application/x-www-form-urlencoded";
+		cf.todo.value = "reset";
+		cf.next_file.value = "pass_msg.htm";
+		dataToHidden(cf); cf.submit();
+	}
+	*/
+}
+
+function setRestart() {
+	global_var="setRestart";
+//	if(
+	   rConfirm("Maintenance",restart_msg);
+	   /*
+	   ) {
+		var cf = document.forms[0];
+		cf.method = "get";
+		cf.enctype = "application/x-www-form-urlencoded";
+		cf.todo.value = "restart";
+		cf.next_file.value = "pass_msg.htm";
+		dataToHidden(cf); cf.submit();
+		
+	}
+	*/
+}
+
+function check_restore()
+{
+	global_var="check_restore";	
+	var cf = document.forms[1];
+	if(cf.mtenRestoreCfg.value.length == 0)
+	{
+			rALERT("Maintenance",nofile_msg);
+			return false;
+	}
+	rConfirm("Maintenance",msg_confirmCfile);
+
+	return false;
+	
+}
+
+function cfg_download()
+{
+	self.location.href = "admcfg.cfg";
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Maintenance');">
+
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Maintenance</div>
+ 	
+ 
+
+ 
+
+
+<FORM name="user_form" method="post" action="file.cgi" ENCTYPE="multipart/form-data">
+ 	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px;">Restore Factory Defaults</div>
+<table cellpadding="0" cellspacing="0">
+		  <tr>
+			<td nowrap><div  style="margin-left:-3"><input type="button" class="newbutton" value="Restore" onClick="setDefault()"></div></td>
+		  </tr>
+		  <tr>
+			<td>
+			  <table border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td nowrap><div style="margin-left:1"><b>Caution:</b></div></td>
+			  </tr>
+			  <tr>
+				<td><div style="margin-left:1">Any settings you have saved will be lost when the default settings are restored.</div></td>
+			  </tr>
+			  </table>
+			</td>
+		  </tr>
+	  </table>
+          
+              <hr class="newHR">
+
+ 	<div class="newGroupBoxTitle" style="height:25px; ">Restart</div>
+    <table cellpadding="0" cellspacing="0">
+		  <tr>
+			<td nowrap><div  style="margin-left:-3"><input type="button" class="newbutton" value="Restart" onClick="setRestart();"></div></td>
+		  </tr>
+	  </table>
+	<input type="Hidden" name="this_file" value="pass_wd.htm">
+	<input type="Hidden" name="next_file" value="">
+	<input type="Hidden" name="todo" value="save">
+	<input type="hidden" name="message" value="@message#">
+	<input type="hidden" name="video_file" value="@video_file#">
+	</form>
+
+    
+    
+   <form id="backup" name="backup" method="post" action="upload.cgi" ENCTYPE="multipart/form-data"> 
+   <hr class="newHR">   
+ 	<div class="newGroupBoxTitle" style="height:25px; margin-left:1">Configuration</div>
+
+     <table cellpadding="0" cellspacing="0">
+		  <tr>
+			<td nowrap><div  style="margin-left:-3"><input type="button" class="newbutton" name="conf_download" value="Save" onClick="cfg_download();"></div></td>
+		  </tr>
+		  <tr>
+			<td>
+			  <br>
+              <div  style="margin-left:-3">
+			  <table border="0" cellspacing="0" cellpadding="0" style="height:25px; margin-left:4px">
+			  <tr>
+				<td>
+				<input type="file" name="mtenRestoreCfg" maxlength="255"> &nbsp;
+				<input type="submit" class="newbutton" name="mtenRestore" value="Upload" onClick="return check_restore()">
+				</td>
+			  </tr>
+			  </table>
+              </div>
+			</td>
+		  </tr>
+		  </table>
+          <br>
+ <input type="hidden" name="todo" value="save">
+  <input type="hidden" name="next_file" value="">
+ 
+ </form>	
+
+
+    
+	</div><!-- formpane end-->    
+       <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    
+    
+</div> <!--  newContentArea end -->  
+</body>
+</html>

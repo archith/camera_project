@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ ! -h ${PROJ_ROOT}/src/kernel/linux ]; then
+    cd ${PROJ_ROOT}/src/kernel
+    ln -sf linux-2.4.19 linux
+    cd -
+fi 
+
+if [ "$1" = "defconfig" ]; then
+	# ---- busybox ---- #
+	cp -f ${PROJ_ROOT}/src/sysapps/busybox-1.01/sysdeps/linux/defconfig ${PROJ_ROOT}/src/sysapps/busybox-1.01/.config
+
+	# ---- kernel  ---- #
+	cp -f ${PROJ_ROOT}/src/kernel/linux/arch/arm/defconfig ${PROJ_ROOT}/src/kernel/linux/.config
+fi
+
+exit 0

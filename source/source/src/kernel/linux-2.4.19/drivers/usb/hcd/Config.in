@@ -1,0 +1,11 @@
+#
+# USB Host Controller Drivers
+#
+dep_tristate '  EHCI HCD (USB 2.0) support (EXPERIMENTAL)' CONFIG_USB_EHCI_HCD $CONFIG_USB $CONFIG_EXPERIMENTAL
+dep_tristate '  Faraday EHCI-compatible For Host(FUSBH200)' CONFIG_FARADAY_FUSBH200 $CONFIG_USB 
+
+
+
+
+
+

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+
+function setData()
+{
+	var cf = document.forms[0];
+  	dataToVisible(document.forms[0]);
+	setSMB();
+	if(cf.h_smb_rec_filesize.value%1024)
+		cf.smb_rec_filesize.value=10;
+	else
+		cf.smb_rec_filesize.value=cf.h_smb_rec_filesize.value/1024;
+  //	showMsg();
+}
+
+function setSMB()
+{
+	var cf = document.forms[0];
+
+	if (cf.en_smb_rec.checked == false)
+	{ 
+		cf.smb_rec_server.disabled = cf.smb_rec_path.disabled = cf.smb_rec_name.disabled = cf.smb_rec_pwd.disabled = cf.smb_rec_filesize.disabled = cf.smb_rec_mode.disabled = 1;
+		
+		document.getElementById("SERVER_TEXT").disabled = 1;
+		document.getElementById("PATH_TEXT").disabled = 1;
+		document.getElementById("NAME_TEXT").disabled = 1;
+		document.getElementById("PASS_TEXT").disabled = 1;
+		document.getElementById("MAX_TEXT").disabled = 1;
+		document.getElementById("MB_TEXT").disabled = 1;
+		document.getElementById("ENABLE_TEXT").disabled = 1;
+		
+	}
+	else
+	{
+		cf.smb_rec_server.disabled = cf.smb_rec_path.disabled = cf.smb_rec_name.disabled = cf.smb_rec_pwd.disabled = cf.smb_rec_filesize.disabled = cf.smb_rec_mode.disabled = 0;
+				
+		document.getElementById("SERVER_TEXT").disabled = 0;
+		document.getElementById("PATH_TEXT").disabled = 0;
+		document.getElementById("NAME_TEXT").disabled = 0;
+		document.getElementById("PASS_TEXT").disabled = 0;
+		document.getElementById("MAX_TEXT").disabled = 0;
+		document.getElementById("MB_TEXT").disabled = 0;
+		document.getElementById("ENABLE_TEXT").disabled = 0;
+	}
+}
+
+function checkData()
+{
+ 	var cf = document.forms[0];
+	var msg = "";
+	var invalid_path_str = '?*"<>';
+
+	if(cf.en_smb_rec.checked)
+	{
+		if(cf.smb_rec_server.value == "")
+		{ msg+= msg_smb_server_empty; }
+		else 
+		{ 
+			msg+= checkValid(cf.smb_rec_server, msg_smb_server_illegal_str, Valid_Strs, 64, false); 
+		}
+
+		if(cf.smb_rec_path.value == "")
+		{ msg+= msg_smb_path_empty; }
+		else 
+		{ msg+= checkInvalid(cf.smb_rec_path, msg_smb_path_illegal_str, invalid_path_str); }
+
+		//msg+= checkBlank(cf.smb_rec_name, msg_smb_name);
+		//msg+= checkBlank(cf.smb_rec_pwd, msg_smb_pwd);
+		msg+= checkInt(cf.smb_rec_filesize, msg_smb_max, 10, 100, cf.smb_rec_filesize.value == "");
+	}
+
+	if (msg.length > 1)	
+	{
+		rALERT("SMB/CIFS",msg);
+		return false;
+	}
+	return true;	
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+	return;
+	dataToHidden(cf);
+	cf.h_smb_rec_filesize.value = cf.smb_rec_filesize.value*1024;
+	cf.todo.value = "save";
+	cf.submit();		
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('SMB/CIFS');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">SMB/CIFS</div>
+ 	
+
+
+<FORM name="smb" method="post" action="file.cgi" onSubmit="return SaveAll()">
+  	<div id="formpane" class="newFormPane">
+
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+	<tr>
+	 <td class="sp1" nowrap="nowrap" valign="top">
+	 <table cellspacing=0 cellPadding=0 >
+     	<tr>
+		<td width="21px">
+		<input type="checkbox" name="en_smb_rec" id="en_smb_rec" value="1" onClick="setSMB()" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("en_smb_rec").style.marginLeft="0px";
+				 </script>
+        <td>Enable SMB/CIFS Recording
+		</td>
+        </tr>
+         </table>
+	</tr>
+    
+    <table border=0 cellspacing=0 cellpadding=0>
+    <tr>
+		<td nowrap height="35"><span id="SERVER_TEXT">SMB/CIFS Server:</span></td>
+		<td  nowrap height="35"><input type="text" name="smb_rec_server" size="25" maxlength="256" value="@smb_rec_server#" style="width:160px"></td>
+	</tr>
+    
+    <tr>
+		<td  nowrap height="35"><span id="PATH_TEXT">Upload Path:</span></td>
+		<td  nowrap height="35"><input type="text" name="smb_rec_path" size="25" maxlength="256" value="@smb_rec_path#" style="width:260px"></td>
+	</tr>
+    
+	<tr>
+		<td  nowrap height="35"><span id="NAME_TEXT">Login Name:</span></td>
+		<td  nowrap height="35"><input type="text" name="smb_rec_name" value="@smb_rec_name#" size="24" maxlength="48" style="width:160px"></td>
+	</tr>
+<tr>
+		<td><span id="PASS_TEXT">Password:</span></td>
+		<td><input type="password" name="smb_rec_pwd" value="@smb_rec_pwd#" size="24" maxlength="24" style="width:160px"></td>
+	</tr>    
+	
+	<tr>    
+	<tr>
+		<td  width="156px" nowrap height="35"><span id="MAX_TEXT">Maximum Size of Each File:</span></td>
+		<td  nowrap height="35">
+		<input type="text" class="num" name="smb_rec_filesize" value="@smb_rec_filesize#" size="3" > <span id="MB_TEXT">MB</span>
+		</td>
+	</tr>    
+	<tr>
+    
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+		<td td width="21px">
+		<input type="checkbox" name="smb_rec_mode" id="smb_rec_mode" value="1" onClick="" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("smb_rec_mode").style.marginLeft="0px";
+				 </script>
+        <td><span id="ENABLE_TEXT">Enable adding timestamp to files </span>
+		</td>
+        </tr>
+         </table>
+         
+	</tr>
+	</table>        
+       
+     </table>
+
+  
+  	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=samba.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='samba.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+ 
+<input type="Hidden" name="h_en_smb_rec" value="@h_en_smb_rec#">
+<input type="Hidden" name="h_smb_rec_mode" value="@h_smb_rec_mode#">
+<input type="Hidden" name="h_smb_rec_filesize" value="@h_smb_rec_filesize#">
+<input type="Hidden" name="this_file" value="samba.htm">
+<input type="Hidden" name="next_file" value="samba.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+</form>
+</div> <!--  newContentArea end -->  
+</body>
+</html>

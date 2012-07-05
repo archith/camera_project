@@ -1,0 +1,35 @@
+<html><head><meta HTTP-EQUIV='Pragma' CONTENT='no-cache'>
+<script language='JavaScript' type='text/javascript'>
+<!-- Start Script	
+var maxchars = 50;var charcount = 0;
+function ppp(){var cf = document.forms[0];if (charcount < maxchars){charcount ++;cf.progress.value = makeStr(charcount,'|');cf.progress.select();window.status = 'Progress: ' + Math.floor(charcount/maxchars *100) + ' %';
+if( charcount == maxchars)setTimeout('ppp()',1000);else setTimeout('ppp()',4000);}
+else{ alert('Firmware Upgrade completed... Camera restarting. \nPlease wait for restart to be completed before continuing.');top.self.close() ;}}
+function makeStr(strSize, fillChar) {var temp = '';for (i=0; i < strSize ; i ++)temp = temp + fillChar;return temp;}
+// End Script --> 
+</script>
+<style type='text/css'>
+<!--
+.style1 {font-family: Arial, Helvetica, sans-serif}
+.bignum    { color: blue;  font: bold 12pt Courier,serif; }
+-->
+</style>
+</head>
+	<body onLoad='ppp()' style="background-color:#D9E3E9;">
+<form>
+	<blockquote class='style1'>
+	<div class="style1" style="height:25px; margin-left:9px">Firmware Upgrade in Progress!</div>
+	<table cellpadding="8" cellspacing="0" width="420">
+		<tr><td align="left" ></td></tr>
+		<tr><td nowrap align="left" ><span class="style1">Please wait. This could take 4 to 5 minutes.</span></td></tr>
+		<tr><td nowrap align="left" ></td></tr>
+		<tr><td colspan="2"  align="center" style="padding-bottom:0px; width:500px" valign="bottom"><b>Progress</b></td></tr>
+                <tr><td colspan="2" nowrap style="padding-top:6px; padding-bottom:6px">
+ 	</div>
+	<table>
+		<tr><td nowrap colspan='2'><input type='text' class='bignum' name='progress' size='50' readonly onFocus='this.select();this.blur();'></td></tr>
+		<tr><td nowrap align='left'><b>0%</b></td><td nowrap align='right'><b>100%</b></td></tr>
+	</table>
+		<tr><td align="left" >Upgrade must NOT be interrupted!</td></tr>
+	</blockquote>
+</form></body></html>

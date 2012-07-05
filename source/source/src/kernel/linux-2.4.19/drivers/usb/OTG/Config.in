@@ -1,0 +1,6 @@
+#
+# USB OTG Controller Drivers
+#
+  dep_tristate 'USB OTG FOTG2XX(Faraday) support' CONFIG_FARADAY_FOTG2XX $CONFIG_USB 
+
+

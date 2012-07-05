@@ -1,0 +1,33 @@
+PL-1029 NOR flash Linux driver
+==============================
+
+
+Purpose
+=======
+Provide the accessibility of the on-board NOR flash on PL-1029 and
+CRAM file-system underlying block device.
+
+
+Build
+=====
+
+1. Kernel configuration.
+
+Prolific Character/Misc. devices  --->
+	Prolific PL-1029 NOR flash driver
+	  Firmware upgrade functionality.
+
+2. Firmware upgrade is optional.
+
+
+Usage Guide
+===========
+
+Please see the "PL1029 NOR Flash Linux Driver User Guide"
+
+
+
+
+-------------------------
+Last updated: 2006-05-08 Gary Lin
+

@@ -1,0 +1,1536 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+    
+	<script language="javascript" type="text/javascript" src="./func.js"></script>
+	<script language="JavaScript" type="text/javascript" src="./P.js"></script>
+    
+    
+	<style type="text/css">
+	   
+/* Alert Box */
+div.AB_ALL
+{
+POSITION:absolute; Z-INDEX:999999; TOP:20%; LEFT:35%; FILTER:alpha(opacity=100); background: transparent;
+}
+iframe.AB_FRAME
+{
+position: absolute; z-index: 9999px; width: expression(this.nextSibling.offsetWidth); height: expression(this.nextSibling.offsetHeight); top: expression(this.nextSibling.offsetTop); left: expression(this.nextSibling.offsetLeft); opacity:0; filter:alpha(opacity=0); display:block;
+}
+
+table.AB_TABLE
+{
+width:368px; background: transparent; cursor:move;
+}
+
+/* AB TOP */
+td.AB_TD_top
+{
+width:368px; height:25px;
+}
+table.top_TABLE
+{
+width:100%; height:25px;
+}
+td.top_td_l
+{
+width:7px; height:25px; background-image:url(./img_alert/bdr_TL.png); background-repeat: no-repeat;*/
+}
+td.top_td_ct
+{
+width:300px; height:25px; background-image:url(./img_alert/bdr_TC.png); background-repeat:repeat-x; padding-left:2px; padding-top:3px; font-size:12px; font-weight:bold;
+}
+tr.tct
+{
+cursor:move;
+}
+td.top_td_cc
+{
+width:47px; height:25px; background-image:url(./img_alert/bdr_TC.png); background-repeat:repeat-x; text-align:right; padding-right:0px; padding-top:2px;
+}
+img.td_cc_img
+{
+cursor:pointer;
+}
+td.top_td_r
+{
+width:14px; height:25px; background-image:url(./img_alert/bdr_TR.png); background-repeat: no-repeat;*/
+}
+
+/* AB MID */
+td.AB_TD_Ml
+{
+width:5px; height:100%; background-position:top; background-image:url(./img_alert/bdr_LC.png); background-repeat:repeat-y;*/
+}
+img.TD_Ml_img
+{
+width:5px; height:100%;
+}
+td.AB_TD_Mc
+{
+width:352px; background-color:#FFFFFF; vertical-align:top;
+}
+table.Help_TABLE
+{
+width:100%; height:15px;
+}
+span.Help_span
+{
+float:right; margin-top:1px; margin-right:6px; font-size:12px; font-weight:bold; cursor:pointer; color:#42E3FD;
+}
+table.MSG_TABLE
+{
+width:322px; margin: 0px 15px 5px 15px;
+}
+td.MSG_type
+{
+width:48px; vertical-align:top;
+}
+td.MSG_cont
+{
+vertical-align:top; white-space:normal; font-size:12px; font-weight:bold;
+}
+td.MSG_lc
+{
+width:48px; vertical-align:top;
+}
+td.MSG_no
+{
+vertical-align:top; white-space:normal; font-size:12px; font-weight:bold;
+}
+td.MSG_BTN_t
+{
+height:20px;
+}
+div.Norm2
+{
+	font-size: 12px;
+	font-weight: bold;
+	padding-top: 4px;
+	cursor: pointer;
+	text-align: center;
+	width: 37px;
+	height: 23px;
+	margin-left: 2px;
+	margin-right: 2px;
+	background: transparent url(./img_alert/BT_Norm2.gif) no-repeat;
+}
+div.Norm3
+{
+font-size:12px; font-weight:bold; padding-top:4px; cursor:pointer; text-align:center; width:40px; height:23px; background: transparent url(./img_alert/BT_Norm3.gif) no-repeat; margin-left:2px; margin-right:2px;
+}
+div.Norm5
+{
+font-size:12px; font-weight:bold; padding-top:4px; cursor:pointer; text-align:center; width:74px; height:23px; background: transparent url(./img_alert/BT_Norm5.gif) no-repeat; margin-left:2px; margin-right:2px;
+}
+div.Over2
+{
+font-size:12px; font-weight:bold; padding-top:4px; cursor:pointer; text-align:center; width:37px; height:23px; background: transparent url(./img_alert/BT_Over2.gif) no-repeat; margin-left:2px; margin-right:2px;
+}
+div.Over3
+{
+font-size:12px; font-weight:bold; padding-top:4px; cursor:pointer; text-align:center; width:40px; height:23px; background: transparent url(./img_alert/BT_Over3.gif) no-repeat; margin-left:2px; margin-right:2px;
+}
+div.Over5
+{
+font-size:12px; font-weight:bold; padding-top:4px; cursor:pointer; text-align:center; width:74px; height:23px; background: transparent url(./img_alert/BT_Over5.gif) no-repeat; margin-left:2px; margin-right:2px;
+}
+td.MSG_Num_t
+{
+height:15px;
+}
+td.MSG_Num
+{
+white-space:normal; font-size:12px; font-weight:bold;
+}
+td.AB_TD_Mr
+{
+width:11px; height:100%; background-position:top; background-image:url(./img_alert/bdr_RC.png); background-repeat:repeat-y;*/
+}
+img.TD_Mr_img
+{
+width:11px; height:100%;
+}
+
+/* AB BOTTOM */
+td.AB_TD_btm
+{
+width:368px; height:12px;
+}
+table.btm_TABLE
+{
+width:100%; height:100%;
+}
+td.btm_td_l
+{
+width:13px; height:12px; background-image:url(./img_alert/bdr_BL.png); background-repeat: no-repeat;*/
+}
+td.btm_td_cc
+{
+width:341px; height:12px; background-image:url(./img_alert/bdr_BC.png); background-repeat:repeat-x;*/
+}
+img.btm_cc_img
+{
+width:341px; height:12px;
+}
+td.btm_td_r
+{
+width:14px; height:12px; background-image:url(./img_alert/bdr_BR.png); background-repeat: no-repeat;*/
+}
+	 
+.IconR{margin:0 4px 0 5px;vertical-align:middle}
+.TitleMenu{height:25px;	line-height:25px;font-family:Arial;}
+#MoveGripper{margin-left:3px;}
+#MResizeLayer{z-index:999;
+	position:absolute;
+	top:0;left:0;
+	height:2048px;
+	width:2048px;
+	display:none;
+	opacity:.40;filter:alpha(opacity=40);
+	background-color:white;
+	overflow:hidden;
+	}
+#MResizeBox{
+	position:absolute;
+	top:0;left:0;
+	width:20px;
+	border:1px dashed black;
+	background-color:#6b7485;
+	}
+.subline tr{line-height:18px;}
+.lfbg{overflow:hidden; }
+.btn_normal{
+	background:repeat-x url(./images/btn_mouse_out.jpg); 
+	width:100%; 
+	height:25px;
+	line-height:25px;
+
+	font-size: 12px; 
+	color: #000000; 
+	font:Arial;
+	font-weight:normal;
+	text-shadow:1px 1px  #333333;
+
+
+}
+.btn_over{
+	cursor:pointer;
+	background:repeat-x url(./images/btn_mouse_on.jpg);
+	width:100%;
+	height:25px; 
+	line-height:25px;
+	
+	font-size: 12px; 
+	color: #000000; 
+	font:Arial;
+	font-weight:normal;
+
+}
+
+.btn_clk{
+	background:repeat-x url(./images/btn_mouse_out.jpg); 
+	width:100%; 
+	height:25px;
+	line-height:25px;
+
+	font-size: 12px; 
+	color: #000000; 
+	font:Arial;
+	font-weight:normal;
+	text-shadow:1px 1px  #333333;
+}	
+/*
+.btn_clk{
+	cursor:pointer;
+	background:repeat-x url(./images/btn_mouse_clk.jpg); 
+	width:100%; 
+	height:25px; 
+	line-height:25px;
+
+	font-size: 12px; 
+	color: #FFFFFF; 
+	font:Arial;
+	font-weight:bold;
+	text-shadow:1px 1px  #333333;
+	
+}
+*/
+.opensub{display:block;width:100%;overflow:auto;}
+.closesub{display:none;width:100%;overflow:auto;}
+.pro_hidden{display:none;}
+
+
+td.green_td{
+	background-color:#8DB71f;
+}
+td.normal_td{
+	
+}
+
+/*
+a.green{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	color:#ffffff;
+	text-decoration:none;
+	margin-left:10;
+	background-color:#8DB71f;}*/
+a.green{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	color:#ffffff;
+	text-decoration:none;
+	margin-left:10;
+	}
+
+a.flink{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	color:#000000;
+	text-decoration:none;
+	margin-left:10;
+	
+}
+a.flink:link{
+	height:12px;
+	font-family:Arial;
+	font-size:12px; 
+	color:#000000;
+	text-decoration:none;
+	margin-left:10;
+
+} 
+a.flink:visited {
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	color:#000000;
+	text-decoration:none;
+	margin-left:10;
+	}
+a.flink:hover{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	COLOR: #1fa0d5;
+	text-decoration:none;
+	margin-left:10;
+
+}
+/*a.flink:active{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	COLOR: #FFFFFF;
+	background-color:#8DB71f;
+	text-decoration:none;
+	margin-left:10;
+	cursor:pointer;
+} */
+
+a.flink:active{
+	height:12px;
+	font-family:Arial;
+	font-size:12px;
+	COLOR: #FFFFFF;
+	text-decoration:none;
+	margin-left:10;
+	cursor:pointer;
+} 
+.small{
+	font-weight:normal;
+	font-size:14px;
+	color:#ffffff;
+}
+.big{
+	font-weight:normal;
+	font-size:22px;
+	color:#ffffff;
+	vertical-align:bottom;
+	padding-bottom:0px;
+}
+.rline{
+	padding-left:4px;
+	padding-right:14px;
+	vertical-align:top;
+	font-size:11px;
+	font-size:11px;
+	padding-top:9px;
+}
+.usrbold{
+	color:#ffffff;
+	font-weight:bold;
+	margin-left:8px;
+	margin-right:8px;
+}
+a.rlink             {margin-left:8px;margin-right:8px;}
+a.rlink:link        {color:#ffffff;text-decoration:none;}
+a.rlink:visited     {color:#ffffff;text-decoration:none;}
+a.rlink:hover       {color:#ffffff;text-decoration:underline;}
+a.rlink:active      {color:#ffffff;text-decoration:none;}
+.cpr{
+	padding-left:15px;
+	padding-top:5px;
+	padding-bottom:11px;
+	font-family:arial;
+	color:#ffffff;
+	font-weight:normal;
+}
+.MContentLayer  {opacity:.67;filter:alpha(opacity=67);background-color:white;overflow:hidden;padding:0;}
+.iframebg{
+	z-index:-1;
+	position:absolute;
+	top:0px;left:0px;
+	height:100%;
+	width:100%;
+	opacity:.67;
+	filter:alpha(opacity=67);
+	background-color:white;
+	overflow:hidden;
+	padding:0;
+}
+#iframetd {width:100%;border-width:0px;border-color:#858A91;border-style:solid;}
+
+body			 {font-family:Arial;color:#000000;font-size:12px;position:absolute;z-index:0;top:0px;left:0px;background-color:transparent; 
+      width:100%;height:100%;max-height:100%;margin:0;padding:0;border:0;overflow:hidden;}
+</style>
+<script>
+var help_page;
+
+function fixpng(img)
+{									
+    if (navigator.userAgent.indexOf("MSIE 6") ==  - 1)
+        return ;
+    var cf = new Array();
+        cf.push(img);
+    for (var i = 0; i <cf.length; i++)
+    {
+			 var ssrc=cf[i].src;
+			 var swidth=cf[i].width;
+			 var sheight=cf[i].height;
+        if (ssrc.toLowerCase().indexOf(".png") ==  - 1)
+            continue;
+        cf[i].style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + ssrc + "', sizingMethod=scale);";
+        cf[i].src ="./images/spacer.gif";
+        cf[i].style.width=swidth;
+        cf[i].style.height=sheight;
+    }
+
+};
+
+function openAbout(url)
+{
+    var aboutWindow = window.open(url, "AboutWindow", "status=no,scrollbars=no,resizable=yes,height=345px,width=480px");
+};
+
+function changehelp(h_page)
+{
+   
+      var str_location = h_page.indexOf(".");
+      var str = "help/h_" + h_page.substring(0, str_location) + ".htm";
+      if (str == "help/h_SecurityProtection_email.htm")
+      { 
+          alert("This page is not existed");
+      }
+      else
+      {
+          openDataSubWin(str, bigsub);
+      }
+
+            
+};
+
+function btn_mouse_over(btn_div)
+{
+	var cf =document.getElementById(btn_div);
+	if(cf.className=="btn_normal")
+		cf.className="btn_over";
+}
+function btn_mouse_out(btn_div)
+{
+	var cf =document.getElementById(btn_div);
+	if(cf.className=="btn_over")
+		cf.className="btn_normal";
+}
+
+function LftBtnClk(btnID,grpID)
+{
+	var cf=document.getElementById(btnID);
+	var cfgrp=document.getElementById(grpID);
+	if(cf.className=="btn_clk")
+		closeall(grpID);
+	else
+		{
+			closeall(grpID);
+			showbtn(btnID);
+
+		}
+}
+function pro_LftBtnClk(btnID,grpID)
+{
+	//var purchase=@Security_Protection#;
+	//if(purchase=="SecurityProtection_purchase.htm")
+	//{
+	//document.getElementById("PL_show_1").className="pro_hidden";
+	//document.getElementById("PL_show_2").className="pro_hidden";
+	//document.getElementById("PL_show_3").className="pro_hidden";
+	//LftBtnClk(btnID,grpID);
+	//}
+	//eles
+	//{
+	document.getElementById("PL_hidden").className="pro_hidden";
+	var cf=document.getElementById(btnID);
+	var cfgrp=document.getElementById(grpID);
+	if(cf.className=="btn_clk")
+		closeall(grpID);
+	else
+		{
+			closeall(grpID);
+			var btn=document.getElementById(btnID);
+			btn.className="btn_clk";
+			document.getElementById(btnID+"Toggler").src="./images/drawerTriangleOpenT.gif";
+			var submenu=document.getElementById(btnID+'submenu');
+			submenu.className="opensub";
+			var alla=submenu.getElementsByTagName("a");
+			eval(alla[1].target+".location.href='"+alla[1].href+"'");
+			alla[1].className="green";
+			
+			 var alltd=submenu.getElementsByTagName("td");
+   			 alltd[0].className="green_td";
+		}
+	
+	//}
+	
+}
+
+function closeall(grpID)
+{
+	var cf=document.getElementById(grpID);
+	var alldiv=cf.getElementsByTagName("div");
+	for(var i=0; i<alldiv.length; i++)
+	{//change btn
+		if(alldiv[i].className=="btn_clk")
+		{
+			document.getElementById(alldiv[i].id+"Toggler").src="./images/drawerTriangleCollapsedT.gif";
+			alldiv[i].className="btn_normal";
+		}
+		//hide sub
+		if(alldiv[i].className=="opensub")
+		{
+			alldiv[i].className="closesub"
+			var alla=alldiv[i].getElementsByTagName("a");
+			var alltd=alldiv[i].getElementsByTagName("td");
+			for(var j=0; j<alla.length; j++)
+			{//green to white
+				if(alla[j].className=="green")
+				alla[j].className="flink";
+			}
+			for(var j=0; j<alltd.length; j++)
+			{//green to white
+				if(alltd[j].className=="green_td")
+				alltd[j].className="normal_td";
+			}
+		}
+	}
+}
+
+function showbtn(btnID)
+{
+	var btn=document.getElementById(btnID);
+	btn.className="btn_clk";
+	document.getElementById(btnID+"Toggler").src="./images/drawerTriangleOpenT.gif";
+	var submenu=document.getElementById(btnID+'submenu');
+	submenu.className="opensub";
+	var alla=submenu.getElementsByTagName("a");
+	eval(alla[0].target+".location.href='"+alla[0].href+"'");
+  alla[0].className="green";
+  
+  	var alltd=submenu.getElementsByTagName("td");
+    alltd[0].className="green_td";
+
+}
+function sbuclk(submID,thisID)
+{
+	var cfID=document.getElementById(thisID);
+	var cfTD=document.getElementById("td_"+thisID);
+	var cf=document.getElementById(submID);
+	var alla=cf.getElementsByTagName("a");
+	var alltd=cf.getElementsByTagName("td");
+	if(alla.length){
+	for(var i=0;i<alla.length;i++)
+	{
+	if(alla[i].className=="green")
+		alla[i].className="flink";}
+	}
+	if(alltd.length)
+	{
+		for(var i=0;i<alltd.length;i++)
+		{
+			if(alltd[i].className == "green_td")
+				alltd[i].className = "normal_td"
+		}
+	}
+	cfID.className="green";
+	cfTD.className="green_td";
+	
+	help_page=cfID.href.substring(cfID.href.lastIndexOf("/")+1);
+
+}
+
+
+var ResizeBox = null;
+var ResizeLayer = null;
+
+function resize()
+{
+    myExtendHeight("layout");
+    myExtendHeight("rightframe");
+    myExtendHeight("contentarea");    
+    myExtendHeight("leftarea");
+    myExtendHeight("lefttree");
+     
+	 if(navigator.appName.indexOf("Microsoft") == -1)
+	{
+		var w=document.getElementById("front_tree")
+		 var w2=document.getElementById("back_td")
+		 w.width=w2.offsetWidth;
+	}
+}
+
+
+function init()
+{
+    resize();
+    help_page= 'Setup_summary.htm';   
+} 
+
+var resizeTimer = null;
+
+function onresizeHandler()
+{
+        if(resizeTimer!=null)
+        	clearTimeout(resizeTimer);
+        resizeTimer = setTimeout("resize()",300);
+}
+
+
+</script>
+<script>
+	var ResizeBox = null;
+var ResizeLayer = null;
+var Resizing = false;
+	var isIE = navigator.userAgent.indexOf("MSIE") !=  - 1;
+function ResizeLayerMouseDown(evt,obj)
+{
+  try
+  {
+    if(evt==null)evt=window.event;
+    var obj = (isIE)?evt.srcElement:evt.target;
+    if(obj.tagName.toLowerCase()=="img" )
+    {
+//    	alert("img");
+      obj = FindObjByTagname(obj, "td");
+      obj.style.backgroundColor="";
+    }
+    if(obj.id != "MMoveArea")
+      return true;
+    var MoveArea = GetMoveArea();
+//    alert("MoveArea is :"+MoveArea);
+    if(MoveArea != null && MoveArea.style.display=="none") 
+    {
+  //    EventBubbleStop(evt);
+    //  document.selection.empty();
+//    alert("false");
+      return false;
+    }
+//    alert("ResizeLayer is :"+ResizeLayer);
+    if(ResizeLayer == null)
+      ResizeLayer = document.getElementById("MResizeLayer");
+    ResizeLayer.style.display="block";
+    ResizeLayer.style.cursor = "col-resize";
+    // force to be last element in page.  zIndex not enough for Firefox
+    document.body.appendChild(ResizeLayer);
+//    alert("ResizeBox is:"+ResizeBox);
+    if(ResizeBox == null)
+      ResizeBox = document.getElementById("MResizeBox");
+ //  alert(CountObjHeight(obj));
+    ResizeBox.style.top = 96;
+    ResizeBox.style.left = CountObjWidth(obj);
+    ResizeBox.style.width = obj.offsetWidth;
+    ResizeBox.style.height = obj.offsetHeight;
+    Resizing = true;
+//    alert("AddMoveListeners");
+    AddMoveListeners();
+//   EventBubbleStop(evt);
+ //  document.selection.empty();
+
+    return false;
+  }catch(e){}
+  return false;
+}
+function MouseOverGripper(evt, obj)
+{
+  obj.style.cursor = "col-resize";
+//  obj.parentNode.style.backgroundColor="#0088c2";
+  obj.parentNode.style.backgroundColor="#1bb7ea";
+}
+function MouseOutGripper(evt, obj)
+{
+ // obj.style.cursor = "default";
+  obj.parentNode.style.backgroundColor="";
+}
+function FindObjByTagname(obj, tagName)
+{
+    try
+    {
+        tagName = tagName.toLowerCase();
+        while (obj.tagName.toLowerCase() != tagName && obj != null)
+            obj = obj.parentNode;
+    }
+    catch (e)
+    {
+        obj = null;
+    }
+    return obj;
+};
+function GetMoveArea()
+{
+  var MoveArea = null;
+  try
+  {
+    var AllArea = document.getElementById("layout");
+    var numofcell = AllArea.rows[0].cells.length;
+    for(var i=0; i<numofcell; i++)
+    {
+      if(AllArea.rows[0].cells[i].id=="MMoveArea")
+      {
+        MoveArea = AllArea.rows[0].cells[i-1];
+        break;
+      }
+    }
+  }
+  catch(e){}
+ // alert("moveArea is :"+MoveArea);
+  return MoveArea;
+}
+function MResizeAborted(evt, obj)
+{        
+  try
+  {
+    Resizing = false;
+    ResizeLayer.style.display="none";
+    DelMoveListeners();
+  //  EventBubbleStop(evt);
+   //  document.selection.empty();
+      return false;
+  }catch(e){}
+  return false;
+}
+
+function CountObjWidth(obj)
+{
+    var ObjLeft = 0;
+        while (obj != null)
+        {
+            ObjLeft += obj.offsetLeft * 1;
+            obj = obj.offsetParent;
+        }
+    return ObjLeft;
+};
+
+function AddMoveListeners()
+{
+  if (document.addEventListener)
+  {
+  	 document.addEventListener("mousemove", MLayerMouseMove, false); 
+ 	   document.addEventListener("mouseup", MLayerMouseUp, false); 
+//   document.addEventListener('mouseout', MLayerMouseOut, false); 
+// alert("addEventListener");
+}
+  else 
+  if (document.attachEvent)
+  {
+    document.attachEvent('onmousemove', MLayerMouseMove);
+    document.attachEvent('onmouseup', MLayerMouseUp);
+ // document.attachEvent('onmouseout', MLayerMouseOut);
+// alert("attachEvent");
+  }
+}
+function MLayerMouseMove(evt)
+{
+  try
+  {
+    if(evt==null)evt=window.event;
+// alert("MLayerMouseMove");
+    if(!Resizing ||
+       evt.clientX < 0 ||
+       evt.clientX > document.body.offsetWidth)
+    {      
+//    	 alert(evt.clientX+","+document.body.offsetWidth);
+     	 MResizeAborted(evt);
+    }
+    // needed for IE which sends events WAY too often
+    if(ResizeBox.style.left==evt.clientX+"px") return false;
+//    alert("move :"+evt.clientX);
+    ResizeBox.style.left = evt.clientX-4;
+//    alert("ResizeBox left is :"+ResizeBox.style.left);
+  //  EventBubbleStop(evt);
+   //  document.selection.empty();
+      return false;
+  }catch(e){}
+  return false;
+};
+
+
+function MLayerMouseUp(evt, obj)
+{              
+  try
+  {
+    if(!Resizing){
+//    	alert("22222");
+      return MResizeAborted(evt);
+     }
+   DelMoveListeners();
+
+    if(evt==null)evt=window.event;
+    ResizeLayer.style.display="none";
+    var moveArea = GetMoveArea();
+    if(moveArea != null)
+    {
+ //   	alert("not null");
+      var space = 0;
+      var wid ;
+      var spaceLeft = document.getElementById("leftspace");
+        if(spaceLeft != null)
+          space = spaceLeft.offsetWidth;
+      if((evt.clientX-space <0 )||(evt.clientX > (document.body.offsetWidth-space)))
+      	{
+      		MResizeAborted(evt);
+      		return;
+      	}
+      else
+      	wid =(evt.clientX-space-15-3)+ "px";
+    
+      moveArea.width = wid;
+      var divs = moveArea.getElementsByTagName("div");
+      var indexid = -1;
+      for(var j=0; j<divs.length; j++)
+      {
+        if(divs[j].id.indexOf("btngrp")==0)
+        {
+          indexid = j;
+          divs[j].style.width = wid;
+ //         alert("btngrp");
+        }
+        else{
+        if(divs[j].className.indexOf("MLeftLayer")==0)
+        divs[j].style.width = wid;
+ //       alert("else");
+        }
+      }
+
+	 if(navigator.appName.indexOf("Microsoft") == -1)
+	{
+		var w=document.getElementById("front_tree")
+		 var w2=document.getElementById("back_td")
+		 w.width=w2.offsetWidth;
+	}
+
+    }
+  //  EventBubbleStop(evt);
+   //  document.selection.empty();
+      return false;
+  }catch(e){}
+//  alert("333");
+  return false;
+}
+
+function DelMoveListeners()
+{
+  if (document.removeEventListener)
+  {
+    document.removeEventListener('mousemove', MLayerMouseMove, false); 
+    document.removeEventListener('mouseup', MLayerMouseUp, false); 
+//  document.removeEventListener('mouseout', MLayerMouseOut, false); 
+  }
+  else 
+  if (document.detachEvent)
+  {
+   document.detachEvent('onmousemove', MLayerMouseMove);
+    document.detachEvent('onmouseup', MLayerMouseUp);
+// document.detachEvent('onmouseout', MLayerMouseOut);
+  }    
+}
+
+
+function M_Over(index)
+{
+	var temp = document.getElementById("td_left_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_left.gif)'; 
+	
+	temp = document.getElementById("td_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_tile.gif)'; 
+	temp.style.color = "#000";
+	
+	temp = document.getElementById("td_right_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_right.gif)'; 
+
+}
+
+function M_Down(index)
+{
+	var temp = document.getElementById("td_left_"+index);
+	temp.style.backgroundImage='url(./images/toolbarButtonDownLeft.gif)'; 
+	
+	temp = document.getElementById("td_"+index);
+	temp.style.backgroundImage='url(./images/toolbarButtonDownTile.gif)'; 
+	temp.style.color = "#FFF";
+	
+	temp = document.getElementById("td_right_"+index);
+	temp.style.backgroundImage='url(./images/toolbarButtonDownRight.gif)'; 
+	
+
+}
+
+function M_Up(index)
+{
+	var temp = document.getElementById("td_left_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_left.gif)'; 
+	
+	temp = document.getElementById("td_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_tile.gif)'; 
+	temp.style.color = "#000";
+	
+	temp = document.getElementById("td_right_"+index);
+	temp.style.backgroundImage='url(./images/toolbar_button_right.gif)'; 
+
+}
+
+function M_Out(index)
+{
+		var temp = document.getElementById("td_left_"+index);
+	temp.style.backgroundImage='url( none)'; 
+	
+	temp = document.getElementById("td_"+index);
+	temp.style.backgroundImage='url( none)'; 
+	temp.style.color = "#000";
+	
+	temp = document.getElementById("td_right_"+index);
+	temp.style.backgroundImage='url( none)'; 
+	
+}
+
+function M_Click(index)
+{
+	
+	if(index == 1)
+	{
+		dofresh();
+	}
+	else if(index == 2)
+	{
+		showVideo();
+	}
+	else if(index == 3)
+	{
+		;
+	}
+	else if(index == 4)
+	{
+		showHelp();
+	}
+	
+	
+}
+
+function dofresh()
+{
+	window.frames["rightframe"].location.reload();
+//var temp = document.getElementById("rightframe");
+//	window.location.reload();
+}
+function showVideo()
+{
+//    RELEASE
+	top.location.href='./video_adm.htm'; 
+//    DEMO
+//		top.location.href='./video.htm'; 
+
+}
+
+var global_url = "";
+function showHelp() /*WVC2300,PVC2300*/
+{
+	var location = String(window.frames["rightframe"].location);
+	var linkto = "";
+
+	location = window.frames["rightframe"].document.forms[0].elements["this_file"].value;
+
+	//alert(location)
+	if(location.indexOf("advance.htm")!=-1)
+		linkto = "./h_advance.htm";
+	if(location.indexOf("basic.htm")!=-1)
+		linkto = "./h_basic.htm";
+	if(location.indexOf("ddns.htm")!=-1)
+		linkto = "./h_ddns.htm";
+	if(location.indexOf("event.htm")!=-1)
+		linkto = "./h_event.htm";
+	if(location.indexOf("firmware.htm")!=-1)
+		linkto = "./h_fw.htm";
+	if(location.indexOf("im.htm")!=-1)
+		linkto = "./h_im.htm";
+	if(location.indexOf("image.htm")!=-1)
+		linkto = "./h_image.htm";
+	if(location.indexOf("io.htm")!=-1)
+	{
+		if(location.indexOf("audio.htm")!=-1)
+			linkto = "./h_audio.htm";
+		else
+			linkto = "./h_io.htm";
+	}
+	if(location.indexOf("ip_filter.htm")!=-1)
+		linkto = "./h_ip_filter.htm";
+	if(location.indexOf("m2_detect.htm")!=-1)
+		linkto = "./h_md.htm";
+	if(location.indexOf("mail.htm")!=-1)
+		linkto = "./h_mail.htm";
+	if(location.indexOf("ftp.htm")!=-1)
+		linkto = "./h_ftp.htm";
+	if(location.indexOf("pass_wd.htm")!=-1)
+		linkto = "./h_pwd.htm";		
+	if(location.indexOf("r2s485.htm")!=-1)
+		linkto = "./h_rs485.htm";
+	if(location.indexOf("r2s485_pt.htm")!=-1)
+		linkto = "./h_rs485_pt.htm";
+	if(location.indexOf("samba.htm")!=-1)
+		linkto = "./h_samba.htm";		
+	if(location.indexOf("status_image.htm")!=-1)
+		linkto = "./h_status_image.htm";		
+	if(location.indexOf("status_network.htm")!=-1)
+		linkto = "./h_status_network.htm";		
+	if(location.indexOf("status_syslog.htm")!=-1)
+		linkto = "./h_status_syslog.htm";	
+	if(location.indexOf("status_system.htm")!=-1)
+		linkto = "./h_status_system.htm";	
+	if(location.indexOf("user.htm")!=-1)
+		linkto = "./h_user.htm";	
+	if(location.indexOf("vlog.htm")!=-1)
+		linkto = "./h_vlog.htm";	
+	//if(location.indexOf("Wsecurity.htm")!=-1)
+	//	linkto = "./adm/help/h_Wsecurity.htm";			
+		
+
+	window.open("./help/help_fs.htm","a","height=600, width=600,status=no,scrollbars=no,resizable=yes");
+
+	global_url = linkto;
+
+	
+	
+	
+	//window.frames["rightframe"].location.href=linkto ;
+	//alert(linkto);
+	
+	
+//	window.frames["rightframe"].location.href="./adm/help.htm"   ;
+//	var location = String(window.frames["rightframe"].location);
+//	alert(location);
+//	var index = location.lastIndexOf("/");
+//	alert(index);
+}
+function dw(message)
+{ document.write(message); }
+
+
+</script>
+<style>
+td {font-family:Arial;font-size:12px;text-decoration: none;}
+td.radius{ opacity:0; filter:alpha(opacity=0); background-color:white; height:1px; width:1px;}
+td.toolbar_bg{opacity:.67; filter:alpha(opacity=67); background-color:white; width:100%;}
+</style>
+
+<link rel="icon" href="./images/cisco.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="./images/cisco.ico" type="image/x-icon" />
+
+</head>
+<body onLoad="init()" onResize="onresizeHandler()" background="./images/pageBackground.jpg" >
+
+
+<!--
+<div style="z-index:-1;position:absolute;left:0;top:0;width:100%;height:100%;">
+	<div align="center"><img style="width:100%;height:1024px;" src="./images/pageBackground.jpg" /></div>
+</div>-->
+
+
+
+		<!--  header begin -->
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><img onload="fixpng(this)" onMouseOver="this.style.cursor='pointer'" onClick="window.open('http://www.cisco.com')"   src="./images/cisco_logo_header.gif" align="absmiddle" title="Company logo" alt="Company logo"/></td>
+			<td>
+				<table border="0" cellpadding="0px">
+					<tr>
+					<td style="height:15px"><div class="small"><nobr>Small Business</nobr></div></td>
+					</tr>
+					<tr>
+					<td style="height:23px"><div class="big"><nobr>PVC2300 Internet Camera</nobr></div></td>
+					</tr>	
+			   </table>
+		  </td>	
+			<td width="100%">&nbsp;</td>
+			<td class="rline" nowrap="yes">
+            <!--<nobr><span class=usrbold>Admin</span>-->
+            
+   
+            <a  href="./main.cgi?next_file=logout.htm&adm_todo=logout" class="rlink">Log Out</a>
+<!--            
+<!--  DEMO
+            <a  href="./logout.htm&adm_todo=logout" class="rlink">Log Out</a>
+
+-->            
+            
+<!--DEMO            
+            <a  href="javascript:openAbout('./adm/about.htm')" class="rlink">About</a> 
+--> 
+<!--RELEASE-->            
+            <a  href="javascript:openAbout('./main.cgi?next_file=about.htm')" class="rlink">About</a> 
+<!--    --> 
+
+
+            
+            <a  href="javascript:M_Click(4)" class="rlink">Help</a> 
+            
+
+
+		</tr>
+	</table>
+
+	<!--  header end-->
+	<!-- buf begin  -->
+
+
+		
+	<table height="4px" cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td></td></tr>
+	</table>
+	
+
+  <!--buf end  -->
+  
+  
+    <!-- tool bar begin -->
+<div id="tool_bar_bg" style="z-index:0">
+    <!--script>
+	if(navigator.appName.indexOf("Microsoft") != -1)
+	{
+		dw('<table cellpadding="0" cellspacing="0" style="height:31px;margin-left:14px;margin-right:16px;position:absolute;overflow:hidden; "><tr><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td width="100%" style="opacity:.67; filter:alpha(opacity=67); background-color:white;"></td><td width="1px" bgcolor="transparent" nowrap></td><td width="1px" bgcolor="transparent" nowrap></td></tr><tr><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td colspan="3" width="100%" style="opacity:.67; filter:alpha(opacity=67); background-color:white;"></td><td width="1px" bgcolor="transparent" nowrap></td></tr><tr><td colspan="5" width="100%" style="opacity:.67; filter:alpha(opacity=67); background-color:white;"></td></tr><tr><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td colspan="3" width="100%" style="opacity:.67; filter:alpha(opacity=67); background-color:white;"></td><td width="1px" bgcolor="transparent" nowrap></td></tr><tr><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td width="1px" bgcolor="transparent" height="1px" nowrap></td><td width="100%" style="opacity:.67; filter:alpha(opacity=67); background-color:white;"></td><td width="1px" bgcolor="transparent" nowrap></td><td width="1px" bgcolor="transparent" nowrap></td></tr></table>');
+	}
+	else
+	{
+		dw('<table style="height:31px;margin-left:14px;margin-right:16px;position:absolute;overflow:hidden; opacity:.67; filter:alpha(opacity=67); background-color:white;"><tr><td></td><td width="100%"></td></tr></table>');
+	}
+	</script-->
+   <!-- lable 1-->
+ <table id="toolbar_bg_table" cellpadding="0" cellspacing="0" style="height:31px;margin-left:14px;margin-right:16px;position:relative;overflow:hidden; ">
+ <tr>
+ <td class="radius" nowrap> </td>
+  <td class="radius" nowrap> </td>
+ <td class="toolbar_bg"></td>
+<td class="radius" nowrap> </td>
+<td class="radius" nowrap> </td>
+ </tr>
+ 
+ <!--lable 2-->
+ <tr>
+ <td class="radius" nowrap> </td>
+ <td colspan="3" class="toolbar_bg"></td>
+<td class="radius" nowrap> </td>
+ </tr>
+ <!-- label 3 main-->
+ <tr>
+
+  <td colspan="5" class="toolbar_bg"></td>
+ </tr>
+ 
+  <!--lable 4-->
+ <tr>
+ <td class="radius" nowrap> </td>
+ <td colspan="3" class="toolbar_bg"></td>
+<td class="radius" nowrap> </td>
+ </tr>
+  
+<!-- lable 5 -->
+ <tr>
+ <td class="radius" nowrap> </td>
+  <td class="radius" nowrap> </td>
+ <td class="toolbar_bg"></td>
+<td class="radius" nowrap> </td>
+<td class="radius" nowrap> </td>
+ </tr>
+ 
+ </table>   
+    
+    
+    
+    
+  <script>
+  if(navigator.appName.indexOf("Microsoft") == -1)
+  {
+	  var tbt=document.getElementById("toolbar_bg_table");
+	  tbt.style.position = "absolute";
+  }
+  </script>
+    </div>
+  
+  <div id="tool_bar" style="position:relative; z-index:1; top:expression(0-document.getElementById('tool_bar_bg').offsetHeight);">
+  <table style="height:31px;margin-left:15px;margin-right:16px;;overflow:hidden;" cellspacing="0" border="0" > 
+
+  <tr>
+	
+
+     <td id="td_left_1" onMouseOver="M_Over(1)" onMouseOut="M_Out(1)" onMouseDown="M_Down(1)" onMouseUp="M_Up(1)" onClick="M_Click(1)" style="cursor:pointer">
+      
+      </td>
+      
+      <td id="td_1" onMouseOver="M_Over(1)" onMouseOut="M_Out(1)" onMouseDown="M_Down(1)" onMouseUp="M_Up(1)" onClick="M_Click(1)" style="cursor:pointer;">
+    <nobr>&nbsp;&nbsp;&nbsp;<img src="./images/Refresh24T.gif" style="vertical-align:middle">&nbsp;&nbsp;Refresh&nbsp;&nbsp;
+     </td>
+     <td id="td_right_1" onMouseOver="M_Over(1)" onMouseOut="M_Out(1)" onMouseDown="M_Down(1)" onMouseUp="M_Up(1)" onClick="M_Click(1)" style="cursor:pointer">
+  </td>
+  
+  
+  
+     <td id="td_left_2" onMouseOver="M_Over(2)" onMouseOut="M_Out(2)" onMouseDown="M_Down(2)" onMouseUp="M_Up(2)" onClick="M_Click(2)" style="cursor:pointer">
+      
+      </td>
+      
+      <td id="td_2" onMouseOver="M_Over(2)" onMouseOut="M_Out(2)" onMouseDown="M_Down(2)" onMouseUp="M_Up(2)" onClick="M_Click(2)" style="cursor:pointer;">
+     <nobr>&nbsp;&nbsp;&nbsp;<img src="./images/Home24TWht.gif" style="vertical-align:middle">&nbsp;&nbsp;Home&nbsp;&nbsp;
+     </td>
+     <td id="td_right_2" onMouseOver="M_Over(2)" onMouseOut="M_Out(2)" onMouseDown="M_Down(2)" onMouseUp="M_Up(2)" onClick="M_Click(2)" style="cursor:pointer">
+  </td>
+  
+  
+  
+
+     <td id="td_left_3" onMouseOver="M_Over(3)" onMouseOut="M_Out(3)" onMouseDown="M_Down(3)" onMouseUp="M_Up(3)" onClick="M_Click(3)" style="cursor:pointer">
+      
+      </td>
+      
+      <td id="td_3" onMouseOver="M_Over(3)" onMouseOut="M_Out(3)" onMouseDown="M_Down(3)" onMouseUp="M_Up(3)" onClick="M_Click(3)" style="cursor:pointer;">
+     <nobr>&nbsp;&nbsp;&nbsp;<img src="./images/Configure24.gif" style="vertical-align:middle">&nbsp;&nbsp;Setup&nbsp;&nbsp;
+     </td>
+     <td id="td_right_3" onMouseOver="M_Over(3)" onMouseOut="M_Out(3)" onMouseDown="M_Down(3)" onMouseUp="M_Up(3)" onClick="M_Click(3)" style="cursor:pointer">
+  </td>
+
+
+  <td width="100%">
+<!--  
+  
+  
+     <td id="td_left_4" onMouseOver="M_Over(4)" onMouseOut="M_Out(4)" onMouseDown="M_Down(4)" onMouseUp="M_Up(4)" onClick="M_Click(4)" style="cursor:pointer">
+      
+      </td>
+      
+      <td id="td_4" onMouseOver="M_Over(4)" onMouseOut="M_Out(4)" onMouseDown="M_Down(4)" onMouseUp="M_Up(4)" onClick="M_Click(4)" style="cursor:pointer;">
+     <nobr>&nbsp;&nbsp;&nbsp;<img src="./images/Help24T.gif" style="vertical-align:middle">&nbsp;&nbsp;Help&nbsp;&nbsp;
+     </td>
+     <td id="td_right_4" onMouseOver="M_Over(4)" onMouseOut="M_Out(4)" onMouseDown="M_Down(4)" onMouseUp="M_Up(4)" onClick="M_Click(4)" style="cursor:pointer">
+  </td>
+<td width="1">
+
+</td>
+-->
+  </tr>
+  </table>
+  </div>
+<!-- tool bar end-->
+
+<script>
+if(navigator.appName.indexOf("Microsoft") == -1)
+{
+	dw('<table height="4">'+
+		'<tr>'+
+		'<td width="100%">'+
+		'</td>'+
+		'</tr>'+
+		'</table>')
+}
+</script>
+  
+  
+<div id="down_frame" style="position:relative; top:expression(0-document.getElementById('tool_bar_bg').offsetHeight+4);">
+
+<!--   left-->
+<table style="table-layout:fixed" cellPadding="0" cellSpacing="0" id="layout" border="0" width="100%" height="100%">
+<tr  >
+	
+<!--left margin begin-->	
+
+<td style="width:15px;">&nbsp;</td>	
+
+<!-- left margin end   -->
+
+<td id="back_td" width="200px" style="position:relative" valign="top">
+
+<script> 
+if(navigator.appName.indexOf("Microsoft") != -1)
+{
+	dw('<table height="100%" width="100%" style="margin-right:16px;position:absolute;overflow:hidden; opacity:.67; filter:alpha(opacity=67); background-color:white; z-index:0">');
+}
+else
+{
+	dw('<table height="100%" width="100%" style="position:relative;overflow:hidden; opacity:.67; filter:alpha(opacity=67); background-color:white; z-index:0">');
+}
+</script>
+
+
+    <tr>
+    <td>
+    
+    </td>
+    </tr>
+    </table>
+
+<script> 
+if(navigator.appName.indexOf("Microsoft") != -1)
+{
+	dw('<table cellPadding="0" cellSpacing="0" border="0"  height="100%"  style="z-index:1; position:relative";>');
+}
+else
+{
+	dw('<table id="front_tree" cellPadding="0" cellSpacing="0" border="0"  height="100%"  style="z-index:1; position:absolute; top:0px";>');
+}
+</script>
+
+<tr>
+<td class="lfbg" width="200px"  id="leftarea" valign="top"   >
+		<div id="lefttree" style="overflow:hidden;z-index:1;height:100%">
+			<div   style="overflow:hidden" id="btngrp" scrollers="false" mode="single" scrollingnav="false">
+<!--  setup button-->
+				<div class="btn_normal"; id="btn1" onClick="LftBtnClk('btn1','btngrp');" onMouseOver="btn_mouse_over('btn1');" onMouseout="btn_mouse_out('btn1');" title="Setup">
+					 <a ><img class="IconR" id="btn1Toggler" src="./images/drawerTriangleCollapsedT.gif" border="0" width="12px" height="12px" alt="Expand" title="Expand"></a><nobr class="TitleMenu">
+					 <a >Setup</a></nobr>
+ 	  </div>
+					
+					 <div  id="btn1submenu" class="closesub" >
+					 	<table class="subline" width="100%" cellpadding="0" cellspacing="0">
+					 	
+<!--    RELEASE-->
+<tr ><td id="td_1-1" class="green_td"><a id="1-1" class="flink" onClick="sbuclk('btn1submenu','1-1');" href="./adm/file.cgi?next_file=basic.htm" target="rightframe");">Basic Setup</a><br></td></tr>
+
+<tr ><td id="td_1-2" class="normal_td">
+<a id="1-2" class="flink" onClick="sbuclk('btn1submenu','1-2');" href="./adm/file.cgi?next_file=advance.htm" target="rightframe");">Advance Setup</a><br></td></tr>
+
+<tr ><td id="td_1-3" class="normal_td">
+<a id="1-3" class="flink" onClick="sbuclk('btn1submenu','1-3');" href="./adm/file.cgi?next_file=ip_filter.htm" target="rightframe");">IP Filter</a><br></td></tr>
+<!--    -->	
+
+<!--    DEMO
+<tr ><td id="td_1-1" class="green_td"><a id="1-1" class="flink" onClick="sbuclk('btn1submenu','1-1');" href="./adm/basic.htm" target="rightframe");">Basic Setup</a><br></td></tr>
+
+<tr ><td id="td_1-2" class="normal_td">
+<a id="1-2" class="flink" onClick="sbuclk('btn1submenu','1-2');" href="./adm/advance.htm" target="rightframe");">Advance Setup</a><br></td></tr>
+
+<tr ><td id="td_1-3" class="normal_td">
+<a id="1-3" class="flink" onClick="sbuclk('btn1submenu','1-3');" href="./adm/ip_filter.htm" target="rightframe");">IP Filter</a><br></td></tr>
+<!--    -->	
+
+
+
+</table>
+
+</div>
+
+<!-- Administration button-->					
+                    
+                    			<div class="btn_normal"; id="btn2" onClick="LftBtnClk('btn2','btngrp')" onMouseOver="btn_mouse_over('btn2');" onMouseout="btn_mouse_out('btn2');" title="Administration">
+					 <a ><img class="IconR" id="btn2Toggler" src="./images/drawerTriangleCollapsedT.gif" border="0" width="12px" height="12px" alt="Expand" title="Expand"></a><nobr class="TitleMenu">
+					 <a  >Administration</a></nobr></div>
+			<div id="btn2submenu" class="closesub" >
+	 	<table class="subline" width="100%" cellpadding="0" cellspacing="0">
+	 	
+<!--    RELEASE-->		 	
+<tr ><td id="td_2-1" class="green_td"><a id="2-1" class="flink" onClick="sbuclk('btn2submenu','2-1');" href="./adm/file.cgi?next_file=user.htm" target="rightframe">Users</a><br></td></tr>
+<tr ><td id="td_2-2" class="normal_td"><a id="2-2" class="flink" onClick="sbuclk('btn2submenu','2-2');" href="./adm/file.cgi?next_file=pass_wd.htm" target="rightframe">Maintenance</a><br>    </td></tr>  
+<tr ><td id="td_2-3" class="normal_td"><a id="2-3" class="flink" onClick="sbuclk('btn2submenu','2-3');" href="./adm/file.cgi?next_file=firmware.htm" target="rightframe">Firmware</a><br></td></tr>  
+<!--    -->	
+
+<!--    DEMO
+<tr ><td id="td_2-1" class="green_td"><a id="2-1" class="flink" onClick="sbuclk('btn2submenu','2-1');" href="./adm/user.htm" target="rightframe">Users</a><br></td></tr>
+<tr ><td id="td_2-2" class="normal_td"><a id="2-2" class="flink" onClick="sbuclk('btn2submenu','2-2');" href="./adm/pass_wd.htm" target="rightframe">Maintenance</a><br>    </td></tr>  
+<tr ><td id="td_2-3" class="normal_td"><a id="2-3" class="flink" onClick="sbuclk('btn2submenu','2-3');" href="./adm/firmware.htm" target="rightframe">Firmware</a><br></td></tr>  
+<!--	-->
+
+</table>
+			</div>
+            
+<!-- Audio/Video buttion -->
+
+			<div class="btn_normal"; id="btn3" onClick="LftBtnClk('btn3','btngrp')" onMouseOver="btn_mouse_over('btn3');" onMouseout="btn_mouse_out('btn3');" title="Audio/Video">
+					 <a><img class="IconR" id="btn3Toggler" src="./images/drawerTriangleCollapsedT.gif" border="0" width="12px" height="12px" alt="Expand" title="Expand"></a><nobr class="TitleMenu">
+					 <a>Audio/Video</a></nobr></div>
+			<div id="btn3submenu" class="closesub" >
+	 	<table class="subline" width="100%" cellpadding="0" cellspacing="0">
+
+<!--    RELEASE-->	
+<tr ><td id="td_3-1" class="green_td"><a id="3-1" class="flink" onClick="sbuclk('btn3submenu','3-1');" href="./adm/file.cgi?next_file=image.htm" target="rightframe">Video</a><br></td></tr>
+<tr ><td id="td_3-2" class="normal_td"><a id="3-2" class="flink" onClick="sbuclk('btn3submenu','3-2');" href="./adm/file.cgi?next_file=audio.htm" target="rightframe">Audio</a><br></td></tr>
+<!--    -->
+
+<!--    DEMO
+<tr ><td id="td_3-1" class="green_td"><a id="3-1" class="flink" onClick="sbuclk('btn3submenu','3-1');" href="./adm/image.htm" target="rightframe">Video</a><br></td></tr>
+<tr ><td id="td_3-2" class="normal_td"><a id="3-2" class="flink" onClick="sbuclk('btn3submenu','3-2');" href="./adm/audio.htm" target="rightframe">Audio</a><br></td></tr>
+<!--    -->	
+
+
+</table>
+			</div>
+            
+<!-- Applications button -->       
+			<div class="btn_normal"; id="btn4" onClick="LftBtnClk('btn4','btngrp')" onMouseOver="btn_mouse_over('btn4');" onMouseout="btn_mouse_out('btn4');" title="Applications">
+					 <a><img class="IconR" id="btn4Toggler" src="./images/drawerTriangleCollapsedT.gif" border="0" width="12px" height="12px" alt="Expand" title="Expand"></a><nobr class="TitleMenu">
+					 <a  >Applications</a></nobr></div>
+			<div id="btn4submenu" class="closesub" >
+			<table class="subline" width="100%" cellpadding="0" cellspacing="0">
+<!--    RELEASE	-->			
+<tr><td id="td_4-1" class="green_td"><a id="4-1" class="green" onClick="sbuclk('btn4submenu','4-1');" href="./adm/file.cgi?next_file=mail.htm" target="rightframe">Mail</a><br></td></tr>
+<tr><td id="td_4-2" class="normal_td"><a id="4-2" class="flink" onClick="sbuclk('btn4submenu','4-2');" href="./adm/file.cgi?next_file=ftp.htm" target="rightframe">FTP</a><br></td></tr>
+<tr><td id="td_4-3" class="normal_td"><a id="4-3" class="flink" onClick="sbuclk('btn4submenu','4-3');" href="./adm/file.cgi?next_file=im.htm" target="rightframe">Instant Messaging</a><br></td></tr>
+<tr><td id="td_4-4" class="normal_td"><a id="4-4" class="flink" onClick="sbuclk('btn4submenu','4-4');" href="./adm/file.cgi?next_file=m2_detect.htm" target="rightframe">Motion Detection</a><br></td></tr>
+<tr><td id="td_4-5" class="normal_td"><a id="4-5" class="flink" onClick="sbuclk('btn4submenu','4-5');" href="./adm/file.cgi?next_file=event.htm" target="rightframe">Event</a><br></td></tr>
+<tr><td id="td_4-6" class="normal_td"><a id="4-6" class="flink" onClick="sbuclk('btn4submenu','4-6');" href="./adm/file.cgi?next_file=ddns.htm" target="rightframe">DDNS</a><br></td></tr>
+<tr><td id="td_4-7" class="normal_td"><a id="4-7" class="flink" onClick="sbuclk('btn4submenu','4-7');" href="./adm/file.cgi?next_file=io.htm" target="rightframe">I/O Ports</a><br></td></tr>
+<tr><td id="td_4-8" class="normal_td"><a id="4-8" class="flink" onClick="sbuclk('btn4submenu','4-8');" href="./adm/file.cgi?next_file=r2s485.htm" target="rightframe">RS-485</a><br></td></tr>
+<tr><td id="td_4-9" class="normal_td"><a id="4-9" class="flink" onClick="sbuclk('btn4submenu','4-9');" href="./adm/file.cgi?next_file=samba.htm" target="rightframe">SMB/CIFS</a><br></td></tr>
+<!--    -->
+
+<!--    DEMO
+<tr><td id="td_4-1" class="green_td"><a id="4-1" class="green" onClick="sbuclk('btn4submenu','4-1');" href="./adm/mail.htm" target="rightframe">Mail</a><br></td></tr>
+<tr><td id="td_4-2" class="normal_td"><a id="4-2" class="flink" onClick="sbuclk('btn4submenu','4-2');" href="./adm/ftp.htm" target="rightframe">FTP</a><br></td></tr>
+<tr><td id="td_4-3" class="normal_td"><a id="4-3" class="flink" onClick="sbuclk('btn4submenu','4-3');" href="./adm/im.htm" target="rightframe">Instant Messaging</a><br></td></tr>
+<tr><td id="td_4-4" class="normal_td"><a id="4-4" class="flink" onClick="sbuclk('btn4submenu','4-4');" href="./adm/m_detect.htm" target="rightframe">Motion Detection</a><br></td></tr>
+<tr><td id="td_4-5" class="normal_td"><a id="4-5" class="flink" onClick="sbuclk('btn4submenu','4-5');" href="./adm/event.htm" target="rightframe">Event</a><br></td></tr>
+<tr><td id="td_4-6" class="normal_td"><a id="4-6" class="flink" onClick="sbuclk('btn4submenu','4-6');" href="./adm/ddns.htm" target="rightframe">DDNS</a><br></td></tr>
+<tr><td id="td_4-7" class="normal_td"><a id="4-7" class="flink" onClick="sbuclk('btn4submenu','4-7');" href="./adm/io.htm" target="rightframe">I/O Ports</a><br></td></tr>
+<tr><td id="td_4-8" class="normal_td"><a id="4-8" class="flink" onClick="sbuclk('btn4submenu','4-8');" href="./adm/rs485.htm" target="rightframe">RS-485</a><br></td></tr>
+<tr><td id="td_4-9" class="normal_td"><a id="4-9" class="flink" onClick="sbuclk('btn4submenu','4-9');" href="./adm/samba.htm" target="rightframe">SMB/CIFS</a><br></td></tr>
+<!--    -->
+
+			</table>
+			</div>
+            
+<!--Status button -->
+        
+			<div class="btn_normal"; id="btn5" onClick="LftBtnClk('btn5','btngrp')" onMouseOver="btn_mouse_over('btn5');" onMouseout="btn_mouse_out('btn5');" title="Status">
+					 <a><img class="IconR" id="btn5Toggler" src="./images/drawerTriangleCollapsedT.gif" border="0" width="12px" height="12px" alt="Expand" title="Expand"></a><nobr class="TitleMenu">
+					 <a  >Status</a></nobr></div>
+			<div id="btn5submenu" class="closesub" >
+					 	<table class="subline" width="100%" cellpadding="0" cellspacing="0">
+<!--    RELEASE-->	
+<tr><td id="td_5-1" class="green_td"><a id="5-1" class="flink" onClick="sbuclk('btn5submenu','5-1');" href="./adm/file.cgi?next_file=status_system.htm" target="rightframe">System</a><br></td></tr>
+<tr><td id="td_5-2" class="normal_td"><a id="5-2" class="flink" onClick="sbuclk('btn5submenu','5-2');" href="./adm/file.cgi?next_file=status_image.htm" target="rightframe">Image</a><br></td></tr>
+<tr><td id="td_5-3" class="normal_td"><a id="5-3" class="flink" onClick="sbuclk('btn5submenu','5-3');" href="./adm/file.cgi?next_file=status_network.htm" target="rightframe">Network</a><br></td></tr>
+<tr><td id="td_5-4" class="normal_td"><a id="5-4" class="flink" onClick="sbuclk('btn5submenu','5-4');" href="./adm/file.cgi?next_file=status_syslog.htm" target="rightframe">Syslog & Log</a></td></tr>
+<tr><td id="td_5-5" class="normal_td"><a id="5-5" class="flink" onClick="sbuclk('btn5submenu','5-5');" href="./adm/file.cgi?next_file=vlog.htm" target="rightframe">Video Log</a></td></tr>
+<!--    -->
+<!--    DEMO
+<tr><td id="td_5-1" class="green_td"><a id="5-1" class="flink" onClick="sbuclk('btn5submenu','5-1');" href="./adm/status_system.htm" target="rightframe">System</a><br></td></tr>
+<tr><td id="td_5-2" class="normal_td"><a id="5-2" class="flink" onClick="sbuclk('btn5submenu','5-2');" href="./adm/status_image.htm" target="rightframe">Image</a><br></td></tr>
+<tr><td id="td_5-3" class="normal_td"><a id="5-3" class="flink" onClick="sbuclk('btn5submenu','5-3');" href="./adm/status_network.htm" target="rightframe">Network</a><br></td></tr>
+<tr><td id="td_5-4" class="normal_td"><a id="5-4" class="flink" onClick="sbuclk('btn5submenu','5-4');" href="./adm/status_syslog.htm" target="rightframe">Syslog & Log</a></td></tr>
+<tr><td id="td_5-5" class="normal_td"><a id="5-5" class="flink" onClick="sbuclk('btn5submenu','5-5');" href="./adm/vlog.htm" target="rightframe">Video Log</a></td></tr>
+<!--    -->
+	</table>	
+			</div>            
+            
+                    
+                    </td>
+                    </tr>
+                    </table>
+                 
+                     
+                     
+
+           
+
+
+
+
+<!-- left button end-->
+<!-- left end-->
+<!--center bar  begin-->
+	<td  onmousedown="return ResizeLayerMouseDown(event,this)"  id="MMoveArea" width="5px">
+		<div id="MResizeLayer">
+		<div id="MResizeBox">
+		&nbsp;</div>
+		&nbsp;
+		</div>
+		<img id="MoveGripper" onMouseOver="MouseOverGripper(event,this);" onMouseOut="MouseOutGripper(event,this);" title="Resize Pane" alt="Resize Navigation Pane" src="./images/NavPaneGripperT_V.gif" style="margin-left:1px">
+	</td>
+	
+	
+<!--center bar end-->
+
+
+<td id="iframetd" width="*" valign="top">
+<div id="contentarea" style="width:100%;height:100%;overflow:auto;position:relative;">
+	<div class="iframebg">&nbsp</div>
+<!--    RELEASE-->				
+			<iframe style="overflow:hide;margin:0;padding:0" frameborder="0" name="rightframe" id="rightframe"  title="" allowtransparency="true" src="./adm/file.cgi?next_file=basic.htm" width="100%" height="100%"></iframe>
+<!--    -->				
+<!--    DEMO
+			<iframe style="overflow:hide;margin:0;padding:0" frameborder="0" name="rightframe" id="Iframe1"  title="" allowtransparency="true" src="./adm/basic.htm" width="100%" height="100%"></iframe>
+<!--    -->	
+
+</div>
+</td>
+
+
+<!--iframe end-->
+
+
+	<td style="width:16px;">&nbsp;</td>
+	
+	
+	<!--  margin right-->
+	
+
+</tr>	
+</table>
+
+	<div id="copyrightline" class="cpr" colspan="5">
+      &copy; 2009-2010 Cisco Systems, Inc. All rights reserved.
+    </div>
+
+   <!-- Alert Box-->
+  
+
+ <form name="ABox" method="POST" action="setup.cgi">
+ <iframe  dragable="dragable" id="AB_IFrame" frameborder="0" lass="AB_FRAME" style="z-index:9999">
+ </iframe>
+ <div dragable="dragable" id="CON" onMouseDown="startDrag(this.id)" class="AB_ALL" style="display:none;">
+ </div>
+ <input type="hidden" name="h_NoMsg" value="@h_NoMsg#">
+ </form>
+
+<iframe id="cover" style="position:absolute; z-index: 99; width:100%; height:100%; top:-90; left:0; opacity:0; filter:alpha(opacity=0); display:none;" frameborder="0">
+</iframe>
+
+
+
+<iframe name='hide' scrolling='no' marginwidth='0' marginheight='0'  noresize src='logout_hidden.htm'></iframe>
+
+</body>
+</html>

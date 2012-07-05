@@ -1,0 +1,5 @@
+writeb has some problem
+If use writeb to write 0x12 in register A.
+Then register A will be  0x12121212.
+
+Now use writel to replace writeb temorarily.

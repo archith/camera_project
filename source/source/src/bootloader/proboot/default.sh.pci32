@@ -1,0 +1,68 @@
+#
+# PL-1029
+#
+
+#
+# common script
+#
+
+# show booting information in LEDs
+@led 0x40
+
+# detect console
+#console
+
+#
+# Default PCI clock  32MHz , Fix baudrate 230400
+#
+#@write1 0x1b000406 0x00
+#@write1 0x1b000402 0xff
+#@write1 0x1b000404 0x8a
+#@write1 0x1b000405 0x00
+#@write1 0x1b000406 0x05
+
+
+#
+# Int PCI 96MHz ,Ext PCI 32MHz , CPU 192MHz, DRAM 96MHz, USB 48MHz, DEV 96MHz, NOR 48 MHz, MXTL 24MHz
+# Fix baudrate 230400
+#
+@write4 0x1b000000 0x3085d848
+@write4 0x1b000014 0x00000111
+@write4 0x1b00001C 0x000c0002
+@write2 0x1b000008 0xffff
+
+@led 0x41
+
+@write1 0x1b000406 0x00
+@write1 0x1b000402 0xff
+@write1 0x1b000404 0x8a
+@write1 0x1b000405 0x00
+@write1 0x1b000406 0x05
+
+@led 0x42
+
+# show prolific banner
+@echo
+@echo
+@echo Welcome to Proboot 1.0
+@echo Prolific Technology Inc. 2003-2006
+@echo
+
+#
+# nor flash access
+#
+@norinit 1 "8x8,64x63"
+@setbufferaddr 0x700000
+
+#
+# nor flash config for DEV 96MHz, NOR 48 MHz
+#
+@led 0x43
+@write4 0x19780004 0x63cc4810
+
+@sysinfo
+@led 0x44
+@echo
+
+script 0x19802000 8192 5
+

@@ -1,0 +1,2 @@
+#define VERSION "1.0.15"
+#define PROBOOT_COMPILE_TIME "2010/03/01"

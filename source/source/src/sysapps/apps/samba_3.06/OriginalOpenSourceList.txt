@@ -1,0 +1,2 @@
+Original Open Source files are listed as below:
+	samba-3.0.6.tar.gz

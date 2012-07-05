@@ -1,0 +1,19 @@
+Openssl 0.9.7 with PL1029 AES engine function enabled
+1. To build the openssl library, type "configure.pl1029;make;make install", the library will be 
+installed to $PROJ_ROOT/lib and the include files will be installed to $PROJ_ROOT/include 
+2. The ported interface is EVP_xxx high-level cryptographic functions, applications should use 
+this interface instead the low level ciphers.
+3. Applications link to this library must also link to prolific aes library, plaes, with -laes, 
+and the AES engine driver must be installed too(the device /dev/crypt must exist). IOW, the
+dependency of using this ported openssl are the plaes library and /dev/crypt device. Please see
+the corresponding README in the plaes package for the installation instructions.
+4. Notes on configure.pl1029: if application need to enable/disable some features of Openssl, 
+the programmer must modify the configure.pl1029. For example, if for some reasons application 
+want to use Openssl in thread environment, the "threads" option should add to the the config 
+parameters, instead of the default no-threads argument. One more thing to note on multithreading,
+the plaes library has to have PL_AES_THREAD enable too for multithreading to work, see the
+README in the plaes library. After the configure.pl1029 is modified, the building step 1 should
+run again.
+5. The sample program is in prolific/ directory
+
+loren-hsu@prolific.com.tw 2006-06-26

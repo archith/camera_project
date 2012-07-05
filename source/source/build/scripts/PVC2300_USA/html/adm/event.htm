@@ -1,0 +1,1320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function setData()
+{
+    var cf = document.forms[0];
+	var index = 0;
+	dataToVisible(cf);
+	df = document.forms[1];
+	dataToVisible(df);
+
+	setDivs();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[1];
+	if (!(checkData()))
+		return;
+	
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+function checkData()
+{
+	var cf = document.forms[1];
+    var msg = "";
+
+	
+if (((cf.en_trig.checked) && !(cf.trig_in1.checked) && !(cf.trig_in2.checked) && !(cf.trig_md.checked)) &&  
+((!(cf.email_1.checked)&&!(cf.ftp_1.checked)&&!(cf.smb_1.checked)&&!(cf.out1_1.checked)&&!(cf.out2_1.checked)&&!(cf.im_1.checked))) &&
+((!(cf.email_2.checked)&&!(cf.ftp_2.checked)&&!(cf.smb_2.checked)&&!(cf.out1_2.checked)&&!(cf.out2_2.checked)&&!(cf.im_2.checked))) &&
+((!(cf.email_md.checked)&&!(cf.ftp_md.checked)&&!(cf.smb_md.checked)&&!(cf.out1_md.checked)&&!(cf.out2_md.checked)&&!(cf.im_md.checked))))
+	{
+		rALERT("Event",msg_no_option);
+		return false;
+	}
+	
+	
+
+	
+	var invalid_path_str = '?*"<>';
+
+	if(cf.en_smb.checked)
+	{
+		if(cf.smb_server.value == "")
+		{ msg+= msg_smb_server_empty; }
+		else 
+		{ 
+			msg+= checkDomainName(cf.smb_server,msg_smb_server_illegal_str,Valid_domain);
+
+			//msg+= checkValid(cf.smb_rec_server, msg_smb_server_illegal_str, Valid_String, 64, false); 
+		}
+
+		if(cf.smb_path.value == "")
+		{ msg+= msg_smb_path_empty; }
+		else 
+		{ 
+		  msg+= checkInvalid(cf.smb_path, msg_smb_path_illegal_str, invalid_path_str);
+		}
+		//msg+= checkBlank(cf.smb_rec_name, msg_smb_name);
+		//msg+= checkBlank(cf.smb_rec_pwd, msg_smb_pwd);
+		//msg+= checkInt(cf.smb_rec_filesize, msg_smb_max, 10, 100, cf.smb_rec_filesize.value == "");
+	}
+
+	if (msg.length > 1)	
+	{
+		rALERT("Event",msg);
+		return false;
+	}
+	
+	
+	
+	
+
+	return true;
+}
+
+function checkSch()
+{
+    var cf = document.forms[0];
+    var msg = "";
+	var maxEvents = document.forms[0].vac_events.length
+
+  if (maxEvents >= 10)
+  {
+    rALERT("Event",msg_event_over);
+    return false;
+  }
+  else
+  {
+	var shr = cf.sch_hr.options[cf.sch_hr.selectedIndex].value;
+	var smin = cf.sch_min.options[cf.sch_min.selectedIndex].value;
+	var fhr = cf.hrend.options[cf.hrend.selectedIndex].value;
+	var fmin = cf.minend.options[cf.minend.selectedIndex].value;
+	if ((shr > fhr) || (shr==fhr && smin >= fmin))
+	{
+		msg+= msg_finish_after_start;
+	}
+
+    if (msg.length > 1)
+	{
+		rALERT("Event",msg);
+		return false;
+	}
+  }
+
+	cf.vac_events.selectedIndex = -1;
+	cf.h_sch_day.value = cf.sch_day.options[cf.sch_day.selectedIndex].value;
+	cf.h_sch_hr.value = cf.sch_hr.options[cf.sch_hr.selectedIndex].value;
+	cf.h_sch_min.value = cf.sch_min.options[cf.sch_min.selectedIndex].value;
+	cf.h_hrend.value = cf.hrend.options[cf.hrend.selectedIndex].value;
+	cf.h_minend.value = cf.minend.options[cf.minend.selectedIndex].value;
+   cf.h_action.value = "addperiod";
+   cf.todo.value = "addperiod";
+   return true;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+function enTrig()
+{
+    var cf = document.forms[1];
+	
+	if (!cf.en_trig.checked)
+	{ cf.a_wait.disabled = cf.trig_in1.disabled = cf.email_1.disabled = cf.ftp_1.disabled = cf.smb_1.disabled = cf.out1_1.disabled = cf.out2_1.disabled = cf.trig_in2.disabled = cf.email_2.disabled = cf.ftp_2.disabled = cf.smb_2.disabled = cf.out1_2.disabled = cf.out2_2.disabled = cf.trig_md.disabled = cf.email_md.disabled = cf.ftp_md.disabled = cf.smb_md.disabled = cf.out1_md.disabled = cf.out2_md.disabled = cf.im_1.disabled = cf.im_2.disabled = cf.im_md.disabled = 1; 
+	
+	document.getElementById("INTERVAL_TEXT").disabled = 1;
+	document.getElementById("BEFORE_DESCRIPTION_TEXT").disabled = 1;
+	document.getElementById("TRIGGERED_BY_TEXT").disabled = 1;
+	document.getElementById("ACTION_TEXT").disabled = 1;
+	document.getElementById("INPUT1_TEXT").disabled = 1;
+	document.getElementById("EMAIL1_TEXT").disabled = 1;
+	document.getElementById("FTP1_TEXT").disabled = 1;
+	document.getElementById("SAMBA1_TEXT").disabled = 1;
+	document.getElementById("OUTPUT1_1_TEXT").disabled = 1;
+	document.getElementById("OUTPUT2_1_TEXT").disabled = 1;
+	document.getElementById("IM_1_TEXT").disabled = 1;
+	document.getElementById("INPUT2_TEXT").disabled = 1;
+	document.getElementById("EMAIL2_TEXT").disabled = 1;
+	document.getElementById("FTP2_TEXT").disabled = 1;
+	document.getElementById("SAMBA2_TEXT").disabled = 1;
+	document.getElementById("OUTPUT1_2_TEXT").disabled = 1;
+	document.getElementById("OUTPUT2_2_TEXT").disabled = 1;
+	document.getElementById("IM_2_TEXT").disabled = 1;
+	document.getElementById("MOTION_DETECTION_TEXT").disabled = 1;
+	document.getElementById("EMAIL3_TEXT").disabled = 1;
+	document.getElementById("FTP3_TEXT").disabled = 1;
+	document.getElementById("SAMBA3_TEXT").disabled = 1;
+	document.getElementById("OUTPUT1_3_TEXT").disabled = 1;
+	document.getElementById("OUTPUT2_3_TEXT").disabled = 1;
+	document.getElementById("IM_3_TEXT").disabled = 1;
+	
+	}
+	else
+	{ cf.a_wait.disabled = cf.trig_in1.disabled = cf.email_1.disabled = cf.ftp_1.disabled = cf.smb_1.disabled = cf.out1_1.disabled = cf.out2_1.disabled = cf.trig_in2.disabled = cf.email_2.disabled = cf.ftp_2.disabled = cf.smb_2.disabled = cf.out1_2.disabled = cf.out2_2.disabled = cf.trig_md.disabled = cf.email_md.disabled = cf.ftp_md.disabled = cf.smb_md.disabled = cf.out1_md.disabled = cf.out2_md.disabled = cf.im_1.disabled = cf.im_2.disabled = cf.im_md.disabled = 0; 
+	
+	document.getElementById("INTERVAL_TEXT").disabled = 0;
+	document.getElementById("BEFORE_DESCRIPTION_TEXT").disabled = 0;
+	document.getElementById("TRIGGERED_BY_TEXT").disabled = 0;
+	document.getElementById("ACTION_TEXT").disabled = 0;
+	document.getElementById("INPUT1_TEXT").disabled = 0;
+	document.getElementById("EMAIL1_TEXT").disabled = 0;
+	document.getElementById("FTP1_TEXT").disabled = 0;
+	document.getElementById("SAMBA1_TEXT").disabled = 0;
+	document.getElementById("OUTPUT1_1_TEXT").disabled = 0;
+	document.getElementById("OUTPUT2_1_TEXT").disabled = 0;
+	document.getElementById("IM_1_TEXT").disabled = 0;
+	document.getElementById("INPUT2_TEXT").disabled = 0;
+	document.getElementById("EMAIL2_TEXT").disabled = 0;
+	document.getElementById("FTP2_TEXT").disabled = 0;
+	document.getElementById("SAMBA2_TEXT").disabled = 0;
+	document.getElementById("OUTPUT1_2_TEXT").disabled = 0;
+	document.getElementById("OUTPUT2_2_TEXT").disabled = 0;
+	document.getElementById("IM_2_TEXT").disabled = 0;
+	document.getElementById("MOTION_DETECTION_TEXT").disabled = 0;
+	document.getElementById("EMAIL3_TEXT").disabled = 0;
+	document.getElementById("FTP3_TEXT").disabled = 0;
+	document.getElementById("SAMBA3_TEXT").disabled = 0;
+	document.getElementById("OUTPUT1_3_TEXT").disabled = 0;
+	document.getElementById("OUTPUT2_3_TEXT").disabled = 0;
+	document.getElementById("IM_3_TEXT").disabled = 0;
+	
+	}
+		setUplist();
+		//setReclist();
+		enV();
+}
+
+function enV()
+{
+    var cf = document.forms[1];
+	
+	if ((!cf.en_trig.checked))   // && (!cf.en_rec.checked)
+	{  cf.ftp_over.disabled = cf.amvid.disabled = cf.evtype.disabled = cf.a_vlen.disabled = cf.b_vlen.disabled = cf.ja_vlen.disabled = cf.jb_vlen.disabled = cf.jpg_fr.disabled=cf.en_smb.disabled  = 1; }     //  = cf.aftp_vlen.disabled
+	else
+	{  cf.ftp_over.disabled = cf.amvid.disabled = cf.evtype.disabled = cf.a_vlen.disabled = cf.b_vlen.disabled = cf.ja_vlen.disabled = cf.jb_vlen.disabled = cf.jpg_fr.disabled=cf.en_smb.disabled = 0; }    //  = cf.aftp_vlen.disabled
+}
+
+var global_var = "";
+function delevent()
+{
+	global_var="delevent";
+	
+    var cf = document.forms[0];
+	if(chkSelected(cf.vac_events, msg_noevent_selected))
+	{
+		rConfirm("Event",msg_delevent);
+		/*
+		if(rConfirm("Event",msg_delevent))
+		{
+			//dataToHidden(cf);
+			cf.h_vac_events.value = cf.vac_events.options[cf.vac_events.selectedIndex].value;
+			cf.todo.value = "delperiods";
+			cf.h_action.value = "delperiods";
+			dataToHidden(cf);
+			cf.h_sch_day.value = "";
+			cf.h_sch_hr.value = "";
+			cf.h_sch_min.value = "";
+			cf.h_hrend.value = "";
+			cf.h_minend.value = "";
+			cf.submit();
+		}
+		*/
+	}
+}
+
+function setEndMin()
+{
+    var cf = document.forms[0];
+	if (cf.hrend.options[cf.hrend.selectedIndex].value == "24")
+	{
+		cf.minend.selectedIndex = getSelIndex(cf.minend, "00");
+		cf.minend.disabled = true;
+	}
+	else
+		cf.minend.disabled = false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+function Add(type)
+{
+  var maxEvents = document.event.vac_events.length
+  var cf = document.forms[0];
+  
+  if (maxEvents >= 10)
+  {
+    rALERT("Event",msg_event_over);
+    return 0
+  }
+  else
+  {
+    if (type == 't')
+	{
+		setDivs();
+    }
+  }
+}
+
+function setDivs()
+
+{
+ 	var cf = document.forms[0];
+
+		enTrig();
+		//enRec();
+		//setTimer();
+		cf.sch_day.selectedIndex = 0;
+		cf.sch_hr.selectedIndex = 0;
+		cf.sch_min.selectedIndex = 0;
+		cf.hrend.selectedIndex = 0;
+		cf.minend.selectedIndex = 0;
+}
+
+function setVideo()
+{
+    var cf = document.forms[1];
+	var index = cf.amvid.selectedIndex;
+	index = (index > -1 && index < cf.amvid.options.length) ? index : 0;
+	
+	show_hide("snapDIV", (index == 0));
+	show_hide("videoDIV", (index == 1));
+}
+
+function preVid()
+{
+  var cf = document.forms[1];
+
+  if (cf.h_v_mode.value == "jpeg")
+  {
+	cf.amvid.selectedIndex = 0;
+	cf.amvid.disabled = true;
+	setVideo();
+  }
+  else
+  { 
+	cf.amvid.disabled = false;
+	setVideo();
+  }
+}
+
+function setSamba()
+{
+	var cf = document.forms[1];
+	show_hide("sambaDIV",(cf.smb_1.checked == true) || (cf.smb_2.checked == true) || (cf.smb_md.checked == true));
+	show_hide("sambaDIV_title",(cf.smb_1.checked == true) || (cf.smb_2.checked == true) || (cf.smb_md.checked == true));
+}
+
+
+function setUplist()
+{
+ 	var cf = document.forms[1];
+
+	show_hide("attachDIV", (cf.email_1.checked == true) || (cf.email_2.checked == true) || (cf.email_md.checked == true) || (cf.ftp_1.checked == true) || (cf.ftp_2.checked == true) || (cf.ftp_md.checked == true) || (cf.smb_1.checked == true) || (cf.smb_2.checked == true) || (cf.smb_md.checked == true));
+	show_hide("attDIV", (cf.email_1.checked == true) || (cf.email_2.checked == true) || (cf.email_md.checked == true) || (cf.ftp_1.checked == true) || (cf.ftp_2.checked == true) || (cf.ftp_md.checked == true) || (cf.smb_1.checked == true) || (cf.smb_2.checked == true) || (cf.smb_md.checked == true));
+	
+	setSamba()
+	preVid();
+}
+
+function clearorcancel()
+{
+ 	var cf = document.forms[0];
+
+		cf.sch_day.selectedIndex = 0;
+		//setTimer();
+		cf.sch_day.selectedIndex = 0;
+		cf.sch_hr.selectedIndex = 0;
+		cf.sch_min.selectedIndex = 0;
+		cf.hrend.selectedIndex = 0;
+		cf.minend.selectedIndex = 0;
+		
+}
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('Event');">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Event</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px;">Event Schedule</div>
+        <table class="std" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><select name="vac_events" size="8" class="fixfont" style="width:300px">
+@vac_events#  <!-- Name / Triggers / Time Frame / Action -->
+                        </select>
+              <p>
+                <input type="button" class="newbutton" name="deleteevent" value="Delete" onClick="delevent()">
+          </td>
+      </tr>
+      
+      <tr>
+      	<td>
+        </td>
+      </tr>
+      
+    </table>
+       <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">New Schedule</div>
+    <table class="std" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td nowrap width="139px" class="lc">Effective Time Frame: </td>
+        <td nowrap="nowrap" valign="top"><select name="sch_day" size="1" onChange="">    <!-- setTimer(); -->
+ <!-- option value="on">Always ON</option -->
+ <option value="9">Every day</option>
+ <option value="8">Weekdays (Mon - Fri)</option>
+ <option value="7">Sunday</option>
+ <option value="1">Monday</option>
+ <option value="2">Tuesday</option>
+ <option value="3">Wednesday</option>
+ <option value="4">Thursday</option>
+ <option value="5">Friday</option>
+ <option value="6">Saturday</option>
+ </select>
+        </td>
+      </tr>
+      <tr>
+        <td nowrap class="lc">Start Time: </td>
+        <td nowrap="nowrap" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td nowrap><select name="sch_hr" size="1">
+              <option value="00">00</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+            </select>
+              :
+              <select name="sch_min" size="1">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
+              </select>
+              (hh:mm)</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td nowrap class="lc">End Time: </td>
+        <td nowrap="nowrap" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td nowrap><select name="hrend" size="1" onChange="setEndMin()">
+              <option value="00">00</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+            </select>
+              :
+              <select name="minend" size="1">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
+              </select>
+              (hh:mm)</td>
+          </tr>
+        </table>
+        </td>
+      </tr>
+      <tr>        
+        <td nowrap="nowrap" style="height:15">&nbsp;</td>
+      </tr>
+      <tr>
+
+        <td nowrap="nowrap" colspan="2">
+			  <input type="submit" name="add_new" value="Add" class="newbutton" onClick="return checkSch();">        
+              <input type="button" name="clearcancelButton" value="Clear" class="newbutton" onClick="clearorcancel()">
+	  
+
+<input type="Hidden" name="h_vac_events" value="" title="not set by CGI">
+<input type="Hidden" name="h_sch_day" value="" title="not set by CGI">
+<input type="Hidden" name="h_sch_hr" value="" title="not set by CGI">
+<input type="Hidden" name="h_sch_min" value="" title="not set by CGI">
+<input type="Hidden" name="h_hrend" value="" title="not set by CGI">
+<input type="Hidden" name="h_minend" value="" title="not set by CGI">
+<input type="Hidden" name="h_action" value="" title="not set by CGI">
+<input type="Hidden" name="todo" value="save">
+
+<input type="hidden" name="message" value="@message#">
+<input type="Hidden" name="this_file" value="event.htm">
+<input type="Hidden" name="next_file" value="event.htm">
+			  </form>
+		</td>
+      </tr>
+    </table>
+    
+         <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px; margin-left:1px">Trigger Event</div>  
+    <table class="std" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+      <form name="formname2" method="post" action="file.cgi">
+		
+        <td width="21px">
+		<input type="checkbox" name="en_trig" id="en_trig" value="disable" onClick="enTrig();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("en_trig").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td>Enable
+        </td>
+        </tr>
+         </table>
+      </tr>
+      
+        <tr>
+        
+        <table cellpadding="0" cellspacing="0">
+        <td width="139px">
+           <span id="INTERVAL_TEXT">Interval:</span>
+           </td>
+           <td>
+          <select  name="a_wait" size="1" class="time">
+<!-- option value="0s">0 sec</option>
+<option value="3s">3 secs</option>
+<option value="5s">5 secs</option>
+<option value="10s">10 secs</option>
+<option value="15s">15 secs</option>
+<option value="30s">30 secs</option>
+<option value="45s">45 secs</option -->
+<option value="0">0 min</option>
+<option value="60">1 min</option>
+<option value="120">2 mins</option>
+<option value="180">3 mins</option>
+<option value="240">4 mins</option>
+<option value="300">5 mins</option>
+<option value="600">10 mins</option>
+<option value="900">15 mins</option>
+</select><span id="BEFORE_DESCRIPTION_TEXT"> before detecting the next event. </span></td>
+      </tr>
+    </table>
+    <table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="138px" nowrap><span id="TRIGGERED_BY_TEXT">Triggered by: </span></td>
+            <td nowrap><div style="margin-left:1"><span id="ACTION_TEXT">Action(s): </span></div></td>
+          </tr>
+          <tr>
+            <td  nowrap class="lc">
+            <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+	    <td width="21px">
+        <input type="checkbox" name="trig_in1" id="trig_in1" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("trig_in1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+              <td><span id="INPUT1_TEXT">Input 1</span></td>
+              </tr>
+              </table>
+              
+              
+            </td>
+            <td nowrap="nowrap" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td nowrap>
+                  <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+                  <input type="checkbox" name="email_1" id="email_1" value="disable" onClick="setUplist();" style="margin-left:-3px">
+                  <script>				 
+				 if(!isIE())
+					document.getElementById("email_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                  <td><span id="EMAIL1_TEXT">E-mail</span></td>
+                  </tr>
+                  </table>
+                  
+                  
+                  </td>
+                  <td width="8px"></td>
+                  <td nowrap>
+                  <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="ftp_1" id="ftp_1" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ftp_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="FTP1_TEXT">FTP</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                    <td width="8px"></td>
+                    <td nowrap>
+                    <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="smb_1" id="smb_1" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("smb_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="SAMBA1_TEXT">SMB/CIFS</span></td>
+                    </tr>
+                    </table>                    
+                    
+                    </td>
+                    <td width="8px"></td>
+                  <td nowrap>
+                  <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="out1_1" id="out1_1" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out1_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT1_1_TEXT">Output 1</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                    <td width="8px"></td>
+                  <td nowrap>
+                  <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="out2_1" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out2_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT2_1_TEXT">Output 2</span></td>
+                    </tr>
+                    </table>
+                    
+                    
+                    </td>
+                    <td width="8px"></td>
+	              <td nowrap>
+                  <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="im_1" id="im_1" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("im_1").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td><span id="IM_1_TEXT"> Instant Messaging</span></td>
+        </tr>
+        </table>
+        
+        
+        </td>
+                </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td nowrap class="lc">
+            <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+        <input type="checkbox" name="trig_in2" id="trig_in2" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("trig_in2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+              <td><span id="INPUT2_TEXT">Input 2 </span></td>
+              </tr>
+              </table>
+              
+              
+              
+              </td>
+            <td nowrap="nowrap" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="email_2" id="email_2" value="disable" onClick="setUplist();" style="margin-left:-3px">
+<script>				 
+				 if(!isIE())
+					document.getElementById("email_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="EMAIL2_TEXT">E-mail</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="ftp_2" id="ftp_2" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ftp_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="FTP2_TEXT">FTP</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                    <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="smb_2" id="smb_2" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("smb_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="SAMBA2_TEXT">SMB/CIFS</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="out1_2" id="out1_2" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out1_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT1_2_TEXT">Output 1</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="out2_2" id="out2_2" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out2_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT2_2_TEXT">Output 2</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+	              <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="im_2" id="im_2" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("im_2").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td><span id="IM_2_TEXT"> Instant Messaging</span></td>
+        </tr>
+        </table>
+        
+        </td>
+                </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td  width="132px" nowrap class="lc">
+            <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+        <input type="checkbox" name="trig_md" id="trig_md" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("trig_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+              <td><span id="MOTION_DETECTION_TEXT">Motion Detection </span></td>
+              </tr>
+              </table>
+              
+              
+              </td>
+            <td nowrap="nowrap" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px"><input type="checkbox" name="email_md" id="email_md" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("email_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="EMAIL3_TEXT">E-mail</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="ftp_md" id="ftp_md" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ftp_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="FTP3_TEXT">FTP</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                    <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="smb_md" id="smb_md" value="disable" onClick="setUplist();" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("smb_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="SAMBA3_TEXT">SMB/CIFS</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="out1_md" id="out1_md" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out1_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT1_3_TEXT">Output 1</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+                  <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="out2_md" id="out2_md" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("out2_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+                    <td><span id="OUTPUT2_3_TEXT">Output 2</span></td>
+                    </tr>
+                    </table>
+                    
+                    </td>
+	              <td nowrap><table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px" style="padding-left:8px"><input type="checkbox" name="im_md" id="im_md" value="disable" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("im_md").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+         <td><span id="IM_3_TEXT">Instant Messaging</span></td>
+         </tr>
+         </table>
+         
+         
+         </td>
+                </tr>
+            </table></td>
+          </tr>
+      </table>
+      
+      <div id="attDIV"><br>     <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Event Attachment</div>  
+    <div id="attachDIV">
+    <table class="std" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td >
+          
+          <table cellpadding="0" cellspacing="0">
+        <tr>
+        <td width="21px">
+        <input type="checkbox" name="ftp_over" id="ftp_over" value="disable" onClick="" style="margin-left:-3px">
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ftp_over").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+        <td>Overwrite/Replace oldest video file when SDRAM is full </td>
+        </tr>
+        </table>
+        
+        
+        
+        </td>
+        </tr>
+      </table>
+      <table class="std" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td  width="139px" nowrap class="lc">Attachment Type:  </td>
+          <td nowrap><SELECT onChange="setVideo()" name="amvid" style="{width:100}" width=100>
+	<OPTION value="1">JPEG Image</OPTION>
+	<OPTION value="0">Video</OPTION>
+</SELECT>
+          </td>
+        </tr>
+      </table>
+      <div id="videoDIV">
+        <table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap style="vertical-align:middle">Video Format (MPEG-4):  </td>
+            <td nowrap ><select name="evtype" size="1" style="{width:100}" width=100>
+	<option value="1">ASX</option>
+	<!-- option value="4">AVI</option -->
+	<option value="2">MP4 (no audio)</option>
+	<option value="3">3GP (no audio)</option>
+	</select>
+                  &nbsp;</td>
+          </tr>
+        </table>
+        <table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap class="lc">Pre-Capture Length:  </td>
+            <td  nowrap class="rc"><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap>
+				   <select name="a_vlen" size="1" class="time" style="{width:40}" width=40>
+	 <option value="0">0</option>
+	 <option value="1">1</option>
+	 <option value="2">2</option>
+	 <option value="3">3</option>
+	 <option value="4">4</option>
+	 <option value="5">5</option>
+	 </select> Seconds &nbsp;</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        <table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap class="lc">Post-Capture Length:  </td>
+            <td nowrap class="rc"><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap>
+				   <select name="b_vlen" size="1" class="time" style="{width:40}" width=40>
+	 <option value="1">1</option>
+	 <option value="2">2</option>
+	 <option value="3">3</option>
+	 <option value="4">4</option>
+	 <option value="5">5</option>
+	 </select> Seconds &nbsp;</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+      </div>
+      <div id="snapDIV">
+        <!-- table class="std">
+          <tr>
+            <td nowrap class="lc">Snapshot: &nbsp; </td>
+            <td nowrap><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap><select name="aftp_vlen" size="1" style="{width:40}" width=40>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ </select>
+                  Photo(s) &nbsp; </td>
+              </tr>
+            </table></td>
+          </tr>
+        </table -->
+		<table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap class="lc">Frame Rate: &nbsp; </td>
+            <td nowrap class="rc"><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap>
+				   <select name="jpg_fr" size="1" style="{width:40}" width=40>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select> fps &nbsp;</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+		<table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap class="lc">Pre-Capture Length: &nbsp; </td>
+            <td nowrap class="rc"><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap>
+				   <select name="ja_vlen" size="1" class="time" style="{width:40}" width=40>
+	 <option value="0">0</option>
+	 <option value="1">1</option>
+	 <option value="2">2</option>
+	 <option value="3">3</option>
+	 <option value="4">4</option>
+	 <option value="5">5</option>
+	 </select> Seconds &nbsp;</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        <table class="std" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="139px" nowrap class="lc">Post-Capture Length: </td>
+            <td nowrap class="rc"><table border="0" cellspacing="0" cellpadding="0" width="90%">
+              <tr>
+                <td nowrap>
+				   <select name="jb_vlen" size="1" class="time" style="{width:40}" width=40>
+	 <option value="1">1</option>
+	 <option value="2">2</option>
+	 <option value="3">3</option>
+	 <option value="4">4</option>
+	 <option value="5">5</option>
+	 </select> Seconds &nbsp;</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        
+      </div>
+      </div>
+      
+       
+    <div id="sambaDIV_title">    <hr class="newHR">
+	<br style="height:10px">
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">SMB/CIFS</div>  </div>
+    <div id="sambaDIV"><table class="std" border="0" cellspacing="0" cellpadding="0">
+    <td colspan="2">
+    
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+	    <td width="21px">
+    <input type="checkbox" name="en_smb" id="en_smb" value="disable" onClick="" style="margin-left:-3px">
+    <script>				 
+				 if(!isIE())
+					document.getElementById("en_smb").style.marginLeft="0px";
+				 </script>
+    </td>
+    
+    	<td>Enable SMB/CIFS</td>
+        </tr>
+        </table>
+        </td>
+        
+           <tr>
+          <td width="139px">SMB/CIFS Server:</td>
+                    <td><input type="text" name="smb_server" size="25" maxlength="256" value="@smb_server#" style="width:160px"></td>
+           <tr>
+           <td width="139px">Upload Path:</td>
+                    <td><input type="text" name="smb_path" value="@smb_path#" size="24" maxlength="128" style="width:260px"></td>
+                </tr>
+                <tr>
+                    <td width="139px">Login Name:</td>
+                    <td><input type="text" name="smb_name" value="@smb_name#" size="24" maxlength="48" style="width:160px"></td>
+                </tr>
+          <tr>
+                    <td width="139px">Password:</td>
+                    <td><input type="password" name="smb_pwd" value="@smb_pwd#" size="24" maxlength="24" style="width:160px"></td>
+                </tr>
+        
+    
+    </table>
+    </div>
+
+</div>
+
+
+
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE       --> 
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=event.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='event.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="" value="" title="not set by CGI">
+<input type="Hidden" name="h_" value="@h_#">
+
+<input type="hidden" name="h_v_mode" value="@h_v_mode#">
+<input type="Hidden" name="h_en_trig" value="@h_en_trig#">
+<input type="Hidden" name="h_a_wait" value="@h_a_wait#">
+
+<input type="Hidden" name="h_trig_in1" value="@h_trig_in1#">
+<input type="Hidden" name="h_email_1" value="@h_email_1#">
+<input type="Hidden" name="h_ftp_1" value="@h_ftp_1#">
+<input type="Hidden" name="h_smb_1" value="@h_smb_1#">
+<input type="Hidden" name="h_out1_1" value="@h_out1_1#">
+<input type="Hidden" name="h_out2_1" value="@h_out2_1#">
+<input type="Hidden" name="h_im_1" value="@h_im_1#">
+<input type="Hidden" name="h_trig_in2" value="@h_trig_in2#">
+<input type="Hidden" name="h_email_2" value="@h_email_2#">
+<input type="Hidden" name="h_ftp_2" value="@h_ftp_2#">
+<input type="Hidden" name="h_smb_2" value="@h_smb_2#">
+<input type="Hidden" name="h_out1_2" value="@h_out1_2#">
+<input type="Hidden" name="h_out2_2" value="@h_out2_2#">
+<input type="Hidden" name="h_im_2" value="@h_im_2#">
+<input type="Hidden" name="h_trig_md" value="@h_trig_md#">
+<input type="Hidden" name="h_email_md" value="@h_email_md#">
+<input type="Hidden" name="h_ftp_md" value="@h_ftp_md#">
+<input type="Hidden" name="h_smb_md" value="@h_smb_md#">
+<input type="Hidden" name="h_en_smb" value="@h_en_smb#">
+<input type="Hidden" name="h_out1_md" value="@h_out1_md#">
+<input type="Hidden" name="h_out2_md" value="@h_out2_md#">
+<input type="Hidden" name="h_im_md" value="@h_im_md#">
+
+<!-- input type="Hidden" name="h_en_rec" value="@h_en_rec#" -->
+<!-- input type="Hidden" name="h_rec_wait" value="@h_rec_wait#" -->
+<input type="Hidden" name="h_ftp_over" value="@h_ftp_over#">
+<!--
+<input type="Hidden" name="h_rec_in1" value="@h_rec_in1#">
+<input type="Hidden" name="h_ftp_rec1" value="@h_ftp_rec1#">
+<input type="Hidden" name="h_rec_in2" value="@h_rec_in2#">
+<input type="Hidden" name="h_ftp_rec2" value="@h_ftp_rec2#">
+<input type="Hidden" name="h_rec_md" value="@h_rec_md#">
+<input type="Hidden" name="h_ftp_recmd" value="@h_ftp_recmd#">
+-->
+<input type="Hidden" name="h_amvid" value="@h_amvid#">
+<input type="Hidden" name="h_evtype" value="@h_evtype#">
+<input type="Hidden" name="h_a_vlen" value="@h_a_vlen#">
+<input type="Hidden" name="h_b_vlen" value="@h_b_vlen#">
+<!-- input type="Hidden" name="h_aftp_vlen" value="@h_aftp_vlen#" -->
+<input type="Hidden" name="h_ja_vlen" value="@h_ja_vlen#">
+<input type="Hidden" name="h_jb_vlen" value="@h_jb_vlen#">
+<input type="Hidden" name="h_jpg_fr" value="@h_jpg_fr#">
+
+<input type="Hidden" name="this_file" value="event.htm">
+<input type="Hidden" name="next_file" value="event.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+
+</form>  
+</div> <!--  newContentArea end -->     
+</body>
+
+</html>

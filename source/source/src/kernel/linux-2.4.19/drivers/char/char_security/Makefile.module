@@ -1,0 +1,21 @@
+# Comment/uncomment the following line to enable/disable debugging
+
+CC := arm-linux-gcc
+LD := arm-linux-ld
+
+LINUX_SRC=/usr/src/linux-dist/arm-linux-2.4.19
+
+WFLAGS := -Wall -Wstrict-prototypes -Wno-trigraphs -Wno-unused
+CFLAGS := -D__NO_VERSION__ -D__KERNEL__ -DMODULE -I$(LINUX_SRC)/include -O2 -fomit-frame-pointer -fno-strict-aliasing -fno-common -pipe -include $(LINUX_SRC)/include/linux/modversions.h $(WFLAGS)
+
+OBJS = security.o 
+
+all: es.o
+	@touch config.mk
+	
+es.o: $(OBJS)
+	$(LD) -r $(OBJS) -o es.o
+
+clean:
+	rm -f core *.o *.a *.s
+

@@ -1,0 +1,59 @@
+CFLAGS		= -Wall -O2 -D__KERNEL__ -DMODULE -D__MIPSEB__ \
+			-DBIG_ENDIAN -DRALINK_ATE\
+			-DAGGREGATION_SUPPORT  -DWMM_SUPPORT\
+			-fomit-frame-pointer -fno-common \
+			-mlong-calls -mno-abicalls -fno-pic -pipe \
+			-I$(KERNELDIR)/include -I$(KERNELDIR)/drivers/net -include $(KERNELDIR)/include/linux/modversions.h
+			# -DDBG -DSINGLE_ADHOC_LINKUP
+
+
+
+MOD_TARGET = rt61.o
+CONF_FILE  = rt61sta.dat
+
+OBJ = rt61.o
+
+#all: $(MOD_TARGET)
+all: $(OBJ)
+
+RT61_OBJ:   rtmp_main.o	\
+		  rtmp_task.o	\
+		  rtmp_data.o	\
+		  rtmp_init.o	\
+          mlme.o	\
+          connect.o	\
+          sync.o	\
+          assoc.o	\
+          auth.o	\
+          auth_rsp.o	\
+          sanity.o	\
+          rtmp_wep.o	\
+          rtmp_info.o	\
+          eeprom.o	\
+          rtmp_tkip.o	\
+          wpa.o		\
+          md5.o		
+
+         
+#ifdef MAT_SUPPORT
+ifeq ($(HAS_ETH_CONVERT),y)
+RT61_OBJ +=	cmm_mat.o	\
+	cmm_mat_iparp.o	\
+	cmm_mat_ipv6.o	\
+	cmm_mat_pppoe.o
+endif
+#endif // MAT_SUPPORT //
+          
+#$(MOD_TARGET): $(OBJS)
+#	$(LD) -r -o  $@ $(OBJS)
+
+rt61.o: $(RT61_OBJ)
+      
+	$(LD) -r $^ -o $@
+		
+clean:
+	rm -f *.o *.bak
+
+romfs:
+	cp -f $(MOD_TARGET) $(ROMFSDIR)/lib/modules/$(MOD_TARGET)
+	#cp -f $(CONF_FILE)  $(ROMFSDIR)/etc/$(CONF_FILE)

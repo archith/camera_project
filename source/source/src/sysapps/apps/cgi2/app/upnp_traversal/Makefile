@@ -1,0 +1,4 @@
+CFLAGS += -D_POSIX #-D_MT_CONNECTION_MANAGER -D_MT_RENDERINGCONTROL -D_MT_AVTRANSPORT
+LDFLAGS += -lpthread
+INSTALL_DIR	= $(PROJ_INSTALL)/usr/local/bin
+include $(PROJ_CGI2)/makefiles/makefile_exe

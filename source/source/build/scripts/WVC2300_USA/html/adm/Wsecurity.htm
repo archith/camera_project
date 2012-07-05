@@ -1,0 +1,702 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<script language="javascript" type="text/javascript" src="../P.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var minPhraseSize = 1;
+var lastkeypressed;
+var keyTooBig = false;
+var mustbeHEX = false;
+
+if (document.layers) document.captureEvents(Event.KEYPRESS);
+document.onkeypress = checkKey;
+
+function checkKey(evt) 
+{
+  evt = (evt) ? evt : ((window.event) ? window.event : null)
+  if (evt) 
+	    lastkeypressed = (evt.keyCode) ? evt.keyCode : (evt.which ) ? evt.which : null;
+//  window.status = lastkeypressed;
+
+  if ( (lastkeypressed != 13) && (lastkeypressed != 8) && ( keyTooBig ))
+  	return false;
+  else if (mustbeHEX)
+  {
+    mustbeHEX = false;
+  	if ( ((lastkeypressed > 47) && (lastkeypressed < 58 )) 
+	  || ((lastkeypressed > 96) && (lastkeypressed < 103))
+	  || ((lastkeypressed > 64) && (lastkeypressed < 71 ))
+	  || (lastkeypressed ==  8) 
+	  || (lastkeypressed == 13) )
+		 ;   // OK
+  	else return false;
+  }
+}
+
+function reveal()
+{
+	switch(document.getElementById("wire_sec").value)
+	{
+		case '0':
+			document.getElementById("wepdiv").style.display="none";
+			document.getElementById("wpadiv").style.display="none";
+			//document.getElementById("wpa2div").style.display="none";
+			document.getElementById("wpaEdiv").style.display="none";
+			break;
+		case '1':
+			document.getElementById("wepdiv").style.display="block";
+			document.getElementById("wpadiv").style.display="none";
+			//document.getElementById("wpa2div").style.display="none";
+			document.getElementById("wpaEdiv").style.display="none";
+			break;
+		case '2':
+			document.getElementById("wepdiv").style.display="none";
+			document.getElementById("wpadiv").style.display="block";
+			//document.getElementById("wpa2div").style.display="none";
+			document.getElementById("wpaEdiv").style.display="none";
+			break;
+		case 'wpa2':
+			document.getElementById("wepdiv").style.display="none";
+			document.getElementById("wpadiv").style.display="none";
+			//document.getElementById("wpa2div").style.display="block";
+			document.getElementById("wpaEdiv").style.display="none";
+			break;
+		case '3':
+			document.getElementById("wepdiv").style.display="none";
+			document.getElementById("wpadiv").style.display="none";
+			//document.getElementById("wpa2div").style.display="none";
+			document.getElementById("wpaEdiv").style.display="block";
+			e_reveal();
+			break;
+	}
+}
+
+function setKeySize()
+{
+  var cf = document.forms[0];
+  var keysize = (cf.w_wep.selectedIndex == 1) ? 26 : 10; // hex
+//  cf.WEPKey1.size = cf.WEPKey2.size = cf.WEPKey3.size = cf.WEPKey4.size = keysize;
+}
+
+function clearKeys()
+{	
+  var cf = document.forms[0];
+  cf.WEPKey1.value = cf.WEPKey2.value = cf.WEPKey3.value = cf.WEPKey4.value = "";
+}
+
+function keyCheck(fobj)
+{	
+  var cf = document.forms[0];
+  var keysize = (cf.w_wep.selectedIndex == 1) ? 26 : 10; // hex chars
+  if (fobj.value.length >= keysize )
+  	keyTooBig = true;
+  else
+    keyTooBig = false;
+  mustbeHEX = true;
+}
+
+
+function checkData()
+{	
+	  var cf = document.forms[0];
+	  var secMethod = cf.wire_sec.options[cf.wire_sec.selectedIndex].value;
+	  var eMethod = cf.e_port.options[cf.e_port.selectedIndex].value;
+	   var msg = "";
+	  if(secMethod == "1")
+		{
+		  var keysize = (cf.w_wep.selectedIndex == 1) ? 26 : 10; // hex
+		  var defaultKey ="********";
+	
+		  if(
+			 ((cf.WEPKey1.value.length > 0 ) && (cf.WEPKey1.value.length != keysize) && (cf.WEPKey1.value != defaultKey))
+		  || ((cf.WEPKey2.value.length > 0 ) && (cf.WEPKey2.value.length != keysize) && (cf.WEPKey2.value != defaultKey) )
+		  || ((cf.WEPKey3.value.length > 0 ) && (cf.WEPKey3.value.length != keysize) && (cf.WEPKey3.value != defaultKey))
+		  || ((cf.WEPKey4.value.length > 0 ) && (cf.WEPKey4.value.length != keysize)&& (cf.WEPKey4.value != defaultKey)) )
+			  {
+				rALERT("Wireless Security",addstr(msg_keysize, "" + keysize));
+				return false;
+			  }
+		  if( ((!hexStr(cf.WEPKey1.value)) && (cf.WEPKey1.value != defaultKey))
+			||((!hexStr(cf.WEPKey2.value)) && (cf.WEPKey2.value != defaultKey))
+			||((!hexStr(cf.WEPKey3.value)) && (cf.WEPKey3.value != defaultKey))
+			||((!hexStr(cf.WEPKey4.value)) && (cf.WEPKey4.value != defaultKey)) )
+			  {
+				rALERT("Wireless Security",msg_hexkey);
+				return false;
+			  }
+		}
+	
+	else if (secMethod == "2")
+	{
+		if(cf.psk.value.length < 8 || cf.psk.value.length > 63 )
+			msg+= msg_psk_size;
+	}
+	/*
+	else if (secMethod == "wpa2psk")
+	{
+		if(cf.wpa2_psk.value.length < 8 || cf.wpa2_psk.value.length > 63 )
+			msg+= msg_psk_size;
+		msg = checkBlank(cf.wpa2e_name, msg_blank_wpa2e_name);
+		msg+= checkBlank(cf.wpa2e_pw, msg_blank_wpa2e_pw);
+	}
+	*/
+	else if (secMethod == "3")
+	{
+		if(eMethod == "0")
+		{
+			msg+= checkBlank(cf.tls_id, msg_blank_urid);
+			//msg+= checkBlank(cf.tls_pw, msg_blank_urpw);
+		}
+		else //if(eMethod == "1")
+		{
+			msg+= checkBlank(cf.ttls_id, msg_blank_urid);
+			msg+= checkBlank(cf.ttls_pw, msg_blank_urpw);
+		}
+		/*
+		else
+		{
+			msg+= checkBlank(cf.peap_id, msg_blank_urid);
+			msg+= checkBlank(cf.peap_pw, msg_blank_urpw);
+		}
+		*/
+	}
+
+	
+	if(msg.length > 1)
+	{
+		rALERT("Wireless Security",msg);
+		return false;
+	}
+	
+	return true;
+}
+
+
+function hexStr(str)
+{
+   for(i=0; i < str.length; i++)
+  {
+ 	 if (isNaN(parseInt(str.charAt(i), 16)))
+	 	return false;
+  }
+  return true;
+}
+
+
+function clearKey(F)
+{
+	F.WEPKey1.value='';	
+	F.WEPKey2.value='';	
+	F.WEPKey3.value='';	
+	F.WEPKey4.value='';
+	F.wepPassphrase.value='';
+}
+
+function setData()
+{
+    var cf = document.forms[0];
+	var index;
+	
+	dataToVisible(cf);
+	
+	cf.psk.value = makeStr(cf.h_psk.value.length, '*');
+	//cf.wpa2_psk.value = makeStr(cf.h_wpa2_psk.value.length, '*');
+	
+	cf.w_wep.selectedIndex = (cf.h_w_wep.value == "1") ? 0 : 1 ;
+	index = parseInt(cf.h_defkey.value);
+	if (isNaN(index)) 
+		index = 1;
+	cf.defkey[index - 1].checked = true;   // values from 1, index from 0
+	index = getSelIndex(cf.w_auth,cf.h_w_auth.value,true);
+		cf.w_auth.selectedIndex = index;
+
+	var w_mode = @h_w_mode#;
+	if ( w_mode != 1) //ad-hoc rex modify
+	{
+		//if((cf.wire_sec.value == "2")||(cf.wire_sec.value == "3"))
+	    	//cf.wire_sec.value = "0" ;
+	    	cf.wire_sec.options.length = 2;
+	}
+	
+	/*index = getSelIndex(cf.w2p_algo,cf.h_w2p_algo.value,true);
+		cf.w2p_algo.selectedIndex = index;
+	index = getSelIndex(cf.w2e_algo,cf.h_w2e_algo.value,true);
+		cf.w2e_algo.selectedIndex = index;*/
+	setKeySize();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!checkData())
+		return;
+	cf.h_wire_sec.value = "1";
+	//window.opener.document.forms[0].h_wire_sec.value = "1"; // weeder add it to debug of can't save "wep" or "wpe-psk"
+	cf.h_w_wep.value = (cf.w_wep.selectedIndex==0) ? "1" : "2";
+	cf.h_defkey.value = cf.defkey.options[cf.defkey.selectedIndex].value;
+	cf.h_w_auth.value = cf.w_auth.selectedIndex == 0 ? "0" : "1";
+	
+	//cf.h_w2p_algo.value = cf.w2p_algo.selectedIndex == 0 ? "0" : "1";
+	//cf.h_w2e_algo.value = cf.w2e_algo.selectedIndex == 0 ? "0" : "1";
+	
+	cf.Passphrase.value = cf.wepPassphrase.value = "";
+	updateOpener();
+    cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+function generateKey()
+{
+    var cf = document.forms[0];
+	if(cf.wepPassphrase.value.length < minPhraseSize)
+	{
+		rALERT("Wireless Security",msg_smallpassphase);
+		return;
+	}
+	//cf.h_w_wep.value = cf.w_wep.options[cf.w_wep.selectedIndex].value;
+	cf.h_defkey.value = cf.defkey.options[cf.defkey.selectedIndex].value;
+	cf.todo.value = "generate";
+
+	cf.Passphrase.value = cf.wepPassphrase.value;
+
+	dataToHidden(cf); cf.submit();
+}
+
+function makeStr(strSize, fillChar)
+{
+	var temp = "";
+	for (i=0; i < strSize ; i ++)
+		temp = temp + fillChar;
+	return temp;
+}
+ 
+function displayKey(onOff)
+{
+    var cf = document.forms[0];
+	if(onOff == "on")
+	{
+		cf.psk.value = cf.h_psk.value;
+		cf.psk.select();
+	}
+	else if (onOff == "off")
+	{
+		cf.h_psk.value = cf.psk.value;
+		cf.psk.value = makeStr(cf.h_psk.value.length, '*');
+	}
+}
+ 
+/*function displayKey2(onOff)
+{
+    var cf = document.forms[0];
+	if(onOff == "on")
+	{
+		cf.wpa2_psk.value = cf.h_wpa2_psk.value;
+		cf.wpa2_psk.select();
+	}
+	else if (onOff == "off")
+	{
+		cf.h_wpa2_psk.value = cf.wpa2_psk.value;
+		cf.wpa2_psk.value = makeStr(cf.h_wpa2_psk.value.length, '*');
+	}
+}*/
+
+function updateOpener()
+{
+ 	var cf = document.forms[0];
+	if(opener)
+		setHTML(opener, "secDIV", cf.wire_sec.options[cf.wire_sec.value].text);
+}
+// Enterprise
+function e_reveal()
+{
+	switch(document.getElementById("e_port").value)
+	{
+		case '0':
+			document.getElementById("tlsDIV").style.display="block";
+			document.getElementById("ttlsDIV").style.display="none";
+			//document.getElementById("peapDIV").style.display="none";
+			break;
+		case '1':
+			document.getElementById("tlsDIV").style.display="none";
+			document.getElementById("ttlsDIV").style.display="block";
+			//document.getElementById("peapDIV").style.display="none";
+			break;
+		/*
+		case '2':
+			document.getElementById("tlsDIV").style.display="none";
+			document.getElementById("ttlsDIV").style.display="none";
+			document.getElementById("peapDIV").style.display="block";
+			break;
+		*/
+	}
+}
+
+function ck_tls_rtca()
+{
+	var cf = document.forms[0];
+	location.href='file.cgi?next_file=Wsec_tlsr.htm';
+	/*if(cf.tls_rtca.value.length == 0)
+	{ rALERT("",nofile_msg); return; }
+	if (!confirm(ca_msg))
+	return; dataToHidden(cf); cf.submit();*/
+}
+
+function ck_tls_urca()
+{
+	var cf = document.forms[0];
+	location.href='file.cgi?next_file=Wsec_tlsu.htm';
+	/*if(cf.tls_urca.value.length == 0)
+	{ rALERT("",nofile_msg); return; }
+	if (!confirm(ca_msg))
+	return; dataToHidden(cf); cf.submit();*/
+}
+
+function ck_ttls_rtca()
+{
+	var cf = document.forms[0];
+	location.href='file.cgi?next_file=Wsec_ttlsr.htm';
+	/*if(cf.ttls_rtca.value.length == 0)
+	{ rALERT("",nofile_msg); return; }
+	if (!confirm(ca_msg))
+	return; dataToHidden(cf); cf.submit();*/
+}
+
+function warn_auth()
+{
+	var cf = document.forms[0];
+	var dflag = cf.en_untrust.checked;
+	if (dflag)
+	{ rALERT("Wireless Security",msg_warn_auth); return;} 
+}
+
+function sub()
+{ var cf = document.forms[0]; cf.submit(); }
+
+// End Script -->
+</script>
+<style type="text/css">
+<!--
+.ca_st { color: #425587; font-weight: bold; }
+-->
+</style>
+
+<link rel="icon" href="../images/cisco.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="../images/cisco.ico" type="image/x-icon" />
+
+</head>
+<body onLoad="window.focus();setData();showMsg('Basic Setup');reveal();" style=" background-color:#D9E3E9">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+
+
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+
+ 	<br>
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPanePopup">
+    <div class="newGroupBoxTitle" style="height:25px;">Wireless Security</div>
+<table cellspacing="0" cellpadding="0" border="0">
+			    <tr>
+				<td valign="top">
+					
+						<table cellspacing="0" cellpadding="0" id="wpa" border="0">
+							<tr>
+							<td nowrap  width="97px">Security Mode:</td>
+							<td>
+							<select name="wire_sec" id="wire_sec" onChange="reveal();">
+							 <option value="0" selected>Disabled</option>
+							 <option value="1">WEP</option>
+							 <option value="2">WPA / WPA2 Personal</option>
+							 <option value="3">WPA / WPA2 Enterprise</option>
+							</select>
+							</td>
+							</tr>
+						  </table>
+                  
+				</td>
+			    </tr>
+
+			    <tr>
+				<td valign="top" style="height:5px">
+					<div>
+						<div id="wepdiv" style="display:none;">
+<table cellspacing="0" cellpadding="0" id="wep">
+<tr>
+  <td  nowrap  width="97px">TX Key:</td>
+  <td nowrap><SELECT size="1" name="defkey"> 
+    <option value="1"d>1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+   </SELECT></td>
+ </tr>
+
+<tr>
+<td nowrap >WEP Encryption:</td>
+<td><select name="w_wep" size="1" onChange="setKeySize();clearKeys()">
+  <option value="1">64 Bit Keys (10 Hex chars)</option>
+  <option value="2">128 Bit Keys (26 Hex chars)</option>
+  </select></td>
+</tr>
+<tr>
+<td nowrap>Passphrase:</td>
+<td><input type="text" name="wepPassphrase" size="16" maxlength="32" value="@Passphrase#" onFocus="keyTooBig=false;">
+   &nbsp; 
+   <input type="button" class="newbutton" value="Generate" onClick="generateKey()"></td>
+</tr>
+<tr>
+<td nowrap>Key 1:</td>
+<td><input type="text" class="num" name="WEPKey1" size="26" maxlength="26" value="@WEPKey1#" title="Keys must be in Hex (0~9 and A~F)" onKeyDown="keyCheck(this)"></td>
+</tr>
+<tr>
+<td nowrap>Key 2:</td>
+<td><input type="text" class="num" name="WEPKey2" size="26" maxlength="26" value="@WEPKey2#" title="Keys must be in Hex (0~9 and A~F)" onKeyDown="keyCheck(this)"></td>
+</tr>
+<tr>
+<td nowrap>Key 3:</td>
+<td><input type="text" class="num" name="WEPKey3" size="26" maxlength="26" value="@WEPKey3#" title="Keys must be in Hex (0~9 and A~F)" onKeyDown="keyCheck(this)"></td>
+</tr>
+<tr>
+<td nowrap>Key 4:</td>
+<td><input type="text" class="num" name="WEPKey4" size="26" maxlength="26" value="@WEPKey4#" title="Keys must be in Hex (0~9 and A~F)" onKeyDown="keyCheck(this)"></td>
+</tr>
+<tr>
+<td nowrap>Authentication:</td>
+<td><select name="w_auth" size=1>
+	<option value="1">Open System</option>
+	<option value="2">Shared Key</option>
+	</select></td>
+</tr>
+<tr><td style="height:5px"></td></tr>
+</table></div>
+
+
+<div ID="wpadiv" style="display:none;">     <!-- style="display:none" -->
+<table cellspacing="0" cellpadding="0" id="wpa" border="0">
+<tr>
+<td nowrap width="97px">Encryption:</td>
+<td><b>TKIP / AES</b>
+	<!-- select name="w2p_algo" size=1>
+	<option value="tkip">TKIP</option>
+	<option value="aes">AES</option>
+	</select -->
+</td>
+</tr>
+<tr>
+<td nowrap valign="top">Shared Key:</td>
+<td nowrap valign="top"><input type="text" name="psk" size="24" maxlength="63" value="" onFocus="displayKey('on')" onBlur="displayKey('off')">
+ <BR>(8 to 63 characters)
+</td>
+</tr>
+<tr><td style="height:9px"></td></tr>
+</table>
+</div>
+
+<div id="wpaEdiv" style="display:none;">
+<table cellspacing="0" cellpadding="0" id="wep" border="0">
+<tr>
+  <td  width="97px" nowrap>Protocol Type:</td>
+  <td nowrap><select name="e_port" id="e_port" onChange="e_reveal();" style="{width:100}">
+							 <option value="0">EAP-TLS</option>
+							 <option value="1">EAP-TTLS</option>
+							 <!-- option value="2">EAP-PEAP</option -->
+						 </select></td>
+ </tr>
+<!-- tr>
+  <td width="100" nowrap>Untrust CA:</td>
+  <td nowrap><input type="checkbox" name="en_untrust" value="disable" onClick="warn_auth();"> Allow download the certification (CA) from untrust publishers</td>
+ </tr -->
+ <tr><td style="height:9px"></td></tr>
+</table>
+
+<div id="tlsDIV" style="display:none;">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+  <td  width="97px" nowrap height="30">User ID:</td>
+  <td nowrap><input type="text" name="tls_id" size="16" maxlength="32" style="{width:140}" value="@tls_id#"></td>
+ </tr>
+
+<tr>
+<td nowrap height="30">Root CA:</td>
+<td nowrap valign="top"><!-- input type="file" name="tls_rtca" maxlength="255"> &nbsp;>
+<input type="button" class="newbutton" name="up_tls_rtca" value="Upload" onClick="return ck_tls_rtca()"-->
+<IFRAME NAME="tlsr" frameborder="0" scrolling="no" width="350" height="24" SRC="Wsec_tlsr.htm">Need IFRAME Support!</iframe>
+</td>
+</tr>
+
+<!-- tr>
+  <td nowrap></td>
+  <td valign="top" nowrap class="ca_st">@tlsr_ca#</td>
+</tr -->
+
+<tr>
+<td nowrap height="30">User CA:</td>
+<td nowrap valign="top"><!-- input type="file" name="tls_urca" maxlength="255"> &nbsp;>
+<input type="button" class="newbutton" name="up_tls_urca" value="Upload" onClick="return ck_tls_urca()"-->
+<IFRAME NAME="tlsu" frameborder="0" scrolling="no" width="350" height="24" SRC="Wsec_tlsu.htm">Need IFRAME Support!</iframe>
+</td>
+</tr>
+
+<!-- tr>
+  <td nowrap></td>
+  <td nowrap valign="top" class="ca_st">@tlsu_ca#</td>
+</tr -->
+
+<tr>
+<td nowrap>Password:</td>
+<td><input type="password" name="tls_pw" size="16" maxlength="16" style="{width:140}" value="@tls_pw#"> (for Private Key)</td>
+</tr>
+<tr><td style="height:5px"></td></tr>
+</table>
+</div>
+
+<div id="ttlsDIV" style="display:none;">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+  <td width="97px" nowrap>Process Method:</td>
+  <td nowrap><select name="e_ttls" id="e_ttls" style="{width:100}">
+							 <option value="0">MS-CHAP</option>
+							 <option value="1">MS-CHAP v2</option>
+							 <option value="2">PAP</option>
+							 <option value="3">EAP-MD5</option>
+						 </select></td>
+ </tr>
+
+<tr>
+<td nowrap>User ID:</td>
+<td><input type="text" name="ttls_id" size="16" maxlength="32" style="{width:140}" value="@ttls_id#"></td>
+</tr>
+<tr>
+<td nowrap>Password:</td>
+<td><input type="password" name="ttls_pw" size="16" maxlength="16" style="{width:140}" value="@ttls_pw#"></td>
+</tr>
+<tr>
+<td nowrap>Anonymous ID:</td>
+<td><input type="text" name="anon_id" size="16" maxlength="32" style="{width:140}" value="@anon_id#"></td>
+</tr>
+<tr>
+<td nowrap height="30">Root CA:</td>
+<td nowrap valign="top"><!-- input type="file" name="ttls_rtca" maxlength="255"> &nbsp;>
+<input type="button" class="newbutton" name="up_ttls_rtca" value="Upload" onClick="return ck_ttls_rtca()"-->
+<IFRAME NAME="ttlsr" frameborder="0" scrolling="no" width="350" height="24" SRC="Wsec_ttlsr.htm">Need IFRAME Support!</iframe>
+</td>
+</tr>
+
+<!-- tr>
+  <td nowrap></td>
+  <td nowrap valign="top" class="ca_st">@ttlsr_ca#</td>
+</tr 
+
+<tr> 
+ <td colspan="2"> </td>
+</tr>-->
+<tr><td style="height:2px"></td></tr>
+</table>
+</div>
+
+<!-- div id="peapDIV">
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+  <td width="100" nowrap>Process Method:</td>
+  <td nowrap>&nbsp;<b>MS-CHAP v2</b></td>
+</tr>
+<tr>
+<td nowrap>User ID:</td>
+<td><input type="text" name="peap_id" size="16" maxlength="32" style="{width:140}" value="@peap_id#"></td>
+</tr>
+<tr>
+<td nowrap>Password:</td>
+<td><input type="password" name="peap_pw" size="16" maxlength="16" style="{width:140}" value="@peap_pw#"></td>
+</tr>
+<tr>
+<td nowrap>Anonymous ID:</td>
+<td><input type="text" name="peap_anon_id" size="16" maxlength="32" style="{width:140}" value="@peap_anon_id#"></td>
+</tr>
+<tr>
+<td nowrap height="30">Root CA:</td>
+<td nowrap valign="top">
+<IFRAME NAME="peap" frameborder="0" scrolling="no" width="350" height="24" SRC="Wsec_peap.htm">Need IFRAME Support!</iframe>
+</td>
+</tr>
+<tr> 
+ <td colspan="2"> </td>
+</tr>
+</table>
+</div -->
+
+</div>
+					</div>
+				</td>
+			    </tr>
+			</table>
+
+
+
+
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRowPopup">
+    <input type="button" name="save" value="Apply" class="newbutton" onClick="SaveAll();">
+<input type="button" name="cancel" value="Cancel" class="newbutton" onClick="self.close()">
+						</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="Passphrase" value="@Passphrase#">
+<input type="Hidden" name="h_wire_sec" value="@h_wire_sec#">
+
+<input type="Hidden" name="h_w_wep" value="@h_w_wep#">
+<input type="Hidden" name="h_defkey" value="@h_defkey#">
+<input type="Hidden" name="h_w_auth" value="@h_w_auth#">
+
+<input type="Hidden" name="h_psk" value="@h_psk#">
+<!-- input type="Hidden" name="h_wpa2_psk" value="@h_wpa2_psk#" -->
+<!-- input type="Hidden" name="h_w2p_algo" value="@h_w2p_algo#">
+<input type="Hidden" name="h_w2e_algo" value="@h_w2e_algo#" -->
+
+<input type="Hidden" name="h_e_port" value="@h_e_port#">
+<input type="Hidden" name="h_en_untrust" value="@h_en_untrust#">
+<input type="Hidden" name="h_e_ttls" value="@h_e_ttls#">
+<input type="Hidden" name="this_file" value="Wsecurity.htm">
+<input type="Hidden" name="next_file" value="Wsecurity.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+<input type="Hidden" name="h_w_mode" value="@h_w_mode#">	    
+
+</form>
+
+<!-- Alert Box -->
+
+<iframe id="AB_IFrame" frameborder="0" class="AB_FRAME" style="z-index:9999"></iframe>
+<div dragable="dragable" id="CON" onMouseDown="startDrag(this.id)"   class="AB_ALL" style="display:none;"></div>
+
+<iframe id="cover" style="position: absolute; z-index: 99; width: 100%; height: 100%; top: 0; left:0; opacity:0; filter:alpha(opacity=0); display:none;" frameborder="0"></iframe>
+
+</div> <!--  newContentArea end -->  
+</body>
+</html>

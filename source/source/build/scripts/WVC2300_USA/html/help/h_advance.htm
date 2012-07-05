@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<link REL="stylesheet" TYPE="text/css" HREF="help.css">
+
+<script language="javascript" type="text/javascript">
+
+</SCRIPT>
+</HEAD>
+
+<BODY>
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+
+<!--<form name="dummy">-->
+
+<table border="0" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px">
+<tr>
+<td width="100%">&nbsp;</td>
+</tr>
+
+<tr>
+<td>
+<!-- org table-->
+
+<!-- Start Help Content -->
+<table width="100%">
+<tr>
+  <th class="help">Help - Advance Setup</th>
+</tr>
+<tr>
+ <td><hr size=2></td>
+</tr>
+</table>
+
+
+<a name="https"></a>
+<p><b>HTTP/HTTPS</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">HTTP Alternative Port</td>
+  <td><p><strong>Enable HTTP Alternative Port</strong>&mdash;Allows you to define the  port number used to communicate with the camera using an HTTP connection. The  default value is <strong>1024</strong>.  A value in the range of 1024-65535 can be defined.</p>
+The port number must be specified in the URL when accessing the camera&rsquo;s  web-based utility via the LAN or Internet. For example, if the camera&rsquo;s IP  address is 192.168.1.99 and the port is defined as 1028, you would specify the  following address: http://192.168.1.99:1028</a></td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">HTTPS Alternative Port</td>
+  <td><p><strong>Enable HTTPS Alternative Port</strong>&mdash;Allows you to define the  port number used to communicate with the camera using an HTTPS connection. The  default value is 1024. A value in the range of 1024-65535 can be defined. </p>
+When  using a secure connection, video is not available. This option is used only for  configuration. The port number must be specified in the URL when accessing the  camera&rsquo;s web-based utility via the LAN or Internet. For example, if the  camera&rsquo;s IP address is 192.168.1.99 and the port is defined as 1032, you would  specify the following address: https://192.168.1.99:1032</td>
+</tr>
+</table>
+
+<a name="rtps"></a>
+<p><strong>RTP/RTSP</strong><strong>&mdash;</strong>RTSP (Real Time Streaming Protocol) is a standard for  connected client(s) to control streaming data (MPEG-4) over the Internet. RTP  (Real-Time Transport Protocol) is an Internet protocol used for transmitting  single real-time multimedia data such as audio and video to a select group of  connected clients. RTSP uses RTP to format packets of multimedia content.
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+  <tr>
+  <td class="itemhead" valign="top">RTSP Port</td>
+   <td ><p>Enter the RTSP Port  number (between 1024 to 65535) in the field provided. The default RTSP port is <strong>554</strong>. &nbsp;</p>
+     <strong>Example:</strong> if camera IP address is 192.168.1.100 and RTSP port is 1030. User would  enter on the browser with URL address as: <strong>rtsp://192.168.1.100:1030/img/media.sav</strong>     <p>.
+   </td>
+</tr>
+
+<tr>
+  <td class="itemhead" valign="top">RTP Data Port</td>
+   <td >The camera&rsquo;s data port  number has been pre-configured and can be used for multicasting. It does not  normally need to be reconfigured. If a port number does need to be changed,  please contact your network administrator. If a change is necessary, enter the  data port number (1024 to 65535) in the field provided. The default RTP port is <strong>5000</strong>.     <p></td>
+</tr>
+
+<tr>
+  <td class="itemhead" valign="top">Max RTP Data Packet</td>
+   <td >Allows you to define the  maximum size of the RTP data packets. The length can be between 400 to 1400  bytes. The default value is <strong>1400  bytes</strong>.</td>
+</tr>
+
+<tr>
+  <td class="itemhead" valign="top">Multicast Setup</td>
+   <td ><p>These  configuration options are displayed when you check the Enable Multicast check  box.   
+     <ul>
+       <li><strong>Group Name</strong><strong>&mdash;</strong>If Group Name does need to be changed, please  contact your network administrator. To change, enter the Group Name in the field provided. </li>
+       <li><strong>Video Address / Audio Address</strong><strong>&mdash;</strong>The  Network Camera's Video and Audio IP Address has been pre-configured and can be  used for multicasting, and does not normally need to be re-configured. If an  address does need to be changed, please contact your network administrator. If  desired to change, enter the Video Address / Audio Address in the field  provided. </li>
+       <li><strong>Video</strong><strong> Port / Audio  Port</strong><strong>&mdash;</strong>The camera&rsquo;s  Video and Audio Port number has been pre-configured and  can be used for multicasting. This does not normally need to be re-configured.  If a port number does need to be changed, please contact your network  administrator. To change, enter the Video  Port / Audio Port  number (between 1024 to 65534) in the field provided.  &nbsp; The Video Port  / Audio Port number you entered must be even  values. </li>
+     </ul>
+     <p><strong>Time to Live&mdash;</strong>Define the number of hops (the number of network routers that can  be passed before the multimedia data packets arrive at their destination or are  dropped) that can occur before the packets are dropped. A value in the range of  1 to 255 can be defined. The default value is <strong>16</strong>.</p></td>
+</tr>
+</table>
+<!--
+<p><b>UPnP</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable Discovery</td>
+   <td >If enabled, the Network Camera will broadcast its availability
+    through UPnP. UPnP compatible systems such as Windows XP will then be able to detect the presence of the Network Camera. </td>
+</tr>
+
+<tr>
+  <td class="itemhead" valign="top">Enable Traversal</td>
+   <td >
+   If enabled, HTTP, HTTPS, RTP, and RTSP ports can be opened to establish and maintain TCP/IP network connections with the camera that traverse routers using network address translation (NAT).
+</td>
+</tr>
+
+<tr>
+  <td class="itemhead" valign="top">Enable Security Camera</td>
+   <td class="rightstyle" valign="top">
+   If enabled,&nbsp; the Network Camera will be accessible through HTTP connections.   
+   </td>
+</tr> 
+
+</table>
+
+<p><b>Bonjour</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable Bonjour</td>
+   <td >
+   If enabled, the Network Camera will be accessible through Bonjour connections.   
+   </td>
+</tr>
+</table>
+-->
+
+
+
+<p><b>Discovery Settings</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable UPnP Discovery</td>
+   <td >If enabled, the camera will broadcast its  availability through Universal Plug and Play protocol. UPnP compatible systems  such as Windows XP will then be able to detect the presence of the camera.</td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">Enable UPnP Traversal (Port Mapping)</td>
+   <td >When enabled, will create a port forwarding rule  on a NAT router automatically for opened HTTP, HTTPS, RTP, and RTPS ports. <strong>Note</strong>: UPnP must be enabled on the NAT  router for the UPnP Traversal feature to work. </td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">Enable Bonjour</td>
+   <td >Enabled by default. If enabled, the Cisco  xVC2300 camera is accessible through a Bonjour enabled browser, such as  Microsoft Internet Explorer with a Bonjour plug-in, or the Mac Safari browser.  By using Bonjour, you can easily find Bonjour-enabled items on your network.</td>
+</tr>
+</table>
+
+
+<p><b>CDP</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable CDP (Cisco Discovery Protocol)</td>
+   <td >Check to enable Cisco Discovery Protocol (CDP). CDP allows for Cisco Solution Integration, that is, integration with Cisco Configuration Assistant (CCA).</td>
+</tr>
+</table>
+
+<p><b>QoS</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable QoS Mode</td>
+   <td >Check to enable Quality of  Service (QoS) for media streams.</td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">DSCP</td>
+   <td >If QoS is enabled, enter the Differentiated  Services Code Point (DSCP) to be used in processing QoS packets. The default  value is <strong>12</strong>.</td>
+</tr>
+</table>
+
+<p><b>CoS</b>
+<table border=1 cellspacing=0 cellpadding=2 width="100%">
+<tr>
+  <td class="itemhead" valign="top">Enable CoS Mode</td>
+   <td ><p>Class of Service (CoS)  mode is disabled by default. Toenable  CoS mode, check the check box.</p></td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">Priority</td>
+   <td ><p>Priority can be set to a  value between 0 to 7. The highest priority value  is 7.</p></td>
+</tr>
+<tr>
+  <td class="itemhead" valign="top">VLAN ID</td>
+   <td >Enter the VLAN ID (1 to  4094).</td>
+</tr>
+</table>
+
+<p>The 802.1p header includes  a three-bit field for prioritization, which allows packets to be grouped into  various traffic classes. The IEEE has made broad recommendations concerning how  network managers can implement these traffic classes, but it stops short of  mandating the use of its recommended traffic class definitions. It can also be  defined as best-effort QoS (Quality of Service) or CoS  (Class of Service) at Layer 2 and is implemented in network adapters and  switches without involving any reservation setup. 802.1p traffic is simply classified  and sent to the destination; no bandwidth reservations are established.
+  <!-- End Help Content -->
+
+</td>
+</tr>
+<!-- Joseph removed - no need [print] and [close] buttons
+<tr>
+<td height="40px">
+
+Click the <b>Save </b>button to apply your changes or <b>Cancel </b>button to cancel.
+
+</td>
+</tr>
+<tr>
+<td height="30px">
+
+<input type="button" name="close" value="Close" class="newbutton"  onClick="parent.close()">
+&nbsp;
+<input type="button" name="print" value="Print" class="newbutton" onClick="location.href='javascript:print();';">
+
+
+
+</td>
+</tr>
+<tr>
+<td width="100%" height="20px"></td>
+</tr>-->
+</table>
+<!--</FORM>-->
+</div><!-- Content Area End -->
+    
+<script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+</BODY></HTML>

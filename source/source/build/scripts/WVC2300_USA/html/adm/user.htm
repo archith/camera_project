@@ -1,0 +1,1126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var USERSTARTNUM	= 1;
+var MAXUSERNUM		= 20;
+
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+
+	for(var i = USERSTARTNUM; i < MAXUSERNUM; i++) {
+		var aobj, h_aobj;
+		eval("aobj=cf.user" + i + "_adm");
+		eval("h_aobj=cf.h_user" + i + "_adm");
+		h_aobj.value == aobj.options[aobj.selectedIndex].value;
+	}
+
+	if(!checkData()) {
+		return;
+	}
+
+	cf.todo.value ="save"; // mode; 
+	dataToHidden(cf); cf.submit();
+}
+
+
+//helper function to create the form
+function getNewSubmitForm(){
+ var submitForm = document.createElement("FORM");
+ document.body.appendChild(submitForm);
+ submitForm.method = "POST";
+ return submitForm;
+}
+
+//helper function to add elements to the form
+function createNewFormElement(inputForm, elementName, elementValue){
+ var newElement = document.createElement("<input name='"+elementName+"' type='hidden'>");
+ inputForm.appendChild(newElement);
+ newElement.value = elementValue;
+ return newElement;
+}
+function singleCheckData(j)
+{
+	//--------------------------------------------------------
+	//single Check data
+	var cf = document.forms[0];
+    var msg = "";
+	var pwd1, pwd2;
+		eval("pwd1 = cf.user" + j + "_pw.value");
+		eval("pwd2 = cf.user" + j + "_repw.value");
+		
+	if(pwd1 != pwd2)
+		msg+= addstr(msg_user + j + ":" + msg_passwd_nomatch, j);
+	var name, pwd, admc;     // , ptc
+	eval("name = cf.user" + j + "_name.value");
+	eval("pwd = cf.user" + j + "_pw.value");
+	eval("admc = cf.user" + j + "_adm.options[cf.user" + j + "_adm.selectedIndex].value");
+	
+	if(name.length == 0 && (pwd.length != 0))     //  || ptc    || admc
+		msg+= addstr(msg_user + j + ": " + msg_name_empty, i);
+		
+//	if("admin" == name) { msg+= msg_nameused; }//avoid error message appear twice - when add [admin] user
+	
+			
+	if (msg.length > 1)
+	{
+		rALERT("User Settings",msg);
+		return false;
+	}
+	//--------------------------------------------------------
+}
+
+
+
+function singlesave(j)
+{
+	//single Check data
+	singleCheckData(j);		
+//cf.h_user1_adm.value = cf.user1_adm.options[cf.user1_adm.selectedIndex].value			
+	var uf = document.forms["formname"];
+	var user1_adm_index = uf.elements["user" +j + "_adm"].selectedIndex;	
+	var user1_adm = uf.elements["user" +j + "_adm"].options[user1_adm_index].value;
+	uf.elements["h_user" +j + "_adm"].value = user1_adm;
+	var user1_name = uf.elements["user" +j + "_name"].value;
+	var user1_pw = uf.elements["user" + j + "_pw"].value;
+/*	
+	var submitForm = getNewSubmitForm();
+ createNewFormElement(submitForm, "h_user" +j + "_adm", user1_adm);
+ createNewFormElement(submitForm, "user" +j + "_name", user1_name);
+ createNewFormElement(submitForm, "user" + j + "_pw", user1_pw);
+ createNewFormElement(submitForm,"next_file","user.htm");
+
+ submitForm.action= "file.cgi";
+ submitForm.todo.value ="save";
+ submitForm.method="POST";
+ submitForm.submit();
+ */
+ 
+	var obj = document.getElementById("single_data");
+	obj.innerHTML = 
+	"<form name='submitForm' action='file.cgi' method='POST'>"+
+	"<input type='text' name='h_user"+j+"_adm' value="+user1_adm+">"+
+	"<input type='text' name='user"+j+"_name' value="+user1_name+">"+
+	"<input type='text' name='user"+j+"_pw' value="+user1_pw+">"+
+	"<input type='Hidden' name='next_file' value='user.htm'>"+
+	"<input type='Hidden' name='todo' value='save'>"+
+	"</form>";
+	
+	document.forms["submitForm"].submit();
+}
+
+function checkData()
+{
+    var cf = document.forms[0];
+    var msg = "";
+
+
+	/* check the password and re-password */
+	if( cf.admpw.value != cf.adm_repw.value )
+		msg+= addstr("Admin " + msg_passwd_nomatch);
+
+	if("admin" == cf.demo.value) { msg+= msg_nameused; }
+
+	if( cf.demopw.value != cf.demo_repw.value )
+		msg+= addstr("Demo " + msg_passwd_nomatch);
+
+	for(var i = USERSTARTNUM; i < MAXUSERNUM; i++) {
+		var pwd1, pwd2;
+		eval("pwd1 = cf.user" + i + "_pw.value");
+		eval("pwd2 = cf.user" + i + "_repw.value");
+		
+		if(pwd1 != pwd2)
+			msg+= addstr(msg_user + i + ":" + msg_passwd_nomatch, i);
+	}
+
+
+	/* check user fields, the username can not be empty if one of other fileds is filled */
+	if(cf.admpw.value.length != 0 && cf.adm.value.length == 0) {
+		msg+= addstr("Admin:" + msg_name_empty);
+	}
+
+	for(var i = USERSTARTNUM; i < MAXUSERNUM; i++) {
+		var name, pwd, admc;     // , ptc
+		eval("name = cf.user" + i + "_name.value");
+		eval("pwd = cf.user" + i + "_pw.value");
+		eval("admc = cf.user" + i + "_adm.options[cf.user" + i + "_adm.selectedIndex].value");
+		
+		if(name.length == 0 && (pwd.length != 0) && pwd != "********")     //  || ptc    || admc
+			msg+= addstr(msg_user + i + ": " + msg_name_empty, i);
+			
+		if("admin" == name) { msg+= msg_nameused; }
+				
+		eval("u_name = cf.user" + i + "_name");	
+	msg+= checkInvalid(u_name, 'User'+i, InValid_Str_UserPassword);
+
+		eval("u_pass = cf.user" + i + "_pw");	
+	msg+= checkInvalid(u_pass, 'Password'+i, InValid_Str_UserPassword);
+
+	}
+
+    if (msg.length > 1)
+	{
+		rALERT("User Settings",msg);
+		return false;
+	}
+	dataToHidden(cf);
+	return true;	
+
+}
+
+function check()
+{
+    var cf = document.forms[0];
+    var msg = "";
+
+	for(var i = USERSTARTNUM; i < MAXUSERNUM; i++) {
+		var pwd1, pwd2;
+		eval("pwd1 = cf.user" + i + "_pw.value");
+		eval("pwd2 = cf.user" + i + "_repw.value");
+		
+		if(pwd1 != pwd2)
+			msg+= addstr(msg_user + i + ":" + msg_passwd_nomatch, i);
+	}
+
+	for(var i = USERSTARTNUM; i < MAXUSERNUM; i++) {
+		var name, pwd, admc;   // , ptc
+		eval("name = cf.user" + i + "_name.value");
+		eval("pwd = cf.user" + i + "_pw.value");
+		eval("admc = cf.user" + i + "_adm.options[cf.user" + i + "_adm.selectedIndex].value");
+		
+		if(name.length == 0 && (pwd.length != 0))     //  || ptc    || admc
+			msg+= addstr(msg_user + i + ":" + msg_name_empty, i);
+		
+		if("admin" == name) { msg+= msg_nameused; }
+	}
+
+    if (msg.length > 1)
+	{
+		rALERT("User Settings",msg);
+		return false;
+	}
+	dataToHidden(cf);
+	return true;	
+
+}
+function check(index)
+{
+    var cf = document.forms[0];
+    var msg = "";
+	var pwd1, pwd2;
+		eval("pwd1 = cf.user" + index + "_pw.value");
+		eval("pwd2 = cf.user" + index + "_repw.value");
+		
+		if(pwd1 != pwd2)
+			msg+= addstr(msg_user + index + ": " + msg_passwd_nomatch, index);
+
+
+	
+		var name, pwd, ptc, admc;
+		eval("name = cf.user" + index + "_name.value");
+		eval("pwd = cf.user" + index + "_pw.value");		
+		eval("admc = cf.user" + index + "_adm.options[cf.user" + index + "_adm.selectedIndex].value");
+		
+		if(name.length == 0)// && (pw.length != 0 || ptc || admc))
+			msg+= addstr(msg_user + index + ": " + msg_name_empty, index);
+			
+	eval("u_name = cf.user" + index + "_name");	
+	msg+= checkInvalid(u_name, 'User'+index, InValid_Str_UserPassword);
+
+	eval("u_pass = cf.user" + index + "_pw");	
+	msg+= checkInvalid(u_pass, 'Password'+index, InValid_Str_UserPassword);
+		
+
+
+    if (msg.length > 1)
+	{
+		rALERT("User Settings",msg);//alert(msg);
+		return false;
+	}
+	//dataToHidden(cf);
+	return true;	
+}
+
+function init()
+{
+    var cf = document.forms[0];
+	dataToVisible(cf);
+	doc_adb1(); doc_adb2(); doc_adb3(); doc_adb4(); doc_adb5(); doc_adb6(); doc_adb7(); doc_adb8(); doc_adb9(); doc_adb10(); 
+	doc_adb11(); doc_adb12(); doc_adb13(); doc_adb14(); doc_adb15(); doc_adb16(); doc_adb17(); doc_adb18(); doc_adb19(); doc_adb20(); 
+}
+
+
+// Add/Delete Buttons
+var NULL = "";
+
+function doc_adb1()
+{
+   var cf = document.forms[0];
+   if (cf.user1_name.value == NULL) 
+   { cf.adb1.value = "Add"; }
+   else
+   { cf.adb1.value = "Delete"; }
+}
+function act_adb1()
+{
+   var cf = document.forms[0];
+   if (cf.adb1.value == "Delete") 
+   { cf.user1_name.value = cf.user1_pw.value = cf.user1_repw.value = ""; cf.h_user1_adm.value = cf.user1_adm.options[cf.user1_adm.selectedIndex].value = "view"; 
+   
+   singlesave(1);
+   
+   }
+   else
+   { cf.adb1.value = "Add";    if(!check(1)) {return;}  
+   
+   singlesave(1);
+   
+   }
+}
+
+
+function doc_adb2()
+{
+   var cf = document.forms[0];
+   if (cf.user2_name.value == NULL) 
+   { cf.adb2.value = "Add"; }
+   else
+   { cf.adb2.value = "Delete"; }
+}
+function act_adb2()
+{
+   var cf = document.forms[0];
+   if (cf.adb2.value== "Delete") 
+   { cf.user2_name.value = cf.user2_pw.value = cf.user2_repw.value = ""; cf.h_user2_adm.value = cf.user2_adm.options[cf.user2_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(2);
+   }
+   else
+   { cf.adb2.value = "Add";  cf.h_user2_adm.value = cf.user2_adm.options[cf.user2_adm.selectedIndex].value;  if(!check(2)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(2);
+   }
+}
+
+
+function doc_adb3()
+{
+   var cf = document.forms[0];
+   if (cf.user3_name.value == NULL) 
+   { cf.adb3.value = "Add"; }
+   else
+   { cf.adb3.value = "Delete"; }
+}
+function act_adb3()
+{
+   var cf = document.forms[0];
+   if (cf.adb3.value== "Delete") 
+   { cf.user3_name.value = cf.user3_pw.value = cf.user3_repw.value = ""; cf.h_user3_adm.value = cf.user3_adm.options[cf.user3_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(3);
+   }
+   else
+   { cf.adb3.value = "Add";  cf.h_user3_adm.value = cf.user3_adm.options[cf.user3_adm.selectedIndex].value;  if(!check(3)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(3);
+   }
+}
+
+
+function doc_adb4()
+{
+   var cf = document.forms[0];
+   if (cf.user4_name.value == NULL) 
+   { cf.adb4.value = "Add"; }
+   else
+   { cf.adb4.value = "Delete"; }
+}
+function act_adb4()
+{
+   var cf = document.forms[0];
+   if (cf.adb4.value== "Delete") 
+   { cf.user4_name.value = cf.user4_pw.value = cf.user4_repw.value = ""; cf.h_user4_adm.value = cf.user4_adm.options[cf.user4_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(4);
+   }
+   else
+   { cf.adb4.value = "Add";  cf.h_user4_adm.value = cf.user4_adm.options[cf.user4_adm.selectedIndex].value;  if(!check(4)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(4);
+   }
+}
+
+
+function doc_adb5()
+{
+   var cf = document.forms[0];
+   if (cf.user5_name.value == NULL) 
+   { cf.adb5.value = "Add"; }
+   else
+   { cf.adb5.value = "Delete"; }
+}
+function act_adb5()
+{
+   var cf = document.forms[0];
+   if (cf.adb5.value== "Delete") 
+   { cf.user5_name.value = cf.user5_pw.value = cf.user5_repw.value = ""; cf.h_user5_adm.value = cf.user5_adm.options[cf.user5_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(5);
+   }
+   else
+   { cf.adb5.value = "Add";  cf.h_user5_adm.value = cf.user5_adm.options[cf.user5_adm.selectedIndex].value;  if(!check(5)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(5);
+   }
+}
+
+
+function doc_adb6()
+{
+   var cf = document.forms[0];
+   if (cf.user6_name.value == NULL) 
+   { cf.adb6.value = "Add"; }
+   else
+   { cf.adb6.value = "Delete"; }
+}
+function act_adb6()
+{
+   var cf = document.forms[0];
+   if (cf.adb6.value== "Delete") 
+   { cf.user6_name.value = cf.user6_pw.value = cf.user6_repw.value = ""; cf.h_user6_adm.value = cf.user6_adm.options[cf.user6_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(6);
+   }
+   else
+   { cf.adb6.value = "Add";  cf.h_user6_adm.value = cf.user6_adm.options[cf.user6_adm.selectedIndex].value;  if(!check(6)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(6);
+   }
+}
+
+
+function doc_adb7()
+{
+   var cf = document.forms[0];
+   if (cf.user7_name.value == NULL) 
+   { cf.adb7.value = "Add"; }
+   else
+   { cf.adb7.value = "Delete"; }
+}
+function act_adb7()
+{
+   var cf = document.forms[0];
+   if (cf.adb7.value== "Delete") 
+   { cf.user7_name.value = cf.user7_pw.value = cf.user7_repw.value = ""; cf.h_user7_adm.value = cf.user7_adm.options[cf.user7_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(7);
+   }
+   else
+   { cf.adb7.value = "Add";  cf.h_user7_adm.value = cf.user7_adm.options[cf.user7_adm.selectedIndex].value;  if(!check(7)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(7);
+   }
+}
+
+
+function doc_adb8()
+{
+   var cf = document.forms[0];
+   if (cf.user8_name.value == NULL) 
+   { cf.adb8.value = "Add"; }
+   else
+   { cf.adb8.value = "Delete"; }
+}
+function act_adb8()
+{
+   var cf = document.forms[0];
+   if (cf.adb8.value== "Delete") 
+   { cf.user8_name.value = cf.user8_pw.value = cf.user8_repw.value = ""; cf.h_user8_adm.value = cf.user8_adm.options[cf.user8_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(8);
+   }
+   else
+   { cf.adb8.value = "Add";  cf.h_user8_adm.value = cf.user8_adm.options[cf.user8_adm.selectedIndex].value;  if(!check(8)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(8);
+   }
+}
+
+
+function doc_adb9()
+{
+   var cf = document.forms[0];
+   if (cf.user9_name.value == NULL) 
+   { cf.adb9.value = "Add"; }
+   else
+   { cf.adb9.value = "Delete"; }
+}
+function act_adb9()
+{
+   var cf = document.forms[0];
+   if (cf.adb9.value== "Delete") 
+   { cf.user9_name.value = cf.user9_pw.value = cf.user9_repw.value = ""; cf.h_user9_adm.value = cf.user9_adm.options[cf.user9_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(9);
+   }
+   else
+   { cf.adb9.value = "Add";  cf.h_user9_adm.value = cf.user9_adm.options[cf.user9_adm.selectedIndex].value;  if(!check(9)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(9);
+   }
+}
+
+
+function doc_adb10()
+{
+   var cf = document.forms[0];
+   if (cf.user10_name.value == NULL) 
+   { cf.adb10.value = "Add"; }
+   else
+   { cf.adb10.value = "Delete"; }
+}
+function act_adb10()
+{
+   var cf = document.forms[0];
+   if (cf.adb10.value== "Delete") 
+   { cf.user10_name.value = cf.user10_pw.value = cf.user10_repw.value = ""; cf.h_user10_adm.value = cf.user10_adm.options[cf.user10_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(10);
+   }
+   else
+   { cf.adb10.value = "Add";  cf.h_user10_adm.value = cf.user10_adm.options[cf.user10_adm.selectedIndex].value;  if(!check(10)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(10);
+   }
+}
+
+
+function doc_adb11()
+{
+   var cf = document.forms[0];
+   if (cf.user11_name.value == NULL) 
+   { cf.adb11.value = "Add"; }
+   else
+   { cf.adb11.value = "Delete"; }
+}
+function act_adb11()
+{
+   var cf = document.forms[0];
+   if (cf.adb11.value== "Delete") 
+   { cf.user11_name.value = cf.user11_pw.value = cf.user11_repw.value = ""; cf.h_user11_adm.value = cf.user11_adm.options[cf.user11_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(11);
+   }
+   else
+   { cf.adb11.value = "Add";  cf.h_user11_adm.value = cf.user11_adm.options[cf.user11_adm.selectedIndex].value;  if(!check(11)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(11);
+   }
+}
+
+
+function doc_adb12()
+{
+   var cf = document.forms[0];
+   if (cf.user12_name.value == NULL) 
+   { cf.adb12.value = "Add"; }
+   else
+   { cf.adb12.value = "Delete"; }
+}
+function act_adb12()
+{
+   var cf = document.forms[0];
+   if (cf.adb12.value== "Delete") 
+   { cf.user12_name.value = cf.user12_pw.value = cf.user12_repw.value = ""; cf.h_user12_adm.value = cf.user12_adm.options[cf.user12_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(12);
+   }
+   else
+   { cf.adb12.value = "Add";  cf.h_user12_adm.value = cf.user12_adm.options[cf.user12_adm.selectedIndex].value;  if(!check(12)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(12);
+   }
+}
+
+
+function doc_adb13()
+{
+   var cf = document.forms[0];
+   if (cf.user13_name.value == NULL) 
+   { cf.adb13.value = "Add"; }
+   else
+   { cf.adb13.value = "Delete"; }
+}
+function act_adb13()
+{
+   var cf = document.forms[0];
+   if (cf.adb13.value== "Delete") 
+   { cf.user13_name.value = cf.user13_pw.value = cf.user13_repw.value = ""; cf.h_user13_adm.value = cf.user13_adm.options[cf.user13_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(13);
+   }
+   else
+   { cf.adb13.value = "Add";  cf.h_user13_adm.value = cf.user13_adm.options[cf.user13_adm.selectedIndex].value;  if(!check(13)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(13);
+   }
+}
+
+
+function doc_adb14()
+{
+   var cf = document.forms[0];
+   if (cf.user14_name.value == NULL) 
+   { cf.adb14.value = "Add"; }
+   else
+   { cf.adb14.value = "Delete"; }
+}
+function act_adb14()
+{
+   var cf = document.forms[0];
+   if (cf.adb14.value== "Delete") 
+   { cf.user14_name.value = cf.user14_pw.value = cf.user14_repw.value = ""; cf.h_user14_adm.value = cf.user14_adm.options[cf.user14_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(14);
+   }
+   else
+   { cf.adb14.value = "Add";  cf.h_user14_adm.value = cf.user14_adm.options[cf.user14_adm.selectedIndex].value;  if(!check(14)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(14);
+   }
+}
+
+
+function doc_adb15()
+{
+   var cf = document.forms[0];
+   if (cf.user15_name.value == NULL) 
+   { cf.adb15.value = "Add"; }
+   else
+   { cf.adb15.value = "Delete"; }
+}
+function act_adb15()
+{
+   var cf = document.forms[0];
+   if (cf.adb15.value== "Delete") 
+   { cf.user15_name.value = cf.user15_pw.value = cf.user15_repw.value = ""; cf.h_user15_adm.value = cf.user15_adm.options[cf.user15_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(15);
+   }
+   else
+   { cf.adb15.value = "Add";  cf.h_user15_adm.value = cf.user15_adm.options[cf.user15_adm.selectedIndex].value;  if(!check(15)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(15);
+   }
+}
+
+
+function doc_adb16()
+{
+   var cf = document.forms[0];
+   if (cf.user16_name.value == NULL) 
+   { cf.adb16.value = "Add"; }
+   else
+   { cf.adb16.value = "Delete"; }
+}
+function act_adb16()
+{
+   var cf = document.forms[0];
+   if (cf.adb16.value== "Delete") 
+   { cf.user16_name.value = cf.user16_pw.value = cf.user16_repw.value = ""; cf.h_user16_adm.value = cf.user16_adm.options[cf.user16_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(16);
+   }
+   else
+   { cf.adb16.value = "Add";  cf.h_user16_adm.value = cf.user16_adm.options[cf.user16_adm.selectedIndex].value;  if(!check(16)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(16);
+   }
+}
+
+
+function doc_adb17()
+{
+   var cf = document.forms[0];
+   if (cf.user17_name.value == NULL) 
+   { cf.adb17.value = "Add"; }
+   else
+   { cf.adb17.value = "Delete"; }
+}
+function act_adb17()
+{
+   var cf = document.forms[0];
+   if (cf.adb17.value== "Delete") 
+   { cf.user17_name.value = cf.user17_pw.value = cf.user17_repw.value = ""; cf.h_user17_adm.value = cf.user17_adm.options[cf.user17_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(17);
+   }
+   else
+   { cf.adb17.value = "Add";  cf.h_user17_adm.value = cf.user17_adm.options[cf.user17_adm.selectedIndex].value;  if(!check(17)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(17);
+   }
+}
+
+
+function doc_adb18()
+{
+   var cf = document.forms[0];
+   if (cf.user18_name.value == NULL) 
+   { cf.adb18.value = "Add"; }
+   else
+   { cf.adb18.value = "Delete"; }
+}
+function act_adb18()
+{
+   var cf = document.forms[0];
+   if (cf.adb18.value== "Delete") 
+   { cf.user18_name.value = cf.user18_pw.value = cf.user18_repw.value = ""; cf.h_user18_adm.value = cf.user18_adm.options[cf.user18_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(18);
+   }
+   else
+   { cf.adb18.value = "Add";  cf.h_user18_adm.value = cf.user18_adm.options[cf.user18_adm.selectedIndex].value;  if(!check(18)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(18);
+   }
+}
+
+
+function doc_adb19()
+{
+   var cf = document.forms[0];
+   if (cf.user19_name.value == NULL) 
+   { cf.adb19.value = "Add"; }
+   else
+   { cf.adb19.value = "Delete"; }
+}
+function act_adb19()
+{
+   var cf = document.forms[0];
+   if (cf.adb19.value== "Delete") 
+   { cf.user19_name.value = cf.user19_pw.value = cf.user19_repw.value = ""; cf.h_user19_adm.value = cf.user19_adm.options[cf.user19_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(19);
+   }
+   else
+   { cf.adb19.value = "Add";  cf.h_user19_adm.value = cf.user19_adm.options[cf.user19_adm.selectedIndex].value;  if(!check(19)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(19);
+   }
+}
+
+
+function doc_adb20()
+{
+   var cf = document.forms[0];
+   if (cf.user20_name.value == NULL) 
+   { cf.adb20.value = "Add"; }
+   else
+   { cf.adb20.value = "Delete"; }
+}
+function act_adb20()
+{
+   var cf = document.forms[0];
+   if (cf.adb20.value== "Delete") 
+   { cf.user20_name.value = cf.user20_pw.value = cf.user20_repw.value = ""; cf.h_user20_adm.value = cf.user20_adm.options[cf.user20_adm.selectedIndex].value = "view";  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(20);
+   }
+   else
+   { cf.adb20.value = "Add";  cf.h_user20_adm.value = cf.user20_adm.options[cf.user20_adm.selectedIndex].value;  if(!check(20)) {return;}  cf.todo.value ="save"; dataToHidden(cf); 
+   
+   singlesave(20);
+   }
+}
+
+
+// End Script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="init();showMsg('Users Settings');">
+ 	<style>  
+    td {height:30px;}  
+    </style> 
+    
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+<div width="100%" class="newContentTitle">Users Settings</div>
+ 	
+<form name="formname" method="post" action="file.cgi">  <div id="formpane" class="newFormPane">
+<div class="newGroupBoxTitle" style="height:25px; margin-left:1">Administrator</div>
+
+<table  border="0" cellpadding="0" cellspacing="0" class="std">
+      
+      <tr>
+        <td width="44" nowrap><div style="margin-left:1px">User ID</div></td><td width="8"></td>
+        <td width="80" align="left" nowrap>Admin Name</td><td width="8"></td>
+        <td width="75" align="left" nowrap>Password</td><td width="6"></td>
+        <td width="75" align="left" nowrap>Confirm Password</td><td width="8"></td>
+        <td width="98" align="left" nowrap><td width="7"></td></td>
+        <td width="83" align="left" nowrap></td>
+      </tr>
+      
+      
+      <tr>
+        <td width="44" nowrap><div style="margin-left:1px">Admin</div></td><td width="8"></td>
+        <td width="80" align="left" nowrap><input type="text" size="12" maxlength="32" name="adm" value="admin" disabled="disabled"></td><td width="8"></td>
+        <td width="75" align="left" nowrap><input type="password" name="admpw" value="@admpw#" size="8" maxlength="64"></td><td width="6"></td>
+        <td width="75" align="left" nowrap><input type="password" name="adm_repw" value="@admpw#" size="8" maxlength="64"></td><td width="8"></td>
+        <td width="98" align="left" nowrap><td width="7"></td></td>
+        <td width="83" align="left" nowrap><input type="button" name="admin" class="smbutton" value="Change" onClick="SaveAll();"></td><td width="8"></td>
+      </tr>
+    </table>
+    
+      <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Demo</div>
+    <table border="0" cellpadding="0" cellspacing="0" class="std"><tr>
+        <td width="44" nowrap><div style="margin-left:1px">User ID</div></td><td width="8"></td>
+        <td width="80" align="left" nowrap>Viewer Name</td><td width="8"></td>
+        <td width="75" align="left" nowrap>Password</td><td width="6"></td>
+        <td width="75" align="left" nowrap>Confirm Password</td><td width="8"></td>
+        <td width="98" align="left" nowrap><td width="7"></td></td>
+        <td width="83" align="left" nowrap></td>
+      </tr>
+      <tr>
+        <td width="44" nowrap><div style="margin-left:1px">Viewer</div></td><td width="8"></td>
+        <td width="80" align="left" nowrap><input type="text" size="12" maxlength="32" name="demo" value="@demo#"></td><td width="8"></td>
+        <td width="75" align="left" nowrap><input type="password" name="demopw" value="@demopw#" size="8" maxlength="64"></td><td width="6"></td>
+        <td width="75" align="left" nowrap><input type="password" name="demo_repw" value="@demopw#" size="8" maxlength="64"></td><td width="8"></td>
+        <td width="98" align="left" nowrap><td width="7"></td></td>
+        <td width="83" align="left" nowrap><input type="button" name="demo_ch" class="smbutton" value="Change" onClick="SaveAll();"></td><td width="8"></td>
+      </tr>
+    </table>
+    
+      <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">User List</div>
+    <table width="450" border="0" cellpadding="0" cellspacing="0" >
+      <tr>
+        <td width="50" nowrap>User ID</td>
+        <td width="80" align="left">User Name</td>
+        <td width="80" align="left" style="padding-left:8">Password</td>
+        <td width="80" align="left" style="padding-left:8">Confirm Password</td>
+        <td width="90" align="left" style="padding-left:8">Privilege Level</td>
+        <td width="70" align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td  width="52" nowrap>User 1</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user1_name" value="@user1_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user1_pw" value="@user1_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user1_repw" value="@user1_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user1_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb1" class="newbutton" value="Add" onClick="act_adb1();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 2</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user2_name" value="@user2_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user2_pw" value="@user2_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user2_repw" value="@user2_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user2_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb2" class="newbutton" value="Add" onClick="act_adb2();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 3</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user3_name" value="@user3_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user3_pw" value="@user3_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user3_repw" value="@user3_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user3_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb3" class="newbutton" value="Add" onClick="act_adb3();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 4</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user4_name" value="@user4_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user4_pw" value="@user4_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user4_repw" value="@user4_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user4_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb4" class="newbutton" value="Add" onClick="act_adb4();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 5</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user5_name" value="@user5_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user5_pw" value="@user5_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user5_repw" value="@user5_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user5_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb5" class="newbutton" value="Add" onClick="act_adb5();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 6</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user6_name" value="@user6_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user6_pw" value="@user6_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user6_repw" value="@user6_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user6_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb6" class="newbutton" value="Add" onClick="act_adb6();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 7</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user7_name" value="@user7_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user7_pw" value="@user7_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user7_repw" value="@user7_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user7_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb7" class="newbutton" value="Add" onClick="act_adb7();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 8</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user8_name" value="@user8_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user8_pw" value="@user8_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user8_repw" value="@user8_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user8_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb8" class="newbutton" value="Add" onClick="act_adb8();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 9</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user9_name" value="@user9_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user9_pw" value="@user9_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user9_repw" value="@user9_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user9_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb9" class="newbutton" value="Add" onClick="act_adb9();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 10</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user10_name" value="@user10_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user10_pw" value="@user10_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user10_repw" value="@user10_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user10_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb10" class="newbutton" value="Add" onClick="act_adb10();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 11</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user11_name" value="@user11_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user11_pw" value="@user11_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user11_repw" value="@user11_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user11_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb11" class="newbutton" value="Add" onClick="act_adb11();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 12</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user12_name" value="@user12_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user12_pw" value="@user12_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user12_repw" value="@user12_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user12_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb12" class="newbutton" value="Add" onClick="act_adb12();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 13</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user13_name" value="@user13_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user13_pw" value="@user13_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user13_repw" value="@user13_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user13_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb13" class="newbutton" value="Add" onClick="act_adb13();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 14</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user14_name" value="@user14_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user14_pw" value="@user14_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user14_repw" value="@user14_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user14_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb14" class="newbutton" value="Add" onClick="act_adb14();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 15</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user15_name" value="@user15_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user15_pw" value="@user15_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user15_repw" value="@user15_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user15_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb15" class="newbutton" value="Add" onClick="act_adb15();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 16</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user16_name" value="@user16_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user16_pw" value="@user16_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user16_repw" value="@user16_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user16_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb16" class="newbutton" value="Add" onClick="act_adb16();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 17</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user17_name" value="@user17_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user17_pw" value="@user17_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user17_repw" value="@user17_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user17_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb17" class="newbutton" value="Add" onClick="act_adb17();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 18</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user18_name" value="@user18_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user18_pw" value="@user18_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user18_repw" value="@user18_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user18_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb18" class="newbutton" value="Add" onClick="act_adb18();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 19</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user19_name" value="@user19_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user19_pw" value="@user19_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user19_repw" value="@user19_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user19_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb19" class="newbutton" value="Add" onClick="act_adb19();"></td>
+      </tr>
+      <tr>
+        <td nowrap>User 20</td>
+        <td align="center"  nowrap><input type="text" size="12" maxlength="32" name="user20_name" value="@user20_name#"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user20_pw" value="@user20_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><input type="password" name="user20_repw" value="@user20_pw#" size="8" maxlength="64"></td>
+        <td align="center"  nowrap style="padding-left:8"><select name="user20_adm" size="1">
+		  <option value="admin">Administrator</option>
+		  <option value="moni">Monitor</option>
+		  <option value="view">Viewer</option>
+		</select></td>
+        <td align="center"  nowrap style="padding-left:4"><input type="button" name="adb20" class="newbutton" value="Add" onClick="act_adb20();"></td>
+      </tr>
+    </table>
+
+
+
+</div><!-- formpane end-->
+ <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=user.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='user.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+   
+   <input type="Hidden" name="h_adm_adm" value="enable">
+
+<input type="Hidden" name="h_user1_adm" value="@h_user1_adm#">
+<input type="Hidden" name="h_user2_adm" value="@h_user2_adm#">
+<input type="Hidden" name="h_user3_adm" value="@h_user3_adm#">
+<input type="Hidden" name="h_user4_adm" value="@h_user4_adm#">
+<input type="Hidden" name="h_user5_adm" value="@h_user5_adm#">
+<input type="Hidden" name="h_user6_adm" value="@h_user6_adm#">
+<input type="Hidden" name="h_user7_adm" value="@h_user7_adm#">
+<input type="Hidden" name="h_user8_adm" value="@h_user8_adm#">
+<input type="Hidden" name="h_user9_adm" value="@h_user9_adm#">
+<input type="Hidden" name="h_user10_adm" value="@h_user10_adm#">
+<input type="Hidden" name="h_user11_adm" value="@h_user11_adm#">
+<input type="Hidden" name="h_user12_adm" value="@h_user12_adm#">
+<input type="Hidden" name="h_user13_adm" value="@h_user13_adm#">
+<input type="Hidden" name="h_user14_adm" value="@h_user14_adm#">
+<input type="Hidden" name="h_user15_adm" value="@h_user15_adm#">
+<input type="Hidden" name="h_user16_adm" value="@h_user16_adm#">
+<input type="Hidden" name="h_user17_adm" value="@h_user17_adm#">
+<input type="Hidden" name="h_user18_adm" value="@h_user18_adm#">
+<input type="Hidden" name="h_user19_adm" value="@h_user19_adm#">
+<input type="Hidden" name="h_user20_adm" value="@h_user20_adm#">
+
+<input type="Hidden" name="this_file" value="user.htm">
+<input type="Hidden" name="next_file" value="user.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#"> 
+    
+</form>    
+</div> <!--  newContentArea end -->  
+ <div id= "single_data" style="position:absolute z-index:-10"></div>
+</body>
+
+</html>

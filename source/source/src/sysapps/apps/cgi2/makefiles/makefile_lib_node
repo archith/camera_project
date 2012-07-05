@@ -1,0 +1,11 @@
+SUBDIR = $(filter-out makefile $(SKIPDIR), $(shell ls))
+all clean h install uninstall:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i $@ || exit 1 ; \
+	done
+
+gpl-clean:
+	@for i in $(SUBDIR); do \
+		$(MAKE) -C $$i $@ || exit 1 ; \
+	done
+	@rm -rf $(filter $(SKIPDIR), $(shell ls))

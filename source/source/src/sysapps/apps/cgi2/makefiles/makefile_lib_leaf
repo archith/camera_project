@@ -1,0 +1,44 @@
+LIB_ROOT_DIR = $(PROJ_CGI2)/$(shell echo $(subst $(PROJ_CGI2)/,,$(PWD)) |  sed 's/\/.*//g')
+INSTALL_HEADERS = $(patsubst %, $(PROJ_CGI2)/inc/%, $(filter-out $(UNEXPORT_HEADERS), $(wildcard *.h)))
+INSTALL_OBJS    = $(patsubst %, $(LIB_ROOT_DIR)/obj/%, $(wildcard *.o))
+CFLAGS += -I$(PROJ_CGI2)/inc
+include $(PROJ_CGI2)/makefiles/makefile_ground
+
+$(PROJ_CGI2)/inc/%.h:
+	ln -s ..$(subst $(PROJ_CGI2),,$(PWD))/${@F} $(PROJ_CGI2)/inc
+	
+$(LIB_ROOT_DIR)/obj/%.o:
+	ln -s ..$(subst $(LIB_ROOT_DIR),,$(PWD))/${@F} $(LIB_ROOT_DIR)/obj
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
+	
+all: .depend $(OBJS)
+	@make -s --no-print-director install
+
+install: $(INSTALL_HEADERS) $(INSTALL_OBJS)
+	
+		
+h: $(INSTALL_HEADERS)
+
+clean uninstall:
+	@rm -f $(OBJS) .depend
+
+ifeq	($(GPL_LICENSE), yes)
+gpl-clean:
+	@make clean
+else
+gpl-clean:
+	rm -f $(SRCS) .depend
+endif
+	
+.depend:
+ifneq ($(SRCS),)
+ifeq ($(wildcard .depend),)
+	@$(CC) -MM $(CFLAGS) $(SRCS) > .depend
+endif
+endif
+
+ifneq ($(wildcard .depend),)
+include .depend
+endif

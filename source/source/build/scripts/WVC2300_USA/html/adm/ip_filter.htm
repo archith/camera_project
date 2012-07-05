@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+var end1 = "@eip_1#"
+var end2 = "@eip_2#"
+var end3 = "@eip_3#"
+var end4 = "@eip_4#"
+var end5 = "@eip_5#"
+var end6 = "@eip_6#"
+var end7 = "@eip_7#"
+var end8 = "@eip_8#"
+var end9 = "@eip_9#"
+var end10 = "@eip_10#"
+
+function setData()
+{
+    var cf = document.forms[0];
+	var index = 0;
+	dataToVisible(cf);
+	set_add1(); set_add2(); set_add3(); set_add4(); set_add5(); set_add6(); set_add7(); set_add8(); set_add9(); set_add10();
+	setSec();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+		return;
+					
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+
+var IPSTARTNUM	= 1;
+var MAXIPNUM		= 10;
+
+function checkData()
+{
+	var cf = document.forms[0];
+    var msg = "";
+
+	if (cf.security.options[cf.security.selectedIndex].value != "disable")
+	{
+		for(var i = IPSTARTNUM; i <= MAXIPNUM; i++)
+		{
+			var SIP, EIP;
+			eval("SIP = cf.sip_" + i + ".value");
+			eval("EIP = cf.eip_" + i + ".value");
+			
+			if((SIP.length != 0) || (EIP.length != 0))
+			{
+				msg+= checkIPAdd(eval("cf.sip_" + i));
+				
+				var Range;
+				eval("Range = cf.spec_rang" + i + ".selectedIndex");
+				if (Range != 0)
+				{ msg+= checkIPAdd(eval("cf.eip_" + i)); }
+			}
+		}
+	}
+
+	// if(cf.sip_1.value.length > 0)  msg+= checkIPAdd(cf.sip_1);
+
+	if (msg.length > 1)
+    {
+        rALERT("IP Filter",msg);
+        return false;
+    }
+
+    return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+function setSec()
+{
+	var cf = document.forms[0];
+	var dflag = cf.security.options[cf.security.selectedIndex].value;
+	if(dflag == "disable")
+	{ 
+	cf.spec_rang1.disabled = cf.spec_rang2.disabled = cf.spec_rang3.disabled = cf.spec_rang4.disabled = cf.spec_rang5.disabled = cf.spec_rang6.disabled = cf.spec_rang7.disabled = cf.spec_rang8.disabled = cf.spec_rang9.disabled = cf.spec_rang10.disabled = cf.sip_1.disabled = cf.sip_2.disabled = cf.sip_3.disabled = cf.sip_4.disabled = cf.sip_5.disabled = cf.sip_6.disabled = cf.sip_7.disabled = cf.sip_8.disabled = cf.sip_9.disabled = cf.sip_10.disabled = cf.eip_1.disabled = cf.eip_2.disabled = cf.eip_3.disabled = cf.eip_4.disabled = cf.eip_5.disabled = cf.eip_6.disabled = cf.eip_7.disabled = cf.eip_8.disabled = cf.eip_9.disabled = cf.eip_10.disabled = 1;
+	
+	document.getElementById("IP1_TEXT").disabled = 1;
+	document.getElementById("IP2_TEXT").disabled = 1;
+	document.getElementById("IP3_TEXT").disabled = 1;
+	document.getElementById("IP4_TEXT").disabled = 1;
+	document.getElementById("IP5_TEXT").disabled = 1;
+	document.getElementById("IP6_TEXT").disabled = 1;
+	document.getElementById("IP7_TEXT").disabled = 1;
+	document.getElementById("IP8_TEXT").disabled = 1;
+	document.getElementById("IP9_TEXT").disabled = 1;
+	document.getElementById("IP10_TEXT").disabled = 1;
+	
+	document.getElementById("START_IP1_TEXT").disabled = 1;
+	document.getElementById("START_IP2_TEXT").disabled = 1;
+	document.getElementById("START_IP3_TEXT").disabled = 1;
+	document.getElementById("START_IP4_TEXT").disabled = 1;
+	document.getElementById("START_IP5_TEXT").disabled = 1;
+	document.getElementById("START_IP6_TEXT").disabled = 1;
+	document.getElementById("START_IP7_TEXT").disabled = 1;
+	document.getElementById("START_IP8_TEXT").disabled = 1;
+	document.getElementById("START_IP9_TEXT").disabled = 1;
+	document.getElementById("START_IP10_TEXT").disabled = 1;
+	
+	
+	document.getElementById("NO1_TEXT").disabled = 1;
+	document.getElementById("NO2_TEXT").disabled = 1;
+	document.getElementById("NO3_TEXT").disabled = 1;
+	document.getElementById("NO4_TEXT").disabled = 1;
+	document.getElementById("NO5_TEXT").disabled = 1;
+	document.getElementById("NO6_TEXT").disabled = 1;
+	document.getElementById("NO7_TEXT").disabled = 1;
+	document.getElementById("NO8_TEXT").disabled = 1;
+	document.getElementById("NO9_TEXT").disabled = 1;
+	document.getElementById("NO10_TEXT").disabled = 1;
+	
+	document.getElementById("SLAH1_TEXT").disabled = 1;
+	document.getElementById("SLAH2_TEXT").disabled = 1;
+	document.getElementById("SLAH3_TEXT").disabled = 1;
+	document.getElementById("SLAH4_TEXT").disabled = 1;
+	document.getElementById("SLAH5_TEXT").disabled = 1;
+	document.getElementById("SLAH6_TEXT").disabled = 1;
+	document.getElementById("SLAH7_TEXT").disabled = 1;
+	document.getElementById("SLAH8_TEXT").disabled = 1;
+	document.getElementById("SLAH9_TEXT").disabled = 1;
+	document.getElementById("SLAH10_TEXT").disabled = 1;
+
+	
+	}
+	else
+	{ 
+	cf.spec_rang1.disabled = cf.spec_rang2.disabled = cf.spec_rang3.disabled = cf.spec_rang4.disabled = cf.spec_rang5.disabled = cf.spec_rang6.disabled = cf.spec_rang7.disabled = cf.spec_rang8.disabled = cf.spec_rang9.disabled = cf.spec_rang10.disabled = cf.sip_1.disabled = cf.sip_2.disabled = cf.sip_3.disabled = cf.sip_4.disabled = cf.sip_5.disabled = cf.sip_6.disabled = cf.sip_7.disabled = cf.sip_8.disabled = cf.sip_9.disabled = cf.sip_10.disabled = cf.eip_1.disabled = cf.eip_2.disabled = cf.eip_3.disabled = cf.eip_4.disabled = cf.eip_5.disabled = cf.eip_6.disabled = cf.eip_7.disabled = cf.eip_8.disabled = cf.eip_9.disabled = cf.eip_10.disabled = 0; 
+	
+	document.getElementById("IP1_TEXT").disabled = 0;
+	document.getElementById("IP2_TEXT").disabled = 0;
+	document.getElementById("IP3_TEXT").disabled = 0;
+	document.getElementById("IP4_TEXT").disabled = 0;
+	document.getElementById("IP5_TEXT").disabled = 0;
+	document.getElementById("IP6_TEXT").disabled = 0;
+	document.getElementById("IP7_TEXT").disabled = 0;
+	document.getElementById("IP8_TEXT").disabled = 0;
+	document.getElementById("IP9_TEXT").disabled = 0;
+	document.getElementById("IP10_TEXT").disabled = 0;
+	
+	document.getElementById("START_IP1_TEXT").disabled = 0;
+	document.getElementById("START_IP2_TEXT").disabled = 0;
+	document.getElementById("START_IP3_TEXT").disabled = 0;
+	document.getElementById("START_IP4_TEXT").disabled = 0;
+	document.getElementById("START_IP5_TEXT").disabled = 0;
+	document.getElementById("START_IP6_TEXT").disabled = 0;
+	document.getElementById("START_IP7_TEXT").disabled = 0;
+	document.getElementById("START_IP8_TEXT").disabled = 0;
+	document.getElementById("START_IP9_TEXT").disabled = 0;
+	document.getElementById("START_IP10_TEXT").disabled = 0;
+	
+	
+	document.getElementById("NO1_TEXT").disabled = 0;
+	document.getElementById("NO2_TEXT").disabled = 0;
+	document.getElementById("NO3_TEXT").disabled = 0;
+	document.getElementById("NO4_TEXT").disabled = 0;
+	document.getElementById("NO5_TEXT").disabled = 0;
+	document.getElementById("NO6_TEXT").disabled = 0;
+	document.getElementById("NO7_TEXT").disabled = 0;
+	document.getElementById("NO8_TEXT").disabled = 0;
+	document.getElementById("NO9_TEXT").disabled = 0;
+	document.getElementById("NO10_TEXT").disabled = 0;
+	
+	document.getElementById("SLAH1_TEXT").disabled = 0;
+	document.getElementById("SLAH2_TEXT").disabled = 0;
+	document.getElementById("SLAH3_TEXT").disabled = 0;
+	document.getElementById("SLAH4_TEXT").disabled = 0;
+	document.getElementById("SLAH5_TEXT").disabled = 0;
+	document.getElementById("SLAH6_TEXT").disabled = 0;
+	document.getElementById("SLAH7_TEXT").disabled = 0;
+	document.getElementById("SLAH8_TEXT").disabled = 0;
+	document.getElementById("SLAH9_TEXT").disabled = 0;
+	document.getElementById("SLAH10_TEXT").disabled = 0;
+	
+	}
+	//show_hide("secdiv", (dflag != "disable") );
+}
+
+function set_add1()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang1.selectedIndex == 0);
+	{ show_hide("single1", aFlag); show_hide("range1", !aFlag); show_hide("eip1", !aFlag); (cf.eip_1.value = "", aFlag); (cf.eip_1.value = end1, !aFlag); (end1 = "", aFlag); } }
+
+function set_add2()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang2.selectedIndex == 0);
+	{ show_hide("single2", aFlag); show_hide("range2", !aFlag); show_hide("eip2", !aFlag); (cf.eip_2.value = "", aFlag); (cf.eip_2.value = end2, !aFlag); (end2 = "", aFlag); } }
+
+function set_add3()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang3.selectedIndex == 0);
+	{ show_hide("single3", aFlag); show_hide("range3", !aFlag); show_hide("eip3", !aFlag); (cf.eip_3.value = "", aFlag); (cf.eip_3.value = end3, !aFlag); (end3 = "", aFlag); } }
+
+function set_add4()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang4.selectedIndex == 0);
+	{ show_hide("single4", aFlag); show_hide("range4", !aFlag); show_hide("eip4", !aFlag); (cf.eip_4.value = "", aFlag); (cf.eip_4.value = end4, !aFlag); (end4 = "", aFlag); } }
+
+function set_add5()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang5.selectedIndex == 0);
+	{ show_hide("single5", aFlag); show_hide("range5", !aFlag); show_hide("eip5", !aFlag); (cf.eip_5.value = "", aFlag); (cf.eip_5.value = end5, !aFlag); (end5 = "", aFlag); } }
+
+function set_add6()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang6.selectedIndex == 0);
+	{ show_hide("single6", aFlag); show_hide("range6", !aFlag); show_hide("eip6", !aFlag); (cf.eip_6.value = "", aFlag); (cf.eip_6.value = end6, !aFlag); (end6 = "", aFlag); } }
+
+function set_add7()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang7.selectedIndex == 0);
+	{ show_hide("single7", aFlag); show_hide("range7", !aFlag); show_hide("eip7", !aFlag); (cf.eip_7.value = "", aFlag); (cf.eip_7.value = end7, !aFlag); (end7 = "", aFlag); } }
+
+function set_add8()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang8.selectedIndex == 0);
+	{ show_hide("single8", aFlag); show_hide("range8", !aFlag); show_hide("eip8", !aFlag); (cf.eip_8.value = "", aFlag); (cf.eip_8.value = end8, !aFlag); (end8 = "", aFlag); } }
+
+function set_add9()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang9.selectedIndex == 0);
+	{ show_hide("single9", aFlag); show_hide("range9", !aFlag); show_hide("eip9", !aFlag); (cf.eip_9.value = "", aFlag); (cf.eip_9.value = end9, !aFlag); (end9 = "", aFlag); } }
+
+function set_add10()
+{ var cf = document.forms[0]; var aFlag = (cf.spec_rang10.selectedIndex == 0);
+	{ show_hide("single10", aFlag); show_hide("range10", !aFlag); show_hide("eip10", !aFlag); (cf.eip_10.value = "", aFlag); (cf.eip_10.value = end10, !aFlag); (end10 = "", aFlag); } }
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('IP Filter');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">IP Filter</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+     	<div class="newGroupBoxTitle" style="height:25px;">IP Filter Settings</div>
+        
+        <table border="0" cellspacing="0" cellpadding="0" >
+ <tr>
+  <td nowrap>
+  		<select id="security" name="security" size="1" onChange="setSec();">
+			<option value="disable">Disable
+			<option value="deny">Enable and Deny the following IP Address
+			<option value="allow">Enable and Allow the following IP Address
+		</select>
+  </td>
+ </tr>
+ </table>
+ 
+ <div ID="secdiv">
+  <table border="0" cellspacing="0" cellpadding="0" class="std">
+    <tr>
+      <td nowrap width="77px"><select id="spec_rang1" name="spec_rang1" size="1" style="{width:70}" width=70 onChange="set_add1();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left" width="94"><div id="single1"><span id="IP1_TEXT">IP Address</span></div>
+          <div id="range1"><span id="START_IP1_TEXT">Start IP ~ End IP</span></div></td>
+      <td nowrap width="24"><span id="NO1_TEXT">1:</span></td>
+      <td nowrap width="121"><input type="text" size="16" maxlength="20" name="sip_1" value="@sip_1#"></td>
+      <td nowrap width="150">
+      <div id="eip1">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH1_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_1" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang2" name="spec_rang2"  size="1" style="{width:70}" width=70 onChange="set_add2();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single2"><span id="IP2_TEXT"> IP Address</span></div>
+          <div id="range2"><span id="START_IP2_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO2_TEXT">2:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_2" value="@sip_2#"></td>
+      <td nowrap>
+           <div id="eip2">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH2_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_2" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+   
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang3" name="spec_rang3"  size="1" style="{width:70}" width=70 onChange="set_add3();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single3"><span id="IP3_TEXT"> IP Address</span></div>
+          <div id="range3"><span id="START_IP3_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO3_TEXT">3:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_3" value="@sip_3#"></td>
+      <td nowrap>
+      
+      <div id="eip3">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH3_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_3" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang4" name="spec_rang4"  size="1" style="{width:70}" width=70 onChange="set_add4();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single4"><span id="IP4_TEXT"> IP Address</span></div>
+          <div id="range4"><span id="START_IP4_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO4_TEXT">4:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_4" value="@sip_4#"></td>
+      <td nowrap>
+      
+      <div id="eip4">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH4_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_4" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang5" name="spec_rang5"  size="1" style="{width:70}" width=70 onChange="set_add5();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single5"><span id="IP5_TEXT"> IP Address</span></div>
+          <div id="range5"><span id="START_IP5_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO5_TEXT">5:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_5" value="@sip_5#"></td>
+      <td nowrap>
+      
+      <div id="eip5">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH5_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_5" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang6" name="spec_rang6"  size="1" style="{width:70}" width=70 onChange="set_add6();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single6"><span id="IP6_TEXT"> IP Address</span></div>
+          <div id="range6"><span id="START_IP6_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO6_TEXT">6:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_6" value="@sip_6#"></td>
+      <td nowrap>
+      
+      <div id="eip6">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH6_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_6" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang7" name="spec_rang7"  size="1" style="{width:70}" width=70 onChange="set_add7();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single7"><span id="IP7_TEXT"> IP Address</span></div>
+          <div id="range7"><span id="START_IP7_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO7_TEXT">7:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_7" value="@sip_7#"></td>
+      <td nowrap>
+      
+      <div id="eip7">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH7_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_7" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang8" name="spec_rang8"  size="1" style="{width:70}" width=70 onChange="set_add8();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single8"><span id="IP8_TEXT"> IP Address</span></div>
+          <div id="range8"><span id="START_IP8_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO8_TEXT">8:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_8" value="@sip_8#"></td>
+      <td nowrap>
+      
+      <div id="eip8">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH8_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_8" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang9" name="spec_rang9"  size="1" style="{width:70}" width=70 onChange="set_add9();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single9"><span id="IP9_TEXT"> IP Address</span></div>
+          <div id="range9"><span id="START_IP9_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO9_TEXT">9:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_9" value="@sip_9#"></td>
+      <td nowrap>
+      
+      <div id="eip9">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH9_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_9" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><select id="spec_rang10" name="spec_rang10"  size="1" style="{width:70}" width=70 onChange="set_add10();">
+          <option value="single">Single</option>
+          <option value="range">Range</option>
+        </select>      </td>
+      <td nowrap align="left"><div id="single10"><span id="IP10_TEXT"> IP Address</span></div>
+          <div id="range10"><span id="START_IP10_TEXT"> Start IP ~ End IP</span></div></td>
+      <td nowrap><span id="NO10_TEXT">10:</span></td>
+      <td nowrap><input type="text" size="16" maxlength="20" name="sip_10" value="@sip_10#"></td>
+      <td nowrap>
+      
+      <div id="eip10">
+      <table cellpadding="0" cellspacing="0">
+      <tr>
+      <td width="15">
+      <span id="SLAH10_TEXT"> ~ </span>
+      </td>
+      <td><input type="text" size="16" maxlength="20" name="eip_10" value="">
+      </td>
+      </tr>
+      </table>
+      </div>
+      
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=ip_filter.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='ip_filter.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+<input type="Hidden" name="h_security" value="@h_security#">
+<input type="Hidden" name="h_spec_rang1" value="@h_spec_rang1#">
+<input type="Hidden" name="h_spec_rang2" value="@h_spec_rang2#">
+<input type="Hidden" name="h_spec_rang3" value="@h_spec_rang3#">
+<input type="Hidden" name="h_spec_rang4" value="@h_spec_rang4#">
+<input type="Hidden" name="h_spec_rang5" value="@h_spec_rang5#">
+<input type="Hidden" name="h_spec_rang6" value="@h_spec_rang6#">
+<input type="Hidden" name="h_spec_rang7" value="@h_spec_rang7#">
+<input type="Hidden" name="h_spec_rang8" value="@h_spec_rang8#">
+<input type="Hidden" name="h_spec_rang9" value="@h_spec_rang9#">
+<input type="Hidden" name="h_spec_rang10" value="@h_spec_rang10#">
+<input type="Hidden" name="this_file" value="ip_filter.htm">
+<input type="Hidden" name="next_file" value="ip_filter.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+
+</form>     
+</div> <!--  newContentArea end -->  
+</body>
+
+</html>

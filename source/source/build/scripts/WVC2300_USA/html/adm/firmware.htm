@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function upf()
+{ //1.2.3.4
+var ip = "@ip#";
+ip =ip.replace(".","");//12.3.4
+ip =ip.replace(".","");//123.4
+ip =ip.replace(".","");//1234
+
+	window.open('file.cgi?next_file=upg_fw.htm',ip, "status=no,scrollbars=no,resizable=yes,height=270px,width=620px");
+}
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="showMsg('Firmware');">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Firmware</div>
+ 	 	<div id="formpane" class="newFormPane_noForm">
+    <FORM name="user_form" method="post" action="file.cgi">
+    
+     	<div class="newGroupBoxTitle" style="height:25px; margin-left:3">Firmware Upgrade</div>
+       
+        <table>
+		  <tr>
+			<td>
+            
+            <div style="margin-left:1">
+			  <table border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td><b>You may check for the latest firmware at <a href="http://www.cisco.com" target="_blank">www.cisco.com</a></b></td>
+			  </tr>
+              </table>
+              </div>
+              
+              <table border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td nowrap height="10"> </td>
+			  </tr>
+			  <tr>
+				<td nowrap><b>Current Installed Firmware Version:  @ver#</b></td>
+			  </tr>
+			  </table><br>
+			</td>
+		  </tr>
+		  <tr>
+			<td nowrap><div  style="margin-left:-3"><input type="button" class="newbutton" value="Upgrade" onClick="upf();"></div></td>
+		  </tr>
+		  </table>
+
+
+
+
+    
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+	<input type="Hidden" name="this_file" value="firmware.htm">
+	<input type="Hidden" name="next_file" value="firmware.htm">
+	<input type="Hidden" name="todo" value="save">
+	<input type="hidden" name="message" value="@message#">
+	<input type="hidden" name="video_file" value="@video_file#">
+	</form>
+    </div>
+    </div> <!--  newContentArea end -->  
+</body>
+</html>

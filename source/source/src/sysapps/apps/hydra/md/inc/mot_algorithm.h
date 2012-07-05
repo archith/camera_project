@@ -1,0 +1,12 @@
+#ifndef _MOT_ALGORITHM_H_
+#define _MOT_ALGORITHM_H_
+
+#define ALGORITHM_FAST_LEVEL    9999
+#define DEFAULT_FAST_FACTOR     2
+
+#define	STAND_ALGRTH		0
+#define FAST_ALGRTH		1
+#define FAST_STAND_ALGRTH	2
+
+
+#endif

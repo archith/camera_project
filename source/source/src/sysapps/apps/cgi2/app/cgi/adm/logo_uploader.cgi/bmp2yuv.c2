@@ -1,0 +1,341 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+#define min(a,b)	(a<b)?a:b
+
+typedef struct tgBitmapFileHeader
+{
+	unsigned short bfType;
+	unsigned int bfSize;
+	unsigned short bfRes1;
+	unsigned short bfRes2;
+	unsigned int bfOffBits;
+} __attribute__ ((packed)) bmfh_t;
+
+typedef struct tgBitmapInfoHeader
+{
+	unsigned int biSize;
+	long biWidth;
+	long biHeight;
+	short biPlanes;
+	short biBitCount;
+	long biCompression;
+	long biSizeImage;
+	long biXPelsPerMeter;
+	long biYPelsPerMeter;
+	long biClrUsed;
+	long biClrImportant;
+} __attribute__ ((packed)) bmih_t;
+
+bmfh_t bmfh;
+bmih_t bmih;
+
+static int
+loaddigitbmp (char *file, unsigned char **pimage)
+{
+	int fd = 0, rc = -1;
+	fd = open (file, O_RDONLY | O_EXCL);
+	if (fd < 0)
+	{
+		printf ("Failed to open bmp file %s\n", file);
+		goto EXIT;
+	}
+
+	rc = read (fd, &bmfh, sizeof (bmfh_t));
+	rc = read (fd, &bmih, sizeof (bmih_t));
+
+#if 1
+	printf ("bmfh bfType = %x bfSize = %d bfOffBits = %d\n",
+		bmfh.bfType, bmfh.bfSize, bmfh.bfOffBits);
+	printf ("bmih biSize   = %d\n", bmih.biSize);
+	printf ("bmih biWidth  = %ld\n", bmih.biWidth);
+	printf ("bmih biHeight = %ld\n", bmih.biHeight);
+	printf ("bmih biPlanes = %d\n", bmih.biPlanes);
+	printf ("bmih biBitCount = %d\n", bmih.biBitCount);
+	printf ("bmih biCompression = %ld\n", bmih.biCompression);
+	printf ("bmih biSizeImage = %ld\n", bmih.biSizeImage);
+	printf ("bmih biXPelsPerMeter = %ld\n", bmih.biXPelsPerMeter);
+	printf ("bmih biYPelsPerMeter = %ld\n", bmih.biYPelsPerMeter);
+	printf ("bmih biClrUsed = %ld\n", bmih.biClrUsed);
+	printf ("bmih biClrImportant = %ld\n", bmih.biClrImportant);
+	printf ("size = %ld\n",
+		bmih.biWidth * bmih.biHeight * bmih.biBitCount / 8);
+#endif
+	/* only support bitcount 'b' RGB bmp */
+	if (bmih.biCompression != 0 /* BI_RGB */  ||
+	    (bmih.biBitCount != 24))
+	{
+		printf ("Only support RGB%d bitmap\n", 24);
+		rc = -1;
+		goto EXIT;
+	}
+
+
+	if (bmih.biSize - rc > 0)
+	{
+		char *p;
+		printf ("skip %d bytes data\n", bmih.biSize - rc);
+		p = alloca (bmih.biSize - rc);
+		if (p == NULL)
+		{
+			printf ("Failed to allocate memory\n");
+			rc = -1;
+			goto EXIT;
+		}
+		rc = read (fd, p, bmih.biSize - rc);
+	}
+
+	*pimage = (unsigned char *) malloc (bmfh.bfSize - bmfh.bfOffBits);
+	if (*pimage == NULL)
+	{
+		printf ("Failed to allocate memory\n");
+		goto EXIT;
+	}
+#if 1
+	printf ("image [%p %p]\n", *pimage,
+		*pimage + bmfh.bfSize - bmfh.bfOffBits);
+#endif
+
+
+	rc = read (fd, *pimage, bmfh.bfSize - bmfh.bfOffBits);
+	if (rc != bmfh.bfSize - bmfh.bfOffBits)
+	{
+		printf ("Failed to read image rc = %d size = %d\n", rc,
+			bmfh.bfSize - bmfh.bfOffBits);
+		rc = -1;
+		goto EXIT;
+	}
+
+	rc = 0;
+      EXIT:
+	if (fd)
+		close (fd);
+	return rc;
+}
+
+
+int
+main (int argc, char **argv)
+{
+	unsigned int r, g, b;
+	unsigned int Y, U, V;
+	unsigned int Yoffset = 0;
+	unsigned int Uoffset = 0;
+	unsigned int Voffset = 0;
+	unsigned char *pbmp = NULL;
+	unsigned char *ptr;
+	unsigned char *pY, *pU, *pV = NULL;
+	int uvsize = 0;
+	int ysize = 0;
+	int rc;
+	int height, i;
+	int bmpstride;
+	int ofd;
+	int quadwidth;
+
+	rc = loaddigitbmp (argv[1], &pbmp);
+	if (rc < 0)
+	{
+		printf ("Failed to load %s file\n", argv[1]);
+		return 0;
+	}
+
+	/* check the dimension of BMP file */
+
+	/* the horizontal line is not a quadruple */
+	if( bmih.biWidth%2 != 0 )
+		quadwidth = bmih.biWidth+1;
+	else
+		quadwidth = bmih.biWidth;
+
+	bmpstride = bmih.biWidth*3 + bmih.biWidth%4;
+
+	/* allocate memory for YUV file */
+	uvsize = quadwidth*bmih.biHeight/2;
+	ysize = bmih.biWidth*bmih.biHeight;
+
+	pY = (unsigned char *) malloc ( ysize + uvsize);
+	
+	memset( pY, 0, ysize+uvsize);
+	pU = pY + ysize;
+	/* the iamge height can be divided by 2 , U and V has the same size*/
+	if ( bmih.biHeight %2 == 0)
+		pV = pU + uvsize/2 ;
+	else
+		pV = pU + (bmih.biHeight +1 )/2*quadwidth/2;
+
+	printf(" pY %p, pU %p , pV %p\n", pY, pU, pV);
+
+	if (pY == NULL || pU == NULL || pV == NULL)
+		return 0;
+
+	for (height = 0; height < bmih.biHeight ;height++)
+	{
+		ptr= pbmp + (bmih.biHeight- 1 - height) * bmpstride;
+
+		/* convert format */
+		for ( i = 0 ; i < quadwidth; i++)
+		{
+
+		unsigned int r1, g1, b1;
+		unsigned int r2, g2, b2;
+		unsigned int r3, g3, b3;
+		unsigned int r4, g4, b4;
+
+		/* Y planar */
+		if( i < bmih.biWidth)
+		{
+		r = *(ptr + i * 3 + 2);
+		g = *(ptr + i * 3 + 1);
+		b = *(ptr + i * 3 );
+		Y = min (abs (r * 2104 + g * 4130 + b * 802 + 4096 + 131072)
+			 >> 13, 235);
+		*(pY + Yoffset) = Y;
+		Yoffset++;
+		}
+		/* U planar */
+		if(((height  % 2) == 0) && ( i < bmih.biWidth))
+		{
+			/* height is not even number */
+			if ((height == bmih.biHeight- 1) && ( i%2==0))
+			{
+				r1 = *(ptr + i * 3 + 2);
+				g1 = *(ptr + i * 3 + 1);
+				b1 = *(ptr + i * 3 );
+				r2 = *(ptr + i * 3 + 5);
+				g2 = *(ptr + i * 3 + 4);
+				b2 = *(ptr + i * 3 + 3);
+
+				/* the stuffing byte for quadruple 
+				   will be skip */
+				if (i ==  bmih.biWidth -1 )
+				{
+				r = r1;
+				g = g1;
+				b = b1;
+				}
+				else
+				{
+				r = (r1 + r2 ) / 2;
+				g = (g1 + g2 ) / 2;
+				b = (b1 + b2 ) / 2;
+				}
+				U = min (abs
+				 (r * -1214 + g * -2384 + b * 3598 +
+				  4096 + 1048576) >> 13, 240);
+
+				*(pU + Uoffset) = U;
+				Uoffset++;
+
+			}
+			else if ((height != bmih.biHeight- 1) && ( i%2==0))
+			{
+				r1 = *(ptr + i * 3 + 2);
+				g1 = *(ptr + i * 3 + 1);
+				b1 = *(ptr + i * 3 );
+				r3 = *(ptr + i * 3 - bmpstride + 2);
+				g3 = *(ptr + i * 3 - bmpstride + 1);
+				b3 = *(ptr + i * 3 - bmpstride);
+				r2 = *(ptr + i * 3 + 5);
+				g2 = *(ptr + i * 3 + 4);
+				b2 = *(ptr + i * 3 + 3);
+				r4 = *(ptr + i * 3 - bmpstride + 5);
+				g4 = *(ptr + i * 3 - bmpstride + 4);
+				b4 = *(ptr + i * 3 - bmpstride + 3);
+				/* the stuffing byte for quadruple 
+				   will be skip */
+				if ( i ==  bmih.biWidth - 1)
+				{
+				r = (r1 + r3 ) / 2;
+				g = (g1 + g3 ) / 2;
+				b = (b1 + b3 ) / 2;
+				}
+				else
+				{
+				r = (r1 + r2 + r3 + r4) / 4;
+				g = (g1 + g2 + g3 + g4) / 4;
+				b = (b1 + b2 + b3 + b4) / 4;
+				}
+			
+				U = min (abs
+				 (r * -1214 + g * -2384 + b * 3598 +
+				  4096 + 1048576) >> 13, 240);
+
+				*(pU + Uoffset) = U;
+				Uoffset++;
+
+			}
+		}
+
+		/* V planar */
+		if(( (height% 2) == 1) && ( i < bmih.biWidth))
+		{
+			if (i % 2 == 0)
+			{
+				r1 = *(ptr + i * 3 + 2);
+				g1 = *(ptr + i * 3 + 1);
+				b1 = *(ptr + i * 3 );
+				r3 = *(ptr + i*3 + bmpstride + 2);
+				g3 = *(ptr + i*3 + bmpstride + 1);
+				b3 = *(ptr + i*3 + bmpstride );
+				r2 = *(ptr + i * 3 + 5);
+				g2 = *(ptr + i * 3 + 4);
+				b2 = *(ptr + i * 3 + 3);
+				r4 = *(ptr + i*3 + bmpstride + 5);
+				g4 = *(ptr + i*3 + bmpstride + 4);
+				b4 = *(ptr + i*3 + bmpstride + 3);
+				
+				if( i ==  bmih.biWidth -1)
+				{
+				r = (r1 + r3 ) / 2;
+				g = (g1 + g3 ) / 2;
+				b = (b1 + b3 ) / 2;
+				}
+				else
+				{
+				r = (r1 + r2 + r3 + r4) / 4;
+				g = (g1 + g2 + g3 + g4) / 4;
+				b = (b1 + b2 + b3 + b4) / 4;
+				}
+
+				V = min (abs
+					 (r * 3598 + g * -3013 + b * -585 +
+					  4096 + 1048576) >> 13, 240);
+
+				*(pV + Voffset) = V;
+				Voffset++;
+			}
+		}
+
+
+			
+		}
+	}
+
+
+
+
+	printf (" Yoff %d, Uoff %d, Voff %d\n", Yoffset, Uoffset, Voffset);
+	ofd = open ("logo.yuv", O_RDWR | O_CREAT,  S_IRWXU );
+	if (ofd < 0)
+		fprintf (stderr, " open logo.yuv failed\n");
+
+	rc = 0;
+
+	while ( ysize+uvsize - rc > 0)
+	{
+		rc += write (ofd, pY + rc, ysize + uvsize - rc);
+	}
+
+	close (ofd);
+
+	free (pbmp);
+	free (pY);
+	return 0;
+}

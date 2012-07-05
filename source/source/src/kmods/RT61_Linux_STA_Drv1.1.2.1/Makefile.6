@@ -1,0 +1,116 @@
+######################################################################
+#	Module Name: Makefile
+#	Abstract: Makefile for rt61 linux driver on kernel series 2.6 
+######################################################################
+
+
+#Enable for wpa_supplicant's spcific driver "driver_ralink.c", default enabled.
+HAS_RALINK_WPA_SUPPLICANT_SUPPORT=n
+
+#Enable for wpa_supplicant's generic driver "driver_wext.c", used for NetworkManager
+HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=y
+
+WFLAGS := -DAGGREGATION_SUPPORT -DWMM_SUPPORT -Wall -Wstrict-prototypes -Wno-trigraphs
+
+ifeq ($(HAS_RALINK_WPA_SUPPLICANT_SUPPORT),y)
+WFLAGS += -DWPA_SUPPLICANT_SUPPORT
+endif
+
+ifeq ($(HAS_NATIVE_WPA_SUPPLICANT_SUPPORT),y)
+WFLAGS += -DNATIVE_WPA_SUPPLICANT_SUPPORT
+endif
+
+## Comment/uncomment the following line to enable/disable
+#CFLAGS += -DDBG
+
+
+
+CFLAGS+= $(WFLAGS)
+
+obj-m := rt61.o
+
+rt61-objs := rtmp_main.o \
+	mlme.o	\
+	connect.o	\
+	sync.o	\
+	assoc.o	\
+	auth.o	\
+	auth_rsp.o	\
+	rtmp_data.o	\
+	rtmp_init.o	\
+	sanity.o	\
+	rtmp_wep.o	\
+	rtmp_info.o	\
+	eeprom.o	\
+	rtmp_tkip.o	\
+	wpa.o	\
+	md5.o	\
+	rtmp_task.o	\
+	
+
+#ifdef MAT_SUPPORT
+ifeq ($(HAS_ETH_CONVERT),y)
+rt61-objs +=	cmm_mat.o	\
+	cmm_mat_iparp.o	\
+	cmm_mat_ipv6.o	\
+	cmm_mat_pppoe.o
+endif
+#endif // MAT_SUPPORT //
+
+ifeq ($(HAS_NATIVE_WPA_SUPPLICANT_SUPPORT),y)
+rt61-objs += rtmp_wext.o
+endif
+
+## Configuration files on SuSE
+#NDDIR=/etc/sysconfig/network
+#MOD_CONF=/etc/modprobe.d/module-renames
+
+## NDDIR/ifcfg-ra0
+ND_CONF=/etc/sysconfig/network-scripts/ifcfg-ra0
+
+ifdef NDDIR
+	NDDIR := $(NDDIR)
+else
+ 	NDDIR := /etc/sysconfig/network-scripts
+endif
+
+ifdef MOD_CONF
+	MOD_CONF := $(MOD_CONF)	
+else
+	MOD_CONF := /etc/modprobe.conf 
+endif
+
+all: 
+	make -C /lib/modules/$(shell uname -r)/build SUBDIRS=$(shell pwd) modules
+
+clean:
+	rm -rf *.o *~ .*.cmd *.ko *.mod.c .tmp_versions built-in.o
+
+install:
+	make -C /lib/modules/$(shell uname -r)/build \
+	INSTALL_MOD_DIR=extra SUBDIRS=$(shell pwd) \
+	modules_install 
+
+	@echo "Network device directory $(NDDIR)"; 
+	@echo "Module configuration file $(MOD_CONF)";	
+	
+	@if [ -d "$(NDDIR)" ] ; then \
+		if [ ! -f "$(ND_CONF)" ]; then \
+			echo "Create 'ifcfg-ra0' in $(NDDIR)/"; \
+			cp ifcfg-ra0 $(NDDIR)/ ; \
+		fi; \
+ 	fi
+	
+	@if ! grep -q 'ra0' $(MOD_CONF) ; then \
+		echo "append 'alias ra0 rt61' to $(MOD_CONF)"; \
+		echo "alias ra0 rt61" >> $(MOD_CONF) ; \
+ 	fi
+	/sbin/depmod -a
+#	auto copy *.bin to /etc/Wireless/RT61STA
+#	mkdir /etc/Wireless ;
+#	mkdir /etc/Wireless/RT61STA ;
+#	cp $(shell pwd)/*.bin /etc/Wireless/RT61STA ;
+#	cp $(shell pwd)/*.dat /etc/Wireless/RT61STA ;
+
+#	Copy file  on Mandriva 2007.1	
+#	cp $(shell pwd)/*.bin /lib/firmware/ ;

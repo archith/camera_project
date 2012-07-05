@@ -1,0 +1,12 @@
+FW_size=0x800000
+FW_name=$MODEL.bin
+FW_map=(
+	"loader 		0x0"
+	"kernel 		0x70000"
+	"filesystem 		0x140000"
+	"PID 			0x800000-0x4E"
+)
+
+checksum_map=(
+	"0x70000	0x800000"
+)

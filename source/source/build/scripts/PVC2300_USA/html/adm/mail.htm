@@ -1,0 +1,664 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+var PAN_TILT = false;
+
+var showit = "block";
+var hideit = "none";
+var na_var = "n/a";
+
+//////// Mail ///////////
+function setColor(el,newcolor)
+{
+        if (document.all)
+                document.all(el).style.color = newcolor ;
+        else if (document.getElementById)
+                document.getElementById(el).style.color = newcolor ;
+}
+
+function portMsg()
+{
+	rALERT("Mail",msg_change_port);
+}
+
+function setsmtp()
+{
+    var cf = document.forms[0];
+	var smtp = cf.smtp_enable.checked;
+	if(!smtp)
+	{
+		cf.smtp_auth.selectedIndex = 0;  setAuth();
+		cf.smtp2_enable.checked = false;  setsmtp2();
+		cf.en_url.checked = false;  //setAttach();
+	}
+	else
+	{
+		var index = 0;
+		index = getSelIndex(cf.smtp_auth,cf.h_smtp_auth.value,true);  cf.smtp_auth.selectedIndex = index;  setAuth();
+		cf.smtp2_enable.checked = (cf.h_smtp2_enable.value == "enable") ? true : false;  setsmtp2();
+		cf.en_url.checked = (cf.h_en_url.value == "enable") ? true : false;  //setAttach();
+	}
+	cf.amail1.disabled = cf.amail2.disabled = cf.amail3.disabled = cf.asender.disabled = cf.asub.disabled = 
+	cf.en_url.disabled = cf.smtp2_enable.disabled = cf.smtp_auth.disabled = cf.smtp_add.disabled = cf.smtp1_port.disabled =cf.ssl_enable.disabled = !smtp;
+	
+	document.getElementById("SEND_TO_TEXT").disabled = !smtp;
+	document.getElementById("SHOW_FROM_TEXT").disabled = !smtp;
+	document.getElementById("SUBJECT_TEXT").disabled = !smtp;
+	
+	document.getElementById("SMTP_MAIL1_TEXT").disabled = !smtp;
+	document.getElementById("PORT1_TEXT").disabled = !smtp;
+	document.getElementById("testSMTP1").disabled = !smtp;
+//	document.getElementById("OUTGOING_MAIL1_TEXT").disabled = !smtp;
+	document.getElementById("AUTHEN1_TEXT").disabled = !smtp;
+	document.getElementById("REQUIRE_SSL1_TEXT").disabled = !smtp;
+//	document.getElementById("SECONDARY_SMTP_TEXT").disabled = !smtp;
+	document.getElementById("SECONDARY_SMTP_DESCRIPTION_TEXT").disabled = !smtp;
+	document.getElementById("ATTACH_TEXT").disabled = !smtp;
+
+}
+
+function setAuth()
+{
+    var cf = document.forms[0];
+	var auth = cf.smtp_auth.options[cf.smtp_auth.selectedIndex].value;
+	cf.smtp_login.disabled = cf.smtp_pw.disabled  = ( auth == "0");
+	cf.pop_name.disabled = ( auth != "2" ) ;
+	setColor("smtplogin",(auth != "0")?"#000000":"#C0C0C0");
+	setColor("smtppw",(auth != "0")?"#000000":"#C0C0C0");
+	setColor("smtppop",(auth == "2")?"#000000":"#C0C0C0");
+}
+
+function setssl()
+{
+    var cf = document.forms[0];
+	if(cf.ssl_enable.checked)
+	{
+		cf.smtp1_port.value = 465;
+	}
+	else
+	{
+		cf.smtp1_port.value = 25;
+	}
+
+}
+
+function setssl2()
+{
+    var cf = document.forms[0];
+	if(cf.ssl2_enable.checked)
+	{
+		cf.smtp2_port.value = 465;
+	}
+	else
+	{
+		cf.smtp2_port.value = 25;
+	}
+
+}
+
+function setsmtp2()
+{
+    var cf = document.forms[0];
+	var smtpp = cf.smtp2_enable.checked;
+	if(!smtpp)
+	{ cf.smtp2_auth.selectedIndex = 0;  setAuth2(); }
+	else
+	{ var index = 0;  index = getSelIndex(cf.smtp2_auth,cf.h_smtp2_auth.value,true);  cf.smtp2_auth.selectedIndex = index;  setAuth2(); }
+	cf.smtp2_auth.disabled = cf.smtp2_add.disabled = cf.smtp2_port.disabled = cf.ssl2_enable.disabled =!smtpp;
+	
+	document.getElementById("SMTP_MAIL2_TEXT").disabled = !smtpp;
+	document.getElementById("PORT2_TEXT").disabled = !smtpp;
+//	document.getElementById("OUTGOING_MAIL2_TEXT").disabled = !smtpp;
+	document.getElementById("AUTHEN2_TEXT").disabled = !smtpp;
+	document.getElementById("REQUIRE_SSL2_TEXT").disabled = !smtpp;
+	document.getElementById("testSMTP2").disabled = !smtpp;
+}
+
+function setAuth2()
+{
+    var cf = document.forms[0];
+	var auth = cf.smtp2_auth.options[cf.smtp2_auth.selectedIndex].value;
+	cf.smtp2_login.disabled = cf.smtp2_pw.disabled  = ( auth == "0");
+	cf.pop2_name.disabled = ( auth != "2" ) ;
+	setColor("smtp2login",(auth != "0")?"#000000":"#C0C0C0");
+	setColor("smtp2pw",(auth != "0")?"#000000":"#C0C0C0");
+	setColor("smtp2pop",(auth == "2")?"#000000":"#C0C0C0");
+}
+
+/*
+function setAttach()
+{
+    var cf = document.forms[0];
+	var attach = cf.en_url.checked;
+	cf.v_url.disabled = !attach;
+}
+*/
+
+
+function chkSPort() {
+    var cf = document.forms[0];
+	if(cf.smtp_add.value!="" && cf.smtp1_port.value == "") {
+		cf.smtp1_port.value = "25";
+	}
+
+	if(cf.smtp2_add.value!="" && cf.smtp2_port.value == "") {
+		cf.smtp2_port.value = "25";
+	}
+}
+
+//////// General ///////////
+function checkData()
+{
+ 	var cf = document.forms[0];
+	var msg = ""; msg1 = "";
+
+	/// Prim ///
+	if (cf.smtp_enable.checked)
+	{
+		msg+= checkBlank(cf.smtp_add,msg_smtp_server);
+		msg+= checkValid(cf.smtp_add, msg_smtp_server, Valid_Strs, 64, false);
+		msg+= checkInt(cf.smtp1_port,msg_smtp_port,1,65534,true);
+		msg+= checkMailAdd(cf.amail1, msg_emaildest1);
+		if(cf.amail2.value.length > 0)
+		msg+= checkMailAdd(cf.amail2, msg_emaildest2);
+		if(cf.amail3.value.length > 0)
+		msg+= checkMailAdd(cf.amail3, msg_emaildest3);
+		msg+= checkMailAdd(cf.asender, msg_emailsrc);
+	
+		//if (cf.en_url.checked)
+		//{ msg+= checkBlank(cf.v_url,msg_v_url); }
+
+		if (cf.smtp_auth.selectedIndex == 1)
+		{
+			msg+= checkBlank(cf.smtp_login, msg_blank_smtp_name);
+			msg+= checkBlank(cf.smtp_pw, msg_blank_smtp_pw);
+		}
+		else if (cf.smtp_auth.selectedIndex == 2)
+		{
+			msg+= checkBlank(cf.smtp_login, msg_blank_smtp_name);
+			msg+= checkBlank(cf.smtp_pw, msg_blank_smtp_pw);
+			msg+= checkBlank(cf.pop_name, msg_blank_pop_name);
+		}
+		else {}
+		/// Sec ///
+		if (cf.smtp2_enable.checked)
+		{
+			msg+= checkBlank(cf.smtp2_add,msg_smtp_server);
+			msg+= checkValid(cf.smtp2_add, msg_smtp_server, Valid_Strs, 64, false);
+			msg+= checkInt(cf.smtp2_port,msg_smtp_port,1,65534,true);
+			if (cf.smtp2_auth.selectedIndex == 1)
+			{
+				msg+= checkBlank(cf.smtp2_login, msg_blank_smtp_name);
+				msg+= checkBlank(cf.smtp2_pw, msg_blank_smtp_pw);
+			}
+			else if (cf.smtp2_auth.selectedIndex == 2)
+			{
+				msg+= checkBlank(cf.smtp2_login, msg_blank_smtp_name);
+				msg+= checkBlank(cf.smtp2_pw, msg_blank_smtp_pw);
+				msg+= checkBlank(cf.pop2_name, msg_blank_pop_name);
+			}
+			else {}
+		}
+	}
+
+	if (msg.length > 1)	{
+		rALERT("Mail",msg);
+		return false;
+	}
+	return true;	
+}
+
+function setData()
+{
+
+    var cf = document.forms[0];
+	var index = 0;
+	dataToVisible(cf);
+	//setAuth();
+	setsmtp();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+		return;
+	chkSPort();
+//	chkPort();
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+var global_var="Mail";
+var global_index="";
+var http_request;
+function showResponse(index)
+{
+	var resp_context;
+	if (http_request.readyState == 4 || http_request.readyState == 'complete')
+	{
+		resp_context = http_request.responseText;
+		if ("" != resp_context)
+		{
+			if(resp_context.length == 55)
+				rINFO("Mail", resp_context);
+			else
+				rALERT("Mail", resp_context);
+			//alert(resp_context);
+		}
+		http_request.abort();
+		http_request = null;
+		if (1 == index)
+		{
+			document.forms[0].smtp_test.disabled = false;
+		}
+		else if(2 == index)
+		{
+			document.forms[0].smtp_test2.disabled = false;
+		}
+	}
+}
+function confirmTest(index)
+{
+	var src_file;
+	var msg = "";
+	var cf = document.forms[0];
+	global_index = index;
+
+	if (1 == index)
+	{
+		msg += checkBlank(cf.smtp_add,msg_smtp_server);
+		msg += checkDomainName(cf.smtp_add,msg_smtp_server,Valid_domain);
+		msg += checkInt(cf.smtp1_port,msg_smtp_port,1,65534,false);
+		if (cf.smtp_auth.checked)
+		{
+			msg+= checkBlank(cf.smtp_login,msg_smtp_login);
+			msg+= checkBlank(cf.smtp_pw, msg_smtp_pw);
+		}
+	}
+	else if (2 == index)
+	{
+		msg+= checkBlank(cf.smtp2_add,msg_smtp_server);
+		msg+= checkDomainName(cf.smtp2_add,msg_smtp_server,Valid_domain);
+		msg+= checkInt(cf.smtp2_port,msg_smtp_port,1,65534,true);
+		if (cf.smtp2_auth.checked)
+		{
+			msg+= checkBlank(cf.smtp2_login,msg_smtp_login);
+			msg+= checkBlank(cf.smtp2_pw, msg_smtp_pw);
+		}
+	}
+    
+	msg+= checkMailAdd(cf.amail1, msg_emaildest1);
+	msg+= checkMailAdd(cf.asender, msg_emailsrc);
+
+	if (cf.amail1.value.length > 0)
+		msg+= checkMailAdd(cf.amail1, msg_emaildest1);
+	if (cf.amail2.value.length > 0)
+		msg+= checkMailAdd(cf.amail2, msg_emaildest2);
+	if (cf.amail3.value.length > 0)
+		msg+= checkMailAdd(cf.amail3, msg_emaildest3);
+	
+	if (msg.length > 1)	
+	{
+		rALERT("Mail", msg);//alert(msg);
+		return false;
+	}
+
+	dataToHidden(cf);
+	//rConfirm("Mail",msg_send_test_mail);
+    
+	if(http_request == null)
+	{
+		if(window.XMLHttpRequest)
+		{ http_request = new XMLHttpRequest(); } 
+		else if(window.ActiveXObject)
+		{
+			try
+			{ http_request = new ActiveXObject("Msxml2.XMLHTTP"); } 
+			catch(e)
+			{
+				try
+				{ http_request = new ActiveXObject("Microsoft.XMLHTTP"); } 
+				catch(e)
+				{ http_request = null; }
+			}
+		}
+	}
+
+	if (!http_request)
+	{
+        rALERT("Mail", 'Giving up: ( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    
+	if (1 == index)
+	{
+		var ssl_e = cf.ssl_enable.checked?"enable":"disable";
+		cf.smtp_test.disabled = true;
+//		cf.pwd_chg_email.value = ( cf.smtp_pw.value != "********" )?1:0;
+		src_file =  '../adm/file.cgi?todo=smtp_test'+
+								'&smtp_add='+cf.smtp_add.value+
+								'&smtp1_port='+cf.smtp1_port.value+
+								'&h_smtp_auth='+cf.smtp_auth.value+
+								'&smtp_login='+cf.smtp_login.value+
+								'&smtp_pw='+cf.smtp_pw.value+
+								'&pop_name='+cf.pop_name.value+
+								'&amail1='+cf.amail1.value+
+								'&amail2='+cf.amail2.value+
+								'&amail3='+cf.amail3.value+
+								'&asender='+cf.asender.value+
+								'&asub='+cf.asub.value+
+								'&h_ssl_enable='+ssl_e+
+								'&next_file=mail.htm';
+								
+	}
+	else if (2 == index)
+	{
+		var ssl_e = cf.ssl2_enable.checked?"enable":"disable";
+//        var smtp2_enable = cf.smtp_test2.checked?"1":"0";
+		cf.smtp_test2.disabled = true;
+//		cf.pwd_chg_email2.value = ( cf.smtp2_pw.value != smtp2_pw_old )?1:0;
+		src_file =  '../adm/file.cgi?todo=smtp_test2'+
+								'&smtp2_add='+cf.smtp2_add.value+
+								'&smtp2_port='+cf.smtp2_port.value+
+								'&h_smtp2_auth='+cf.smtp2_auth.value+
+								'&smtp2_login='+cf.smtp2_login.value+
+								'&smtp2_pw='+cf.smtp2_pw.value+
+								'&pop2_name='+cf.pop2_name.value+
+								'&amail1='+cf.amail1.value+
+								'&amail2='+cf.amail2.value+
+								'&amail3='+cf.amail3.value+
+								'&asender='+cf.asender.value+
+								'&asub='+cf.asub.value+
+								'&h_ssl2_enable='+ssl_e+
+								'&next_file=mail.htm';
+	}
+	http_request.onreadystatechange = function() { showResponse(index); };
+	http_request.open('GET', src_file, true);
+	http_request.send(null);
+
+	return true;	
+
+}
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('Mail');">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Mail</div>
+ 	
+
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+<!--         	<div class="newGroupBoxTitle" style="height:25px;">Mail</div>-->
+     	<div class="newGroupBoxTitle" style="height:25px;">Primary SMTP Server</div>
+        <table class="stdd" cellspacing="0" cellpadding="0">
+<tr>
+	 <td width="21px"><input type="checkbox" name="smtp_enable" id="smtp_enable" value="disable" onClick="setsmtp();" style="margin-left:-3px"></td>
+     <script>				 
+				 if(!isIE())
+					document.getElementById("smtp_enable").style.marginLeft="0px";
+				 </script>
+     <td>Primary SMTP</td>
+</tr>
+   </table>
+   <table class="stdd" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td nowrap class=""><span id="SMTP_MAIL1_TEXT">SMTP Mail Server:</span></td>
+        <td nowrap><input type="text" name="smtp_add" size="20" maxlength="64" style="{width:240}" value="@smtp_add#"></td>
+        <td style="padding-left:4"><span style="color:#8e8e8e" id="OUTGOING_MAIL1_TEXT"> (Outgoing Mail Server)</span></td>
+      </tr>
+      <tr>
+        <td>
+          <span id="PORT1_TEXT">Port: </span></td>
+          <td><input type="text" name="smtp1_port" size="5" maxlength="5" value="@smtp1_port#" style="{width: 40}">
+		</td>
+        
+      </tr>
+      <tr>
+        <td nowrap class=""><span id="AUTHEN1_TEXT">Authentication:</span></td>
+        <td nowrap><select name="smtp_auth" size="1" onChange="setAuth()" style="{width:240}" width=240>
+          <option value="0">Not Required</option>
+          <option value="1">Requires SMTP Authentication</option>
+          <option value="2">Requires POP before SMTP</option>
+        </select>
+        </td>
+      </tr>
+
+
+          <tr>
+            <td nowrap><span id='smtplogin'><b>Account Name:</b></span></td>
+            <td nowrap><input type="text" name="smtp_login" size="16" maxlength="32" style="{width:140}" value="@smtp_login#"></td>
+          </tr>
+          <tr>
+            <td nowrap><span id='smtppw'><b>Password:</b></span></td>
+            <td nowrap><input type="password" name="smtp_pw" size="16" maxlength="16" style="{width:140}" value="@smtp_pw#"></td>
+          </tr>
+          <tr>
+            <td width="112"><span id='smtppop'><b>POP Server Name:&nbsp;</b></span></td>
+            <td nowrap><input type="text" name="pop_name" size="25" maxlength="64" value="@pop_name#" style="{width:140}" width=140></td>
+          </tr>
+          <tr>
+	      <td colspan="2"><span id='testSMTP1'><b><input type="button"  name="smtp_test" value="Test SMTP Server" onClick="confirmTest(1)"></b></span></td>
+		  </tr>
+        </td>
+      </tr>
+      
+      <tr>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+        <td width="21px"><input type="checkbox" name="ssl_enable" id="ssl_enable" value="disable" onClick="setssl();" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ssl_enable").style.marginLeft="0px";
+				 </script>
+        <td><span id="REQUIRE_SSL1_TEXT">Requires SSL Encryption</span></td>
+
+      </tr>
+    </table>
+    
+       <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;"><span id="SECONDARY_SMTP_TEXT">Secondary SMTP Server</span></div>
+    
+    <table class="stdd" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="21px"><input type="checkbox" name="smtp2_enable" id="smtp2_enable" value="enable" onClick="setsmtp2();" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("smtp2_enable").style.marginLeft="0px";
+				 </script>
+        <td><span id="SECONDARY_SMTP_DESCRIPTION_TEXT">Secondary SMTP</span></td>
+      </tr>
+    </table>
+    
+    <table class="stdd" cellspacing="0" cellpadding="0">
+      <tr>
+        <td nowrap class=""><span id="SMTP_MAIL2_TEXT">SMTP Mail Server:</span></td>
+        <td nowrap><input type="text" name="smtp2_add" size="20" maxlength="64" style="{width:240}" value="@smtp2_add#"></td>
+        <td style="padding-left:4"><span style="color:#8e8e8e" id="OUTGOING_MAIL2_TEXT"> (Outgoing Mail Server)</span></td>
+      </tr>
+      <tr>
+        
+        <td>
+          <span id="PORT2_TEXT">Port: </span></td>
+          <td><input type="text" name="smtp2_port" size="5" maxlength="5" value="@smtp2_port#" style="{width: 40}">
+		</td>
+        
+        
+      </tr>
+	  <tr>
+        <td nowrap class=""><span id="AUTHEN2_TEXT">Authentication:</span></td>
+        <td nowrap><select name="smtp2_auth" size="1" onChange="setAuth2()" style="{width:240}" width=240>
+          <option value="0">Not Required</option>
+          <option value="1">Requires SMTP Authentication</option>
+          <option value="2">Requires POP before SMTP</option>
+        </select>
+        </td>
+      </tr>
+    
+          <tr>
+            <td nowrap><span id='smtp2login'><b>Account Name:</b></span></td>
+            <td nowrap><input type="text" name="smtp2_login" size="16" maxlength="32" style="{width:140}" value="@smtp2_login#"></td>
+          </tr>
+          <tr>
+            <td nowrap><span id='smtp2pw'><b>Password:</b></span></td>
+            <td nowrap><input type="password" name="smtp2_pw" size="16" maxlength="16" style="{width:140}" value="@smtp2_pw#"></td>
+          </tr>
+          <tr>
+            <td  width="112"><span id='smtp2pop'><b>POP Server Name:&nbsp;</b></span></td>
+            <td nowrap><input type="text" name="pop2_name" size="25" maxlength="64" value="@pop2_name#" style="{width:140}" width=140></td>
+          </tr>
+          <tr>
+	      <td colspan="2"><span id='testSMTP2'><b><input type="button"  name="smtp_test2" value="Test SMTP Server" onClick="confirmTest(2)"></b></span></td>
+     	</tr>
+        
+        </table></td>
+      </tr>
+            <tr>
+	<table cellpadding="0" cellspacing="0">
+       <tr>
+        <td width="21px"><input type="checkbox" name="ssl2_enable" id="ssl2_enable" value="disable" onClick="setssl2();" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("ssl2_enable").style.marginLeft="0px";
+				 </script>
+        <td><span id="REQUIRE_SSL2_TEXT">Requires SSL Encryption </span></td>
+
+      </tr>
+    </table>
+    
+       <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">E-mail Setup</div>
+    
+    <table class="stdd" cellspacing="0" cellpadding="0">
+      <tr>
+        <td nowrap class="" width="98"><span id="SEND_TO_TEXT">Send To:</span></td>
+        <td><input type="text" name="amail1" size=20 maxlength=48 style="{width:240}" value="@amail1#">
+              <span style="color:#8e8e8e">(E-mail Address #1)</span></td>
+      </tr>
+      <tr>
+        <td nowrap class="">&nbsp;</td>
+        <td><input type="text" name="amail2" size=20 maxlength=48 style="{width:240}" value="@amail2#">
+              <span style="color:#8e8e8e">(E-mail Address #2)</span></td>
+      </tr>
+      <tr>
+        <td nowrap class="">&nbsp;</td>
+        <td><input type="text" name="amail3" size=20 maxlength=48 style="{width:240}" value="@amail3#">
+              <span style="color:#8e8e8e">(E-mail Address #3)</span></td>
+      </tr>
+      <tr>
+        <td  width="112"><span id="SHOW_FROM_TEXT">Show "From" as:</span></td>
+        <td><input type="text" name="asender" size="20" maxlength="48" style="{width:240}" value="@asender#">
+              <span style="color:#8e8e8e">(E-mail Address)</span></td>
+      </tr>
+      <tr>
+        <td nowrap class=""><span id="SUBJECT_TEXT">Subject:</span></td>
+        <td><input type="text" name="asub" size="20" maxlength="48" style="{width:240}" value="@asub#"></td>
+      </tr>
+      <!--
+   <tr> 
+      <td nowrap class="">Motion Detection:</td>
+	  <td nowrap><input type="button" class="btlong180" value="Set Area & Sensitivity" onClick="location.href='file.cgi?next_file=m_detect.htm';doc_back();"></td>
+   </tr>
+-->
+    </table>
+    
+       <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">E-mail Body</div>
+    
+    <table class="stdd" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="21px"><input type="checkbox" name="en_url" id="en_url" value="en_url" onClick="" style="margin-left:-3px"></td>
+        <script>				 
+				 if(!isIE())
+					document.getElementById("en_url").style.marginLeft="0px";
+				 </script>
+        <td>     <!-- setAttach() -->
+          <span id="ATTACH_TEXT">Attach Video Streaming URL Address</span>
+          <!-- input type="text" name="v_url" size="20" maxlength="48" style="{width:220}" value="@v_url#" --></td>
+      </tr>
+      <!--
+	<tr>
+	 <td nowrap><input type="checkbox" name="en_attach" value="en_attach" onClick=""> 
+	 Enable Video/Image Attachment </td>
+	 </tr>
+	 -->
+    </table>
+    
+
+
+
+
+</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=mail.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='options.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+    
+    <input type="Hidden" name="h_v_mode" value="@h_v_mode#">
+<input type="Hidden" name="h_videotype" value="@h_videotype#">
+<input type="Hidden" name="h_smtp_enable" value="@h_smtp_enable#">
+<input type="Hidden" name="h_ssl_enable" value="@h_ssl_enable#">
+<input type="Hidden" name="h_ssl2_enable" value="@h_ssl2_enable#">
+
+<input type="Hidden" name="h_smtp_auth" value="@h_smtp_auth#">
+<input type="Hidden" name="h_smtp2_enable" value="@h_smtp2_enable#">
+<input type="Hidden" name="h_smtp2_auth" value="@h_smtp2_auth#">
+<input type="Hidden" name="h_a_vlen" value="@h_a_vlen#">
+<input type="Hidden" name="h_en_url" value="@h_en_url#">
+
+<input type="Hidden" name="this_file" value="mail.htm">
+<input type="Hidden" name="next_file" value="mail.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+
+</form> 
+</div> <!--  newContentArea end -->      
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+The CGIs are for the Linksys One. We have to prepare four CGIs for them.
+
+AC1. https://<ip>/camera_api/CreateAudioRTP?<parameters>
+	accept= G.711U | G.711A | G.729
+	maxPacket=10..200
+     Creates an audio RTP stream between camera and remote device
+     maxPacket is the interval (ms) to send the RTP packet.
+
+AC2. https://<ip>/camera_api/StartAudioRTP?<parameters>
+	remoteIP=<dotted IP v4 address>
+	remotePort=<number>
+     Start audio RTP streaming to specified remote IP and port number.
+
+AC3. https://<ip>/camera_api/StopAudioRTP
+     This will cause the camera to stop output stream to remote device. This 
+     message may be followed by another StartAudioRTP.
+
+AC4. https://<ip>/camera_api/DestroyAudioRTP
+     This will tear down a complete audio RTP stream.
+
+
+File List
+
+g711.c		- The G.711 codec.
+makefile	- makefile, the CGIs will link the libpond.so. This is the CGI2 library.
+ra_client.c	- For test purpose.
+ra_create.c	- AC1 source code.
+ra_create.h	- AC1 header file.
+ra_debug.c	- Debug function.
+ra_destroy.c	- AC4 source code.
+ra_dsp.c	- Source to control the speaker-out.
+ra_func.c	- Recognize the command type.
+ra_func.h	- Header file.
+ra_globals.h	- Global header file.
+ra.h		- Header file.
+ra_main.c	- Main function source code.
+ra_response.c	- Return the HTTP header and message to client.
+ra_start.c	- AC2 source code.
+ra_start.h	- AC2 header file.
+ra_stop.c	- AC3 source code.
+readme		- The file you are viewing.
+

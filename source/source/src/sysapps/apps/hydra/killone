@@ -1,0 +1,3 @@
+#!/bin/sh
+PP_ID=`pidof -s $2`
+kill $1 $PP_ID

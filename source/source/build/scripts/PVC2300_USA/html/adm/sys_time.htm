@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>PVC2300 Internet Camera</title>
+
+<meta name="description" content="PVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+var maxdays = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+var minyear = 2005;
+var maxyear = 2030;
+
+function checkData()
+{
+    var cf = document.forms[0];
+	var SetTime  = new Date();
+	var dateStr;
+	dataToHidden(cf);
+	dateStr = cf.h_yr.value + "/" + cf.h_mth.value + "/" + cf.h_day.value + " " +
+                cf.h_hr.value + ":" + cf.h_min.value + ":" + cf.h_sec.value;
+	SetTime.setTime(Date.parse(dateStr));
+	cf.pctimezone.value = getGMTOffset();
+	cf.submit();
+}
+
+function syncPC()
+{
+    var cf = document.forms[0];
+    var SysTime = new Date();
+	
+	cf.h_yr.value = SysTime.getFullYear();
+	cf.h_mth.value = SysTime.getMonth() + 1;
+	cf.h_day.value = SysTime.getDate();
+	cf.h_hr.value = SysTime.getHours();
+	cf.h_min.value = SysTime.getMinutes();
+	cf.h_sec.value = SysTime.getSeconds();
+	cf.pctimezone.value = getGMTOffset();
+	
+	getServerTime();
+	cf.submit();
+}
+
+function getGMTOffset()
+{
+  var SysTime = new Date();
+  var offSetMin = SysTime.getTimezoneOffset();
+  var offSetHr =  (offSetMin/60) * -1 ;
+  return offSetHr;
+}  
+
+
+var ServerTime = new Date();
+var delaytime = 1000;  // update display interval
+var toffset ;          // time diff betweeen PC and Server
+
+function getServerTime()
+{
+  var cf = document.forms[0];
+  var SysTime = new Date();
+  var dateStr = cf.h_mth.value + "/" + cf.h_day.value + "/" + cf.h_yr.value + " "  +
+                cf.h_hr.value + ":" + cf.h_min.value + ":" + cf.h_sec.value;
+  ServerTime.setTime(Date.parse(dateStr));
+  toffset = ServerTime - SysTime;
+  showDates();
+  setInterval("showDates();",delaytime);
+}
+
+function showDates()
+{
+    var SysTime = new Date();
+	ServerTime.setTime(SysTime.getTime() + toffset);
+	displayDate("serverTimer", ServerTime);
+	displayDate("pcTimer", SysTime);
+}
+
+function displayDate(idname, dateObj)
+{
+    var cf = document.forms[0];
+	var M  = d2(dateObj.getMonth()+1);
+	var D  = d2(dateObj.getDate());
+//	var Y  = (dateObj.getFullYear() - 2000) + "" ;
+	var Y  = (dateObj.getFullYear()) + "" ;
+	var hh = d2(dateObj.getHours());
+	var mm = d2(dateObj.getMinutes());	
+	var ss = d2(dateObj.getSeconds());
+
+	if( Y.length < 2)
+		Y = "0" + Y;
+
+	var dateYMD =  "" +  Y + "/" + M + "/" + D + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateMDY =  "" +  M + "/" + D + "/" + Y + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateDMY =  "" +  D + "/" + M + "/" + Y + "&nbsp;  " + hh + ":" + mm + ":" + ss;
+	var dateStr = dateMDY;
+	
+    if (document.all)
+          document.all(idname).innerHTML = dateStr;
+    else if (document.getElementById)
+          document.getElementById(idname).innerHTML = dateStr;
+}
+
+
+function d2(dv)  // put 0 in front if only 1 char or number
+{
+	var newDV = "" + dv;
+	if(newDV.length == 1)
+		newDV = "0" + newDV;
+	return newDV;
+}
+
+function setMinSec()
+{
+    var cf = document.forms[0];
+	if (cf.hr.value == "24")
+	{
+		cf.min.selectedIndex = getSelIndex(cf.min, "00");
+		cf.min.disabled = true;
+		cf.sec.selectedIndex = getSelIndex(cf.sec, "00");
+		cf.sec.disabled = true;
+	}
+	else
+	{
+		cf.min.disabled = false;
+		cf.sec.disabled = false;
+	}
+}	
+
+function setDays(Mobj, Dobj, Yobj) 
+{
+ 	var cf = document.forms[0];
+	var year = parseInt(Yobj.value);
+	var cyear = new Date();
+	var month = Mobj.value;
+	var day = Dobj.value;
+	if ( isNaN(day))
+		day = 0;
+	if ( isNaN(month)) 
+		return;
+	if ( isNaN(year) || year < minyear || year > maxyear)
+		year = cyear.getFullYear();
+	var leapyear = (month == 2 && year % 4 == 0) ? 1 : 0;
+	var maxday = maxdays[month-1] + leapyear;
+	Dobj.options.length = 0;
+	for (var i = 1; i < maxday + 1; i ++)
+		Dobj.options[Dobj.options.length] = new Option(i,i);
+	Dobj.value = ( day <= Dobj.options.length ) ? day : (day - 1 <= Dobj.options.length ) ? day - 1 : "1";
+}
+
+function init()
+{
+    var cf = document.forms[0];
+	getServerTime();
+	dataToVisible(cf);
+	dataToVisible(cf);
+	setDays(cf.mth,cf.day,cf.yr);
+	if(opener)
+	{
+		if(opener.toffset)
+			opener.toffset = toffset;
+        }
+}
+
+
+// End Script -->
+</script>
+
+<link rel="icon" href="../images/cisco.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="../images/cisco.ico" type="image/x-icon" />
+
+</head>
+<body onLoad="window.focus();init();showMsg('Basic Setup');" style=" background-color:#D9E3E9">
+     <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+
+ 	<br>
+
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPanePopup">
+	<div class="newGroupBoxTitle" style="height:25px;">Set Date/Time</div>
+<table>
+			    <tr>
+				<td valign="top">PC's Date &amp; Time: &nbsp;&nbsp; </td>
+				<td valign="top">
+					<div class="indent8">
+						<span ID="pcTimer"> </span>
+					</div>
+				</td>
+			    </tr>
+				
+			    <tr>
+				<td valign="top">Camera Date &amp; Time: &nbsp;&nbsp; </td>
+				<td valign="top">
+					<div class="indent8">
+						<span ID="serverTimer"> </span>
+					</div>
+				</td>
+			    </tr>
+				
+			    <tr>
+				<td valign="top"> </td>
+				<td valign="top">
+					<div class="indent8">
+						<input type="button" value="Sync with PC" class="msbutton" onClick="syncPC()">
+					</div>
+				</td>
+			    </tr>
+	<!--			
+			    <tr>
+				<td colspan="2"> 
+                <hr class="newHR">
+				<br style="height:10px">
+                </td>
+			    </tr>
+-->
+			    <tr>
+				<td valign="top">New Date: &nbsp;&nbsp; </td>
+				<td valign="top">
+					<div class="indent8">
+<select name="mth" size="1" onChange="setDays(this,this.form.day,this.form.yr)">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+</select>
+/
+<SELECT size="1" name="day"> 
+<option value="1">1</option>
+<option value="2">2</OPTION>
+<option value="3">3</OPTION>
+<option value="4">4</OPTION>
+<option value="5">5</OPTION>
+<option value="6">6</OPTION>
+<option value="7">7</OPTION>
+<option value="8">8</OPTION>
+<option value="9">9</OPTION>
+<option value="10">10</OPTION>
+<option value="11">11</OPTION>
+<option value="12">12</OPTION>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>
+/
+<SELECT size=1 name="yr" onChange="setDays(this.form.mth,this.form.day,this)"> 
+<option value="2005">2005</option>
+<option value="2006">2006</option>
+<option value="2007">2007</option>
+<option value="2008">2008</option>
+<option value="2009">2009</option>
+<option value="2010">2010</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+</select>
+					</div>
+				</td>
+			    </tr>
+				
+			    <tr>
+				<td valign="top">New Time: &nbsp;&nbsp;
+				</td>
+				<td valign="top">
+					<div class="indent8">
+<select name="hr" size="1" onChange="setMinSec()">
+<option value="0">00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+</select> :
+<select name="min" size="1">
+<option value="0">00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+</select> : 
+<select name="sec" size="1">
+<option value="0">00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+</select> (hh:mm:ss)						
+					</div>
+				</td>
+			    </tr>
+				
+			    <tr>
+				<td valign="top"> </td>
+				<td valign="top">
+					<div class="indent8">
+						<input type="submit" value="Set New Time" class="msbutton" onClick="return checkData()">
+					</div>
+				</td>
+			    </tr>
+
+
+
+
+</table>
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRowPopup" >
+<!--<input type="button" name="refresh" value="Refresh" class="newButton" onClick="location.href='file.cgi?next_file=sys_time.htm'"> &nbsp;-->
+					<input type="button" name="close" value="Close" class="newButton" onClick="self.close()">
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+
+<input type="hidden" name="h_yr" value="@h_yr#">
+<input type="hidden" name="h_mth" value="@h_mth#">
+<input type="hidden" name="h_day" value="@h_day#">
+<input type="hidden" name="h_hr" value="@h_hr#">
+<input type="hidden" name="h_min" value="@h_min#">
+<input type="hidden" name="h_sec" value="@h_sec#">
+
+<input type="Hidden" name="pctimezone" value="" title="not set by CGI">
+
+<input type="Hidden" name="this_file" value="sys_time.htm">
+<input type="Hidden" name="next_file" value="sys_time.htm">
+<input type="Hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+</form>
+</div> <!--  newContentArea end -->  
+</body>
+</html>

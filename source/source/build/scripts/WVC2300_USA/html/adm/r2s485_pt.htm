@@ -1,0 +1,497 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+<style>
+.padbox {
+	width: 161px;
+	height: 150px;
+	background-image: url(../buttons/background32.gif);
+	background-repeat: no-repeat;
+}
+</style>
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function init()
+{
+    var cf = document.forms[0];
+    var df = document.forms[1];
+    var ef = document.forms[2];
+	dataToVisible(cf);
+	dataToVisible(df);
+	dataToVisible(ef);
+	set_Video();
+	init_preset_list();
+	displayData();
+}
+
+/* OCX Video init */
+//RELEASE
+	var vmode = "@h_v_mode#";    // mpeg, jpeg, @h_v_mode#
+//DEMO	
+//	var vmode = "mpeg";    // mpeg, jpeg, @h_v_mode#
+
+
+function set_Video()
+{
+	var cf = document.forms[0];
+	var vs = document.getElementById("v_play");
+
+	if (vmode != "")
+	{ vs.style.display = "block"; }
+	else
+	{ vs.style.display = "none"; }
+}
+
+
+
+var dw_push = 	'<img border="0" alt="Video for other Platform/OS" src="../img/video.mjpeg" onError="reloadOnErr(this)">'; 				  
+
+var is_auto_reload = true;
+function reloadOnErr(obj) {
+	if(!is_auto_reload)
+		return;
+	setTimeout("eval('obj.src = obj.src;')", 500);
+}
+
+function dw(message)
+{ document.write(message); }
+
+if(isIE()) { var brow = "IE"; }
+if(isNS()) { var brow = "MZ"; }
+
+function doPlay() 
+{
+	if(vmode != "")
+	{
+		if(isIE())
+		{ dw(dw_error); }
+		else
+		{ dw(dw_push); }
+	}
+	else return false; 
+}
+
+function toggleButtonOver_pad(original,over)
+{
+	if (document.getElementById("pad").src.indexOf(original.replace('..','')) > -1)
+	{ document.getElementById("pad").src = over; }
+	else
+	{ document.getElementById("pad").src = original; }
+}
+
+var IP ="../pt/ptctrl.cgi";
+function move(d)
+{
+	var timestamp = new Date();
+	var variables = "?cmd="+d;
+	document.getElementById("hiddenframe").src = IP+variables+"&ts="+timestamp;
+}
+
+// Preset List Start
+
+function goPreset(position) 
+{
+	//passes cgi command to camera
+	var variables = "?cmd=goto_preset," + position;
+	var timestamp = new Date();
+	document.getElementById("hiddenframe").src = IP + variables+"&ts="+timestamp;
+}
+
+function goHome() 
+{
+	//passes cgi command to camera
+	var variables = "?cmd=goto_home";
+	var timestamp = new Date();
+	document.getElementById("hiddenframe").src = IP + variables+"&ts="+timestamp;
+}
+
+
+function set_cali()
+{
+	goPreset(104);
+}
+
+function set_home()
+{
+	//passes cgi command to camera
+	var variables = "?cmd=set_home";
+	var timestamp = new Date();
+	document.getElementById("hiddenframe").src = IP + variables+"&ts="+timestamp;
+}
+
+function displayData()
+{
+    var cf = document.forms[0];
+    var df = document.forms[1];
+	if(cf.pslist.length > 0)
+	df.pt_pname.value = pnameA[cf.pslist.selectedIndex];
+}
+
+function checkExistedPresetName() {
+  var cf = document.forms[0];
+  var df = document.forms[1];
+	var self_index = cf.h_pslist.value;
+	var self_name = df.pt_pname.value;
+
+	for(var i = 0; i < pnameA.length; i++) {
+		if(i == self_index)
+			continue;
+		
+		if(self_name == pnameA[i]) {
+			rALERT("Set Pan/Tilt",msg_in_presetname);
+			return false;
+		}
+	}
+	return true;
+}
+
+
+var pnameA = ["@preset1#", "@preset2#", "@preset3#", "@preset4#", "@preset5#", "@preset6#", "@preset7#", "@preset8#", "@preset9#"];
+
+function init_preset_list() {
+    var cf = document.forms[0];
+	var indexAdd1 = 0;
+
+	for (i=0; i< pnameA.length; i++) {
+		if(pnameA[i] != "")
+			addOption(cf.pslist, pnameA[i], pnameA[i]);
+	}
+}
+
+function add_pos()
+{
+    var cf = document.forms[0];    
+    var df = document.forms[1];    
+    var thesame = 0; //alan
+    
+    for (ii=0; ii< cf.pslist.length; ii++)  //alan
+    {   
+
+    		if (df.pt_pname.value==cf.pslist.options[ii].value)
+    		{
+    			thesame = 1;
+    			break;
+    		} 				
+    }
+    
+    if (thesame == 0) //alan
+    {
+		    if (cf.pslist.length <9)
+		    {  
+		       //alan
+		    }
+		    else
+		    { 
+		    	rALERT("Set Pan/Tilt",msg_in_max);  //alan
+			return;
+		    }
+			
+   }
+   else  //alan
+   {
+		rALERT("Set Pan/Tilt",msg_in_ptname);  //alan
+		return;
+   }
+   
+   var df = document.forms[1];
+   	if(df.pt_pname.value=="")
+	{
+		rALERT("Set Pan/Tilt",msg_pname_blank);
+		return;
+	}
+    //df.todo.value = "add_preset";
+    df.submit();
+}
+
+function del_pos()
+{
+    var cf = document.forms[0];
+
+    if(chkSelected(cf.pslist, msg_select_preset))
+    cf.todo.value = "delete_preset";
+    cf.submit();
+    
+}
+
+function SaveAll()
+{
+    var ef = document.forms[2];
+
+	ef.todo.value = "save";
+	dataToHidden(ef);
+	ef.submit();
+}
+
+// End Script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="init();">
+     <style>  
+    td {height:30px;}  
+    </style> 
+    <div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">Set Pan/Tilt</div>
+	<div id="formpane" class="newFormPane">
+    
+    <table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td align="center" valign="top">
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+	<TR>
+	<TD nowrap WIDTH="161" bgcolor="#000000" valign="middle">
+	<TABLE WIDTH="161" border=0 cellspacing=0 cellpadding=0 bgcolor="#000000">
+	<TR><TD nowrap="nowrap" align="center" valign="middle">
+<div class="padbox" id="padbox" style="display:block"><img id="pad" src="../buttons/background32.gif" alt="Video Movement" border="0" usemap="#controller" /></div>
+    </TD></TR>
+	
+	</TABLE>
+
+		<br>
+	
+	<table width="161" border=0 cellspacing=0 cellpadding=0>
+     <FORM name="pt01" method="post" action="file.cgi" onSubmit="return false">
+     <tr>
+        <td nowrap="nowrap" align="center" valign="middle"><input type="button" name="hm" value="Set Home" class="msbutton" onClick="set_home();">        </td>
+      </tr>
+      <tr>
+        <td nowrap></td>
+      </tr>
+    </table></TD>
+	<TD nowrap valign="middle" align="center" bgcolor="#000000" width="320" HEIGHT="240" class="annel">
+
+		<div ID="v_play" style="display:none">
+		<font color="#FFFFFF"><script language="javascript" type="text/javascript">doPlay();</script></font>
+		</div>
+	</TD>
+	</TR>
+    </TABLE>
+</td></tr>
+</table>
+
+<table>
+	<TR>
+    	<TD style="height:5px">
+        </TD>
+    </TR>
+</table>
+
+
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+	<TR>
+	<TD nowrap align="left" width="337">
+<table border=0 cellspacing=0 cellpadding=0>
+	<tr>
+	<td class="lc" width="83px">Preset List: </td>
+	<td class="rc" nowrap>
+	<select name="pslist" size="1" onChange="displayData();" style="width:250px">
+        </select>  </td> 
+	</table>
+	</TD>
+	<TD nowrap WIDTH="100">
+<input type="button" value="Remove" class="newbutton" onClick="del_pos();">
+	</TD>
+	</TR>
+   <input type="Hidden" name="h_pslist" value="@h_pslist#">  
+<input type="Hidden" name="this_file" value="r2s485_pt.htm">
+<input type="Hidden" name="next_file" value="r2s485_pt.htm">
+<input type="hidden" name="message" value="@message#">
+<input type="hidden" name="todo" value="connect">
+<input type="hidden" name="h_is_admin" value="@h_is_admin#">
+<input type="hidden" name="h_authorization" value="@h_authorization#">  <!-- YWRtaW46YWRtaW4=   /   @h_authorization# -->
+<DIV ID="hidden_div1" style="position: absolute; visibility:visible; top: -50; left: -50; zindex:1"><INPUT TYPE="text" NAME="test_txt"></DIV>
+</form>
+</TABLE>
+
+
+
+
+
+
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+<FORM name="pt02" method="post" action="file.cgi" onSubmit="return false">
+	<TR>
+	<TD nowrap align="left" width="337">
+<table border=0 cellspacing=0 cellpadding=0>
+	<tr>
+	<td class="lc" width="83px">Preset Name: </td>
+	<td class="rc" nowrap><input type="text" name="pt_pname" size="18" maxlength="16" value="" style="width:250px"></td> 
+	</table>
+	</TD>
+	<TD nowrap WIDTH="100">
+<input type="button" name="apply" value=" Add " class="newbutton" onClick="add_pos();">
+	</TD>
+	</TR>
+<input type="Hidden" name="h_pslist" value="@h_pslist#">  
+<input type="Hidden" name="this_file" value="rs485_pt.htm">
+<input type="Hidden" name="next_file" value="rs485_pt.htm">
+<input type="hidden" name="message" value="@message#">
+<input type="hidden" name="todo" value="save">
+</form>
+</TABLE>
+
+<br>
+
+
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+	<FORM name="pt03" method="post" action="file.cgi" onSubmit="return false">
+	<TR>
+	<TD nowrap align="left" width="400">
+<table border=0 cellspacing=0 cellpadding=0>
+	<tr>
+	<td class="lc" width="83px">Pan Speed: </td>
+	<td class="rc" nowrap>
+	<select name="p_speed" size="1" onChange="" style="width:50px">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    </select>
+	</td> 
+	</table>
+	</TD>
+	<TD nowrap WIDTH="100">&nbsp;
+
+	</TD>
+	</TR>
+</TABLE>
+<br>
+<table border=0 cellspacing=0 cellpadding=0 class="std">
+	<TR>
+	<TD nowrap align="left" width="400">
+<table border=0 cellspacing=0 cellpadding=0>
+	<tr>
+	<td class="lc" width="83px">Tilt Speed: </td>
+	<td class="rc" nowrap>
+	<select name="t_speed" size="1" onChange="" style="width:50px">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+	</select>
+	</td> 
+	</table>
+	</TD>
+	<TD nowrap WIDTH="100">&nbsp;
+
+	</TD>
+	</TR>
+</TABLE>
+ </td>
+
+</tr>
+
+<input type="Hidden" name="h_p_speed" value="@h_p_speed#">  
+<input type="Hidden" name="h_t_speed" value="@h_t_speed#"> 
+<!----><input type="Hidden" name="this_file" value="r2s485_pt.htm">
+<input type="Hidden" name="next_file" value="r2s485_pt.htm">
+<input type="hidden" name="message" value="@message#">
+<input type="hidden" name="todo" value="save">
+</form>
+
+</table>
+
+
+<iframe id="hiddenframe" width="0" height="0" src=""></iframe>				
+
+<!--- controller --->
+<map name="controller" id="controller">
+
+<AREA SHAPE="rect" COORDS="59,4,102,50" title="Move camera up"
+onmouseover="toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_90-2.gif');"
+onmouseout = "toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_90-2.gif');"
+onmousedown="toggleButtonOver_pad('../buttons/b_90-2.gif','../buttons/b_90-3.gif');"
+onmouseup = "toggleButtonOver_pad('../buttons/b_90-2.gif','../buttons/b_90-3.gif');"
+
+onclick="move('U');"
+ondblclick="move('U');"
+/>
+
+<AREA SHAPE="rect" COORDS="13,50,59,93" title="Move camera left"
+onmouseover="toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_left2.gif');"
+onmouseout = "toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_left2.gif');"
+onmousedown="toggleButtonOver_pad('../buttons/b_left2.gif','../buttons/b_left3.gif');"
+onmouseup = "toggleButtonOver_pad('../buttons/b_left2.gif','../buttons/b_left3.gif');"
+
+onclick="move('L');"
+ondblclick="move('L');"
+/>
+
+<AREA SHAPE="rect" COORDS="59,50,102,93" title="Move camera home"
+onmouseover="toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_0-2.gif');"
+onmouseout = "toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_0-2.gif');"
+onmousedown="toggleButtonOver_pad('../buttons/b_0-2.gif','../buttons/b_0-3.gif');goHome();"
+onmouseup = "toggleButtonOver_pad('../buttons/b_0-2.gif','../buttons/b_0-3.gif');"
+/>
+
+<AREA SHAPE="rect" COORDS="102,50,147,93" title="Move camera right"
+onmouseover="toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_right2.gif');"
+onmouseout = "toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_right2.gif');"
+onmousedown="toggleButtonOver_pad('../buttons/b_right2.gif','../buttons/b_right3.gif');"
+onmouseup = "toggleButtonOver_pad('../buttons/b_right2.gif','../buttons/b_right3.gif');"
+
+onclick="move('R');"
+ondblclick="move('R');"
+/>
+
+<AREA SHAPE="rect" COORDS="60,93,103,138" title="Move camera down"
+onmouseover="toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_270-2.gif');"
+onmouseout = "toggleButtonOver_pad('../buttons/background32.gif','../buttons/b_270-2.gif');"
+onmousedown="toggleButtonOver_pad('../buttons/b_270-2.gif','../buttons/b_270-3.gif');"
+onmouseup = "toggleButtonOver_pad('../buttons/b_270-2.gif','../buttons/b_270-3.gif');"
+
+onclick="move('D');"
+ondblclick="move('D');"
+/>
+
+</MAP> 
+
+
+
+
+
+
+
+	</div><!-- formpane end-->
+            <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	   
+  <input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();"> &nbsp;
+  <input type="button" name="cancel" value="Back" class="newbutton" onClick="location.href='file.cgi?next_file=rs485.htm'">
+
+	<br>
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+	</div> <!--  newContentArea end -->  
+</body>
+</html>

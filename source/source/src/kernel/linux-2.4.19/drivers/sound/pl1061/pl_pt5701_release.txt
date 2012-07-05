@@ -1,0 +1,44 @@
+1061 PT5701 Driver Release Note
+-------------------------------
+* Features
+
+  . Provide Open Sound System (OSS) application programming interface in linux.
+  . Provide 2 digitized voice device (dsp and dsp1) for rucording and playback simultaneously
+  . Provide a mixer device for
+        . input channel selected (mic and line)
+        . volume controlling (headphone amp, DAC volume, and FPG volume)
+        . mic boost controlling
+  . Support 12MHz USB frequency and 48KHz, 44.1KHz, 32KHz, 8KHz sampling rate
+  . Support mono and stereo channels
+  . Support 16 bits and 8 bits sample
+  . Provide audio information on /proc/audio
+    - /proc/audio/i2s       - all pt5701 register dump
+    - /proc/audio/info      - buffer usage in last playback
+
+* Kernel Configuration
+    Sound ----->
+       [*] Sound card support
+       Sound devices
+          [*] PL1061 sound device support
+          [*] Prolific PT5701 Audio driver support
+
+
+* Testing Programs
+
+  1. wavplay - play a wave file
+        $ wavplay wavfile
+
+  2. mixer2  - control pt5701 mixer
+        $ mixer2 -h         # list mixer2 usage
+
+  3. wavrec  - record a wave file
+        $ wavrec [-r samplerate] [-c channels] [-b sampesize] [-s] filename
+
+  4. i2cpt   - issue i2c command to pt5701 (address is 0x1a)
+        $ i2cpt             # dump all pt5701
+        $ i2cpt 0x12        # read 0x12 register
+        $ i2cpt 0x12 0      # set 0x12 register as 0
+
+  5. ossbuf  - oss buffer tool
+
+    

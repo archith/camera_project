@@ -1,0 +1,4 @@
+make -f Makefile.module
+#arm-linux-strip zdclient.o
+echo Make module zdclient.o complete
+cp zdclient.o /home/ivan

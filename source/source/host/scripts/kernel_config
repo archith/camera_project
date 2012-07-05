@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if dialog --clear --title "Network Camera Configuration" \
+    --yesno "Run configuration for the Linux Kernel?" 5 60
+then
+    if [ ! -h ${PROJ_ROOT}/src/kernel/linux ]; then
+        cd ${PROJ_ROOT}/src/kernel
+        ln -sf linux-2.4.19 linux
+        cd -
+    fi 
+    if [ "$?" -eq "0" ]; then
+        make -C ${PROJ_ROOT}/src/kernel/linux $1
+    fi
+fi
+
+exit 0

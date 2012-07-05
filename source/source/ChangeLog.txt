@@ -1,0 +1,2928 @@
+########	WVC230 Firmware Change Log	 ########
+*****************************************************************************
+2007/05/02 (Tony, AM 11:00)
+	- Change dhcpcd to infinite from 90 seconds.
+	  src/sysapps/apps/dhcpcd-1.3.22-pl1/dhcpcd.h
+	  src/sysapps/apps/button_ap/DRV_read_push.c
+	  src/sysapps/apps/cgi2/pond/network_lib/network_api/{lan_config.c,
+	  lan_global.h,lan_default.c}
+*****************************************************************************
+2007/03/15 (Yen, PM 04:29)
+	- Fix bug: total videolog size is not restricted
+	  src/sysapps/apps/hydra/event/videolog/videolog.c
+	- Update: check free memory size before create captured file
+	  src/sysapps/apps/hydra/event/build_file.c
+*****************************************************************************
+2007/03/15 (Tony, PM 01:32)
+	- Fix bug:NTP can't work if timezone is changed.
+	  src/sysapps/apps/dsp_dae.c
+	  src/sysapps/apps/Qset/nc_qset.c
+	  src/sysapps/apps/hydra/config.c
+	  src/sysapps/apps/rc.sethost/sethost.c
+	  src/sysapps/apps/cgi2/pond/sys_lib/sys_api/{system_config.c
+						,system_config.h}
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/sys/system_bulk_ops.c
+*****************************************************************************
+2007/03/15 (Yen, AM 11:01)
+	- Fix bug: cannot add more than one event schedule
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/schedule/*
+*****************************************************************************
+2007/03/14 (Yen, PM 08:30)
+	- Fix bug: two equivalent username were allowed
+	  src/sysapps/apps/cgi2/*
+*****************************************************************************
+2007/03/14 (Tony, PM 07:09)
+	- Fix bug:Codec can't work on 128MB SDRAM H/W
+	  lib/modules/plmedia-1.2.9.o
+	  src/kernel/linux/include/asm-arm/arch-pl1029/dma.h
+	- Support UART1 on kernel
+	  src/kernel/linux/include/linux/serial.h
+	  src/kernel/linux/include/asm-arm/arch-pl1029/dma.h
+	  src/kernel/linux/drivers/prolific/{pl_uart.c,pl_uart.h,uart_utils.c
+					,uart_utils.h,uart_regs.c,uart_regs.h}
+*****************************************************************************
+2007/03/14 (Tony, PM 06:30)
+	- Enable openssl definition on wpa_supplicant
+	  src/sysapps/apps/wpa_supplicant
+	  src/sysapps/apps/stunnel/lib
+*****************************************************************************
+2007/03/13 (Rondall, PM 12:00)
+	- Update - Audio RTP
+	  src/sysapps/apps/lighttpd-1.4.13/src/connections.c
+	  src/sysapps/apps/cgi2/app/cgi/camera_api/rtp_audio_upload.cgi/
+		ra_create.c,ra_func.c,ra_destroy.c
+	  src/sysapps/apps/cgi2/pond/audio_shm_lib/audio_shm_lib/audio_shm.h
+*****************************************************************************
+2007/03/10 (Rondall, PM 01:00)
+	- Add the Content-Length to JPEG Server Push
+	  src/sysapps/apps/hydra/jpeg/jpeg.{c,h}
+	- Add the parameter checker for the JPEG Server Push
+	  src/sysapps/apps/hydra/network.c
+	  src/sysapps/apps/hydra/include/common.h
+	  src/sysapps/apps/lighttpd-1.4.13/src/video_handler.c (fix bug)
+	  src/sysapps/apps/lighttpd-1.4.13/src/common.h
+*****************************************************************************
+2007/03/09 (Jeffrey, PM 03:44)
+        - Change CGI defines of snapshot 64x48 and 128x96 .
+	  (Old: 64x48(11),128x96(11) ; New: 64x48(7),128x96(8))
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/image/image_bulk_ops.h
+*****************************************************************************
+2007/03/07 (TONY, PM 03:44)
+	- snapshot.cgi will response error for unsupported quality and size.
+	  src/sysapps/apps/cgi2/app/cgi/snapshot
+*****************************************************************************
+2007/03/06 (TONY, PM 03:44)
+	- Add snapshot.cgi
+	  src/sysapps/apps/cgi2/app/cgi/{snapshot,makefile}
+*****************************************************************************
+2007/03/05 (Sand, PM 06:06)
+	- solve CBR problem, using ANNELX instead of TMN8
+	  src/sysapps/apps/hydra/{config.c, encode.c}
+*****************************************************************************
+2007/03/05 (TONY, PM 03:44)
+	- Fix bug: Qset response incorrect packet in some case.
+	  src/sysapps/apps/Qset/nc_qset.c
+*****************************************************************************
+2007/03/02 (Yen, PM 21:30)
+	- Fix bug: Client action and Http action
+	  src/sysapps/apps/hydra/event/*
+	  src/sysapps/apps/lighttpd-1.4.13/src/client_handler.c
+*****************************************************************************
+2007/03/02 (Jeffrey, PM 06:25)
+        - Update upnp,use CGI2 library.and restart upnp when sencond port
+          changed.
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_mother/bulk_mother.c
+	  src/sysapps/apps/upnp
+	  src/sysapps/apps/upnp_igd_cp
+*****************************************************************************
+2007/03/02 (Rondall, PM 04:00)
+	- Fix BUG: Audio RTP of the Camera API
+	  src/sysapps/apps/hydra/audio/rtp_audio.c
+	  src/sysapps/apps/cgi2/app/cgi/rtp_audio_upload.cgi/ra_start.c
+*****************************************************************************
+2007/03/02 (Jeffrey, PM 03:25)
+        - Add new items(brand/model/version) of bonjour lsys-camera 
+	  service type.	  
+	  src/sysapps/apps/bonjour/mDNSPosix/bonjour_main.c.h
+*****************************************************************************
+2007/03/01 (Yen, PM 09:00)
+	- Fix Bug: Client action
+	  src/sysapps/apps/hydra/event/*
+	  src/sysapps/apps/lighttpd-1.4.13/src/*
+*****************************************************************************
+2007/03/01 (Rondall, PM 08:00)
+	- Fix BUG: Audio RTP of the Camera API
+	  src/sysapps/apps/hydra/audio/rtp_audio.c
+	  src/sysapps/apps/cgi2/pond/audio_shm_lib/audio_shm_lib/audio_shm.h
+	  src/sysapps/apps/cgi2/app/cgi/rtp_audio_upload.cgi/*
+*****************************************************************************
+2007/03/01 (TONY, PM 07:40)
+	-  Update default name of LINKSYS to CAMXXXXXX from LKXXXXX
+	   src/sysapps/apps/rc.sethost/sethost.c
+	   src/sysapps/apps/cgi2/pond/sys_lib/sys_api/system_config.c
+	   src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2007/02/27 (Jeffrey, PM 02:51)
+        - No any indicator value in motion function.
+	  src/sysapps/apps/hydra/md/mot_setup.c
+*****************************************************************************
+2007/02/27 (TONY, PM 01:32)
+	- Add bonjour stop when reboot
+	  src/sysapps/apps/reboot/reboot.c
+*****************************************************************************
+2007/02/26 (Jeffrey, PM 02:24)
+        - Add a new item in config file for bonjour name. 
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/bonj/{bonj_bulk_ops.c,.h} 
+	  src/sysapps/apps/cgi2/pond/base/definition/conf_sec.h 	  
+	  src/sysapps/apps/bonjour/mDNSPosix/{bonjour_main.c,get_devinfo.c}
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2007/02/26 (Rondall, AM 10:30)
+	- Fix BUG: RTP audio download 
+	  src/sysapps/apps/hydra/audio/rtp_audio.c
+*****************************************************************************
+2007/02/15 (Rondall, PM 02:00)
+	- Fix BUG: RTP audio header is incorrect.
+	  src/sysapps/apps/cgi2/app/cgi/rtp_audio_upload.cgi/ra_create.c
+	  src/sysapps/apps/cgi2/pond/audio_shm_lib/audio_shm_lib/audio_shm.h
+	  src/sysapps/apps/hydra/audio/rtp_audio.c
+	  PS. system.conf will be changed when calling CreateAudioRTP 
+*****************************************************************************
+2007/02/14 (Yen, PM 04:00)
+	- Fix bug: missing videolog link
+	  src/sysapps/apps/hydra/event/videolog/Makefile
+*****************************************************************************
+2007/02/14 (Sand, PM 02:45)
+	- change code to using V1.2.8 plmedia.o, introduce new VBR quality map
+	  src/sysapps/apps/hydra/{config.c, encode.c}
+	  src/sysapps/apps/hydra/include/config_table.h
+	- Fix bug: mobile stream detect is not reliable
+	  src/sysapps/apps/hydra/rtp/{rtcp.c, rtp.c}
+	  src/sysapps/apps/hydra/rtsp/parse.c
+*****************************************************************************
+2007/02/13 (TONY, PM 08:08)
+	- Change link library to libpond.so from libcgicomm.so
+	  src/sysapps/apps/{button_ap,ledoff,rc.sethost,Qset,sc_dst,NTP,
+			ntpsetcron,reboot,dsp_dae}
+	  src/sysapps/apps/cgi2/pond/{Makefile,ptz_lib,sys_lib,network_lib,
+					wlan_lib,flash_lib,cron_lib}
+*****************************************************************************
+2007/02/13 (Yen, PM 06:18)
+	- Fix bug: Missing server-busy message
+	  src/sysapps/apps/lighttpd-1.4.13/src/adm_lock.c
+	- Fix bug: lighttpd sometimes does not save all request headers into
+	  data structures
+	  src/sysapps/apps/lighttpd-1.4.13/src/request.c
+*****************************************************************************
+2007/02/13 (TONY, PM 03:18)
+	- Update plmedia.o to V1.2.8 form V1.2.6
+	  lib/modules/plmedia.o (support VBR)
+*****************************************************************************
+2007/02/12 (TONY, PM 03:50)
+	- Add BASE_check_FWImgae()
+	  src/sysapps/apps/cgi2/pond/base/{base_tools.h,base_tools.c}
+*****************************************************************************
+2007/02/12 (Yen, PM 03:50)
+	- Fix bug: sending email to url.com.tw always fail (bare LF in data)
+	  src/sysapps/apps/hydra/event/smtp_notify.c
+*****************************************************************************
+2007/02/10 (Yen, PM 05:11)
+	- Update: authentication on Linksys One passthrough port(8888)
+	  src/sysapps/apps/lighttpd-1.4.13/src/*
+*****************************************************************************
+2007/02/10 (Rondall, PM 02:30)
+	- Update the audio upload CGI and Linksys One CGI
+	  kernel/linux/drivers/sound/pl1061/pl_ac97.c
+	  src/sysapps/apps/cgi/Makefile
+	  src/sysapps/apps/cgi/audio_upload (remove)
+	  src/sysapps/apps/cgi/rtp_audio_upload (remove)
+	  src/sysapps/apps/cgi2/app/cgi/Makefile 
+	  src/sysapps/apps/cgi2/app/cgi/audio_upload.cgi/*
+	  src/sysapps/apps/cgi2/app/cgi/rtp_audio_upload.cgi/*
+	  src/sysapps/apps/hydra/audio/*
+
+	- Extract the relative functions to the library.
+	  src/sysapps/apps/cgi2/pond/Makefile
+	  src/sysapps/apps/cgi2/pond/audio_shm_lib/*
+
+	- Add the standard base 64 de/encoder to library.
+	  src/sysapps/apps/cgi2/pond/base64ed_lib/base64ed.{c,h}
+
+	- Change the linked library from CGI to CGI2
+	  src/sysapps/apps/ccdc_daemon/*
+*****************************************************************************
+2007/02/09 (Yen, PM 04:46)
+	- Fix bug: event schedule
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/schedule/schedule_bulk_ops.c
+	- Update: special pass through port 8888 only accept HTTPS connections
+	  src/sysapps/apps/webd/*
+*****************************************************************************
+2007/02/07 (Konchi, PM 06:13)
+	- Fix OAMP bugs
+	  src/sysapps/apps/cgi2/apps/cgi/oamp.cgi/*
+	- Fix DNSwitch Bug
+	  src/sysapps/apps/cgi2/pond/dnswitch_lib/dnswitch_api/*
+*****************************************************************************
+2007/02/07 (TONY, PM 11:13)
+	- Move upgrade.cgi and cancel.cgi to cig2 form cgi
+	  src/sysapps/apps/cgi2/apps/cgi/{makefile,upgrade.cgi,cancel.cgi}
+	  src/sysapps/apps/cgi2/apps/cgi/file.cgi/web_msg
+	  src/sysapps/apps/cgi2/pond/web_msg/definition/web_msg.h
+	  src/sysapps/apps/cgi/Makefile
+*****************************************************************************
+2007/02/02 (Yen, PM 05:30)
+	- Update CGI2: update APIs in applications(user,web,io,event,smtp,
+	  ftp)
+	  src/syapps/apps/*
+*****************************************************************************
+2007/02/02 (Rondall, PM 05:30)
+	- Fix Bug: Camera API - Audio 
+	  src/sysapps/apps/cgi2/rtp_audio_upload/ra_create.c
+*****************************************************************************
+2007/02/02 (TONY, PM 04:09)
+	- Add NTP port
+	  src/sysapps/apps/NTP/fntp.c
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/libcgicomm/src/ntp
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/sys/
+		{system_bulk_ops.c,system_bulk_ops.h}
+	  src/sysapps/apps/cgi2/pond/base/definition/conf_sec.h
+	  src/sysapps/apps/cgi2/pond/sys_lib/sys_api/{ntp_config.c,ntp_config.h}
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2007/02/01 (Jeffrey, AM 11:41)
+        - Update bonjour, get devname form CGI2.
+	  src/sysapps/apps/bonjour/*
+*****************************************************************************
+2007/02/01 (Rondall, AM 11:20)
+	- Update the Makfile of CGI2
+	  src/sysapps/apps/cgi2/app/cgi/{audio_upload,config_download,
+	      config_upload,irisctrl.cgi,rtp_audio_upload}.cgi/Makefile
+*****************************************************************************
+2007/01/31 (Jeffrey, PM 04:48)
+        - Add "gpl_clean" in some Makefile. 
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/bonjour/*
+	  src/sysapps/apps/upnp/*
+	  src/sysapps/apps/upnp_igd_cp/* 
+	  src/sysapps/apps/ddns/*
+*****************************************************************************
+2007/01/31 (Yen, PM 01:30)
+	- Fix bug: stunnel insert headers into non-http headers
+	  /src/sysapps/apps/stunnel/src/client.c
+*****************************************************************************
+2007/01/31 (Rondall, PM 10:40)
+	- Update CGI2 - audio upload and rtp audio upload/download
+	  /src/sysapps/apps/cgi2/app/cgi/makefile
+	  /src/sysapps/apps/cgi2/app/cgi/audio_upload.cgi/
+	  /src/sysapps/apps/cgi2/app/cgi/rtp_audio_upload.cgi/
+*****************************************************************************
+2007/01/30 (Rondall, PM 06:10)
+	- Update CGI2 - audio upload, config upload and download
+	  src/sysapps/apps/cgi2/app/cgi/makefile
+	  src/sysapps/apps/cgi2/app/cgi/audio_upload.cgi/
+	  src/sysapps/apps/cgi2/app/cgi/config_{download,upload}.cgi
+	  src/sysapps/apps/cgi2/app/cgi/file.cgi/web_msg
+	  src/sysapps/apps/cgi2/pond/conf_lib/conf_api/conf_lib.c
+	  src/sysapps/apps/cgi2/pond/web_msg/definition/web_msg.h
+*****************************************************************************
+2007/01/30 (Jeffrey, PM 03:53)
+        - Fix bug: PTR(11822,11823)
+	  When CGI changed,need to signal hydra to get new motion conf.
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/mot/mot_bulk_ops.c
+*****************************************************************************
+2007/01/30 (Yen, PM 02:00)
+	- Fix bug: stunnel insert headers into POST contents
+	  src/sysapps/apps/stunnel/src/client.c
+*****************************************************************************
+2007/01/29 (Yen, PM 08:40)
+	- Update: Makefile of hydra
+	  src/sysapps/apps/hydra/Makefile
+*****************************************************************************
+2007/01/29 (Yen, PM 04:00)
+	- Update CGI2: read config api used in listen_input, io_init and webd
+	  src/sysapps/apps/hydra/event/listen/*
+	  src/sysapps/apps/io_init/*
+	  src/sysapps/apps/webd/*
+*****************************************************************************
+2007/01/29 (Rondall, PM 01:00)
+	- Add MT CGI - irisctrl.cgi
+	  src/sysapps/apps/cgi2/app/cgi/irisctrl.cgi/
+	  src/sysapps/apps/cgi2/app/cgi/makefile
+	  src/sysapps/apps/ccdc_daemon/{ccdc.c,ccdc.h,topro.c}
+	  src/kmods/tp6830_lnx_951026/pwc-ctrl.c
+
+	  About the usage, please check the readme under
+	  "src/sysapps/apps/cgi2/app/cgi/irisctrl.cgi/readme"
+*****************************************************************************
+2007/01/26 (Yen, PM 02:31)
+	- Update CGI2: event-trigger read config api
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2007/01/25 (Yen, PM 07:31)
+	- Update CGI2: ioctrl.cgi and query_io.cgi
+	  src/sysapps/apps/cgi2/app/cgi/{ioctrl.cgi, query_io.cgi}
+*****************************************************************************
+2007/01/25 (TONY, PM 06:31)
+	- Add domain item on network api
+	  src/sysapps/apps/cgi2/pond/network_lib/network_api/{lan_config.c,
+		lan_config.h}
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/network_bulk_ops.c,
+		network_bulk_ops.h}
+*****************************************************************************
+2007/01/25 (Yen, PM 06:00)
+	- Update CGI2: user config and auth
+	  src/sysapps/apps/cgi2/pond/webulk/webulk_ops/user/user_webulk_ops.c
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/user/user_bulk_ops.*
+	  src/sysapps/apps/auth/*
+*****************************************************************************
+2007/01/25 (Sand, PM 05:15)
+	- Add feature: make grab & encode an independent thread, the main 
+	  loop will be used for sending frames only.
+	  src/sysapps/apps/hydra/hydra.c
+	- Add feature: add a system wide timer in hydra.
+	  src/sysapps/apps/hydra/{Makefile,timer.c}
+	  src/sysapps/apps/hydra/include/{timer.h,MESS.h}
+	  src/sysapps/apps/hydra/osd/osd.c
+*****************************************************************************
+2007/01/25 (Yen, PM 03:00)
+	- Fix bug: users are able to access .htpasswd file
+	  src/sysapps/apps/lighttpd-1.4.13/src/response.c
+*****************************************************************************
+2007/01/25 (TONY, PM 02:30)
+	- Remove WMM from HTML
+	  src/sysapps/apps/install_pool/html/html.wvc2300/adm/basic.htm
+	- Remove time interval from  rs485.htm
+	  src/sysapps/apps/install_pool/html/html.wvc2300/adm/rs485.htm
+	  src/sysapps/apps/install_pool/html/html.pvc2300/adm/rs485.htm
+*****************************************************************************
+2007/01/25 (Jeffrey, PM 01:20)
+        - Fix bug:The length of mDNS's TXT record should not a ASCII
+          Hex,change it to single binary Hex.
+	  src/sysapps/apps/bonjour/*
+*****************************************************************************
+20007/01/25 (Rondall, AM 9:55)
+	- Update CGI2 - Add config maniplution and base64 encode/decode
+	  src/sysapps/apps/cgi2/pond/Makefile
+	  src/sysapps/apps/cgi2/pond/{base64ed_lib,conf_lib} 
+*****************************************************************************
+2007/01/24 (Yen, PM 21:30)
+	- Fix bug: ftpclient does not release memory
+	  src/sysapps/apps/cgi/libcgicomm/src/ftpclient/cmds.c
+*****************************************************************************
+2007/01/24 (Tony, PM 05:25)
+	- Update OAMP
+	  src/sysapps/apps/cgi2/app/cgi/oamp.cgi/*
+*****************************************************************************
+2007/01/24 (Tony, PM 03:43)
+	- Update Qset
+	  src/sysapps/apps/Qset/nc_qset.c
+	- Add remove topro driver on tflash
+	  src/sysapps/apps/cgi/rwf/tflash.c
+*****************************************************************************
+2007/01/24 (Jeffrey, PM 02:30)
+	- Update new format of additional info of mDNS's text record.
+	  src/sysapps/apps/bonjour/*
+*****************************************************************************
+2007/01/24 (Yen, AM 11:10)
+	- Fix bug: number of captured jpeg file is wrong in low frame rate
+	  src/sysapps/apps/hydra/event/{wait_event.c,build_jpg.*,
+					build_file.c}
+*****************************************************************************
+2007/01/24 (Yen, AM 10:30)
+	- Fix bug: stunnel thread sometimes dies
+	  src/sysapps/apps/stunnel/src/client.c
+*****************************************************************************
+2007/01/23 (Jeffrey, PM 04:06)
+	- Add length in bonjour mDNS text record.
+	  src/sysapps/apps/bonjour
+*****************************************************************************
+2007/01/22 (Yen, PM 10:00)
+	- Fix bug: Event log is incorrect
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2007/01/22 (Konchi, PM 3:25)
+	- Fix bug: ASF not support 160x120
+	  src/sysapps/apps/hydra/asf/asf_common.c
+*****************************************************************************
+2007/01/18 (Yen, PM 7:30)
+	- Update event-trigger: reduce the number of global variables
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2007/01/19 (Jeffrey, PM 6:20)
+	- Update Bonjour, add text attribute values(model/serial/hwversion..)
+	  src/sysapps/apps/bonjour/mDNSPosix/bonjour_main.c
+*****************************************************************************
+2007/01/19 (Konchi, PM 5:02)
+	- CGI2 release
+	  src/sysapps/cgi2/*
+*****************************************************************************
+2007/01/18 (Sand, PM 6:02)
+	- Fix bug: logical error cause OSD comsume too much CPU time.
+	  src/sysapps/apps/hydra/osd/osd.c
+*****************************************************************************
+2007/01/17 (Jeffrey, PM 5:05)
+	- Add UPNP/Bonjour depended definiens in new CGI. 
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_mother/bulk_mother.c
+	- Fix bug: SW utility can't get motion trigger.
+	  src/sysapps/apps/hydra/md/main_md.c
+*****************************************************************************
+2007/01/17 (Sand, PM 1:16)
+	- Update configuration read and reload in hydra. Now we use define 
+	  to support different source resolution.
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.h
+	  src/sysapps/apps/hydra/config.c
+*****************************************************************************
+2007/01/16 (Yen, PM 6:40)
+	- Fix bug: event-trigger might not update info when config file
+	  modified
+	  src/sysapps/apps/hydra/event/camera_api_config.c
+*****************************************************************************
+2007/01/15 (Sand, PM 3:48)
+	- Update streaming server, now we support Realplayer and
+	  SonyEricsson's NetFront player
+	  src/sysapps/apps/hydra/{encode.c,hydra.c, network.c}
+	  src/sysapps/apps/hydra/rtp/{rtp.c, rtcp.c}
+	  src/sysapps/apps/hydra/rtsp/{response.c,sdp.c}
+*****************************************************************************
+2007/01/15 (Rondall, AM 11:41)
+	- Fix bug: audio is always reset if reload
+	  src/sysapps/apps/hydra/config.c
+*****************************************************************************
+2007/01/10 (Yen, PM 18:30)
+	- Fix bug: Set output normal status during output generates a pulse
+	  src/kmods/ioport/src/ioport.c
+*****************************************************************************
+2007/01/10 (Rondall, PM 17:30)
+	- Update CCD driver
+	  src/kmods/tp6830_lnx_951026/{pwc-ctrl.c,pwc-ctrl-TI.h}
+*****************************************************************************
+2007/01/10 (TONY, PM 18:17)
+	- Fix bug:Wireless channel always display channel 1
+	  src/sysapps/apps/cgi/cgi/lan.c
+*****************************************************************************
+2007/01/10 (Rondall, PM 17:30)
+	- Update CCD driver
+	  src/kmods/tp6830_lnx_951026/*
+*****************************************************************************
+2007/01/10 (Konchi, PM 16:20)
+	- Fix bug: Incorrect Day/Night Switch time
+	  src/sysapps/apps/cgi/cgi/image.c
+*****************************************************************************
+2007/01/10 (Jeffrey, PM 15:40)
+	- Add "_DEBUG_RENAME_MSG_" define to hide reanme message.
+	  src/sysapps/apps/bonjour/mDNSPosix/Makefile
+	  src/sysapps/apps/bonjour/mDNSCore/mDNS.c	
+*****************************************************************************
+2007/01/10 (Sand, PM 13:40)
+	- Fix bug: Image overlay at boundary will wrap.
+	  src/sysapps/apps/hydra/osd/osd.c
+*****************************************************************************
+2007/01/08 (Rondall, PM 03:30)
+	- Add HW watchdog
+	  src/kmods/Makefile
+	  src/kmods/watchdog
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2007/01/08 (Sand, PM 14:29)
+	- Add mobile player support 
+	  src/sysapps/apps/hydra/config.c
+	  src/sysapps/apps/hydra/rtp/{rtp.c rtp.h, rtcp.c}
+	  src/sysapps/apps/hydra/rtsp/sdp.c
+	  src/sysapps/apps/hydra/include/config_table.h
+*****************************************************************************
+2007/01/08 (Jeffrey, AM 11:56)
+        - New define of DDNS providers for new CGI(bulk).
+	 src/sysapps/apps/ddns/ez-ipupdate-3.0.11b7/ez-ipupdate.c
+	 src/sysapps/apps/cgi2/pond/bulk/bulk_ops/ddns/ddns_bulk_ops.h
+	 src/sysapps/apps/cgi/libcgicomm/src/ddns/ddns.h
+*****************************************************************************
+2007/01/08 (Rondall, AM 11:12)
+	- Fix CGI bug - incorrect AWB value
+	  src/sysapps/apps/cgi/libcgicomm/CMOS_function.h
+	  src/sysapps/apps/ccdc_daemon/topro.c
+*****************************************************************************
+2007/01/08 (TONY, AM 10:35)
+	- Add cgi2 api
+	  src/sysapps/apps/cgi2/pond/bulk/Makefile
+	  src/sysapps/apps/cgi2/pond/bulk/bulk_ops/{wlan,sys,network,ptz,serial}
+*****************************************************************************
+2007/01/05 (TONY, PM 06:13)
+	- Fix bug:pl_uart will init gpio.(reset LED , topro sensor..)
+	  src/kernel/linux/driver/prolific/pl_uart.c
+	- Description allow all graphic character.
+	  src/sysapps/apps/cgi/libcgicomm/src/system_config.c
+	  src/sysapps/apps/cgi/html.wvc2300/adm/basic.htm
+	- Update username and password length
+	  src/sysapps/apps/cgi/libcgicomm/src/user_config.h
+	  src/sysapps/apps/cgi/html.wvc2300/adm/user.htm
+	  src/sysapps/apps/Qset/{nc_qset.c,nc_qset.h}
+*****************************************************************************
+2007/01/05 (Jeffrey, PM 02:40)
+        - Change UPNP model name of PVC2300.
+	  src/sysapps/apps/upnp/{Makefile-pvc2300 , devinfo.h}
+*****************************************************************************
+2007/01/05 (Sand, PM 13:25)
+	- Fix Bug: IP filter range setting incorrect.
+	  src/sysapps/apps/cgi/libcgicomm/src/ipfilter/ipfilter.c
+	- Update rtsp & ipfilter groups of CGI2.
+	  src/sysapps/apps/cgi2/lib/bulk/bulk_ops/{makefile , rtsp, ipfilter}
+*****************************************************************************
+2007/01/05 (Rondall, AM 09:00)
+	- Rename main_mjpeg.htm to mjpeg.htm
+	  src/sysapps/apps/cgi/html.wvc2300/img/mjpeg.htm
+*****************************************************************************
+2007/01/04 (Yen, PM 02:30)
+	- Add ioport driver API (set fasync)
+	  src/sysapps/apps/cgi/libcgicomm/src/io/*
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2007/01/04 (Tony, PM 02:12)
+	- Update i2c-id.h
+	   src/kernel/linux/include/linux/i2c-id.h
+	- Interlace support
+	   src/kmods/plsensor/sony98.c.interlace
+*****************************************************************************
+2007/01/04 (Sand, AM 10:20)
+	- Fix Bug: change resolution will encode inconsistent vop frame
+	- Fix Bug: MPEG4 wrap boundary is 128KB not 128Byte
+	  src/sysapps/apps/hydra/{config.c, encode.c, mmm.c}
+	  src/sysapps/apps/hydra/include/memsize.h
+*****************************************************************************
+2007/01/03 (Jeffrey, PM 3:30)
+        - Get Toolchain path  from "${PROJ_DEVEL_ROOT}".
+	  setenv
+	  src/sysapps/apps/lighttpd-1.4.13/libtool
+	  src/sysapps/busybox-1.01/Rules.mak
+*****************************************************************************
+2007/01/03 (Rondall, AM 11:00)
+	- Handle the errno - ECONNRESET 
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+*****************************************************************************
+2007/01/04 (TONY, PM 10:30)
+	- Update Codec to v1.2.6 from v1.2.5
+	  lib/modules/plmedia.o
+  	- Add tw9910 source code
+	  src/kmods/{Makefile,tw9910}
+*****************************************************************************
+2007/01/03 (TONY, PM 07:00)
+	- Add memconfig.h link on src/sysapps/apps/cgi/libcgicomm/inc
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/src/flash/flash.h
+	- Fix bug:Default device name should be LKXXXXXX
+	  src/sysapps/apps/cgi/libcgicomm/src/sys/{sys_global.h,system_config.c}
+	  src/sysapps/apps/cgi/rwf/tflash.c
+*****************************************************************************
+2006/12/29 (Yen, PM 02:22)
+	- Fix bug: ioctrl.cgi cannot parse "ts" variable
+	  src/sysapps/apps/cgi/ioctrl/ioctrl.c
+	- Fix bug: input triggered while not enabled
+	  src/sysapps/apps/hydra/event/listen/listen_input.c
+	- Fix bug: video length is not enough
+	  src/sysapps/apps/hydra/event/{MP4API.c, ASFAPI.c}
+*****************************************************************************
+2006/12/29 (Rondall, AM 09:00)
+	- Cancel the JPEG's buffer of hydra
+	  src/sysapps/apps/hydra/jpeg.c
+	- Decrease the Gain of Blue Color
+	  src/kmods/kmods/tp6830_lnx_951026/pwc-ctrl.c
+*****************************************************************************
+2006/12/28 (Jeffrey, PM 02:48)
+        - Update upnp & bonjour groups of CGI2.
+	  src/sysapps/apps/cgi2/lib/bulk/bulk_ops/{makefile , upnp, bonj}
+*****************************************************************************
+2006/12/28 (Sand, AM 11:54)
+	- Fix bug: msync call failed because the start address has to be
+	  page aligned
+	  src/sysapps/apps/hydra/encoded.c
+	  src/sysapps/apps/hydra/osd/osd.c
+	- Add define to switch between 32M hardware and 64M hardware, now we
+	  can just modify the parameter MEM_64M in Rules.mak to change the 
+	  memory size hydra will use
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/Makefile, Rules.mak, mmm.c
+*****************************************************************************
+2006/12/27 (Rondall, AM 10:20)
+	- Update image group of CGI2
+	  src/sysapps/apps/cgi2/lib/bulk/bulk_ops/image/*
+	  src/sysapps/apps/cgi2/lib/bulk/bulk_ops/makefile
+*****************************************************************************
+2006/12/26 (TONY, PM 08:01)
+	- Bug fix: LAN detection will be incorrect on 10MB HUB.
+	  src/sysapps/apps/rc.sethost/sethost.c
+*****************************************************************************
+2006/12/26 (Yen, PM 06:30)
+	- Bug fix: event trigger timeout will terminate hydra
+	- Bug fix: replace wildcards in message will cause some errors
+	- Update: jpeg header is generated by event
+	  src/sysapps/apps/hydra/event/*
+	- Bug fix: smtp client cannot send attachment
+	  src/sysapps/apps/cgi/libcgicomm/src/smtpclient/smtpc_main.c
+	- Bug fix: inputs are triggered while disabled
+	  src/sysapps/apps/hydra/event/listen/listen_input.c
+*****************************************************************************
+2006/12/26 (Jeffrey, PM 3:17)
+        - Bug fix: Bonjour doesn't announce https port when user doesn't
+	  enable https second port.
+	  src/sysapps/apps/bonjour/mDNSPosix/bonjour_main.c
+*****************************************************************************
+2006/12/25 (Sand, PM 1:30)
+	- Bug fix: RTP over RTSP over HTTP doesn't work
+	  src/sysapps/apps/hydra/include/common.h
+	  src/sysapps/apps/hydra/rtp/rtp.c, rtcp.c
+	  src/sysapps/apps/hydra/rtsp/rtsp.c, response.c
+	  src/sysapps/apps/hydra/network.c
+	- Bug Fix: online user counter incorrect.
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	- Modify get max fd for select
+	  src/sysapps/apps/hydra/hydra.c
+*****************************************************************************
+2006/12/25 (Rondall, AM 11:40)
+	- Update new plmedia driver
+	  src/kernel/linux/include/video/{jpeg_qtable.h,plsensor.h,plmedia.h}
+	  src/sysapps/apps/hydra/encode/JPEGHeader.c
+	  src/sysapps/apps/hydra/{config.c,encode.c}
+	  src/kmods/plsensor/sony098.c
+	  lib/modules/plmedia.o
+*****************************************************************************
+2006/12/22 (Yen, PM 01:30)
+	- Update def_config: input port trigger settings
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/12/22 (Rondall, AM 11:55)
+	- Update: CCD driver (Second version)
+	  1. Speed up the AEC
+	  2. Update the framework of Auto-IRIS control
+	  3. Adjust the minimum Exposure Time
+	  4. Decrease the maximum Gain
+
+	  src/kmods/tp6830_lnx_951026/*
+*****************************************************************************
+2006/12/21 (Yen, PM 06:00)
+	- Update: IM message should include wildcards.
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2006/12/21 (Rondall, PM 05:30)
+	- Reduce the audio upload buffer size
+	  src/sysapps/apps/cgi/audio_upload/globals.h
+*****************************************************************************
+2006/12/21(Jeffrey, PM 04:00)
+        - Update motion & ddns CGI library for new CGI architecture.
+	  src/sysapps/apps/cgi2/lib/bulk/bulk_ops/{mot, ddns}
+*****************************************************************************
+2006/12/15(Yen, PM 10:00)
+	- Fix Bug: Captured JPEG file > 1 when 1 fps 1 post capture second
+	  src/sysapps/apps/hydra/event/{build_jpg.c, event.c}
+*****************************************************************************
+2006/12/15(Tony, PM 4:50)
+	- Add wireless information on /proc/tiwlan/status
+	  src/kmods/RT61_Linux_STA_Drv1.1.0.0/rtmp_main.c
+*****************************************************************************
+2006/12/15(Sand, PM 3:23)
+	- Update: comsuming frame when pausing 
+	  src/sysapps/apps/hydra/rtp/rtp.c
+	- Bug Fix: Green label in text overlay area.
+	  src/sysapps/apps/hydra/osd/osd.c
+*****************************************************************************
+2006/12/15(Rondall, PM 3:15)
+	- Update: Support the Auto-IRIS (first version)
+	  src/kmods/tp6830_lnx_951026/*
+*****************************************************************************
+2006/12/14(Yen, PM 10:30)
+	- Update: transfer post data for streaming POST request
+	  src/sysapps/apps/thttpd-2.25b/{spc_proc.c, common.h}
+	  src/sysapps/apps/hydra/include/common.h
+*****************************************************************************
+2006/12/14(Sand , PM 5:43)
+	- Bug Fix: infinite send response and A/V over tcp incorrect
+	  src/sysapps/apps/hydra/rtsp/response.c
+	  src/sysapps/apps/hydra/network.c
+*****************************************************************************
+2006/12/13(Konchi, PM 00:00)
+	- Update: Default setting is for CUT-3 board(8M flash, DAIVCOM driver)
+*****************************************************************************
+2006/12/12(Jeffrey, PM 06:17)
+        - Update UPnP/Bonjour/DDNS CGI library for get_group&set_group
+          function.
+	  src/sysapps/apps/cgi/libcgicomm/src/{upnp , ddns , bonjour} 
+	  src/sysapps/apps/cgi/oamp/oamp_action.c
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/all_bulk_ops.h
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+	- Remove SoloLink DDNS
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/cgi/cgi/Makefile
+	  src/sysapps/apps/cgi/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+*****************************************************************************
+2006/12/11(Yen, PM 10:00)
+	- Add client notification in Camera API
+	  src/sysapps/apps/hydra/event/{event_prototype.h, client_notify.c}
+	  src/sysapps/apps/lighttpd-1.4.13/src/{Makefile, network.c,
+						client_handler.*}
+	- Update ioport API and driver
+	  src/sysapps/apps/cgi/libcgicomm/io/ioconfig.c
+	  src/sysapps/apps/hydra/event/listen/listen_input.c
+	  src/kmods/ioport/src/ioport.c
+*****************************************************************************
+2006/12/11(Tony, PM 7:35)
+	- Update all_bulk_ops.h
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/all_bulk_ops.h
+*****************************************************************************
+2006/12/8 (Sand, PM 8:13)
+	- Auto Frame Rate control now active only when user set Motion-JPEG
+	  frame rate enable.
+	  src/sysapps/apps/hydra/config.c, encode.c
+	  src/sysapps/apps/hydra/include/MESS.h
+*****************************************************************************
+2006/12/8 (Sand, AM 11:11)
+	- Complete image overlay function
+	  src/sysapps/apps/hydra/osd/logo.c
+	  src/sysapps/apps/cgi/logoloader/uploader.c
+*****************************************************************************
+2006/12/6 (Sand, PM 7:34)
+	- Reduce framerate instead of drop frame
+	  src/sysapps/apps/hydra/{config.c, encode.c, umgr.c}
+	  src/sysapps/apps/hydra/include/MESS.h
+*****************************************************************************
+2006/12/6 (Jeffrey, AM 11:29)
+        - Add UPNP start in rcS file.
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/12/4 (Jeffrey, PM 3:11)
+        - Change motion schedule check period to 1-minute.not every frame.
+	  (note: motion spend 1 msec ; schedule_chk spend 15msec)
+	  src/sysapps/apps/hydra/md/main_mot.c
+*****************************************************************************
+2006/12/4 (Sand, PM 5:04)
+	- Fix bug: IP filter doesn't startup at boot stage.
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/12/4 (konchi, PM 5:48)
+	- Add: Jabber use SSL to connect to jabber servers.
+	  src/sysapps/apps/jabberlog/*
+	  src/sysapps/apps/cgi/libcgicomm/src/syslog/SYS_log.c
+*****************************************************************************
+2006/12/4 (Sand, PM 5:04)
+	- Fix bug: RTSP authentication not work
+	  src/sysapps/apps/hydra/rtsp/parse.c, response.c, rtsp.c
+	- Add partial rtcp function
+	  src/sysapps/apps/hydra/config.c, encode.c, hydra.c, network.c
+	  src/sysapps/apps/hydra/encode/volhdr.c
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/rtp/rtcp.c, rtp.c, rtp.h
+	  src/sysapps/apps/hydra/rtsp/include/rtsp.h
+	  src/sysapps/apps/hydra/rtsp/pv_spec.c, response.c, sdp.c
+*****************************************************************************
+2006/12/4 (Jeffrey, AM 11:29)
+        - Fix Bug: Change motion detection padding value(0x17->0x11),
+	  in motion_en and in effect schedule.
+	  src/sysapps/apps/hydra/md/main_mot.c
+*****************************************************************************
+2006/12/1 (TONY, PM 07:09)
+	- Fix Bug: NTP sync is incorrect.
+	  src/sysapps/apps/NTP
+*****************************************************************************
+2006/12/1 (Rondall, PM 07:00)
+	- Fix Bug: No Black-White mode
+	  src/sysapps/apps/cgi/libcgicomm/src/CMOS/CMOS_functions.h
+*****************************************************************************
+2006/12/1 (TONY, PM 06:35)
+	- add "serial=pelco" on query.cgi
+	  src/sysapps/apps/cgi/utility/query.c
+*****************************************************************************
+2006/11/30 (TONY, PM 03:57)
+	- Update Qset(Data encrypt)
+	  src/sysapps/apps/Qset
+*****************************************************************************
+2006/11/29 (Yen, PM 11:35)
+	- Update event-trigger
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2006/11/29 (TONY, PM 08:20)
+	-Update sys
+	 src/sysapps/apps/cgi/libcgicommm/src/sys/{system_config.c,
+		system_config.h}
+	 src/sysapps/apps/cgi/libcgicommm/src/bulk/all_bulk_ops.h
+*****************************************************************************
+2006/11/29 (TONY, PM 06:36)
+	-Update wlan,lan,ptz 
+	 src/sysapps/apps/cgi/libcgicomm/src/ptz/ptz_config.h,ptz_config.c}
+	 src/sysapps/apps/cgi/libcgicomm/src/wlan/WLAN_iwconfig.c
+	 src/sysapps/apps/cgi/libcgicomm/src/lan/lan_config.c
+*****************************************************************************
+2006/11/29 (Rondall, AM 10:10)
+	- Update ccdc_daemon because of H/W change
+	  src/sysapps/apps/ccdc_daemon/ccdc_daemon.c
+*****************************************************************************
+2006/11/28 (Yen, PM 11:20)
+	- Update event-trigger
+	  src/sysapps/apps/hydra/{Makefile, hydra.c, event/*}
+*****************************************************************************
+2006/11/28 (Rondall, PM 10:00)
+	- Update CCD AWB (too blue)
+	  src/kmods/tp6830_lnx_951026/pwc-ctrl.c
+*****************************************************************************
+2006/11/28 (TONY, PM 09:07)
+	 - Update "Upload CA" action.
+	   src/sysapps/apps/cgi/libcgicomm/src/flash/flash.c
+	   src/sysapps/apps/cgi/libcgicomm/src/wlan
+	   src/sysapps/apps/cgi/cgi/lan.c
+	   src/sysapps/apps/cgi/utility/{Makefile,tlsr.c,tlsu.c,ttlsr.c}
+	   src/sysapps/apps/wpa_supplicant/{defconfig,.config}
+*****************************************************************************
+2006/11/28 (Sand, PM 5:43)
+	- Fix bug: enable/disable multicast doesn't work.
+	  src/sysapps/apps/hydra/config.c
+*****************************************************************************
+2006/11/28 (Konchi, PM 03:17)
+	  -Description:
+	  For building 8M FW, please run 8M/flash/8M.sh
+	  For building 4M FW, please run 8M/flash/4M.sh
+	  For building bootloader with DAVICOM driver, 
+	  	please run 8M/loader/Loader_DAVICOM.sh
+	  For building bootloader with ICPLUS driver, 
+	  	please run 8M/loader/Loader_ICPLUS.sh
+*****************************************************************************
+2006/11/24 (Jeffrey, PM 04:36)
+        - Update Motion - indicator active without enable event check_box.
+	  src/sysapps/apps/hydra/{Makeifle ,encode.c}
+	  src/sysapps/apps/hydra/md/*
+	  src/sysapps/apps/hydra/include/MESS.h
+*****************************************************************************
+2006/11/24 (Rondall, PM 07:00)
+	- Update: ccdc_daemon
+	  src/sysapps/apps/ccdc_daemon/topro.c
+*****************************************************************************
+2006/11/24 (TONY, PM 04:48)
+	- Update RT61 driver to V1.1.0.0 from 1.0.4.0 and wpa_supplicant
+	  src/sysapps/apps/wpa_supplicant
+	  src/kmods/{RT61_Linux_STA_Drv1.1.0.0,Makefile}
+	  src/sysapps/apps/rc.sethost/sethost.c
+	  src/sysapps/apps/cgi/libcgicomm/src/lan/lan_config.c
+*****************************************************************************
+2006/11/23 (Jeffrey, PM 04:46)
+        - Update webpage & DDNS client to support "3322.org(CN99)" 
+	  DDNS service.
+	  src/sysapps/apps/ddns/ez-ipupdate-3.0.11b7/ez-ipupdate.c
+	  src/sysapps/apps/cgi/html.wvc2300/adm/ddns.htm
+*****************************************************************************
+2006/11/23 (Rondall, AM 10:00)
+	- Fix Bug: util/query.cgi misses the defname field
+	  src/sysapps/apps/cgi/utility/query.c
+	- Update: CCD driver (noise reduce under low light)
+	  src/kmods/tp6830_lnx_951026/*
+*****************************************************************************
+2006/11/21 (konchi, PM 03:28)
+	- Fix bug:	flash driver lose interrupt signals
+		src/kernel/linux/drivers/mtd/pl_nor8M.c
+		src/kernel/linux/drivers/mtd/pl_nor.c
+*****************************************************************************
+2006/11/21 (Tony, PM 07:19)
+	- Update file
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/cgi/cgi/{main_cgi.c,lan.c,lan.h}
+	  src/sysapps/apps/cgi/utility
+	  src/sysapps/apps/cgi/html.wvc2300/adm/Wsecurity.htm
+*****************************************************************************
+2006/11/21 (Konchi, PM 03:58)
+	- Fix: update bootloader
+		src/bootloader/*
+	Some manual modifications are needed if you use 8M flash or Davicom driver
+	Please see src/bootloader/bootloader_document/build_bootloader.txt
+*****************************************************************************
+2006/11/20 (Rondall, AM 10:20)
+	- Fix bug: No MJPEG server push page
+	  src/sysapps/apps/cgi/html.wvc2300/img/main_mjpeg.htm
+
+*****************************************************************************
+2006/11/20 (Rondall, PM 05:00)
+	- Fix bug: Audio Upload does not response the error message if 
+	  the audio upload is disabled.
+	  src/sysapps/apps/cgi/audio_upload/{Makefile,globals.h,au_main.c}
+	  (return HTTP 400 Bad Request if disabled)
+
+	- Fix bug: MJPEG header is incorrect for the G.711 audio
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+
+*****************************************************************************
+2006/11/16 (Rondall, PM 04:20)
+	- Fix bug: CCD has much noise when the light is dark.
+	  src/kmods/tp6830_lnx_951026/pwc-ctrl*
+	- Fix bug: Hydra does not have the viewer limit
+	  src/sysapps/apps/hydra/network.c
+	  (return the HTTP 503 if too many viewers)
+
+*****************************************************************************
+2006/11/16 (Konchi, PM 04:17)
+	- First Release WVC2300_V100R00.bin
+		source code and bin file are at 
+		/usr/share/LinuxMedia/NetworkCameraV4/WVC2300_RELEASE_SOURCE/
+*****************************************************************************
+2006/11/16 (Jeffrey, PM 01:00)
+        - Support multicast SAP announcement.
+	  (Announce interval is 5sec(as the same as VLC stream server) ;
+	   VLC player can get camera's SDP during 40sec,it's the same as 
+	   VLC stream server in my tested.)
+	  src/sysapps/apps/hydra/{Rules.mak, hydra.c}
+	  src/sysapps/apps/hydra/mcast_sap/*
+*****************************************************************************
+2006/11/15 (Rondall, PM 9:00)
+	- Fix bug: JPEG can not view
+	  src/sysapps/apps/lighttp-1.4.13/src/response.c
+*****************************************************************************
+2006/11/14 (Sand, PM 1:16)
+	- Add bulk operation APIs for rtsp and ipfilter
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/all_bulk_ops.h
+	  src/sysapps/apps/cgi/libcgicomm/src/ipfilter/ipfilter.{c,h}
+	  src/sysapps/apps/cgi/libcgicomm/src/rtsp/rtsp_api.{c,h}
+*****************************************************************************
+2006/11/14 (Rondall, PM 9:00)
+	- Update Audio Upload 
+	  src/sysapps/apps/cgi/audio_upload/*
+*****************************************************************************
+2006/11/14 (TONY, PM 5:15)
+	- Update WPA2 Enterprise relative file 
+	  src/sysapps/apps/cgi/libcgicomm/src/wlan
+	  src/sysapps/apps/cgi/cgi/{main_cgi.c,lan.c,lan.h}
+*****************************************************************************
+2006/11/14 (Sand, PM 1:52)
+	- Add multicast feature and interface with SAP in hydra
+	  src/sysapps/apps/hydra/{config.c, hydra.c, network.c}
+	  src/sysapps/apps/hydra/rtp/rtp.c
+	  src/sysapps/apps/hydra/rtsp/include/rtsp.h
+	  src/sysapps/apps/hydra/rtsp/sdp.c
+	- Add three types of date format
+	  src/sysapps/apps/hydra/osd.c
+	  src/sysapps/apps/hydra/include/MESS.h
+	- Re-organize the rtsp connection structure.
+	  src/sysapps/apps/hydra/rtsp/parse.c, response.c, rtsp.c
+*****************************************************************************
+2006/11/13 (Yen, PM 6:10)
+	- Update webd to maintain all server ports (original "httpd" is
+	  discarded)
+	  src/sysapps/apps/webd/*
+	  src/sysapps/apps/stunnel/src/*
+	  src/sysapps/apps/lighttpd-1.4.13/src/lighttpd.conf
+	  src/sysapps/apps/cgi/cgi/{lan.c, main.h, main_cgi.c}
+	  src/sysapps/apps/cgi/libcgicomm/src/web/web_config.c
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/11/09 (Jeffrey, PM 5:10)
+        - Update motion API for get/set_group.cgi
+	  src/sysapps/apps/cgi/libcgicomm/src/motion/*
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/all_bulk_ops.h
+*****************************************************************************
+2006/11/09 (Sand, PM 4:44)
+	- Using HW memcpy to reduce the CPU loading for text overlay.
+	  src/sysapps/apps/hydra/osd/{logo.c, osd.c}
+	  src/sysapps/apps/hydra/tstamp.c
+	- Add an unconditional multicast function
+	  src/sysapps/apps/hydra/{config.c, hydra.c, networkc}
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/rtp/rtp.c
+	  src/sysapps/apps/hydra/rtsp/include/rtsp.h
+	  src/sysapps/apps/hydra/rtsp/sdp.c
+*****************************************************************************
+2006/11/08 (Rondall, PM 7:00)
+	- Fix one bug of L1's RTP audio
+	  src/sysapps/apps/cgi/rtp_audio_upload
+*****************************************************************************
+2006/11/08 (Rondall, PM 2:00)
+	- Fix one AWB bug of CCD driver
+	  src/kmods/tp6830_lnx_951026/pwc-ctrl.c
+	- Update the CGI libcgicomm to support set_group.cgi
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/all_bulk_ops.h
+	  src/sysapps/apps/cgi/libcgicomm/src/{audio,image}
+*****************************************************************************
+2006/11/08 (Konchi, AM 11:46)
+	- Add set_group.cgi
+	  src/sysapps/apps/cgi/libcgicomm/src/bulk/*
+	  src/sysapps/apps/cgi/libcgicomm/makefile
+	  src/sysapps/apps/cgi/utility/set_group.c
+*****************************************************************************
+2006/11/07 (Sand, PM 5:23)
+	- Add OSD feature in hydra.
+	  src/sysapps/apps/hydra/config.c, hydra.c
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/osd/font.c, logo.c, osd.c
+	  src/rootfs/etc/logo.bmp
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.h
+*****************************************************************************
+2006/11/07 (Yen, PM 2:10)
+	- Move ftpclient from hydra to libcgicomm
+	  src/sysapps/apps/cgi/libcgicomm/src/ftpclient/*
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+	  src/sysapps/apps/hydra/Makefile
+*****************************************************************************
+2006/11/06 (TONY, PM 5:34)
+	- Update rs485.htm (address range should be 1-255).
+	  src/sysapps/apps/cgi/html.wvc2300/adm/rs485.htm
+*****************************************************************************
+2006/11/06 (Jeffrey, PM 4:40)
+        - Fix bug: Sololink can't update successly.
+	  src/sysapps/apps/cgi/html.wvc2300/adm/{ddns.htm , ddns_pwd.htm}
+*****************************************************************************
+2006/11/06 (Rondall, PM 2:00)
+	- Update dsp_dae (skip checking the process during upgrade)
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+*****************************************************************************
+2006/11/04 (TONY, AM 10:57)
+	- Update P/T and wlan
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/pantilt
+	  src/sysapps/apps/cgi/libcgicomm/src/{wlan,ptz,ptzcontrol}
+*****************************************************************************
+2006/11/04 (Rondall, PM 3:00)
+	- Update RTP audio U/D
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/hydra/audio/pcm_source.c
+	  src/sysapps/apps/cgi/Makefile
+	  src/sysapps/apps/cgi/rtp_audio_upload/*
+*****************************************************************************
+2006/11/03 (Jeffrey, PM 06:12)
+        - Update Bonjour,support more service types[ http,http(8888),https,
+	  rtsp,ftp,lsys-oamp,lsys-camera"].
+	  src/sysapps/apps/bonjour/*
+*****************************************************************************
+2006/11/02 (Yen, PM 09:58)
+	- Fix bugs: Lighttpd only recognizes headers with "HTTP/1.x"; all 
+		    CGIs should printf HTTP/1.x instead of HTTP.
+	  src/sysapps/apps/cgi/audio_upload/globals.h
+	  src/sysapps/apps/cgi/utility/config.c
+	  src/sysapps/apps/cgi/cgi/cgi_err.h
+*****************************************************************************
+2006/11/02 (Tony,PM 03:51)
+	- Update PTZ library
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/libcgicomm/src/ptz
+  	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/11/02 (Sand,AM 11:27)
+	- Image Overlay CGI setting.
+	  src/sysapps/apps/cgi/cgi/image.c
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.{c,h}
+*****************************************************************************
+2006/11/01 (Rondall, PM 4:30)
+	- Add the LinksysOne RTP audio upload/download (beta version)
+	  src/sysapps/apps/hydra/audio/rtp_audio.c
+	  src/sysapps/apps/cgi/rtp_audio_upload
+*****************************************************************************
+2006/11/01 (Rondall, PM 3:30)
+	- Update JPEG streaming - support the G.711A/U 
+	  src/sysapps/apps/hydra/jpeg.c
+*****************************************************************************
+2006/11/01 (Tony,PM 03:25)
+	- Allow set CountryRegion whether EEPROM is loaded. 
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/{rtmp_info.c,rt_config.h,Makefile}
+	- Fix bug:driver_ralink.c decode "WPA IE" error.
+	  src/sysapps/apps/wpa_supplicant/driver_ralink.c
+*****************************************************************************
+2006/10/31 (Konchi,PM 08:40)
+	- Add Linksys's OAMP(NMS) actions
+	src/sysapps/cgi/nms/*
+	src/sysapps/cgi/Makefile
+*****************************************************************************
+2006/10/31 (Sand,PM 01:10)
+	- Add multicast and related setting in cgi.
+	src/sysapps/apps/cgi/cgi/{main_cgi.c, lan.c, lan.h}
+	src/sysyapps/cgi/libcgicomm/src/image/{IMG_conf.c,IMG_conf.h, rtsp_api.c, rtsp_api.h}
+	- Add Image overlay and a logo upload cgi.
+	src/sysapps/apps/cgi/cgi/{image.c, image.h}
+	src/sysapps/apps/cgi/logoloader
+	src/sysapps/apps/conf_sec.h
+*****************************************************************************
+2006/10/30 (Yen, PM 07:00)
+	- Update openssl library with only AES/DES cyphers
+	  src/sysapps/apps/stunnel/src/stunnel.conf
+	  src/sysapps/apps/stunnel/lib/{libssl.so, libcrypto.so}
+*****************************************************************************
+2006/10/26 (Tony, AM 11:54)
+	- Add 8MB flash support on WVC2300
+	  1.replace  src/kernel/linux/drivers/mtd/pl_nor8M.c with
+		     src/kernel/linux/drivers/mtd/pl_nor.c
+	  2.replace  src/kernel/linux/include/asm/arch/memconfig8M.h with
+		     src/kernel/linux/include/asm/arch/memconfig.h
+*****************************************************************************
+2006/10/26 (Tony, AM 11:01)
+	- Update network LED position
+	  src/kmods/DM9102/dmfe.c
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/rtmp_main.c
+	  src/kmods/ICPlus/sundance.c
+*****************************************************************************
+2006/10/25 (Jeffrey, PM 06:46)
+        - Update Bonjour CGI.
+	  src/rootfs/etc/init.d/rcS
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+          src/sysapps/apps/cgi/cgi/{main.h, lan.c, lan.h,
+                                main_cgi.c,cgi_msg,cgi_err.h}
+	  src/sysapps/apps/bonjour/mDNSPosix/{Makefile ,bonjour_main.c}
+*****************************************************************************
+2006/10/25 (Yen, PM 06:38)
+	- Update lighttpd: add authentication and admin lock
+	  src/sysapps/apps/lighttpd-1.4.13/*
+*****************************************************************************
+2006/10/25 (Rondall, AM 07:30)
+	- Update CCD driver - AEC
+	  src/kmods/tp6830_lnx_951024
+*****************************************************************************
+2006/10/24 (Konchi, PM 07:07)
+	- Update OCX supporting sercomm padding
+	src/sysapps/apps/cgi/html.wvc2300/Viewer.cab
+	src/sysapps/apps/cgi/html.wvc2300/adm/AlertCfg.cab
+*****************************************************************************
+2006/10/23 (Konchi, PM 05:29)
+	- Add bootloader for 8M Flash
+	src/bootloader/proboot8M
+	FW/combine8M.cfg
+	for using bootloader for 8M flash
+	1. edit the line from "SUBDIRS := proboot" to "SUBDIRS := proboot8M"
+	   in the file "src/bootloader/Makefile"
+	2. replace FW/combine.cfg with FW/combine8M.cfg
+*****************************************************************************
+2006/10/22 (Rondall, AM 11:00)
+	- Update the CCD driver 
+	  (Add the AWB - gray level, update the RGB->YUV color matrix)
+
+	  src/kmods/tp6830_lnx_951020/*
+	  src/kmods/Makefile
+*****************************************************************************
+2006/10/20 (Yen, PM 20:30)
+	- Add new web server: Lighttpd
+	  src/sysapps/apps/lighttpd-1.4.13/*
+*****************************************************************************
+2006/10/19 (Yen, PM 21:00)
+	- Update jpeg pre-capture
+	  src/sysapps/apps/hydra/event/*
+*****************************************************************************
+2006/10/18 (Sand, PM 06:28)
+	- Add auto-framerate control in encoder( DEFAULT 10 FPS, HIGH 30 FPS)
+	  src/sysapps/apps/hydra/{config.c, encode.c}
+*****************************************************************************
+2006/10/18 (Sand, PM 01:41)
+	- Re-organize the sequence of encoding to use 16x32 font in 320 
+	  resolution while using 8x16 font in 640 resolution.
+	  src/sysapps/apps/hydra/osd/osd.c
+	  src/sysapps/apps/hydra/encode.c
+	  src/sysapps/apps/hydra/include/MESS.h
+*****************************************************************************
+2006/10/18 (Jeffrey, PM 1:31)
+        - Motion detection support auto-framerate function.
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/md/inc/commonTypes.h
+	  src/sysapps/apps/hydra/md/{main_mot.c, mot_algorithm.c, mot_setup.c}
+*****************************************************************************
+2006/10/17 (Rondall, PM 8:00)
+	- Update the CCD driver
+	  src/kmods/tp6830_lnx_951013
+	  src/kmods/Makefile
+*****************************************************************************
+2006/10/17 (Sand, PM 06:00)
+	- Using new method to draw 16x32 font from 8x16.
+	  src/sysapps/apps/hydra/osd/osd.c
+*****************************************************************************
+2006/10/17 (Rondall, AM 11:00)
+	- Add the Interface to convert the audio finfo to a wave file
+	  src/sysapps/apps/hydra/wave/*
+
+	  decode_audio_if(fi_b, fi_e, fn);
+	  fi_b -> the begin frame info
+	  fi_e -> the end frame info
+	  fn   -> the wave file name
+*****************************************************************************
+2006/10/17 (Rondall, AM 10:25)
+	- Add Audio Encoder Type - G.711 a-law and G.711 mu-law
+	  src/syapps/apps/cgi/libcgicomm/src/audio/AUD_conf.h
+	  src/sysapps/apps/hydra/config.c
+	  src/sysapps/apps/hydra/audio/{pcm_source.c,g711.c}
+*****************************************************************************
+2006/10/12 (Jeffrey, PM 08:45)
+	- Support snapshot of 64*48 resolution.
+	  (http://../img/snapshot.cgi?size=11)
+	  src/sysapps/apps/hydra/{Makefile , Rules.mak , encode.c , hydra.c}
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/snapshot/snapshooter.c
+	  src/sysapps/apps/hydra/snap_swencode/*
+*****************************************************************************
+2006/10/12 (Yen, PM 04:20)
+	- Update event cgi for jpg frame-rate and capture length
+	  src/sysapps/apps/cgi/cgi/{main_cgi.c, evtcgi.c, evtcgi.h}
+	  src/sysapps/apps/cgi/libcgicomm/src/event/trig_config.*
+*****************************************************************************
+2006/10/09 (Sand, PM 03:07)
+	- New motion JPEG buffer management architecture:
+	  src/sysapps/apps/hydra/encode.c, config.c, hydra.c, mmm.c
+	  src/sysapps/apps/hydra/include/MESS.h, MMM.h
+	- Modify MAX_ORDER from 12 to 13 ( so that we can claim more than 16MB
+	  memory by using __get_free_pages)
+	  src/kernel/linux-2.4.19/include/linux/mmzone.h
+	
+*****************************************************************************
+2006/10/04 (Konchi, PM 06:34)
+	- Update: New Web UI
+	src/sysapps/apps/cgi/html.wvc2300/*
+*****************************************************************************
+2006/10/03 (Yen, PM 07:25)
+	- Fix bug: ref_usr_cnt not cleared after release frame
+	  src/sysapps/apps/hydra/event/event.c
+*****************************************************************************
+2006/10/03 (Rondall, PM 05:35)
+	- Update: new JPEG padding format
+	  src/sysapps/apps/hydra/encode.c -> get_padding_data_format
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+*****************************************************************************
+2006/10/03 (Yen, PM 03:42)
+	- Fix bug: video flaw appears after motion detection
+	  src/sysapps/apps/hydra/encode.c
+*****************************************************************************
+2006/10/03 (Jeffrey, AM 11:37)
+        - Update: Enable second port in bonjour. (#deinfe ONLY_ONE_PORT) 
+	  src/sysapps/apps/bonjour/mDNSPosix/Makefile
+*****************************************************************************
+2006/10/02 (Jeffrey, PM 05:24)
+        - Change motion padding data to new  format.
+	  src/sysapps/apps/hydra/md/main_mot.c
+*****************************************************************************
+2006/10/02 (Jeffrey, PM 03:24)
+        - Fix bug:motion detected in disable-window when open motion OCX.
+	  src/sysapps/apps/hydra/md/main_mot.c	  
+*****************************************************************************
+2006/09/29 (Rondall, PM 6:15)
+	- Add: Half & Full Duplex 
+	  src/sysapps/apps/cgi/audio_upload/*
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/config.c
+	  src/sysapps/apps/hydra/audio/*
+
+	  (by another share memory, not MESS, because of mess)
+
+*****************************************************************************
+2006/09/29 (TONY, PM 01:50)
+	- Restore ramdisk setting on kernel.(System is unstable when disable
+	  ramdisk on kernel)
+	  src/kernel/linux/arch/arm/defconfig
+*****************************************************************************
+2006/09/29 (TONY, PM 01:50)
+	- Fix bug:Wireless doesn't work on cut-2 H/W (Only change dmfe and
+	  sundance order. ??)	  
+	  src/rootfs/etc/init.d/rcS
+	  src/sysapps/apps/rc.sethost/sethost.c
+*****************************************************************************
+2006/09/28 (Jeffrey, PM 07:02)
+        - Adjust motion sensityfity of all resolutions(both DC&MV modes.)
+          src/sysapps/apps/hydra/md/*
+*****************************************************************************
+2006/09/28 (Konchi, PM 05:41)
+	- Default Lan driver for bootloader is "ICPlus"	  
+	- Add two documents to depict how to use backdoor
+	  and how to build bootloader with "ICPlus" or "DAVICOM"
+	  src/bootloader/bootloader_document/*
+*****************************************************************************
+2006/09/27 (Jeffrey, PM 02:41)
+	- Add motion padding data in MJPEG stream.
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/md/main_mot.c
+	  src/sysapps/apps/hydra/encode.c
+*****************************************************************************
+2006/09/27 (Yen, PM 02:21)
+	- Update: new input padding format for mpeg4 and mjpeg streaming
+	  src/sysapps/apps/hydra/event/listen/listen_input.c
+*****************************************************************************
+2006/09/26 (Jeffrey, PM 07:29)
+	- Update moton: Just show out indicator,no motion detecting,when 
+	  event is disable, 
+	  src/sysapps/apps/hydra/md/{main_mot.c , mot_setup.c}
+	  src/sysapps/apps/cgi/ocxparser/motcrop_api.c
+*****************************************************************************
+2006/09/25 (Jeffrey, PM 05:56)
+	- Update new motion padding format(9byte->13byte).
+	 src/sysapps/apps/hydra/include/MMM.h
+	 src/sysapps/apps/hydra/md/{main_mot.c,mot_algorithm.c}
+*****************************************************************************
+2006/09/25 (Yen, PM 02:04)
+	- Update: change video file name format
+	  src/sysapps/apps/hydra/event/wait_event.c
+	  src/sysapps/apps/hydra/event/api/trigger.c
+*****************************************************************************
+2006/09/25 (Konchi, AM 11:52)
+	- Update: default web page is linksys wvc230
+	  src/sysapps/apps/cgi/html.wvc230
+	  src/sysapps/apps/cgi/cgi/Makefile
+*****************************************************************************
+2006/09/22 (Rondall, PM 05:40)
+	- Update: add the watchdog (dog->dsp_dae, dsp_dae->http+https+hydra)
+	  src/kernel/linux/arch/arm/defconfig
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+*****************************************************************************
+2006/09/22 (Yen, PM 04:08)
+	- Update: change email config interface
+	  src/sysapps/apps/cgi/libcgicomm/src/event/{SMTP_config.*, Makefile}
+	  src/sysapps/apps/cgi/cgi/{smtpcgi.c, main_cgi.c}
+	  src/sysapps/apps/logemail/logemail.c
+	  src/sysapps/apps/hydra/event/api/trigger.c
+*****************************************************************************
+2006/09/22 (Rondall, PM 02:30)
+	- Update: JPEG & ASF video request log  
+	  src/sysapps/apps/thttpd-2.25b/spc_proc.c
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	  src/sysapps/apps/hydra/asf/asf_network.c
+*****************************************************************************
+2006/09/22 (Yen, PM 02:24)
+	- Update: reload function in status_syslog.htm
+	  src/sysapps/apps/cgi/html.wvc230/adm/status_syslog.htm
+*****************************************************************************
+2006/09/21 (Jeffrey, PM 01:45)
+        - Fixed bug. Motion detection can work in 320x240 and
+          160x120 resolution,use MOTION-VECTOR mode.(640x480, use DC mode).
+	  src/sysapps/apps/hydra/md/*
+*****************************************************************************
+2006/09/21 (Rondall, AM 11:30)
+	- Update: TOPRO driver
+	  src/sysapps/apps/ccdc_daemon
+	  src/kmods/tp6830_lnx_950903
+*****************************************************************************
+2006/09/20 (Yen, PM 09:00)
+	- Update: video log file overwrite option
+	  src/sysapps/apps/cgi/cgi/evtcgi.c
+	  src/sysapps/apps/cgi/libcgicomm/src/event/trig_config.*
+	  src/sysapps/apps/hydra/event/api/trigger.c
+*****************************************************************************
+2006/09/20 (Yen, PM 07:17)
+	- Fix bug: change openssl library
+	  src/sysapps/apps/stunnel/lib/{libssl.so, libcrypto.so}
+*****************************************************************************
+2006/09/20 (Jeffrey, PM 06:45)
+        - Update motion detection.if resolution is 640x480,use DC mode.
+	  others use MV mode. (motion table not adjust yet).
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/encode.c
+	  src/sysapps/apps/hydra/md/*
+*****************************************************************************
+2006/09/20 (Yen, PM 05:13)
+	- Update: 1. seperate web and lan cgi to different file
+		  2. parse http port to ocx
+	  src/sysapps/apps/cgi/cgi/*
+	  src/sysapps/apps/cgi/html.wvc230/{v_video.htm, adm/m_detect.htm}
+*****************************************************************************
+2006/09/20 (Rondall, AM 11:00)
+	- Fix Bug: opened file does not be closed
+	  src/sysapps/apps/cgi/libcgicomm/src/audio/* 
+*****************************************************************************
+2006/09/19 (Yen, PM 16:29)
+	- Update: video log cgi and web page
+	  src/sysapps/apps/cgi/cgi/*
+	  src/sysapps/apps/cgi/html.wvc230/adm/vlog.htm
+*****************************************************************************
+2006/09/19 (Sand, PM 15:24)
+	- Remove un-used share library files
+	  lib/libcgic.so,libdbif.so
+*****************************************************************************
+2006/09/19 (Yen, PM 14:19)
+	- Fix bug: asf file cannot be played by WindowsMediaPlayer
+	  src/sysapps/apps/hydra/event/api/ASFAPI.c
+*****************************************************************************
+2006/09/18 (Yen, PM 17:31)
+	- Fix bug: thttpd file descriptor is not closed
+	  src/sysapps/apps/cgi/libcgicomm/src/user/user_config.c
+*****************************************************************************
+2006/09/18 (Konchi, PM 16:41)
+	- Update Day/Night switch
+	  src/sysapps/apps/cgi/libcgicomm/src/dnswitch/dnswitch.c
+	  src/sysapps/apps/dnswitch_action/*
+	  src/rootfs/etc/init.d/rcS
+	- Fix bug: LED incorrect for IC+, bootloader version: v1.18
+	  src/bootloader/bootloader-ICPlus/*
+	  src/bootloader/bootloader/*	  	  
+*****************************************************************************
+2006/09/16 (Yen, PM 17:07)
+	- Update: add video log cgi
+	  src/sysapps/apps/cgi/cgi/*
+	  src/sysapps/apps/cgi/html.wvc230/adm/vlog.htm
+*****************************************************************************
+2006/09/15 (Yen, PM 11:49)
+	- Fix bug: https bug
+	  src/sysapps/apps/stunnel/src/client.c
+*****************************************************************************
+2006/09/15 (TONY, PM 04:00)
+	- Fix bug: Time will be incorrect after reboot
+	  src/kernel/linux/drivers/prolific/rtc.c
+*****************************************************************************
+2006/09/15 (Jeffrey, PM 02:37)
+        - Fix bug: Can't save ddns_enable & provider when through
+          sololink's SAVE button.
+	  src/sysapps/apps/cgi/setddns/*
+	  src/sysapps/apps/cgi/libcgicomm/src/ddns_lcs/ddns_conf.c
+	  src/sysapps/apps/cgi/html.wvc230/adm/ddns.htm
+	- Add Sololink DDNS init in rcS file.
+	  src/sysapps/apps/cgi/{Makefile, lcsinit}
+*****************************************************************************
+2006/09/15 (Yen, PM 01:37)
+	- Fix bug: if the connection is set by stunnel, thttpd has no idea 
+		   about what client ip address is
+	  src/sysapps/apps/stunnel/src/client.c
+	  src/sysapps/apps/thttpd-2.25b/libhttpd.c
+*****************************************************************************
+2006/09/14 (TONY, PM 05:55)
+	- Update rcS
+	  src/rootfs/etc/init.d/rcS
+	  src/sysapps/busybox-1.01/sysdeps/linux/defconfig
+*****************************************************************************
+2006/09/14 (Yen, PM 05:25)
+	- Update: add video log to event-trigger
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/hydra/event/api/{trigger.c, video_log.*}
+*****************************************************************************
+2006/09/14 (Konchi, PM 04:54)
+	- Fix Bug: Firmware Version V1.00
+	  FW/PID
+	- Fix Bug: Update CGI
+	  src/sysapps/apps/cgi/cgi/get_cgi.c, lan.c, lan.h, main_cgi.c,
+	  	system.c, Makefile
+*****************************************************************************
+2006/09/14 (Yen, PM 04:24)
+	- Fix bug: user name and password can't be deleted
+	  src/sysapps/apps/cgi/libcgicomm/src/user/user_config.c
+	- Fix bug: https does not connect to http alternative port
+	  src/sysapps/apps/stunnel/src/{options.c, prototypes.h, 
+					stunnel.c, stunnel.conf}
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+*****************************************************************************
+2006/09/14 (TONY, PM 04:00)
+	- Update Reboot action
+	  src/kmods/{Makefile,reset}
+	  src/sysapps/apps/{reboot,Makefile}
+	  src/sysapps/apps/cgi/libcgicomm/src/rest
+	  src/sysapps/apps/button_ap/DRV_read_push.c
+	  src/sysapps/apps/cgi/utility/upload.c
+	  src/sysapps/apps/cgi/rwf/tflash.c
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+*****************************************************************************
+2006/09/14 (Rondall, PM 1:00)
+	- Update: JPEG user counter
+	  src/sysapps/apps/hydra/network.c
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+*****************************************************************************
+2006/09/13 (yen, PM 08:50)
+	- Update: two admin lock (for administrator and super user)
+	  src/sysapps/apps/thttpd-2.25b/libhttpd.c
+*****************************************************************************
+2006/09/13 (konchi, PM 6:27)
+	- Update default system configuration file
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/09/13 (Rondall, PM 6:20)
+	- If the user agent is unknown, send the JPEG server push.
+	  src/sysapps/apps/thttpd-2.25b/spc_proc.c
+*****************************************************************************
+2006/09/13 (Yen, PM 06:00)
+	- Add .htpasswd to www directory
+	  src/sysapps/apps/cgi/cgi/Makefile
+*****************************************************************************
+2006/09/13 (Jeffrey, PM 05:56)
+        - Update:Can't save ddns_enable& provider when through sololink's
+          update button.
+          Sololink return page of query user password cant't show out.
+          src/sysapps/apps/cgi/setddns/*
+          src/sysapps/apps/cgi/html.wvc230/adm/ddns.htm
+          src/sysapps/apps/cgi/cgi/Makefile
+          src/sysapps/apps/cgi/cgi/main_cgi.c ,image.c
+          src/sysapps/apps/cgi/libcgicomm/src/ddns_lcs/ddns_conf.*
+          src/sysapps/apps/cgi/html.wvc230/adm/ddns.htm
+
+        - Change Motion config R/W API.
+          src/sysapps/apps/cgi/libcgicomm/Makefile
+          src/sysapps/apps/cgi/libcgicomm/src/motion/*
+          src/sysapps/apps/hydra/md/mot_setup.c
+*****************************************************************************
+2006/09/13 (TONY, PM 05:11)
+	- Add auto-detect ICPlus or DM9102. 
+	  src/kmods/{Makefile,ICPlus}
+	  src/kmods/dmfe.c
+	  src/kernel/linux/driver/net/{Makefile,mii.c}
+	  src/sysapps/apps/rc.sethost/sethost.c
+	- Update Wsecurity.htm
+	  src/sysapps/apps/cgi/html.wvc230/adm/Wsecurity.htm
+*****************************************************************************
+2006/09/13 (Yen, PM 01:27)
+	- Update: secondary mail server in event-trigger
+	  src/sysapps/apps/hydra/event/api/trigger.c
+*****************************************************************************
+2006/09/13 (Yen, AM 10:51)
+	- Fix bug: ocx will add '~' to empty password
+	  src/sysapps/apps/thttpd-2.25b/libthttpd.c
+*****************************************************************************
+2006/09/13 (Rondall, AM 10:40)
+	- Add TP6842D I2C driver 
+	  src/sysapps/apps/tp6842d_i2c
+	- Add QOS to MJPEG streaming
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+*****************************************************************************
+2006/09/12 (Yen, PM 6:36)
+	- Fix bug: there is no viewer info in .htpasswd
+	  src/sysapps/apps/cgi/auth/auth.c
+*****************************************************************************
+2006/09/12 (Rondall, PM 1:50)
+	- Replace the G.711 a-law with G.711 u-law
+	  src/sysapps/apps/hydra/audio/g711.c
+	  src/sysapps/apps/cgi/audio_upload/g711.c
+*****************************************************************************
+2006/09/11 (Yen, PM 8:54)
+	- Update: attach video stream URL address
+	  src/sysapps/apps/hydra/event/api/trigger.c
+	- Fix bug: input port triggered direction is inverted
+	  src/kmods/ioport/src/ioport.h
+*****************************************************************************
+2006/09/11 (Tony, PM 1:50)
+	- Fix bug:Switch driver will trigger by another GPIO
+	   src/kmods/Switch/switchs.c
+*****************************************************************************
+2006/09/11 (konchi, AM 11:50)
+	- Update ASF
+	  src/sysapps/hydra/asf/*
+	  src/sysapps/hydra/event/api/ASFAPI.c
+*****************************************************************************
+2006/09/08 (Jeffrey, PM 5:50)
+        - Update Motion OCX and WEB UI to expand image size.
+	  src/sysapps/apps/cgi/html.wvc230/adm/{m_detect.htm , m_detect_t.htm
+		AlertCfg.cab } 
+	  src/sysapps/apps/hydra/md/mot_algorithm.c
+*****************************************************************************
+2006/09/06 (konchi, PM 5:20)
+	- Fix Bug: irswitch
+	  src/kmods/irswitch/irswitch.h
+*****************************************************************************
+2006/09/06 (Rondall, PM 3:20)
+	- Fix Bug: JPEG resolution is incorrect when reloading 
+	  src/sysapps/apps/hydra/config.c
+	- Fix Bug: incompatible default value of the audio operation
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/09/05 (Yen, PM 5:00)
+	- Update event trigger
+	  src/sysapps/apps/hydra/event/*
+	  src/sysapps/apps/hydra/Makefile
+	  src/rootfs/etc/init.d/rcS
+	- Fix Bug: web daemon restart after saving configurations
+	  src/sysapps/apps/thttpd-2.25b/thttpd.c
+	  src/sysapps/apps/stunnel/src/stunnel.c
+*****************************************************************************
+2006/09/04 (Rondall, PM 5:40)
+	- Fix Bug: changing JPEG quality does not work
+	  src/sysapps/apps/hydra/config.c
+	- Update: changing the JPEG quality table
+	  src/sysapps/apps/hydra/includes/JPEGHeader.h
+*****************************************************************************
+2006/09/04 (TONY, PM 7:00)
+	- Update DRV_read_push.c
+	  src/sysapps/apps/button_ap/DRV_read_push.c
+*****************************************************************************
+2006/09/04 (Rondall, PM 3:00)
+	- Run the CCDC_DAEMON when booting
+	  src/rootfs/etc/init.d/rcS
+	- Add the corresponding CCD control to CGI library
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_Conf.{c,h}
+*****************************************************************************
+2006/09/01 (Jeffrey, PM 6:55)
+        - Update motion detection.
+	  src/sysapps/apps/hydra/md/*
+	  src/sysapps/apps/cgi/libcgicomm/src/motion/*
+*****************************************************************************
+2006/09/01 (Yen, PM 6:48)
+	- Modify schedule library for "event_schedule" in system.conf
+	  src/sysapps/apps/cgi/libcgicomm/src/event/schedule.c
+*****************************************************************************
+2006/09/01 (TONY, PM 6:12)
+	- Update cgi Makefile
+	  src/sysapps/apps/cgi/cgi/Makefile
+	- use fl_write_conf() replace t_flash
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+	  src/sysapps/apps/cgi/utility/upload.c
+	  src/sysapps/apps/sc_dst/sc_locatime.c
+*****************************************************************************
+2006/09/01 (Yen, PM 5:02)
+	- Update v_video.htm
+	  src/sysapps/apps/cgi/html.wvc230/v_video.htm
+*****************************************************************************
+2006/09/01 (Rondall, PM 4:20)
+	- Update the image CGI I/F (for CCD control)
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.{c,h}
+	- Add the I/F to update the CCD configuration to CCD
+	  src/sysapps/apps/ccdc_daemon/* (SIGUSR2)
+*****************************************************************************
+2006/09/01 (Rondall, PM 2:30)
+	- Update the OCX
+	  src/sysapps/apps/cgi/html.wvc230/Viewer.cab
+	  src/sysapps/apps/cgi/html.wvc230/adm/AlertCfg.cab 
+*****************************************************************************
+2006/08/31 (Rondall, PM 8:00)
+	- Add the sharpness, exposure, frequency control to CCDC
+	  src/sysapps/apps/ccdc_daemon/*
+*****************************************************************************
+2006/08/31 (TONY, PM 6:30)
+	- Update upgrade,reboot,Restor Default relative file.
+	  src/sysapps/apps/cgi/{upgrade,Makefile}
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+	  src/sysapps/apps/cgi/rwf/tflash.c
+	- Update rcS
+	  src/rootfs/etc/init.d/rcS
+	- Use MTD block device to read/write flash
+	  src/sysapps/apps/cgi/libcgicomm/src/flash
+	  src/sysapps/apps/cgi/libcgicomm/src/sys/system_conf.c
+*****************************************************************************
+2006/08/31 (Rondall, PM 6:00)
+	- Update the web pages
+	  src/sysapps/apps/cgi/html.wvc230
+
+	- Update the topro driver
+	  src/kmods/Makefile
+	  src/kmods/tp6830_lnx_950827
+*****************************************************************************
+2006/08/31 (Jeffrey, AM 11:45)
+        - Update SoloLink DDNS.
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/logfile
+	  src/sysapps/apps/cgi/Makefle
+	  src/sysapps/apps/cgi/ipupdate/*
+	  src/sysapps/apps/cgi/setddns/*
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/src/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/ddns_lcs/*
+	  src/sysapps/apps/cgi/cgi/{Makefile,lan.c , main_cgi.c , main.h}
+*****************************************************************************
+2006/08/31 (TONY, AM 10:42)
+	- Update IC-Plus driver
+	  src/kernel/linux/driver/net/Makefile
+	  src/kernel/linux/driver/net/mii.c
+	  src/kernel/linux/driver/net/sundance.c
+	  src/kernel/linux/include/linux/mii.h
+ 	- Update MTD block device driver
+	  src/kernel/linux/driver/mtd/mtdblock.c
+	- Add bootloader-ICPlus directory 
+	  CFLAG +=_LAN_DRV_IP100A_ for IP100A chip
+ 	  CFLAG +=_LAN_DRV_DM9102_ for DM9102 chip 
+	  src/bootloader/proboot-1.0.1/Makefile
+	  src/bootloader/proboot-1.0.1/incluce/{ip100a.h,cross.h}
+	  src/bootloader/proboot-1.0.1/sercomm/{ip100a.c,download.c}
+	  src/bootloader/proboot-1.0.1/shell/sh_scmain.c
+****************************************************************************
+2006/08/30 (Rondall, PM 7:00)
+	- Update CGI message
+	  src/sysapps/apps/cgi/cgi/*
+****************************************************************************
+2006/08/30 (Rondall, PM 4:00)
+	- Fix Bug: Makefile
+	  src/sysapps/apps/cgi/utility/Makefile
+
+	- Update Web UI & OCX
+	  src/sysapps/apps/cgi/html.wvc230
+****************************************************************************
+2006/08/28 (Rondall, PM 7:00)
+	- Add "Configuration Upload"
+	  src/sysapps/apps/cgi/utility/{Makefile,upload.c}
+	  PS. Use the system call to avoid the fl_write_conf failed
+
+****************************************************************************
+2006/08/28 (Konchi, PM 5:00)
+	- Add Log Email Scheduling
+	  src/sysapps/apps/logemial/*
+	  src/sysapps/apps/Makefile, conf_sec.h
+	  src/rootfs/def_system.conf
+	  src/sysapps/apps/cgi/*
+	  
+****************************************************************************
+2006/08/28 (Rondall, PM 4:30)
+	- Update the Audio CGI I/F
+	  src/sysapps/apps/cgi/libcgicomm/src/audio/*
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+****************************************************************************
+2006/08/28 (Rondall, PM 2:00)
+	- Add "Configuration Download"
+	  src/sysapps/apps/cgi/utility/{Makefile,config.c}
+	  src/sysapps/apps/thttpd-2.25/thttpd.conf
+****************************************************************************
+2006/08/25 (Jeffrey, PM 06:26)
+        - Update Sololink WEB page & CGI.
+	  src/sysapps/apps/cgi/html.wvc230/adm/ddns.htm
+          src/sysapps/apps/cgi/cgi/{Makefile , main_cgi.c}
+          src/sysapps/apps/cgi/libcgicomm/src/ddns_solo/*
+	  src/sysapps/apps/cgi/setddns/*
+****************************************************************************
+2006/08/25 (Konchi, AM 11:10)
+	- Add CoS function
+	  src/sysapps/apps/cgi/cgi/lan.c
+	  src/sysapps/apps/cgi/libcgicomm/src/lan/lan_conf.*
+	  src/sysapps/apps/cgi/libcgicomm/src/qos/qos_conf.*
+	  src/kmods/DM9102/dmfe.c
+	  
+****************************************************************************
+2006/08/25 (Yen, AM 11:10)
+	- modify pre-capture and post-capture in TRIG_CONF structure
+	  src/sysapps/apps/cgi/cgi/evtcgi.*
+	  src/sysapps/apps/cgi/libcgicomm/src/event/trig_config.*
+	  src/sysapps/apps/hydra/event/event.c
+****************************************************************************
+2006/08/24 (Rondall, PM 7:10)
+	- Implement the reload action to hydra
+	  src/sysapps/apps/hydra/*
+
+	- Update the align value that Prolific suggested
+	  src/kernel/linux-2.4.19/drivers/sound/pl1061/pl_ac97.c
+*****************************************************************************
+2006/08/24 (Rondall, PM 2:00)
+	- Update the query.cgi to meet the SPEC
+	  src/sysapps/apps/cgi/utility/query.c
+*****************************************************************************
+2006/08/23 (Rondall, PM 8:37)
+	- Update MJPEG  
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+*****************************************************************************
+2006/08/23 (Konchi, PM 6:34)
+	- Add jabber, syslog
+	  src/rootfs/init.d/rcS
+	  src/sysapps/apps/jabberlog/jabber_main.c
+	  src/sysapps/apps/cgi/*
+*****************************************************************************
+2006/08/23 (Rondall, PM 5:40)
+	- Divide the CCD driver into TOPRO driver and Prolific I/F driver
+	  to figure out the crashed system problem
+	  src/kmods/Makefile
+	  src/kmods/{topro,plsensor}
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/08/23 (TONY, PM 5:30)
+	- Fix bug:Snapshot always show 320x240.
+	  src/sysapps/apps/cgi/utility/snapshot.c
+*****************************************************************************
+2006/08/23 (Yen, PM 4:35)
+	- Add https alternative port feature
+	  src/sysapps/apps/stunnel/*
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+	  src/rootfs/etc/init.d/rcS
+	- Add: thttpd sends signal to dsp_dae before exit
+	  src/sysapps/apps/thttpd-2.25b/thttpd.c
+*****************************************************************************
+2006/08/22 (Rondall, PM 9:50)
+	- Fix bug: Noise of the G.726 audio upload
+	  src/sysapps/apps/cgi/audio_upload/{g726.c,audio_upload.c}
+
+	- Fix bug: G.711 encoder 
+	  src/sysapps/apps/hydra/audio/g711.c
+
+*****************************************************************************
+2006/08/22 (Jeffrey, PM 9:15)
+        - Fix bug: motion cgi can't read config.
+	  src/sysapps/apps/cgi/ocxparser/motconf_api.c
+*****************************************************************************
+2006/08/22 (Rondall, PM 8:00)
+	- Add Action to Audio CGI I/F
+	  src/sysapps/apps/cgi/libcgicomm/src/audio/*
+
+*****************************************************************************
+2006/08/22 (TONY, PM 03:48)
+	- Update HWINFO_ReadConfigData()
+	  src/sysapps/apps/cgi/libcgicomm/src/sys/{system_config.c,sys_global.h}
+	- Update snapshot.cgi  (Add support 128x96 and 64x48)
+	  src/sysapps/apps/cgi/libcgicomm/src/img/IMG_conf.h
+	  src/sysapps/apps/cgi/utility/snapshot.c
+	  src/sysapps/apps/cgi/hydra/snapshot/snapshoot.c
+*****************************************************************************
+2006/08/22 (Jeffrey, PM 03:14)
+        - Setting uMVDumpAddr/uMVDumpSize,when motion or indicator enable.
+	  src/sysapps/apps/hydra/encode.c 
+*****************************************************************************
+2006/08/22 (Rondall, AM 11:50)
+	- Add the G711 audio upload
+	  src/sysapps/apps/cgi/audio_upload/{Makefile}
+	  src/sysapps/apps/cgi/audio_upload/{g711_audio_upload.c,g711.c}
+*****************************************************************************
+2006/08/22 (Konchi, AM 11:41)
+        - Update asf
+	  src/sysapps/apps/hydra/asf/asf_data_object.*, asf_network.c
+	- Update CGI
+	  src/sysapps/apps/cgi/libcgicomm/src/qos/*
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+*****************************************************************************
+2006/08/22 (Jeffrey, AM 11:36)
+        - Update software JPEG encoder
+	  src/sysapps/apps/hydra/{Rules.mak , Makefile , hydra.c}
+	  src/sysapps/apps/hydra/swencode_jpg/*
+*****************************************************************************
+2006/08/22 (Jeffrey, AM 10:46)
+        - Add getting motion config in hydra. 
+	  (NOTE:indicator_enable caused RTSP can't work yet)
+	  src/sysapps/apps/hydra/{Rules.mak,config.c,encode.c}
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/md/*
+	  src/sysapps/apps/cgi/libcgicomm/src/motion/*	
+
+*****************************************************************************
+2006/08/21 (Rondall, PM 9:00)
+	- Update the audio encoder (Increase slot number, Decrease buffer
+	  size)
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/hydra/audio/pcm_source.c
+
+*****************************************************************************
+2006/08/21 (TONY, PM 8:21)
+	- Update snapshot.cgi
+	  src/sysapps/apps/hydra/{Makefile,snapshot}
+	  src/sysapps/apps/cgi/utility/{Makefile,snapshot.c}
+*****************************************************************************
+2006/08/21 (Rondall, PM 6:20)
+	- Add the G726 audio upload
+	  src/sysapps/apps/cgi/audio_upload
+	  PS. Known Bug: there're noise.
+	
+*****************************************************************************
+2006/08/21 (Konchi, PM 1:53)
+	- Update new web page
+	  src/sysapps/apps/cgi/html.wvc230/*
+	- Update QoS CGI
+	  src/sysapps/apps/cgi/cgi/lan.*
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+	  src/sysapps/apps/cgi/libcgicomm/src/qos/qos_conf.*
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/18 (Konchi, PM 8:00)
+	- Update asf for changing resolution
+	  src/sysapps/apps/hydra/asf/*
+	- update CGI
+	  src/sysapps/apps/cgi/*
+	  
+*****************************************************************************
+2006/08/18 (Rondall, PM 4:00)
+	- Update the Audio Trigger I/F and merge to the Video Trigger I/F
+	  src/sysapps/apps/hydra/encode.c
+	  src/sysapps/apps/hydra/event/evnent.c
+
+*****************************************************************************
+2006/08/18 (Rondall, PM 4:00)
+	- Update the Audio Encoder (Reduce the Buffer Size of AC97 Driver)
+	  src/sysapps/apps/hydra/audio/pcm_source.c
+	  src/sysapps/apps/hydra/Makefile
+
+	  PS. The feature is defined as "_CONTROL_AUDIO_BUFFER_SIZE_".
+
+*****************************************************************************
+2006/08/18 (Rondall, AM 11:00)
+	- Update the Audio Trigger I/F
+	  src/sysapps/apps/hydra/encode.c
+*****************************************************************************
+2006/08/17 (Konchi, PM 05:27)
+	- Add libdl.so for ipfilter
+	  src/rootfs/Makefile
+	- update CGI
+	  src/sysapps/apps/cgi/cgi/iocgi.c
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+*****************************************************************************
+2006/08/17 (TONY, PM 04:53)
+	- Update sc_dst , conf_sec.h ,def_sys.conf
+	  src/sysapps/apps/{conf_sec.h,sc_dst}
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/17 (Jeffrey, PM 04:00)
+        - Update new UPNP.(include securiy-camera feature.)
+	  src/sysapps/apps/Makefile
+	  src/sysapps/apps/upnp/*
+	  src/sysapps/apps/upnp-securitycam/*
+	  src/sysapps/apps/cgi/cgi/cgi_msg
+	- Remove unnecessary files.
+	  src/sysapps/apps/dsp_dae/*
+*****************************************************************************
+2006/08/17 (TONY, PM 03:45)
+	- Update NTP source code define
+	  src/sysapps/apps/NTP
+*****************************************************************************
+2006/08/17 (Sand, PM 02:33)
+	- Add a kernel module to do the same thing top can do
+	  src/kmods/ktop/*
+	- Update image function to make setting change do real action
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.{c,h}
+	- Add a sleep time for streaming to give up his cuptime to decrease
+	  the loading.
+	  src/sysapps/apps/hydra/hydra.c
+*****************************************************************************
+2006/08/17 (TONY, PM 02:16)
+	- Add chgip
+	  src/sysapps/apps/cgi/{Makefiel,chgip}
+*****************************************************************************
+2006/08/16 (Sand, PM 7:50)
+	- Add reload config: using SIGUSR1 to reload the configuration and 
+	  do some necessary changes.
+	  src/sysapps/apps/hydra/{config.c, signal.c}
+*****************************************************************************
+2006/08/16 (TONY, PM 04:56)
+	- Undefine _PAN_TILT_SUPPORT_ on cgi 
+	  src/sysapps/apps/cgi/cgi/{Makefile,system.c}
+*****************************************************************************
+2006/08/16 (Konchi, PM 06:46)
+	- Add IRSwith driver
+	  src/kmods/irswitch/*
+	  src/rootfs/etc/init.d/rcS
+	- Update CGI
+	  src/sysapps/apps/cgi/cgi/main_cgi.c
+	  sys/sysapps/apps/cgi/cgi/lan.c
+	- Add connection checking to ASF function
+	  src/sysapps/apps/hydra/asf/asf_network.c
+*****************************************************************************
+2006/08/16 (Yen, PM 05:03)
+	- Modify gpio api
+	  src/kernel/linux-2.4.19/arch/arm/mach-pl1029/gio.c
+*****************************************************************************
+2006/08/16 (TONY, PM 04:56)
+	- Add PTZ support 
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/src/{ptz_action,Makefile}
+	  src/sysapps/apps/cgi/{pantilt,Makefile}
+	- Update get_lsr_info() 
+	  src/kernel/linux-2.4.19/drivers/prolific/pl_uart.c
+*****************************************************************************
+2006/08/16 (Rondall, PM 5:00)
+	- Fix bug: video sync mode of hydra is incorrect 
+	  src/sysapps/apps/hydra/config.c
+	(grabfmt.nUseHRef = 0xff if CCIR656)
+	(grabfmt.nUseHRef = 0x01 if YUV422+H/VSync)
+
+*****************************************************************************
+2006/08/16 (Sand, PM 4:02)
+	- Fix bug: when disconnected, check WAN port ip will crash hydra
+	  src/sysapps/apps/hydra/rtsp/checkip.c
+*****************************************************************************
+2006/08/16 (Rondall, PM 3:30)
+	- Update: Audio Tirgger I/F
+	  src/sysapps/apps/hydra/encode.c
+
+	- Update Module Makefile (Remove the SonyCCD-YUV422 module)
+	  src/kmods/Makefile
+*****************************************************************************
+2006/08/16 (Sand, AM 11:59)
+	- Fix bug: Add connection timeout 5 sec for check WAN port ip
+	  src/sysapps/apps/hydra/rtsp/{checkip.c, sdp.c}
+	- Add timeout for while loop of write or sendmsg
+	  src/sysapps/apps/hydra/snapshot/snapshot.c
+	  src/sysapps/apps/hydra/rtsp/response.c
+	- Delete share memory when program exit
+	  src/sysapps/apps/hydra/rtsp/hydra.c
+*****************************************************************************
+2006/08/15 (Rondall, PM 7:30)
+	- Fix a warning message 
+	  src/sysapps/apps/hydra/Makefile
+*****************************************************************************
+2006/08/15 (Sand, PM 06:08)
+	- Fix bug: can't read md value 
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/md/md.c
+	- Provide an eaiser way for snapshot
+	  src/sysapps/apps/hydra/snapshot/*
+	  src/sysapps/apps/hydra/encoded.c
+	- Add initial mobile phone encoder
+	  src/sysapps/apps/hydra/{config.c, hydra.c, Makefile}
+*****************************************************************************
+2006/08/15 (Rondall, PM 05:10)
+	- Update Hydra (Audio pthread + updated MJPEG)
+	  src/sysapps/apps/hydra/audio/pcm_source.c
+	  src/sysapps/apps/hydra/include/{jpeg.c,MESS.h}
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	  src/sysapps/apps/hydra/{config.c,hydra.c,Makefile,network,umgr.c}
+
+	- Update CCD Control Daemon
+	  src/sysapps/apps/ccdc_daemon/Makefile
+	  src/sysapps/apps/Makefile
+*****************************************************************************
+2006/08/14 (Jeffrey, PM 06:00)
+        - Update sololink R/W API,config items
+          src/sysapps/apps/cgi/libcgicomm/Makefile
+          src/sysapps/apps/cgi/libcgicomm/src/Makefile
+          src/sysapps/apps/cgi/libcgicomm/src/ddns_solo/*
+          src/sysapps/apps/conf_sec.h (not defined in spec yet)
+          src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/14 (Sand, PM 05:44)
+	- Fix bug: repeat assign the same user account
+	  src/sysapps/apps/hydra/umgr.c
+	- Add frame drop mechanism
+	  src/sysapps/apps/hydra/encode.c
+	- Add pvplayer support & sdf file generate
+	  src/sysapps/apps/hydra/{config.c, Makefile}
+	  src/sysapps/apps/hydra/rtp/rtp_func.c
+	  src/sysapps/apps/hydra/rtsp/include/function.h
+	  src/sysapps/apps/hydra/rtsp/{pv_spec.c, response.c, sdp.c
+	  src/sysapps/apps/cgi/cgi/Makefile
+*****************************************************************************
+2006/08/14 (Rondall, AM 10:00)
+	- Add the audio I/F for the trigger
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/audio/audio.h
+	  src/sysapps/apps/hydra/encode.c
+*****************************************************************************
+2006/08/11 (Jeffrey, PM 04:46)
+        - Update motion R/W API, rcS file. 
+	  Add sololink R/W API,config items
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/src/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/src/motion/*
+	  src/sysapps/apps/cgi/libcgicomm/src/ddns/*
+	  src/sysapps/apps/cgi/libcgicomm/src/ddns_solo/*
+	  src/sysapps/apps/cgi/Makefile
+	  src/sysapps/apps/cgi/ocxparser/*
+	  src/sysapps/apps/cgi/setddns/*
+	  src/sysapps/apps/cgi/setcron/*
+	  src/sysapps/apps/conf_sec.h (not defined in spec yet)
+	  src/rootfs/etc/init.d/rcS
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/11 (Konchi, PM 05:17)
+	- update CGI
+*****************************************************************************
+2006/08/11 (TONY, AM 11:20)
+	- Fix bug:F/W version always is zero. 
+	  src/sysapps/apps/cgi/libcgicomm/src/sys/{system_config.c,sys_global.h}
+*****************************************************************************
+2006/08/10 (Sand, PM 7:47)
+	- Read configuration from system.conf and add interface for event
+	  trigger 
+	  src/sysapps/apps/hydra/{hydra.c, signal.c, umgr.c, config.c,
+encode.c, Makefile, Rules.mak, mmm.c}
+	  src/sysapps/apps/hydra/osd/osd.c
+	  src/sysapps/apps/hydra/include/{MESS.h, MMM.h}
+	  add 
+	  src/sysapps/apps/hydra/event/*
+	  remove 
+	  src/sysapps/apps/hydra/osd/osd.h , osd.conf
+*****************************************************************************
+2006/08/10 (Rondall, PM 5:00)
+	- Update the CCD driver to 1.0.0.2
+	  src/kmods/sony098/{pwc-ctrl.c,sony098.c}
+	  src/sysapps/apps/hydra/hydra.c
+	  (Fix the slow adjustment of AE/AWB bug)
+*****************************************************************************
+2006/08/10 (TONY, PM 3:20)
+	- Update model.h 
+	  src/sysapps/apps/model.h
+	- Update rc.sethost and Qset
+	  src/sysapps/apps/{rc.sethost,Qset}
+	- Update conf_sec.h,def_sys.conf ptz
+	  src/sysapps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/cgi/libcgicomm/src/ptz
+*****************************************************************************
+2006/08/10 (Rondall PM 3:00)
+	- Update the audio r/w API
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/libcgicomm/src/audio/*
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/10 (Sand, AM 11:59)
+	- Update image configuration read/write API
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/libcgicomm/src/image/IMG_conf.{c,h}
+	  src/rootfs/etc/def_sys.conf
+*****************************************************************************
+2006/08/09 (Sand, PM 8:46)
+	- Fix RTSP overwrite MJPEG stream bug and integrate RTSP into source
+	  src/sysapps/apps/hydra/include/MESS.h
+	  src/sysapps/apps/hydra/{signal.c, config.c, Makefile, hydra.c,
+network.c, Rules.mak}
+	  src/sysapps/apps/hydra/rtsp/response.c
+*****************************************************************************
+2006/08/09 (TONY, PM 5:33)
+	- Remove include sc_config.h from some files.
+	  src/sysapps/apps/NTP/fntp.c
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+	  src/sysapps/apps/cgi/libcgicomm/Makefile
+*****************************************************************************
+2006/08/09 (Rondall, PM 6:00)
+	- Fix one MJPEG bug and remove the hydra killer
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	  src/sysapps/apps/hydra/include/jpeg.h
+
+	- Update the function to pass the file descriptor
+	  src/sysapps/apps/thttpd-2.25b/spc_proc.c
+*****************************************************************************
+2006/08/09 (TONY, PM 5:33)
+	- Remove unnecessary sc_config
+	  src/sysapps/apps/sc_config
+*****************************************************************************
+2006/08/09 (Konchi, PM 3:20)
+	- update bootloader's Hardware ID to 594333
+	- update PID file in FW/ folder
+	- Add asf function into hydra
+*****************************************************************************
+2006/08/09 (Rondall, AM 9:30)
+	- Add Audio I/F to libcgicomm (structure & get/set function)
+	  /src/sysapps/apps/cgi/libcgicomm/Makefile
+	  /src/sysapps/apps/cgi/libcgicomm/src/Makefile
+	  /src/sysapps/apps/cgi/libcgicomm/src/audio
+	  (Remove "/src/sysapps/apps/cgi/libcgicomm/src/AUDIO")
+
+*****************************************************************************
+2006/08/08 (Rondall, PM 9:30)
+	- Solve the frame rate problem temporally by the CCIR656 sync
+	  /src/kmods/sony098/
+	  (Update the new TP6842D driver)
+
+	  /src/sysapps/apps/hydra/config.c
+	  (grabfmt.nUseHRef = 0xff if CCIR656)
+	  (grabfmt.nUseHRef = 0x01 if YUV422+H/VSync)
+
+	  /lib/modules/plmedia-1.1.1.o
+	  (Only 1.1.1 support the CCIR656)
+	  (It's a very strange problem that only CCIR656 can reach to 30fps.)
+
+	- Enable the video setting
+	  /src/kmods/sony098/
+	  /src/sysapps/apps/ccdc_daemon/
+	  /src/sysapps/apps/hydra/{Makefile, Rule.mak, hydra.c, config.c}
+	  (It will take a while to before vaild. Thank you for your patience.)
+
+*****************************************************************************
+2006/08/08 (TONY, PM 6:45)
+	- Add PTZ(RS485 api and configuration items)
+	  src/sysapps/apps/conf_sec.h
+	  src/rootfs/etc/def_sys.conf
+	  src/sysapps/apps/cgi/libcgicomm/src/{ptz,Makefile}
+	- Move SHMKEY_TIME to dsp_dae.c from IMG_conf.h
+	  src/sysapps/apps/dsp_dae/dsp_dae.c
+*****************************************************************************
+2006/08/08 (Jeffrey, PM 6:08)
+        - Remove share memory IMG_S0.
+	  src/sysapps/apps/cgi/libcgicomm/src/motion/*
+	- Remove sc_conf.h
+	  src/sysapps/apps/ddns/*
+	- Add ocxparser.cgi
+	  src/sysapps/apps/cgi/ocxparser
+	  src/sysapps/apps/cgi/Makefile
+*****************************************************************************
+2006/08/08 (TONY, PM 2:48)
+	- Add dsp_dae on rcS
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/08/08 (Sand, PM 0:05)
+	- Update image configuration read/write API
+	  src/sysapps/apps/conf_sec.h
+	  src/sysapps/apps/cgi/libcgicomm/src/image/*
+*****************************************************************************
+2006/08/08 (TONY, AM 11:26)
+	- Update dmfe.c (Add del_timer_sync(&DM9102LedTimer) when interface
+	  stop.)
+	  src/kmods/DM9102/dmfe.c
+	- Update LSDK-WLAN-5.0.0-RC5 wpa_supplicant .config
+	  src/kmods/LSDK-WLAN-5.0.0-RC5-20051117/wpa_supplicant.tar.gz
+	- Add WMM setting on wireless
+	  src/sysapps/apps/cgi/libcgicomm/src/wlan
+	  src/sysapps/apps/conf.h
+	  src/rootfs/etc/def_sys.conf
+	- Add ledoff on rcS
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/08/07 (Rondall, PM 5:55)
+	- Update the SONY CCD driver
+	  src/kmods/sony098_yuv422
+*****************************************************************************
+2006/08/07 (Konchi, PM 4:27)
+	- Update web pages
+	  src/sysapps/apps/cgi/html.wvc230
+*****************************************************************************
+2006/08/07 (TONY, PM 2:27)
+  	- Fix bug:"kernel timer added twice"
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/{rtmp_main.c,rtmp_data.c,
+	  rt_config.h}
+	- Update DM9102 LED action.
+	  src/kmods/DM9102/dmfe.c 
+*****************************************************************************
+2006/08/04 (TONY, PM 4:00)
+	- Enable AES support for Atheros
+	  src/kernel/linux-2.4.19/arch/arm/defconfig
+	- Add wlan_ccmp.o and Led
+	  src/kmods/LSDK-WLAN-5.0.0-RC5-20051117/patch.arm.kernel-2.4.19
+ 	- Export crypt_alloc_tfm , crypto_unregister_alg... symbols
+	  src/kernel/linux-2.4.19/crypto/api.c
+*****************************************************************************
+2006/08/03 (TONY, PM 6:49)
+	-  Fix bug:WEP and WPA-PSK doesn't work.
+	   src/sysapps/apps/cgi/libcgicomm/src/wlan/WLAN_iwconfig.c
+*****************************************************************************
+2006/08/03 (Rondall, PM 6:14)
+	- Modify the Makefile
+	  src/kmods/sony098_yuv422/Makefile
+*****************************************************************************
+2006/08/02 (TONY, PM 2:44)
+	- Enable LED of DM9102 and add report of "Link status".
+	  src/kmods/DM9102/{dmfe.c,Makefile}
+	- Add nc_qset on rcS
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/08/03 ( Sand, AM 11:43)
+	- Update makefile so that if any error occurs, the make procedure will
+	  stop.
+	  src/sysapps/apps/Makefile
+*****************************************************************************
+2006/08/02 (TONY, PM 7:03)
+	- Turn off multi-read (burst mode)on DM9102
+	  src/kmods/DM9102/dmfe.c
+	- Add MTD on linux kernel
+	  src/kernel/linux-2.4.19/drivers/mtd/{pl_nor.c,Makefile,Config.in}
+	  src/kernel/linux-2.4.19/drivers/prolific/Config.in
+	  src/kernel/linux-2.4.19/arch/arm/defconfig
+	- Update tflash and flash module
+	  src/sysapps/apps/cgi/rwf
+	  src/sysapps/apps/cgi/libcgicomm/src/flash
+	- Update rcS
+	  src/rootfs/etc/init.d/rcS
+	- Update rcS,wlan,rc.sethost
+	  src/rootfs/Makefile
+	  src/sysapps/apps/rc.sethost
+	  src/sysapps/apps/cgi/libcgicomm/src/wlan
+	- Change wireless interface to eth0 from ra0
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/rtmp_main.c
+	- Add sc_dst
+	  src/sysapps/apps/{sc_dst,Makefile}
+*****************************************************************************
+2006/08/02 (Konchi, PM 5:57)
+	-update bootloader for solving LAN problem
+*****************************************************************************
+2006/07/31 (Vincent, PM 1:57)
+	- Fix BUG:
+	  Even skip the "menuconfig" for kernel, it still enters the kernel
+	  config selections (always execute "make menuconfig")
+	  host/scripts/kernel_config
+	- Fix BUG:
+	  Run "make defconfig" will cause the F/W build failure - it won't
+	  generate "autoconf.h" by this method.
+	  Makefile
+	  src/kernel/linux-2.4.19/Makefile
+	  src/kernel/linux-2.4.19/scripts/Defconfig
+	!! Now using "src/kernel/linux-2.4.19/arch/arm/defconfig" as !!
+	!! you kernel config option.                                 !!
+	!! No more "src/kernel/linux-2.4.19/.config".                !!
+*****************************************************************************
+2006/07/28 (Rondall, PM 06:30)
+	- Found a bug of the new driver, replace to the old version.
+	  src/kmods/sony098_yuv422
+	- Add the program to enable the AE/AWB (ccdc_daemon)
+	  src/sysapps/apps/ccdc_daemon 
+	  ps. Please run it after hydra is complete to setup the CCD
+*****************************************************************************
+2006/07/28 (Rondall, PM 05:00)
+	- Update Sensor Driver to v1.0.1
+	  src/kmods/sony098_yuv422
+*****************************************************************************
+2006/07/28 (Sand, PM 04:39)
+	- Add RTP over RTSP over HTTP in streaming server.
+	- Fix OSD doesn't close fd bug
+	  Modify :	
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/hydra/{hydra.c, network.c,recv.c}
+	  src/sysapps/apps/hydra/include/{common.h, MESS.h}
+	  src/sysapps/apps/hydra/osd/{osd.c, logo.yuv, osd.conf}
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	  src/sysapps/apps/hydra/rtp/rtp_func.c
+	  src/sysapps/apps/hydra/rtsp/include/function.h, rtsp.h
+	  src/sysapps/apps/hydra/rtsp/{parse.c, response.c, rtsp.c,util.c}
+	  Remove :
+	  src/sysapps/apps/hydra/rtsp/{shared.c sock.c}
+*****************************************************************************
+2006/07/28 (Vincent, PM 3:16)
+	- Update default configure file for both busybox and kernel.
+	- Allow to skip the "make menuconfig" procedure.
+	  Using "make defconfig" instead. (need item 1)
+	  Makefile
+	  host/scripts/def_config
+	  src/kernel/linux-2.4.19/arch/arm/defconfig
+	  src/sysapps/busybox-1.01/sysdeps/linux/defconfig
+	- Removing unecessay files
+	  host/scripts/boot_config
+	  src/kernel/linux-2.4.19/arch/arm/def-config/...
+	  src/sysapps/busybox-1.01/sysdeps/linux/pl1029, pl1029u
+*****************************************************************************
+2006/07/28 (TONY, PM 01:00)
+	- Enable CONFIG_FEATURE_DEVPTS on busybox(for telnetd)
+	  src/sysapps/busybox-1.01/.config
+*****************************************************************************
+2006/07/28 (Yen, PM 06:33)
+	- Unknown error causes thttpd to crash while executing setgid and 
+	  setuid. Some parts of thttpd.c are temporarily commented to make 
+	  thttpd go well.
+	  src/sysapps/apps/thttpd-2.25b/thttpd.c
+*****************************************************************************
+2006/07/27 (TONY , PM 06:33)
+	- Add Atheros driver
+	  src/kmods/LSDK-WLAN-5.0.0-RC5-20051117 (Ad-hoc still can't work)
+	- Update iwpriv.c
+	  src/sysapps/apps/wireless_tool.26/iwpriv.c
+	- Add testing program  for throughput and RS485
+	  src/sysapps/apps/{Makefile,RS485,throughput}
+*****************************************************************************
+2006/07/27 (Sand , PM 05:21)
+	- Update streaming server code.A:Fix OSD never munmap bug.B:enable RTP
+	  over RTSP. C: tune some framework priority. D: remove unused code.
+	  src/sysapps/apps/hydra/{encode.c, hydra.c, mmm.c, network.c, signal.c}
+	  src/sysapps/apps/hydra/osd/osd.c
+	  src/sysapps/apps/hydra/rtp/rtp_func.c
+	  src/sysapps/apps/hydra/rtsp/include/function.h, rtsp.h
+	  src/sysapps/apps/hydra/rtsp/{parse.c, response.c, rtsp.c, sdp.c}
+*****************************************************************************
+2006/07/27 (Jeffrey, PM 03:40)
+        - Update motion detection code.
+	  src/sysapps/apps/hydra/Makefile
+	  src/sysapps/apps/hydra/md/*
+*****************************************************************************
+2006/07/27 (TONY, PM 02:22)
+	- Update kernel for Atheros driver 
+	  src/kernel/linux-2.4.19
+	  !!Backup old kernel to linux-2.4.19_20060727!!
+*****************************************************************************
+2006/07/27 (Yen, AM 11:52)
+	- Patch mmzone.h and update new crypt.o. 
+	  src/kernel/linux-2.4.19/include/linux/mmzone.h
+	  lib/modules/crypt.o
+
+	**MAX_ORDER should not be greater than 15, or we should contact
+	  prolific to modify crypt.o
+
+	  Previous mmzone.h is backed up as mmzone.bak.h
+*****************************************************************************
+2006/07/26 (Rondall, AM 10:12)
+	- Modify the hydra to merge the JPEG and Audio
+	  src/sysapps/apps/hydra/{network.c,hydra.c}
+	  src/sysapps/apps/hydra/audio/{g726.c,pcm_source.c}
+	  src/sysapps/apps/hydra/includes/common.h
+	  src/sysapps/apps/hydra/jpeg/jpeg.c
+	  src/sysapps/apps/boa-simple/spc_proc.c (testing only)
+*****************************************************************************
+2006/07/26 (Rondall, AM 10:12)
+	- Fix an audio bug
+	  src/sysapps/apps/hydra/audio/pcm_source.c
+*****************************************************************************
+2006/07/25 (Rondall, PM 06:05)
+	- Add the G.711 A-Law encoder
+	  src/sysapps/apps/hydra/audio/{audio.h,g726.h,pcm_source.c}
+	  src/sysapps/apps/hydra/include/{common.h,MESS.h}
+	  src/sysapps/apps/hydra/{config.c,encode.c,Makefile}
+
+	  ps. Add one field, audio_type, to "encoders.conf"
+	      audio_type:0 ----> Use G.726 encoder
+	      audio_type:1 ----> Use G.711 encoder
+	      
+	      The corresponding	field of MESS.h is "audio_encoder_type".
+*****************************************************************************
+2006/07/24 (Rondall, PM 06:30)
+	- Modify the client_information of the common.h (for boa and hydra)
+	  src/sysapps/apps/boa-simple/common.h
+	  src/sysapps/apps/hydra/includes/common.h
+	- Update the boa for the testing purpose
+	  src/sysapps/apps/boa-simple/{spc_proc.c, request.c}
+*****************************************************************************
+2006/07/24 (Sand, PM 05:48)
+	- Remove un-used static library
+	  lib/libio.a, libmd.a, libmvse.a, libwd.a
+	- Update Makefile so that ccd driver can be compiled and installed.
+	  src/kmods/Makefile
+	- Replace plmedia driver by plmedia-1.1.0.o
+*****************************************************************************
+2006/07/24 (Sand, PM 03:15)
+	- Update streaming server, adds motion detection and some updates to 
+	  remove compiling stage warnings.
+	  src/sysapps/apps/hydra/*
+*****************************************************************************
+2006/07/24 (TONY, AM 11:28)
+	- Enable wireless LED and RALINK_ATE(for FCC) function 
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/{rtmp_main.c,rtmp_data.c,Makefile}
+	  (Note:Sometimes console will dump "bug:kernel timer added twice",
+		but it still can work normally.) 
+*****************************************************************************
+2006/07/24 (TONY, AM 10:50)
+	- Add r_flash on rcS
+	  src/rootfs/etc/init.d/rcS
+	- modify fl_read_conf() and fl_write_conf()
+	  Makefile
+	  src/sysapps/apps/cgi/{rwf,Makefile}
+	  src/sysapps/apps/cgi/libcgicomm/src/flash
+*****************************************************************************
+2006/07/21 (Yen, PM 06:00)
+	- Modify setregister kernel module
+	  src/kmods/setregister/*
+	  
+	  Now setregister can be use to get/set all registers in pl1029.
+	  <Usage> GET: setregister 1 [num] [base] [offset from base]
+	  	  SET: setregister 2 [num] [base] [offset from base] [data]
+*****************************************************************************
+2006/07/21 (Rondall, PM 05:05)
+	- Update the plmedia driver (grabber)
+	  lib/modules/plmedia-1.1.0.o
+
+	  Please follow the steps if you want to use the CCD
+	  1. insmod ccd_sensor    (Sensor Driver)
+	  2. insmod plmedia-1.1.0 (Grabber Driver)
+
+	- Add the boa simple (test only)
+	  src/sysapps/apps/boa-simple
+*****************************************************************************
+2006/07/21 (Sand, PM 03:15)
+	- Add several feature to streaming server 
+	  1. Motion JPEG
+	  2. Audio
+	  3. On Screen Display
+	  src/sysapps/apps/hydra/*
+*****************************************************************************
+2006/07/21 (Rondall, PM 02:36)
+	- Add the Sony CCD + TI 3on1 + TP6842D driver (beta)
+	  src/kmods/sony098_yuv422
+*****************************************************************************
+2006/07/20 (Tony, PM 02:36)
+	- Update pl_uart.c
+	  src/kernel/linux-2.4.19/drivers/prolific/pl_uart.c
+*****************************************************************************
+2006/07/14 (Sand, PM 01:53)
+	- Add bmp2yuv to convert user upload logo BMP file to YCbCr file
+	  src/sysapps/apps/hydra/logo_convert/*
+*****************************************************************************
+2006/07/13 (Konchi, AM 11:23)
+	- Add jabberlog
+	- Modify SYSTEM log and syslog
+	- Put def_sys.conf and logfile into src/rootfs/etc
+*****************************************************************************
+2006/07/11 (Yen, PM 08:17)
+	- Add gpio functions to kernel
+	  src/kernel/linux-2.4.19/arch/arm/kernel/armksyms.c
+	  src/kernel/linux-2.4.19/arch/arm/mach-pl1029/{gio.c,Makefile}
+	  src/kernel/linux-2.4.19/include/asm/arch-pl1029/gio.h
+	- Modify ioport driver module
+	  src/kmods/ioport/*
+*****************************************************************************
+2006/07/11 (TONY, PM 01:31)
+	- Add led and read mac from flash
+	  src/kernel/linux-2.4.19/arch/arm/kernel/armksyms.c
+	  src/kernel/linux-2.4.19/arch/arm/mach-pl1029/{misc.c,Makefile}
+	  src/kernel/linux-2.4.19/include/asm/arch/misc.h
+	  src/kmods/DM9102/{dmfe.c,Makefile}
+	  src/kmods/RT61_Linux_STA_Drv1.0.4.0/{rtmp_main.c,rt_config.h,
+	  rtmp_data.c,Makefile}
+*****************************************************************************
+2006/07/10 (Konchi, PM 04:39)
+	- Modify console baud rate as 115200.
+	Please use "115200 8E1", "Hardware Flow Control : Yes"
+	You can use console ports on mainboards without USB adaptor
+*****************************************************************************
+2006/07/07 (Yen, PM 06:25)
+	- Add setregister module in kmods
+	  src/kmods/setregister/*
+*****************************************************************************
+2006/07/07 (TONY, PM 04:23)
+	- Disable _EVM_BOARD_ define 
+	  src/kmods/{Led,Switchs}/Makefile
+	- Update armksyms.c
+	  src/kernel/linux-2.4.19/arch/arm/kernel/armksyms.c
+*****************************************************************************
+2006/07/06 (Konchi, PM 02:39)
+	- Modify LED and PUSHBUTTON definition of GPIOs for "CUT1 board"
+*****************************************************************************
+2006/07/05 (Yen, AM 11:39)
+	- Add stunnel with prolific modified openssl library
+	  src/sysapps/apps/stunnel
+	- Add AES and DES crypt driver
+	  lib/crypt.o
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/07/04 (TONY, PM 06:36)
+	- Update LAN driver(Don't read srom)
+	  src/kmods/{Makefile,DM9102,DM9102_OLD}
+	- Update kernel .config
+	  src/kernel/linux-2.4.19/.config
+	- Update netsyms.c
+	  src/kernel/linux-2.4.19/net/netsyms.c
+	- Update rtc driver
+          src/kernel/linux-2.4.19/drivers/prolific/rtc.c
+	- Update wireless_tools and wpa_supplicant Makefile
+	  src/sysapps/apps/wpa_supplicant/Makefile
+	  src/sysapps/apps/wireless_tools.26/Makefile
+*****************************************************************************
+2006/07/04 (TONY, PM 03:12)
+	- Add RT2661 wireless driver,wpa_supplicant and wireless_tools
+	  src/kmods/{Makefile,RT61_Linux_STA_Drv1.0.4.0
+	  src/sysapps/apps/{Makefile,wpa_supplicant,wireless_tools.26}
+	- Enable reboot on busybox
+	  src/sysapps/busybox-1.01/.config
+	- Update rcS
+	  src/rootfs/etc/init.d/rcS
+*****************************************************************************
+2006/07/04 (Yen, AM 11:53)
+	- Update user config and cgi
+	  src/sysapps/apps/cgi/libcgicomm/src/user/user_config.*
+	  src/sysapps/apps/cgi/cgi/{user.*, main_cgi.c, main.h}
+	- Update WVC230 webpage
+	  src/sysapps/apps/html.wvc230/*
+*****************************************************************************
+2006/07/04 (Sand, AM 10:29)
+	- Update streaming server source code, encoder setting profile read
+	  from configuration file ( see sample 'encoders.conf' in directory),
+	  add a usable snapshot feature, and use timer generated from hw regs.
+	  src/sysapps/apps/hydra/*
+*****************************************************************************
+2006/07/03 (TONY, AM 10:00)
+	- Update RTC module
+	  src/sysapps/apps/rc.sethost/sethost.c 	
+	  src/sysapps/apps/cgi/libcgicomm/src/sys/{rtc.c,system_config.c}
+	  src/kernel/linux-2.4.19/drivers/prolific/rtc.c
+*****************************************************************************
+2006/06/30 (Yen, PM 08:54)
+	- Add avi feature to event trigger
+	  src/sysapps/apps/trig/*
+	  src/sysapps/apps/cgi/libcgicomm/src/event/trig_config.*
+*****************************************************************************
+2006/06/30 (TONY, AM 11:11)
+	-Update Qset
+	 src/sysapps/apps/{Qset,Makefile}
+*****************************************************************************
+2006/06/29 (TONY, PM 06:50)
+	-Update Led,Switchs driver
+	 src/kmods/{Switchs,Led,Makefile}
+	 src/kernel/linux-2.4.19/include/asm/arch/gio.h
+	-Update crond ,NTP ,ntpsetcron, LedAP, ledoff, button_ap
+	 src/sysapps/apps/{button_ap,LedAP,ledoff,NTP,cron,ntpsetcron,Makefile}
+	-Remove unnecessary reboot module
+	 src/sysapps/apps/reboot
+	- Update libcgicomm/src/ntp,sys,lan,wlan,syslog
+	 src/sysapps/apps/cgi/libcgicomm/src/{ntp,sys,lan,wlan,syslog}
+*****************************************************************************
+2006/06/29 (Sand, PM 02:24)
+	- update encoder driver provided by Prolific.(v1.0.9), this new module
+	  expand the size which can be requested up to 8 MB. Need to patch the
+	  kernel to request 8MB memory.( MAX_ORDER change from 10 to 12)
+	  lib/modules/plmedia.o
+	  src/kernel/linux-2.4.19/include/linux/mmzone.h
+	- Add an initial version of stream server
+	  src/sysapps/apps/hydra/*
+*****************************************************************************
+2006/06/29 (Yen, PM 2:00)
+	- Add thttpd
+	  src/sysapps/apps/thttpd-2.25b/*
+	  src/sysapps/apps/webd/httpd.c
+*****************************************************************************
+2006/06/26 (Yen, PM 6:50)
+	- Modify user API
+	  src/sysapps/apps/cgi/libcgicomm/src/user/user_config.*
+	  src/sysapps/apps/cgi/auth/*
+*****************************************************************************
+2006/06/22 (Vincent, PM 5:50)
+	- Update Kernel:
+	  Fix the TCP Sequence Number Wrap BUG.
+	  -> We'd fixed it in DM270/DM320. I just port it from the old source.
+	  src/kernel/linux-2.4.19/include/net/tcp.h
+	  src/kernel/linux-2.4.19/include/linux/timer.h
+	  Remove some unecessary files?? (save 8MB)
+	  src/kernel/linux-2.4.19/mbootpImage, mkbootp.sh, mk_usb_gadget.sh
+*****************************************************************************
+2006/06/21 (Sand, AM 10:51)
+	- Add encoder driver provided by Prolific.
+	  lib/modules/plmedia.o
+*****************************************************************************
+2006/06/20 (TONY, AM11:05)
+	- Update Led, reboot modules and application
+	  src/kmods/{reset,Led,Makefile}
+	  src/sysapps/apps/{Makefile,ledoff,LedAP,reboot}
+	  src/kernel/linux-2.4.19/include/asm/arch/gio.h
+*****************************************************************************
+2006/06/19 (Vincent, AM10:53)
+	- Put "libgcc_s" to the filesystem for TOPRO CCD module use. (asked
+	  by Rondall)
+	  src/rootfs/Makefile
+*****************************************************************************
+2006/06/16 (Yen, PM 2:30)
+	- Add webpage WVC230us_v2 to cgi
+	  src/sysapps/apps/cgi/html.wvc230
+	  src/sysapps/apps/cgi/cgi/Makefile
+	- Add libgcc_s.so for web server
+	  lib/libgcc_s.so
+*****************************************************************************
+2006/06/16 (Vincent, PM 1:36)
+	- Update Linux Kernel (base on Prolific June-13 release)
+	  A) Add Kernel ChangeLog
+	  src/kernel/linux-2.4.19/ChangeLog
+	  B) Support 120MHz DEV Clock (I2C/AC97/UART/Keypad)
+	  C) Support Prolific Flash Upgrade API
+	  src/kernel/linux-2.4.19/drivers/prolific/Config.in, Makefile,
+			pl1029_nor_upgrade.c, pl_uart.c, keypad61.c,
+			pl1029_nor.c, README.norflash
+	  src/kernel/linux-2.4.19/drivers/sound/pl1061/pl_ac97.c
+	  src/kernel/linux-2.4.19/drivers/usb/usb.c
+	  src/kernel/linux-2.4.19/drivers/i2c/i2c-adap-61.c
+	  src/kernel/linux-2.4.19/include/linux/sched.h
+	  D) Update Micron CMOS Sensor Driver (&Makefile)
+	  src/kernel/linux-2.4.19/drivers/sensors/Config.in, Makefile, 
+			mt9m111.c
+	# WARNING!!	(I don't change the checking to 2MB.)
+	# The uncompressed kernel size MUST be less than 2MB. Or the kernel
+	# will overlay the filesystem when decompressed. (for initrd method)
+*****************************************************************************
+2006/06/15 (Yen, PM 17:10)
+	- Add apps.wvc200 under src/sysapps for WVC200 model
+	  src/sysapps/apps.wvc200
+	- Update ./setenv to export "MODEL"
+	  ** use ". ./setenv" to build WVC230 model
+	  ** use ". ./setenv wvc200" to build WVC200 model
+*****************************************************************************
+2006/06/15 (Rondall, AM 11:40)
+	- Put the ftp client to apps
+	  src/sysapps/apps/Makefile	  
+	  src/sysapps/apps/ftp
+*****************************************************************************
+2006/06/15 (Vincent, AM 8:21)
+	- Update Linux Kernel:
+	  A) Add "Cryptographic Options" for Wireless WPA2 encryption.
+	  B) Fix "USB Options" can't be enable. (default enable it)
+	  C) Add "BSP-Version" dump when kernel start (Prolific add).
+	  D) Update the JPEG Qtable and plMedia stuff.
+	  E) Other Minor Changes (by Prolific), such like PCI, USB, ALIGN...
+	  src/kernel/linux-2.4.19/
+		.config, Makefile
+	  	./kernel/sched.c
+		./arch/arm/boot/compressed/Makefile, misc.c
+		./arch/arm/mach-pl1029/Makefile, pl_pci.c, dma.c, arch.c
+		./arch/arm/config.in, defconfig
+		./drivers/usb/usb.c, usb-ohci.c, usb-ohci-pci.c, hcd.c
+		./crypto/Config.in, Makefile, wp512.c, cipher.c, blowfish.c, 
+		         michael_mic.c, sha512.c, api.c, internal.h, twofish.c
+		         serpent.c, tcrypt.[ch], tea.c, sha256.c, arc4.c
+		         digest.c, crypto_null.c, cast[56].c, scatterwalk.[ch]
+		         md[45].c, deflate.c, proc.c, autoload.c, hmac.c,
+		         sha1.c, khazad.c, aes.c, des.c, anubis.c, compress.c
+	  	./include/asm-arm/scatterlist.h, kmap_types.h
+		./include/asm-arm/arch-pl1029/irqs.h, pl1029.h, pl_system.h
+		./include/video/plsensor.h, plmedia.h, jpeg_qtable.h
+		./include/linux/kernel.h, sched.h, list.h, crypto.h
+*****************************************************************************
+2006/06/14 (TONY, PM 01:11)
+	- Update hello and DM9102 driver
+	  src/kmods/{hello,DM9102}
+*****************************************************************************
+2006/06/09 (Vincent, AM 9:01)
+	- Add "Squash File System" (3.0) and Enable it by default.
+	  A) Kernel Config:
+	  src/kernel/linux-2.4.19/.config
+	  src/kernel/linux-2.4.19/arch/arm/config.in, defconfig
+	  src/kernel/linux-2.4.19/lib/Config.in
+	  src/kernel/linux-2.4.19/fs/Config.in, Makefile
+	  B) Add/Modify Source for SquashFS:
+	  src/kernel/linux-2.4.19/init/do_mounts.c
+	  src/kernel/linux-2.4.19/fs/squashfs/Makefile, squashfs2_0.c, inode.c
+	                          squashfs.h
+	  src/kernel/linux-2.4.19/include/linux/fs.h, squashfs_fs_i.h,
+				  squashfs_fs_sb.h, squashfs_fs.h
+	  C) SquashFS tools:
+	  host/bin/mksquashfs, unsquashfs
+	  D) Generate SquashFS instead of CramFS
+	  src/rootfs/Makefile
+	- Strip the kernel source - over 19MB!!
+	  src/kernel/linux-2.4.19/include/
+	    ..asm-*/		(ALL CPUs, except asm-arm, asm-generic)
+	    ..asm-arm/arch-*/	(ALL architectures, except arch-pl1029)
+*****************************************************************************
+2006/06/07 (Vincent, PM 3:35)
+	- Update Makefile & Scripts to create the symbolic link to compile
+	  linux kernel. (It needs "linux" name instead of "linux-2.4.19".)
+	  host/scripts/kernel_config
+	  Makfile
+	  src/kernel/linux			(delete this symbolic link)
+	  src/kernel/linux-2.4.19.CompleteSource	(delete)
+*****************************************************************************
+2006/06/06 (Konchi, PM 7:39)
+	- Update bootloader with verison 1.7, first release
+		src/bootloader
+	- Modify Flash Map
+		src/kernel/linux/include/asm-arm/arch-pl1029/memconfig.h
+	- Change loader link in FW/ through modifying makefile in $(PROJ_ROOT)
+*****************************************************************************
+2006/06/06 (Vincent, PM 1:47)
+	- Fix the system can't start while running "init" after mount...
+	  init: can't load library 'libcrypt.so.0'
+	  A) UnSelect "passwd" option in busybox. (should not include it)
+	  B) Install "libcrypt" to the system.
+	  src/sysapps/busybox-1.01/.config
+	  src/rootfs/Makefile	(comment out "udhcpc" files...)
+	- Add console login action:
+	  A) Add username/password - root/<No Passwd>
+	  B) Set default tty to "/dev/tts/0"
+	  C) Baudrate doesn't matter for getty (still set 115200)
+	  D) Create lots of ramdisk files (same as DM320 platform)
+	  src/rootfs/etc/inittab, password, group, hosts
+	  src/rootfs/etc/init.d/rcS
+	  src/rootfs/Makefile
+	- Change the filesystem image to "fs.img" (not cram-image)
+	  Makefile
+	  src/rootfs/Makefile
+	- Change the modules install directory.
+	  It needs to input the full path to load the module in the previous
+	  settings.
+	  setenv	(lib/modules --> lib/modules/2.4.19-pl1029)
+*****************************************************************************
+2006/06/02 (Sand, PM 12:59)
+	- port iptables , ipfilter, and ipfilter in libcgicomm.
+	  src/sysapps/apps/{iptables-1.3.4 , ipfilter}
+	  src/sysapps/apps/cgi/libcgicomm/src/ipfilter/*
+*****************************************************************************
+2006/06/02 (Vincent, AM10:24)
+	- Strip the kernel source - over 52MB!!
+	  Once we could disable the SCSI module, we could save another 13MB!!
+	  The USB driver will check SCSI for dependency. (I still keep the USB
+	  so far.)
+	  A)  Change MenuConfig items to skip those unused modules.
+	  B)  Modify Makefile to skip those unused modules.
+	  src/kernel/linux-2.4.19/arch/arm/config.in
+	  src/kernel/linux-2.4.19/drivers/Makefile
+	- Disable the RealTech-8139D LAN driver options
+	  src/kernel/linux-2.4.19/.config
+	- Set the default config to be the same as our current settings in
+	  case we lost the settings when run "make distclean".
+	  src/kernel/linux-2.4.19/arch/arm/defconfig
+	- Remove those unecessary folders for saving the kernel source size.
+	  src/kernel/linux-2.4.19/
+	    ..arch/....  (ALL architectures, except arm)
+	    ..arch/arm/mach-...  (ALL machines, except mach-pl1029)
+	    ..Documentation/...  (ALL files, except DocBook/, Configure.help)
+	    ..drivers/pcmcia, parport, pnp, md, ieee1394, message, ide, ssi,
+	              isdn, input, bluetooth, cdrom, dio, fc4, macintosh,
+	              nubus, pld, tc, sgi, acpi, atm, s390, htoplug,
+	              telephony, zorro
+	    Remove the following folders will get error:
+	    ..drivers/acorn, scsi, l3, misc
+*****************************************************************************
+2006/06/01 (Sand, PM 7:12)
+	- patch kernel to support ip filter module
+	  src/kernel/linux-2.4.19/net/ipv4/netfilter/{Makefile, ipt_iprange.c
+	  Config.in}
+	  src/kernel/linux-2.4.19/include/linux/netfilter_ipv4/ipt_iprange.h
+	  src/kernel/linux-2.4.19/.config
+*****************************************************************************
+2006/06/01 (Yen, PM 3:20)
+	- Add project installation directory macros in "./setenv".
+	  **Please use $(PROJ_INSTALL) as user space program install root,
+	  **and use $(PROJ_KMODULE) as kernel module install root.
+	- Modify installation root directory and add uninstall target in all
+	  makefiles.
+	  src/kmods/*/Makefile
+	  src/sysapps/apps/*/Makefile
+*****************************************************************************
+2006/05/29 (Vincent, PM 5:46)
+	- Fix Kernel BUG, To let the kernel could boot withou any input
+	  kernel options from bootloader. has verified by Konchi! ;-)
+	  src/kernel/linux-2.4.19/init/main.c
+		- add 1 more debug message (command_line + saved_command_line)
+	  src/kernel/linux-2.4.19/arch/arm/kernel/setup.c
+		- fix command line parser bug (tag from loader)
+		- Prolific original method is always over-written by loader's
+		  input. Now I append the loader input options after the 
+		  default option in kernel (.config)
+		- remove the "root=/dev/rom0" (hard-coded: command_line)
+	  src/kernel/linux-2.4.19/driver/prolific/pl1029_nor.c
+		- fix the mount failure problem when there's no input argument
+		  from loader "nor=..." (MUST with such keyword)
+		  No keyword, then no chance to enter the partition setup
+		  function. Now put such function in the "__init" action.
+*****************************************************************************
+2006/05/26 (Vincent, PM 1:29)
+	- Update Kernel Config:
+	  1. The loader doesn't need to pass the following kernel options to
+	     the kernel.
+	     root=/dev/norblock/disc0/disc rootfstype=cramfs
+	!! If the loader input such kernel options, it will overwritten  !!
+	!! the default options in kernel. (use input options)            !!
+	  2. Disable the DM9102 option
+	     It causes the kernel crash on the EVM board. (need to trace)
+	  src/kernel/linux-2.4.19/.config
+*****************************************************************************
+2006/05/26 (Vincent, AM11:24)
+	- Add "README" for simple descriptions about the BSP source.
+	  README
+	- Change to use "make FW" to generate the F/W image (not auto).
+	  To make it to be the same as WVC200/NC802APT... (DM320 platform)
+	  Makefile
+	- Remove some run-time files from the BSP tree.
+	  img/System.map, vmlinuz-2.4.19, norinstall.bin...
+	- Fix some build procedure holes (make install by default)
+	  src/bootloader/Makefile
+	  src/rootfs/Makefile
+*****************************************************************************
+2006/05/24 (Vincent, PM 5:54)
+	- Add "memconfig.h" for both kernel and loader.
+	- Modify Prolific Nor Flash driver to get the FLASH partitions from
+	  the "memconfig.h", not to parser the kernel options from loader
+	  input.
+	- We could unselect such options (FLASH driver) in the future.
+	    nor=b:0x003300000@0x000D0000,c:8192@0x0000A000,c:8192@0x0000C000
+	  src/bootloader/proboot-1.0.1/include/memconfig.h
+	  src/kernel/linux-2.4.19/include/asm-arm/arch-pl1029/hardware.h
+	  src/kernel/linux-2.4.19/include/asm-arm/arch-pl1029/memconfig.h
+	  src/kernel/linux-2.4.19/drivers/prolific/pl1029_nor.c
+
+	!! Need to remove "autoboot.bat" action in the future when the	!!
+	!! bootloader complete.						!!
+
+	!! Need to remove "DM9102" & "RT8139" from the kernel option	!!
+	!! in the future.						!!
+*****************************************************************************
+2006/05/23 (Yen, PM 01:25)
+	- Port the code from DM320
+	  src/kmods/ioport -> error while compiling the module
+	  src/sysapps/apps/cgi/libcgicomm/src/io -> OK
+	  src/sysapps/apps/trig -> OK	Mark: need some .h files in stream/
+	  src/sysapps/apps/io_init -> OK
+*****************************************************************************
+2006/05/23 (Rondall, AM 9:40)
+	- Port the code from DM320
+	  src/sysapps/apps/boa-0.94.13e11 -> OK
+	  src/sysapps/apps/webd -> OK
+	  src/sysapps/apps/dsp_dae -> OK
+	  src/sysapps/apps/cgi/utility -> OK
+*****************************************************************************
+2006/05/22 (Jeffrey, PM 4:37)
+	- Port the code from DM320.
+	  src/sysapps/apps/sc_config
+	  src/sysapps/apps/bonjour
+	  src/sysapps/apps/cgi/html.nc802apt
+	  src/sysapps/apps/ddns
+	  src/sysapps/apps/NTP
+	  src/sysapps/apps/upnp_igd_cp
+	  src/sysapps/apps/cgi/cgi		->MARK:IO define.
+	  src/sysapps/apps/cgi/libcgicomm 	->MARK:CMOS/VIDEO
+						->No asm/arch/memconfig.h file,
+					  	  so define BSPCONF_FLASH_SIZE
+					  	  in flash.h file temporarity.
+*****************************************************************************
+2006/05/22 (TONY, PM 04:38)
+	- Add DM9102 on kmods
+	  src/kmods/{Makefile,DM9102}
+	- Add dhcpdcd on apps
+	  src/sysapps/apps/{dhcpcd-1.3.22-pl1,Makefile}
+*****************************************************************************
+2006/05/22 (Vincent, AM10:48)
+	- Add "strip" action on the user-space program (hello.c)
+	  src/sysapps/apps/hello/Makefile
+*****************************************************************************
+2006/05/22 (Rondall, AM 10:17)
+	- Port the code from DM320
+	  src/sysapps/apps/{Makefile,conf_sec.h,model.h,sc_config}
+	  src/sysapps/apps/cgi/Makefile
+	  src/sysapps/apps/cgi/libcgicomm/*
+	  src/sysapps/apps/cgi/libcgicomm/src/sys -> Error, 
+							"asm/arch/memconfig.h"
+	  src/sysapps/apps/cgi/libcgicomm/src/io -> Error, miss definitions
+	  src/sysapps/apps/cgi/cgilib -> OK
+	  src/sysapps/apps/cgi/cgi -> Error, miss definitions
+*****************************************************************************
+2006/05/19 (Vincent, PM 5:18)
+	- Update config for kernel and busybox, including Video For Linux.
+	  src/kernel/linux/.config
+	  src/sysapps/busybox-1.01/.config
+*****************************************************************************
+2006/05/18 (Vincent, PM 6:35)
+	- Update Makefile:
+	  1. Change the filesystem image link location
+	  2. Add the autoboot.bat (boot kernel/filesystem) in bootloader.
+	- Add FLASH/SDRAM memory map file
+	  Makfile
+	  host/scripts/boot_config
+	  img/memconfig
+*****************************************************************************
+2006/05/18 (Vincent, PM 3:42)
+	- Update Makefile based on Prolific update:
+		use "install" instead of "mkdir"
+	  src/rootfs/Makefile
+*****************************************************************************
+2006/05/18 (Vincent, PM 1:00)
+	- Complete:
+	A. Put sample files - hello for kernel module and application example.
+	B. Add main Makefile to build the whole source.
+	C. Modify relative Makefiles to complete the build procedure.
+	- Need to do:
+	A. Change the memory map for the real F/W.
+	B. Optimize the kernel for our F/W usage.
+	C. Cramfs or ...
+*****************************************************************************
+2006/05/16 (Vincent, PM 2:03)
+	- Modify some files to make the compile pass. (minor change)
+	  src/fs/root/Makefile (cramfs)
+	  src/sysadm/busybox-1.01/sysdeps/linux/pl1029u
+*****************************************************************************
+2006/05/15 (Vincent, AM11:13)
+	- Update loader code from Prolific.
+	  The original package can't pass the compile. After reporting to
+	  Prolific, they update this source.
+	  --> Rename the previous version file to "proboot-1.0.1-OLD"
+	  src/bootldr/proboot-1.0.1/...
+*****************************************************************************
+2006/05/12 (Vincent, PM 6:16)
+	- Removing the unecessary files from the original package.
+	  --> Not relative to the F/W build.
+	- Modify the "usetenv" script to approach our need.
+	  doc/...	(delete)
+	  resource/...	(delete)
+	  project/...	(delete)
+	  setenv	(new add)

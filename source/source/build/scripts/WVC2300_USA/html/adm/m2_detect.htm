@@ -1,0 +1,790 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<LINK REL="stylesheet" TYPE="text/css" HREF="m_detect.css">
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript" src="../ver_activex.js"></script>
+<!-- for cisco sbbu new style -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<script language="JavaScript" type="text/javascript" src="../slider.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+function clc()
+{ document.location.href='file.cgi?next_file=m_detect.htm'; }
+
+var run_flag = false;
+var intervalID = null;
+var vmode =    "mpeg";
+var PanTilt =  "off"; 
+var FrameRate = "30";
+
+var lang_ocx = '@h_ocx_lang_str#'
+
+var sizetimer = 2000;
+var vsize; 
+var sizeIndex; 
+var netcamObj;
+
+var resolutionA = [160, 320, 400];
+var heightA     = [154, 240, 300];
+var widthA      = [160, 320, 400];
+var borderA     = [120, 120,  40]; 
+
+
+
+var dw_push ='<img border="0" alt="Video for other Platform/OS" src="../img/video.mjpeg" onError="reloadOnErr(this)">';	
+
+			
+function dw(message)
+{ document.write(message); }
+
+
+function doPlay() 
+{
+	if(vmode != "")
+	{
+		if(isIE())
+		{ dw(dw_error); }
+		else
+		{ dw(dw_push); }
+	}
+	else return false; 
+}
+
+function getSizeIndex(imgSize)
+{
+	for (var i = 0; i < resolutionA.length; i++)
+		if(imgSize == resolutionA[i])
+			return i;
+	return 0;
+}
+
+function checkSize()
+{
+	var newsize = netcamObj.GetSize();
+	if (newsize != vsize)
+		setObjSize(newsize);
+}
+  
+function setObjSize(newsize)
+{
+	var index = getSizeIndex(newsize);
+	netcamObj.width  = widthA[index];
+	netcamObj.height = heightA[index];
+	document.getElementById("vidDIV").style.height =  heightA[index] + borderA[index];
+	netcamObj.SetSize(newsize);
+	vsize = newsize;
+}
+
+function doStop() 
+{	
+ 	if(isIE())
+	{
+		document.CiscoAlertCfg.StopPlay(); 
+	}
+}
+
+function init()
+{
+
+   if(isIE())
+   	{ 
+		mySlider1.placeSlider();
+		mySlider2.placeSlider();
+		mySlider3.placeSlider();
+		mySlider4.placeSlider();
+		
+		mySlider5.placeSlider();
+		mySlider6.placeSlider();
+		mySlider7.placeSlider();
+		mySlider8.placeSlider();
+		
+	    netcamObj = document.CiscoAlertCfg;
+
+	    var cf = document.forms[0];
+		dataToVisible(cf);
+		showMsg('Motion Detection');
+		self.status = msg_connect_livevideo;
+		netcamObj.width = 400;
+		netcamObj.height = 300;
+		
+		getMotionRegionData();
+		setTimeout("setMotionRegionDataToOCX();", 100);
+		setInterval("update();", 200);
+		mot_init();
+		
+		get_detect_area_title(); 	
+
+		threhold_init();
+   	}
+   else
+   	{
+   		var traget=document.getElementById("menu");
+		traget.style.display="none";
+   	}  
+}
+
+function getMotionRegionData() {
+	for(var i = 1; i <= 4; i++) {
+	}
+}
+
+function setMotionRegionDataToOCX() {
+	for(var i = 0; i < 4; i++) {
+
+	}
+}
+
+function MotionRegionData(data) {
+	var primary_array = data.split(",");
+	var second_array;
+
+	this.enable = primary_array[0];
+	this.thd = primary_array[1];
+	this.sens = primary_array[2];
+
+	second_array = primary_array[3].split("/");
+
+	this.left = second_array[0];
+	this.top = second_array[1];
+
+	second_array = primary_array[4].split("/");
+	this.width = second_array[0] - this.left;
+	this.height = second_array[1] - this.top;
+}
+
+function addMotionRegion() {
+	count = netcamObj.MotionRegions.Count;
+
+	if(count < 4) {
+		region = netcamObj.MotionRegions.Add();
+
+		region.Left = 0;
+		region.Top = 0;
+		region.Width = 100;
+		region.Height = 100;
+
+		region.Treshhold = 127;
+	}
+	else {
+//		rALERT("Motion Detection",msg_max_wn);//alert(msg_max_wn);
+		rWARN("Motion Detection",msg_max_wn);//alert(msg_max_wn);
+	}
+}
+
+function delMotionRegion() {
+	count = netcamObj.MotionRegions.Count;
+
+	if(count >= 0) {
+		region = netcamObj.CurrentSelection;
+		if(region == null)
+//			rALERT("Motion Detection",msg_del_reg);//alert(msg_del_reg);
+			rWARN("Motion Detection",msg_del_reg);//alert(msg_del_reg);
+		netcamObj.MotionRegions.Remove(region);
+	}
+	region = null;
+}
+
+function delAllMotionRegion() {
+	netcamObj.MotionRegions.RemoveAll();
+}
+
+function save() {
+	netcamObj.SaveConfiguration();
+}
+
+function update() {
+	if(netcamObj.CurrentSelection != null) {
+		var region = netcamObj.CurrentSelection;
+		document.forms[0].feedback1.value == document.forms[0].feedback2.value == document.forms[0].feedback3.value == document.forms[0].feedback4.value == region.CurrentLevel;
+		setWidth2("v_value5", document.forms[0].feedback1.value);
+		setWidth2("v_value6", document.forms[0].feedback2.value);
+		setWidth2("v_value7", document.forms[0].feedback3.value);
+		setWidth2("v_value8", document.forms[0].feedback4.value);
+	}
+}
+
+function updateThd(val) {
+	if(netcamObj.CurrentSelection != null) {
+		var region = netcamObj.CurrentSelection;
+		document.forms[0].threshold1.value == document.forms[0].threshold2.value == document.forms[0].threshold3.value == document.forms[0].threshold4.value == region.Treshhold;
+		region.Treshhold = val;
+	}
+}
+
+function checkData() {
+	count = netcamObj.MotionRegions.Count;
+
+	for(var i = 1; i <= count; i++) {
+		region = netcamObj.MotionRegions.Item(i-1);
+		var w = region.Left + region.Width;
+		var h = region.Top + region.Height;
+		var msg = "1," + region.Treshhold + ", " + region.Left + "/" + region.Top + "," + w + "/" + h;
+		eval("document.forms[0].md_region" + i + ".value=\"" + msg + "\"");
+	}
+	for(var i = count+1; i <= 4; i++) {
+		var msg = "0, 0, 0, 0/0, 100/100";
+		eval("document.forms[0].md_region" + i + ".value=\"" + msg + "\"");
+	}
+	return true;
+}
+
+function SaveAll()
+{
+
+    var cf = document.forms[0];
+	set_detect_area_title(); 
+	MotionApply();
+
+	dataToHidden(cf); 
+	cf.todo.value = "save";
+	cf.submit();
+}
+
+
+function setWidth(obj,theWidth, id)
+{
+  document.getElementById(obj).style.width=Number(theWidth*10);
+  document.forms[0].threshold1.value = Number(theWidth/75 * 255);
+  document.forms[0].threshold2.value = Number(theWidth/75 * 255);
+  document.forms[0].threshold3.value = Number(theWidth/75 * 255);
+  document.forms[0].threshold4.value = Number(theWidth/75 * 255);
+
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.SetMotionThrehold(id, Number(theWidth * 255));
+}
+
+function setWidth2(obj,theWidth)
+{
+  document.getElementById(obj).style.width=Number(theWidth*82);
+  document.forms[0].feedback1.value = Number(theWidth/75 * 255);
+  document.forms[0].feedback2.value = Number(theWidth/75 * 255);
+  document.forms[0].feedback3.value = Number(theWidth/75 * 255);
+  document.forms[0].feedback4.value = Number(theWidth/75 * 255);
+}
+function setcustomarea ()
+{
+	var cf = document.forms[0];
+	if (cf.a1.checked == true)
+	{
+		setFull();
+	}
+	else
+	{
+		cf.ct.checked = true;
+		setCus();
+	}
+
+}
+function mot_init() {
+	for(var i = 0; i < 4; i++) {
+		netcamObj = document.CiscoAlertCfg;
+		var b = netcamObj.GetMotionEnable(i);
+		var formObjStr = "formObj=document.forms[0].a" + (i+1);
+		var formObj;
+
+		eval(formObjStr);
+		formObj.checked = (b == 1 ? true : false);
+		setcustomarea();
+		if(formObj.checked) {
+			var SliderObj;
+			var SliderObjStr = "SliderObj=mySlider" + (i+1);
+			eval(SliderObjStr);
+
+			var v = netcamObj.GetMotionThrehold(i)/255;
+
+			SliderObj.setValue(v);
+		}
+	}
+
+	setInterval("mot_update();", 200);
+}
+
+
+function mot_update() {
+	for(var i = 0; i < 4; i++) {
+		netcamObj = document.CiscoAlertCfg;
+		var b = netcamObj.GetMotionEnable(i);
+
+		if(b == 1) {
+			b = netcamObj.GetMotionIndicator(i);
+
+			var SliderObj;
+			var SliderObjStr = "SliderObj=mySlider" + (i+5) + ";";
+			eval(SliderObjStr);
+
+			SliderObj.setValue(netcamObj.GetMotionIndicator(i)/255);
+		}
+	}
+}
+
+function mot_en_click(i) {
+	var b = netcamObj.GetMotionEnable(i);
+	var formObjStr = "formObj=document.forms[0].a" + (i+1);
+	var formObj;
+
+	eval(formObjStr);
+
+	if(formObj.checked) {
+		if(b != 1) {
+			netcamObj.MotionEnable(i, 1);
+		}
+	}
+	else {
+		if(b != 0) {
+			netcamObj.MotionEnable(i, 0);
+		}
+	}
+}
+
+function mot_get_indicator(i) {
+	var v = netcamObj.GetMotionIndicator(i);
+}
+
+function mot_get_threshold(i) {
+	var v = netcamObj.GetMotionThrehold(i);
+}
+
+var nIdx = 0;
+var nVal = 0;
+
+function GetMotionEnable(nIdx)
+{
+	nIdx = (nIdx >= 0) ? 0 : (nIdx <= 3) ?  3 : nIdx;
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.GetMotionEnable(nIdx);
+
+	var b = netcamObj.GetMotionEnable(nIdx);
+}
+
+function SetMotionEnable(nIdx, nVal)
+{
+	nIdx = (nIdx >= 0) ? 0 : (nIdx <= 3) ?  3 : nIdx;
+	nVal = (nVal >= -1) ? -1 : (nVal <= 1) ?  1 : nVal;
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.SetMotionEnable(nIdx, nVal);
+}
+
+function GetMotionThrehold(nIdx)
+{
+	nIdx = (nIdx >= 0) ? 0 : (nIdx <= 3) ?  3 : nIdx;
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.GetMotionThrehold(nIdx);
+}
+
+function SetMotionThrehold(nIdx, nVal)
+{
+	nIdx = (nIdx >= 0) ? 0 : (nIdx <= 3) ?  3 : nIdx;
+	nVal = (nVal >= 0) ? 0 : (nVal <= 255) ?  255 : nVal;
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.SetMotionThrehold(nIdx, nVal);
+}
+
+function GetMotionIndicator(nIdx)
+{
+	nIdx = (nIdx >= 0) ? 0 : (nIdx <= 3) ?  3 : nIdx;
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.GetMotionIndicator(nIdx);
+}
+
+function MotionApply()
+{
+	netcamObj = document.CiscoAlertCfg;
+	netcamObj.MotionApply();
+}
+
+function get_detect_area_title()  
+{
+	  var cf = document.forms[0];
+	  var title_name = new Array(4);
+	  
+	  for (i=0; i<4; i++)
+	  {
+				title_name[i] = netcamObj.GetMotionTitle(i);
+		}
+		cf.det_area1.value = title_name[0];
+		cf.det_area2.value = title_name[1];
+		cf.det_area3.value = title_name[2];
+		cf.det_area4.value = title_name[3];		
+}
+
+function set_detect_area_title()   
+{
+	
+	var cf = document.forms[0];		
+	var temp_a = new Array(4);	
+	
+	
+	if (cf.a1.checked)
+		temp_a[0] = 1; 
+	else 
+		temp_a[0] = 0;
+	if (cf.a2.checked)
+		temp_a[1] = 1;
+	else
+		temp_a[1] = 0;
+	if (cf.a3.checked)
+		temp_a[2] = 1;
+	else
+		temp_a[2] = 0;
+	if (cf.a4.checked)
+		temp_a[3] = 1;
+	else
+		temp_a[3] = 0;
+		
+	var title_name = new Array(4);
+	title_name[0] = cf.det_area1.value;	
+	title_name[1] = cf.det_area2.value;	
+	title_name[2] = cf.det_area3.value;	
+	title_name[3] = cf.det_area4.value;		
+	
+	for (j=0; j<4; j++)	
+	{
+		if (temp_a[j]==1)
+		{			
+			    netcamObj.SetMotionTitle(j, title_name[j]);
+					netcamObj.MotionEnable(j, 1);			
+		} 
+		else
+		{
+			    netcamObj.MotionEnable(j, 0);
+		}
+	}	
+}	
+
+function threhold_init()  
+{
+	if ((netcamObj.GetMotionThrehold(0)/255) != 0.5)
+		mySlider1.setValue(netcamObj.GetMotionThrehold(0)/255);
+	else
+		mySlider1.setValue(0.5);	
+		
+	if ((netcamObj.GetMotionThrehold(1)/255) != 0.5)
+		mySlider2.setValue(netcamObj.GetMotionThrehold(1)/255);
+	else
+		mySlider2.setValue(0.5);		
+		
+	if ((netcamObj.GetMotionThrehold(2)/255) != 0.5)
+		mySlider3.setValue(netcamObj.GetMotionThrehold(2)/255);
+	else
+		mySlider3.setValue(0.5);		
+		
+	if ((netcamObj.GetMotionThrehold(3)/255) != 0.5)
+		mySlider4.setValue(netcamObj.GetMotionThrehold(3)/255);
+	else
+		mySlider4.setValue(0.5);	
+}
+
+var mySlider1 = new Slider( "Slider1" );
+mySlider1.onchange = "setWidth('v_value1',this.getValue(1), 0)";
+mySlider1.buttonHeight = 16;
+mySlider1.buttonWidth = 9;
+mySlider1.maxSlide = 75;
+mySlider1.offsetX = -10;
+mySlider1.offsetY = -9;
+mySlider1.buttonImg = "../buttons/b_slidebar.gif";
+mySlider1.buttonHiliteImg = "../buttons/b_slidebar2.gif";
+
+var mySlider2 = new Slider( "Slider2" );
+mySlider2.onchange = "setWidth('v_value2',this.getValue(1), 1)";
+mySlider2.buttonHeight = 16;
+mySlider2.buttonWidth = 9;
+mySlider2.maxSlide = 75;
+mySlider2.offsetX = -10;
+mySlider2.offsetY = -9;
+mySlider2.buttonImg = "../buttons/b_slidebar.gif";
+mySlider2.buttonHiliteImg = "../buttons/b_slidebar2.gif";
+
+var mySlider3 = new Slider( "Slider3" );
+mySlider3.onchange = "setWidth('v_value3',this.getValue(1), 2)";
+mySlider3.buttonHeight = 16;
+mySlider3.buttonWidth = 9;
+mySlider3.maxSlide = 75;
+mySlider3.offsetX = -10;
+mySlider3.offsetY = -9;
+mySlider3.buttonImg = "../buttons/b_slidebar.gif";
+mySlider3.buttonHiliteImg = "../buttons/b_slidebar2.gif";
+
+var mySlider4 = new Slider( "Slider4" );
+mySlider4.onchange = "setWidth('v_value4',this.getValue(1), 3)";
+mySlider4.buttonHeight = 16;
+mySlider4.buttonWidth = 9;
+mySlider4.maxSlide = 75;
+mySlider4.offsetX = -10;
+mySlider4.offsetY = -9;
+mySlider4.buttonImg = "../buttons/b_slidebar.gif";
+mySlider4.buttonHiliteImg = "../buttons/b_slidebar2.gif";
+
+var mySlider5 = new Slider( "Slider5" );
+mySlider5.onchange = "setWidth2('v_value5',this.getValue(1))";
+mySlider5.buttonHeight = 16;
+mySlider5.buttonWidth = 6;
+mySlider5.maxSlide = 75;
+mySlider5.offsetX = -10;
+mySlider5.offsetY = -4;
+mySlider5.buttonImg = "../buttons/clear.gif";
+mySlider5.buttonHiliteImg = "../buttons/clear.gif";
+
+var mySlider6 = new Slider( "Slider6" );
+mySlider6.onchange = "setWidth2('v_value6',this.getValue(1))";
+mySlider6.buttonHeight = 16;
+mySlider6.buttonWidth = 6;
+mySlider6.maxSlide = 75;
+mySlider6.offsetX = -10;
+mySlider6.offsetY = -4;
+mySlider6.buttonImg = "../buttons/clear.gif";
+mySlider6.buttonHiliteImg = "../buttons/clear.gif";
+
+var mySlider7 = new Slider( "Slider7" );
+mySlider7.onchange = "setWidth2('v_value7',this.getValue(1))";
+mySlider7.buttonHeight = 16;
+mySlider7.buttonWidth = 6;
+mySlider7.maxSlide = 75;
+mySlider7.offsetX = -10;
+mySlider7.offsetY = -4;
+mySlider7.buttonImg = "../buttons/clear.gif";
+mySlider7.buttonHiliteImg = "../buttons/clear.gif";
+
+var mySlider8 = new Slider( "Slider8" );
+mySlider8.onchange = "setWidth2('v_value8',this.getValue(1))";
+mySlider8.buttonHeight = 16;
+mySlider8.buttonWidth = 6;
+mySlider8.maxSlide = 75;
+mySlider8.offsetX = -10;
+mySlider8.offsetY = -4;
+mySlider8.buttonImg = "../buttons/clear.gif";
+mySlider8.buttonHiliteImg = "../buttons/clear.gif";
+
+function setFull()
+{
+	var cf = document.forms[0];
+	if (cf.a1.checked = true)
+	{
+		netcamObj.MotionEnable(0, 1);
+		netcamObj.MotionEnable(1, 0);
+		netcamObj.MotionEnable(2, 0);
+		netcamObj.MotionEnable(3, 0);
+
+		cf.ct.checked = false;
+
+		cf.a2.checked = false;
+		cf.a3.checked = false;
+		cf.a4.checked = false;
+
+		cf.a2.disabled = true;
+		cf.a3.disabled = true;
+		cf.a4.disabled = true;
+    }
+
+}	
+function setCus()
+{
+	var cf = document.forms[0];
+	if (cf.ct.checked = true)
+	{
+		cf.a1.checked = false;
+
+		netcamObj.MotionEnable(0, 0);
+
+		cf.a2.disabled = false;
+		cf.a3.disabled = false;
+		cf.a4.disabled = false;
+	}
+}
+// -->
+</script>
+<!--<script>str='<title>'+tm01+'</title>';dw(str);</script>-->
+</head>
+
+<body marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="init();" onbeforeunload="if(run_flag==true) doStop();" >
+	<style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:absolute;">
+ <div width="100%" class="newContentTitle">Motion Detection</div>
+
+	
+<FORM name="m_detect" method="post" action="file.cgi" onSubmit="return SaveAll()">
+<div id="formpane" class="newFormPane">
+
+
+<table cellpadding="0" cellspacing="0" >
+
+<tr>
+ <th id="menu" width="165" style="vertical-align:top">
+ <TABLE border="1" bordercolor="#CCCCCC" cellpadding="0" cellspacing="0">
+ <TR><TD class="up">
+ <TABLE border="1" cellpadding="0" cellspacing="0" class"detect">
+ <TR><TD class="control" colspan="2"><INPUT TYPE="checkbox" NAME="a1" VALUE="disable" onClick="setFull();">
+ Full Screen
+ </TD></TR>
+ 
+ <TR><TD class="control2">Indicator</TD>
+ <TD class="control">
+
+	<div class="ind">
+		<img src="../buttons/v_bar1.gif" alt="Indicator 1" border="0" name="Slider5RailImg" id="Slider5RailImg">
+		<div id="v_value5" class="value"></div>
+	</div> </TD></TR>
+ 
+ <TR>
+ 	<TD class="control3">Threshold</TD>
+ 	
+ <TD class="control">
+	<div class="sli" style="padding:0px;overflow:hidden"   nowrap>
+		<img src="../buttons/v_bar1.gif" alt="Threshold 1" border="0" name="Slider1RailImg" id="Slider1RailImg">
+		<div id="v_value1" class="valuer"></div>
+	</div> </TD>
+ </TR>
+ </TABLE>
+ 
+ <TABLE border="1" cellpadding="0" cellspacing="0" class"detect">
+ <TR><TD class="control"><br><INPUT TYPE="checkbox" NAME="ct" VALUE="disable" onClick="setCus();"> Setting Custom Area<br>&nbsp;</TD></TR>
+ </TABLE>
+ 
+ <TABLE border="1" cellpadding="0" cellspacing="0" class"detect">
+ <TR><TD class="control" colspan="2"><INPUT TYPE="checkbox" NAME="a2" VALUE="disable" onClick="mot_en_click(1);"><input type="text" name="det_area2" size="10" maxlength="12" style="{height:18;width:117}" value=""></TD></TR>
+ <TR><TD class="control2">Indicator</TD>
+ <TD class="control">
+
+	<div class="ind">
+		<img src="../buttons/v_bar1.gif" alt="Indicator 2" border="0" name="Slider6RailImg" id="Slider6RailImg">
+		<div id="v_value6" class="value"></div>
+	</div> </TD></TR>
+ <TR><TD class="control3">Threshold</TD>
+ <TD class="control">
+
+	<div class="sli" style="padding:0px;overflow:hidden"   nowrap>
+		<img src="../buttons/v_bar1.gif" alt="Threshold 2" border="0" name="Slider2RailImg" id="Slider2RailImg">
+		<div id="v_value2" class="valuer"></div>
+	</div> </TD></TR>
+ 
+ </TABLE>
+ 
+ <TABLE border="1" cellpadding="0" cellspacing="0" class"detect">
+ <TR><TD class="control" colspan="2"><INPUT TYPE="checkbox" NAME="a3" VALUE="disable" onClick="mot_en_click(2);"><input type="text" name="det_area3" size="10" maxlength="12" style="{height:18;width:117}" value=""></TD></TR>
+ <TR><TD class="control2">Indicator</TD>
+ <TD class="control">
+
+	<div class="ind">
+		<img src="../buttons/v_bar1.gif" alt="Indicator 3" border="0" name="Slider7RailImg" id="Slider7RailImg">
+		<div id="v_value7" class="value"></div>
+	</div> </TD></TR>
+ <TR><TD class="control3">Threshold</TD>
+ <TD class="control">
+
+	<div class="sli" style="padding:0px;overflow:hidden"   nowrap>
+		<img src="../buttons/v_bar1.gif" alt="Threshold 3" border="0" name="Slider3RailImg" id="Slider3RailImg">
+		<div id="v_value3" class="valuer"></div>
+	</div> </TD></TR>
+ 
+ </TABLE>
+ 
+ <TABLE border="1" cellpadding="0" cellspacing="0" class"detect">
+ <TR><TD class="control" colspan="2"><INPUT TYPE="checkbox" NAME="a4" VALUE="disable" onClick="mot_en_click(3);"><input type="text" name="det_area4" size="10" maxlength="12" style="{height:18;width:117}" value=""></TD></TR>
+ <TR><TD class="control2">Indicator</TD>
+ <TD class="control">
+
+	<div class="ind">
+		<img src="../buttons/v_bar1.gif" alt="Indicator 4" border="0" name="Slider8RailImg" id="Slider8RailImg">
+		<div id="v_value8" class="value"></div>
+	</div> </TD></TR>
+ <TR><TD class="control3">Threshold</TD>
+ <TD class="control">
+
+	<div class="sli" style="padding:0px;overflow:hidden"   nowrap>
+		<img src="../buttons/v_bar1.gif" alt="Threshold 4" border="0" name="Slider4RailImg" id="Slider4RailImg">
+		<div id="v_value4" class="valuer"></div>
+	</div> </TD></TR>
+ </TABLE>
+ </TD></TR>
+ </TABLE>
+ </th>
+    <td colspan="2"  width="100%" style="vertical-align:top" >
+
+  <table cellspacing=2 cellpadding=2>
+	<tr>
+<td rowspan="3" WIDTH="320" HEIGHT="240" bgcolor="#7f8084">
+ <font color="#FFFFFF"><script language="javascript" type="text/javascript">doPlay();</script></font>
+	</td> 
+	</tr>
+	</table>
+
+   </td>
+   </tr>
+
+   </table>
+  
+	</div><!-- formpane Area End -->
+    <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" value="Save" class="newButton" onClick="SaveAll();">
+	<input type="button" class="newButton" name="Cancel" value="Cancel" onClick="clc()">
+	&nbsp; &nbsp; 
+	</div>
+	<br>
+<script type="text/javascript">
+mySlider1.writeSlider();
+mySlider2.writeSlider();
+mySlider3.writeSlider();
+mySlider4.writeSlider();
+
+mySlider5.writeSlider();
+mySlider6.writeSlider();
+mySlider7.writeSlider();
+mySlider8.writeSlider();
+</script>
+</div><!-- Content Area End -->
+    
+<script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+
+<iframe id="hiddenframe" width="1" height="2" style="display:none" src=""></iframe>				
+
+
+<input type="hidden" name="todo" value="connect">
+<input type="hidden" name="this_file" value="m2_detect.htm"> 
+<input type="hidden" name="next_file" value="m2_detect.htm"> 
+
+<input type="Hidden" name="h_a1" value="@h_a1#">
+<input type="Hidden" name="h_ct"   value="@h_ct#">
+<input type="Hidden" name="h_a2" value="@h_a2#">
+<input type="Hidden" name="h_a3" value="@h_a3#">
+<input type="Hidden" name="h_a4" value="@h_a4#">
+
+<INPUT TYPE="hidden" NAME="threshold1" SIZE=3 MAXLENGTH=3 onChange="updateThd(this.value);">
+<INPUT TYPE="hidden" NAME="threshold2" SIZE=3 MAXLENGTH=3 onChange="updateThd(this.value);">
+<INPUT TYPE="hidden" NAME="threshold3" SIZE=3 MAXLENGTH=3 onChange="updateThd(this.value);">
+<INPUT TYPE="hidden" NAME="threshold4" SIZE=3 MAXLENGTH=3 onChange="updateThd(this.value);">
+
+<INPUT TYPE="hidden" NAME="feedback1" SIZE=3 MAXLENGTH=3>
+<INPUT TYPE="hidden" NAME="feedback2" SIZE=3 MAXLENGTH=3>
+<INPUT TYPE="hidden" NAME="feedback3" SIZE=3 MAXLENGTH=3>
+<INPUT TYPE="hidden" NAME="feedback4" SIZE=3 MAXLENGTH=3>
+
+<INPUT TYPE="hidden" NAME="md_window_example" VALUE="enable/disable,x,y,width,height,thresold">
+
+<INPUT TYPE="hidden" NAME="md_region1" VALUE="@md_region1#">
+<INPUT TYPE="hidden" NAME="md_region2" VALUE="@md_region2#">
+<INPUT TYPE="hidden" NAME="md_region3" VALUE="@md_region3#">
+<INPUT TYPE="hidden" NAME="md_region4" VALUE="@md_region4#">
+<input type="hidden" name="message" value="@message#">
+<INPUT TYPE="hidden" NAME="det_area1" VALUE="">
+
+</form>
+
+<script> var msgVar="@message#"; </script>
+</body>
+</html>

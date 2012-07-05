@@ -1,0 +1,1 @@
+#ifdef GCC333_UCLIB#define __u_char_defined#define __mode_t_defined#define __dev_t_defined#define __nlink_t_defined#define __sigset_t_defined#define __timespec_defined#define _STRUCT_TIMEVAL#define _SYS_SELECT_H#endif

@@ -1,0 +1,330 @@
+12c12
+< CFLAGS += -I. #-I../utils -I../hostapd
+---
+> CFLAGS += -I. #-I../utils -I../hostapd-0.3.7
+14,15c14
+< #ALL=wpa_supplicant wpa_passphrase wpa_cli
+< ALL=wpa_supplicant wpa_cli
+---
+> ALL=wpa_supplicant wpa_cli #wpa_passphrase dynamic_eap_methods
+17,18c16
+< #all: verify_config $(ALL) dynamic_eap_methods
+< all: verify_config $(ALL) 
+---
+> all: verify_config $(ALL) install
+38c36
+< install: all
+---
+> install:
+45,48c43,45
+< 	common.o md5.o md4.o \
+< 	rc4.o sha1.o des.o
+< OBJS_p = wpa_passphrase.o sha1.o md5.o md4.o \
+< 	common.o des.o
+---
+> 	common.o md5.o \
+> 	rc4.o sha1.o
+> OBJS_p = wpa_passphrase.o sha1.o md5.o
+61,64d57
+< ifeq ($(CONFIG_OS), internal)
+< CFLAGS += -DOS_NO_C_LIB_DEFINES
+< endif
+< 
+168,170d160
+< ifdef CONFIG_USE_NDISUIO
+< CFLAGS += -DCONFIG_USE_NDISUIO
+< endif
+404,419d393
+< ifdef CONFIG_EAP_GPSK
+< # EAP-GPSK
+< ifeq ($(CONFIG_EAP_GPSK), dyn)
+< CFLAGS += -DEAP_GPSK_DYNAMIC
+< EAPDYN += eap_gpsk.so
+< else
+< CFLAGS += -DEAP_GPSK
+< OBJS += eap_gpsk.o eap_gpsk_common.o
+< endif
+< CONFIG_IEEE8021X_EAPOL=y
+< ifdef CONFIG_EAP_GPSK_SHA256
+< CFLAGS += -DEAP_GPSK_SHA256
+< NEED_SHA256=y
+< endif
+< endif
+< 
+456,465c430
+< CONFIG_TLS=openssl
+< endif
+< 
+< ifeq ($(CONFIG_TLS), internal)
+< ifndef CONFIG_CRYPTO
+< CONFIG_CRYPTO=internal
+< endif
+< endif
+< ifeq ($(CONFIG_CRYPTO), libtomcrypt)
+< CFLAGS += -DCONFIG_INTERNAL_X509
+---
+> CONFIG_TLS=none
+467,470d431
+< ifeq ($(CONFIG_CRYPTO), internal)
+< CFLAGS += -DCONFIG_INTERNAL_X509
+< endif
+< 
+477a439
+> CFLAGS += -I../stunnel/include
+479,480c441
+< LIBS += -L../stunnel/lib -laes
+< LIBS += -lssl -lcrypto
+---
+> LIBS += -L../stunnel/lib -lssl -lcrypto -laes
+494,513c455,458
+< endif
+< ifeq ($(CONFIG_TLS), internal)
+< OBJS += tls_internal.o tlsv1_common.o tlsv1_client.o asn1.o x509v3.o
+< OBJS_p += asn1.o rc4.o aes_wrap.o
+< ifneq ($(CONFIG_BACKEND), file)
+< OBJS += base64.o
+< endif
+< CFLAGS += -DCONFIG_TLS_INTERNAL
+< ifeq ($(CONFIG_CRYPTO), internal)
+< ifdef CONFIG_INTERNAL_LIBTOMMATH
+< CFLAGS += -DCONFIG_INTERNAL_LIBTOMMATH
+< else
+< LIBS += -ltommath
+< LIBS_p += -ltommath
+< endif
+< endif
+< ifeq ($(CONFIG_CRYPTO), libtomcrypt)
+< LIBS += -ltomcrypt -ltfm
+< LIBS_p += -ltomcrypt -ltfm
+< endif
+---
+> # Using OpenSSL for crypto at the moment; to be replaced
+> CFLAGS += -DEAP_TLS_OPENSSL
+> LIBS += -lcrypto
+> LIBS_p += -lcrypto
+518,521d462
+< CONFIG_INTERNAL_AES=y
+< CONFIG_INTERNAL_SHA1=y
+< CONFIG_INTERNAL_MD5=y
+< CONFIG_INTERNAL_SHA256=y
+559,564c500,502
+< endif
+< ifeq ($(CONFIG_TLS), internal)
+< ifeq ($(CONFIG_CRYPTO), libtomcrypt)
+< LIBS += -ltomcrypt -ltfm
+< LIBS_p += -ltomcrypt -ltfm
+< endif
+---
+> # Using OpenSSL for crypto at the moment; to be replaced
+> LIBS += -lcrypto
+> LIBS_p += -lcrypto
+570d507
+< CONFIG_INTERNAL_SHA256=y
+575d511
+< CONFIG_INTERNAL_SHA256=y
+578,604c514,516
+< OBJS += crypto_cryptoapi.o
+< OBJS_p += crypto_cryptoapi.o
+< CONFIG_INTERNAL_SHA256=y
+< endif
+< ifeq ($(CONFIG_TLS), internal)
+< ifeq ($(CONFIG_CRYPTO), libtomcrypt)
+< OBJS += crypto_libtomcrypt.o
+< OBJS_p += crypto_libtomcrypt.o
+< CONFIG_INTERNAL_SHA256=y
+< endif
+< ifeq ($(CONFIG_CRYPTO), internal)
+< OBJS += crypto_internal.o rsa.o bignum.o
+< OBJS_p += crypto_internal.o rsa.o bignum.o
+< CFLAGS += -DCONFIG_CRYPTO_INTERNAL
+< CONFIG_INTERNAL_AES=y
+< CONFIG_INTERNAL_DES=y
+< CONFIG_INTERNAL_SHA1=y
+< CONFIG_INTERNAL_MD4=y
+< CONFIG_INTERNAL_MD5=y
+< CONFIG_INTERNAL_SHA256=y
+< endif
+< ifeq ($(CONFIG_CRYPTO), cryptoapi)
+< OBJS += crypto_cryptoapi.o
+< OBJS_p += crypto_cryptoapi.o
+< CFLAGS += -DCONFIG_CRYPTO_CRYPTOAPI
+< CONFIG_INTERNAL_SHA256=y
+< endif
+---
+> # Using OpenSSL for crypto at the moment; to be replaced
+> OBJS += crypto.o
+> OBJS_p += crypto.o
+609,618d520
+< CONFIG_INTERNAL_SHA256=y
+< endif
+< else
+< CONFIG_INTERNAL_AES=y
+< CONFIG_INTERNAL_SHA1=y
+< CONFIG_INTERNAL_MD5=y
+< endif
+< 
+< ifdef CONFIG_INTERNAL_AES
+< CFLAGS += -DINTERNAL_AES
+620,637d521
+< ifdef CONFIG_INTERNAL_SHA1
+< CFLAGS += -DINTERNAL_SHA1
+< endif
+< ifdef CONFIG_INTERNAL_SHA256
+< CFLAGS += -DINTERNAL_SHA256
+< endif
+< ifdef CONFIG_INTERNAL_MD5
+< CFLAGS += -DINTERNAL_MD5
+< endif
+< ifdef CONFIG_INTERNAL_MD4
+< CFLAGS += -DINTERNAL_MD4
+< endif
+< ifdef CONFIG_INTERNAL_DES
+< CFLAGS += -DINTERNAL_DES
+< endif
+< 
+< ifdef NEED_SHA256
+< OBJS += sha256.o
+648c532
+< CONFIG_CTRL_IFACE=named_pipe
+---
+> CONFIG_CTRL_IFACE=udp
+654,656d537
+< ifeq ($(CONFIG_CTRL_IFACE), unix)
+< CFLAGS += -DCONFIG_CTRL_IFACE_UNIX
+< endif
+660,662d540
+< ifeq ($(CONFIG_CTRL_IFACE), named_pipe)
+< CFLAGS += -DCONFIG_CTRL_IFACE_NAMED_PIPE
+< endif
+667,668c545,546
+< CFLAGS += -DCONFIG_CTRL_IFACE_DBUS -DDBUS_API_SUBJECT_TO_CHANGE
+< OBJS += ctrl_iface_dbus.o ctrl_iface_dbus_handlers.o dbus_dict_helpers.o
+---
+> CFLAGS += -DCONFIG_CTRL_IFACE_DBUS
+> OBJS += ctrl_iface_dbus.o
+683,685d560
+< ifeq ($(CONFIG_CRYPTO), cryptoapi)
+< LIBS_p += -lcrypt32
+< endif
+690,692d564
+< ifndef CONFIG_CTRL_IFACE
+< CFLAGS += -DCONFIG_NO_WPA_MSG
+< endif
+700,706c572,573
+< ifdef CONFIG_PEERKEY
+< CFLAGS += -DCONFIG_PEERKEY
+< endif
+< 
+< ifdef CONFIG_IEEE80211W
+< CFLAGS += -DCONFIG_IEEE80211W
+< NEED_SHA256=y
+---
+> ifdef CONFIG_STAKEY
+> CFLAGS += -DCONFIG_STAKEY
+730,734d596
+< ifdef CONFIG_CLIENT_MLME
+< OBJS += mlme.o
+< CFLAGS += -DCONFIG_CLIENT_MLME
+< endif
+< 
+776,791d637
+< OBJSa=asn1_test.o asn1.o x509v3.o common.o os_unix.o \
+< 	crypto_$(CONFIG_CRYPTO).o md5.o sha1.o \
+< 	rc4.o des.o aes_wrap.o \
+< 	bignum.o rsa.o
+< asn1_test: $(OBJSa)
+< 	$(LDO) $(LDFLAGS) -o asn1_test $(OBJSa)
+< 
+< OBJSx=tests/test_x509v3.o asn1.o x509v3.o \
+< 	common.o os_unix.o \
+< 	crypto_$(CONFIG_CRYPTO).o \
+< 	md5.o sha1.o \
+< 	rc4.o des.o aes_wrap.o \
+< 	bignum.o rsa.o
+< test_x509v3: $(OBJSx)
+< 	$(LDO) $(LDFLAGS) -o test_x509v3 $(OBJSx)
+< 
+811a658,671
+> # parameters for Microsoft Visual C++ Toolkit 2003 compiler
+> CL=cl
+> CLDIR=C:\Program Files\Microsoft Visual C++ Toolkit 2003
+> PSDKDIR=C:\Program Files\Microsoft Platform SDK for Windows XP SP2
+> CLFLAGS=-O
+> CLLIBS=wbemuuid.lib libcmt.lib kernel32.lib uuid.lib ole32.lib oleaut32.lib \
+> 	ws2_32.lib
+> 
+> ndis_events: ndis_events.cpp
+> 	INCLUDE="$(CLDIR)\include;$(PSDKDIR)\Include" \
+> 	LIB="$(CLDIR)\lib;$(PSDKDIR)\Lib" \
+> 	$(CL) $(CLFLAGS) -o ndis_events.exe ndis_events.cpp \
+> 		/link -nodefaultlib $(CLLIBS)
+> 
+834,837c694,698
+< TEST_MS_FUNCS_OBJS = crypto.o sha1.o md5.o \
+< 	os_unix.o rc4.o tests/test_ms_funcs.o
+< test-ms_funcs: $(TEST_MS_FUNCS_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_MS_FUNCS_OBJS) $(LIBS) -lcrypto
+---
+> TEST_SRC_MS_FUNCS = ms_funcs.c crypto.c sha1.c md5.c \
+> 	os_unix.c
+> test-ms_funcs: $(TEST_SRC_MS_FUNCS)
+> 	$(CC) -o test-ms_funcs -Wall -Werror $(TEST_SRC_MS_FUNCS) \
+> 		-DTEST_MAIN_MS_FUNCS -lcrypto -I../hostapd -I.
+841,843c702,705
+< TEST_SHA1_OBJS = sha1.o md5.o tests/test_sha1.o #crypto.o
+< test-sha1: $(TEST_SHA1_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_SHA1_OBJS) $(LIBS)
+---
+> TEST_SRC_SHA1 = sha1.c
+> test-sha1: $(TEST_SRC_SHA1)
+> 	$(CC) -o test-sha1 -Wall -Werror $(TEST_SRC_SHA1) \
+> 		-DTEST_MAIN -I../hostad -I.
+847,863c709,720
+< TEST_SHA256_OBJS = sha256.o md5.o tests/test_sha256.o crypto.o
+< test-sha256: $(TEST_SHA256_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_SHA256_OBJS) $(LIBS)
+< 	./test-sha256
+< 	rm test-sha256
+< 
+< TEST_AES_OBJS = aes_wrap.o tests/test_aes.o # crypto.o
+< test-aes: $(TEST_AES_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_AES_OBJS) $(LIBS)
+< 	./test-aes
+< 	rm test-aes
+< 
+< TEST_EAP_SIM_COMMON_OBJS = sha1.o md5.o \
+< 	aes_wrap.o common.o os_unix.o \
+< 	tests/test_eap_sim_common.o
+< test-eap_sim_common: $(TEST_EAP_SIM_COMMON_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_AES_OBJS) $(LIBS)
+---
+> TEST_SRC_AES_WRAP = aes_wrap.c
+> test-aes_wrap: $(TEST_SRC_AES_WRAP)
+> 	$(CC) -o test-aes_wrap -Wall -Werror $(TEST_SRC_AES_WRAP) \
+> 		-DTEST_MAIN -I../hostad -I.
+> 	./test-aes_wrap
+> 	rm test-aes_wrap
+> 
+> TEST_SRC_EAP_SIM_COMMON = eap_sim_common.c sha1.c md5.c \
+> 	aes_wrap.c common.c os_unix.c
+> test-eap_sim_common: $(TEST_SRC_EAP_SIM_COMMON)
+> 	$(CC) -o test-eap_sim_common -Wall -Werror $(TEST_SRC_EAP_SIM_COMMON) \
+> 		-DTEST_MAIN_EAP_SIM_COMMON -I../hostapd -I.
+867,879c724
+< TEST_MD4_OBJS = md4.o tests/test_md4.o #crypto.o
+< test-md4: $(TEST_MD4_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_MD4_OBJS) $(LIBS)
+< 	./test-md4
+< 	rm test-md4
+< 
+< TEST_MD5_OBJS = md5.o tests/test_md5.o #crypto.o
+< test-md5: $(TEST_MD5_OBJS)
+< 	$(LDO) $(LDFLAGS) -o $@ $(TEST_MD5_OBJS) $(LIBS)
+< 	./test-md5
+< 	rm test-md5
+< 
+< tests: test-ms_funcs test-sha1 test-aes test-eap_sim_common test-md4 test-md5
+---
+> tests: test-ms_funcs test-sha1 test-aes_wrap test-eap_sim_common
+882a728
+> gpl-clean: clean

@@ -1,0 +1,32 @@
+<html><head><meta HTTP-EQUIV='Pragma' CONTENT='no-cache'>
+<script language='javascript'><!-- hide
+
+var progress = 0;
+
+function isInProgress() {
+if ( progress == 0 ){progress = 1;return true;}
+alert('Upload software is in progress. Please wait for a minute.');
+return false;}
+function doupgrade(){
+if (!confirm('Continue upgrading the firmware?')) {	return; }
+if (0 == document.forms[0].file_name.value.length) {alert('No filename provided. Please select the correct file.'); return;}
+document.forms[0].submit();}
+// done hiding -->
+</script>
+<style type='text/css'>
+<!--
+.style1 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+</head>
+<body style="background-color:#D9E3E9;" onLoad="alert('Error: Upgrade file format error');"><blockquote class='style1'>
+<form method='post' ENCTYPE='multipart/form-data' action='upload.cgi' onSubmit='return isInProgress();'>
+<b><div style="height:25px;">Upgrade Firmware</div></b><br>The upgrade firmware file needs to be downloaded and stored on your PC.<br>
+ <br><table border='0' cellpadding='0' cellspacing='0'>
+<tr><td>Upgrade File:&nbsp;</td>
+<td><input type='file' name='file_name' size='32'></td>
+</tr>
+<tr><td></td><td><br><input type='button' value='Start Upgrade' onClick=doupgrade()></td></tr>
+</table>
+</form></blockquote>
+</body></html>

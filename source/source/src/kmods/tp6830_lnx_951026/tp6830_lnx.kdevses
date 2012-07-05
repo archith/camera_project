@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE KDevPrjSession>
+<KDevPrjSession>
+<LastCompileConfig>(Default)</LastCompileConfig>
+ <Mainframe MaximizeMode="1" />
+ <DocsAndViews NumberOfDocuments="7" >
+<Doc0 CursorPosLine="2248" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="14" FileName="/home/steven/tp6830/tp6830_lnx_TI3in1_wo_iso_Sercomm_950827/pwc-ctrl.c" >
+<View0 Top="25" Width="400" Attach="1" Height="300" Left="3" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc0>
+  <Doc1 CursorPosLine="1207" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="57" FileName="/home/steven/tp6830/tp6830_lnx_TI3in1_wo_iso_Sercomm_950827/pwc-if.c" >
+<View0 Top="48" Width="854" Attach="1" Height="481" Left="26" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc1>
+  <Doc2 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/steven/tp6830/tp6830_lnx_TI3in1_wo_iso_Sercomm_950827/pwc-ioctl.h" >
+<View0 Top="71" Width="854" Attach="1" Height="453" Left="49" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc2>
+  <Doc3 CursorPosLine="2077" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="27" FileName="/home/steven/tp6830/tp6830_lnx/pwc-ctrl.c" >
+<View0 Top="117" Width="854" Attach="1" Height="453" Left="95" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc3>
+  <Doc4 CursorPosLine="1421" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/steven/tp6830/tp6830_lnx/pwc-if.c" >
+<View0 Top="117" Width="854" Attach="1" Height="481" Left="95" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc4>
+  <Doc5 CursorPosLine="11" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/steven/tp6830/tp6830_lnx/tp_def.h" >
+<View0 Top="115" Width="860" Attach="1" Height="509" Left="115" Focus="1" Type="KWriteView" MinMaxMode="2" />  </Doc5>
+  <Doc6 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/steven/tp6830/tp6830_lnx/tp_gamma_r.h" >
+<View0 Top="163" Width="854" Attach="1" Height="481" Left="141" Focus="0" Type="KWriteView" MinMaxMode="0" />  </Doc6> </DocsAndViews></KDevPrjSession>

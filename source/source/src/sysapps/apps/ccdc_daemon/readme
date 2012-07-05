@@ -1,0 +1,42 @@
+Function - CCD Control & Daemon Tools
+
+File List
+
+Name		Descript
+---------------	-----------------------------------------------
+ccdc.c		Source code of CCD control tool.
+ccdc_daemon.c	Source code of CCD daemon.
+ccdc.h		Internal header file.
+Makefile	Makefile
+readme		
+shm.c		Internal shared memory.		
+topro.c		IO control for the Topro device.
+     
+
+CCD Control Tool Flow: 
+
+1. Attach the shared memory.
+2. Set the value and changed flag.
+
+
+CCD Control Daemon Flow: 
+
+1. Attach the shared memory.
+2. Open the topro device.
+3. Read the configuration by the API.
+4. Configure the CCD settings to the device.
+5. Wait the signal and do the corresponding action.
+
+
+Signal Action:
+
+SIGUSR1	- Update the CCD setting by the internal memory.
+SIGUSR2	- Update the CCD setting by the current configuration.
+SIGTSTP	- Deactive the IR-cut filter.
+SIGCONT	- Active the IR-cut filter.
+SIGTERM	- Close the Topro device and exit the program.
+SIGURG	- Special IO control to run the iris diagonsis.
+
+
+
+

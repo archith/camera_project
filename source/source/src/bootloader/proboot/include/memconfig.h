@@ -1,0 +1,1 @@
+../../../kernel/linux/include/asm/arch/memconfig.h

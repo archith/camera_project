@@ -1,0 +1,51 @@
+#
+# Character device configuration
+#
+mainmenu_option next_comment
+comment 'Prolific Character/Misc. devices'
+
+if [ "$CONFIG_ARCH_PL1029" = "y" ]; then
+  bool 'Prolific keypad support' CONFIG_PROLIFIC_KEYPAD
+##   bool 'PL1029 generic GPIO support' CONFIG_PL1029_GPIO $CONFIG_ARCH_PL1029
+  bool 'Prolific power switch support' CONFIG_PROLIFIC_PS $CONFIG_ARCH_PL1029
+  bool 'Prolific RTC support' CONFIG_PROLIFIC_RTC $CONFIG_ARCH_PL1029
+##  if [ "$CONFIG_I2C_ALGO91" != "y" ]; then
+##    bool 'PL1029 i2c-keypad support' CONFIG_PL1029_I2C_KEYPAD
+##  fi
+  bool 'Prolific remote control support' CONFIG_PROLIFIC_REMOTE_CONTROLLER
+
+  if [ "$CONFIG_PROLIFIC_IRDA" != "y" -o "$CONFIG_IRDA" != "y" -o "$CONFIG_IRDA_FAST_RR" != "y" ]; then
+    dep_bool 'Prolific UART support' CONFIG_PROLIFIC_UART $CONFIG_ARCH_PL1029
+    define_bool CONFIG_PL1029_IRDA n
+  else
+    comment '  Prolific UART can only be used with disabled IrDA'
+  fi
+
+  if [ "$CONFIG_PROLIFIC_UART" != "y" ]; then
+    if [ "$CONFIG_IRDA" = "y" -a "$CONFIG_IRDA_FAST_RR" = "y" ]; then
+      dep_tristate 'Prolific IrDA support' CONFIG_PROLIFIC_IRDA $CONFIG_ARCH_PL1029
+      define_bool CONFIG_PROLIFIC_UART n
+    else
+      comment '  Prolific IrDA can only be used with enable IrDA, and Fast RRs'
+    fi
+  else
+    comment '  Prolific IrDA can only be used with disabled UART'
+  fi
+
+#   dep_bool 'PL1029 fine alarm support' CONFIG_FALARM $CONFIG_PROLIFIC_RTC
+
+    if [ "$CONFIG_PROLIFIC_KEYPAD" = "y" -o "$CONFIG_PROLIFIC_REMOTE_CONTROLLER" = "y" ]; then
+        define_bool CONFIG_REDIRECT_TTY_TO_CONSOLE y
+        define_bool CONFIG_PROLIFIC_HID y
+    fi
+
+  if [ "$CONFIG_PL_NOR_MTD" = "n" ]; then
+    bool 'Prolific PL-1029 NOR flash driver' CONFIG_PL1029_NOR
+    if [ "$CONFIG_PL1029_NOR" = "y" ]; then
+      bool '  Firmware upgrade functionality' CONFIG_PL1029_NOR_UPGRADE
+    fi
+  fi
+
+fi
+
+endmenu

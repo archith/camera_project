@@ -1,0 +1,4 @@
+make -f Makefile.module
+#arm-linux-strip security.o
+echo Make module security.o complete
+cp security.o /home

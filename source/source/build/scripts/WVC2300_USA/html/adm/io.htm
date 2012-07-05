@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>WVC2300 Wireless Internet Camera</title>
+
+<meta name="description" content="WVC2300-P2">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">	
+<meta HTTP-EQUIV="Expires" CONTENT="Mon, 06 Jan 1990 00:00:01 GMT"> 
+
+<!--FOR CISCO SBBU STYLE -->
+<LINK REL="stylesheet" TYPE="text/css" HREF="../cisco.css">
+
+<script language="javascript" type="text/javascript" src="../func.js"></script>
+<!--FOR CISCO SBBU STYLE -->
+
+<script language="JavaScript" type="text/javascript" src="../linux.js"></script>
+<script language="JavaScript" type="text/javascript" src="../stdlib.js"></script>
+<script language="JavaScript" type="text/javascript" src="../message.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!-- Start Script
+
+function setData()
+{
+    var cf = document.forms[0];
+	var index = 0;
+	dataToVisible(cf);
+	setNorm1();
+	setNorm2();
+}
+
+function SaveAll()
+{
+    var cf = document.forms[0];
+	if (!(checkData()))
+		return;
+		
+	cf.todo.value = "save";
+	dataToHidden(cf); cf.submit();
+}
+
+function checkData()
+{
+	var cf = document.forms[0];
+    var msg = "";
+	
+	//if (((cf.norm1.selectedIndex == 0) && (cf.rt_out1_tri.selectedIndex == 0)) || ((cf.norm1.selectedIndex == 1) && (cf.rt_out1_tri.selectedIndex == 1)))
+	//{ msg+= msg_no_option }
+	if (cf.rt_out1_tri.selectedIndex == 2)
+	{ msg+= checkInt(cf.output1_dur, msg_Output_time, 10, 10000, cf.rt_out1_tri.selectedIndex == 2); }
+	else {}
+	
+	//if (((cf.norm2.selectedIndex == 0) && (cf.rt_out2_tri.selectedIndex == 0)) || ((cf.norm2.selectedIndex == 1) && (cf.rt_out2_tri.selectedIndex == 1)))
+	//{ msg+= msg_no_option }
+	if (cf.rt_out2_tri.selectedIndex == 2)
+	{ msg+= checkInt(cf.output2_dur, msg_Output_time, 10, 10000, cf.rt_out2_tri.selectedIndex == 2); }
+	else {}
+	
+	/*
+	if (cf.actd1.selectedIndex == 1)
+	{ msg+= checkInt(cf.act1_dur, msg_Output_time, 10, 10000, cf.actd1.selectedIndex == 1); }
+	else {}
+	
+	if (cf.actd2.selectedIndex == 1)
+	{ msg+= checkInt(cf.act2_dur, msg_Output_time, 10, 10000, cf.actd2.selectedIndex == 1); }
+	else {}
+	*/
+	
+	if (msg.length > 1)
+    {
+        rALERT("I/O Ports",msg);
+        return false;
+    }
+
+    return true;
+}
+
+////////////////////////////////////////////////////////////////
+
+function setoTime1()
+{
+    var cf = document.forms[0];
+	var index = cf.rt_out1_tri.selectedIndex;
+	index = (index > -1 && index < cf.rt_out1_tri.options.length) ? index : 0;
+	
+	setVisible("oTime1DIV", (index == 2));
+}
+function setoTime2()
+{
+    var cf = document.forms[0];
+	var index = cf.rt_out2_tri.selectedIndex;
+	index = (index > -1 && index < cf.rt_out2_tri.options.length) ? index : 0;
+	
+	setVisible("oTime2DIV", (index == 2));
+}
+
+function setNorm1()
+{
+    var cf = document.forms[0];
+	var index = cf.norm1.selectedIndex;
+	index = (index > -1 && index < cf.norm1.options.length) ? index : 0;
+	
+	if (index == 0)
+	{
+		cf.rt_out1_tri.options[0].text = "None";
+		cf.rt_out1_tri.options[1].text = "Low";
+		//cf.rt_out1_tri.selectedIndex = 1;
+	}
+	else
+	{
+		cf.rt_out1_tri.options[0].text = "High";
+		cf.rt_out1_tri.options[1].text = "None";
+		//cf.rt_out1_tri.selectedIndex = 0;
+	}
+	setoTime1();
+	//actdd1();
+}
+function setNorm2()
+{
+    var cf = document.forms[0];
+	var index = cf.norm2.selectedIndex;
+	index = (index > -1 && index < cf.norm2.options.length) ? index : 0;
+	
+	if (index == 0)
+	{
+		cf.rt_out2_tri.options[0].text = "None";
+		cf.rt_out2_tri.options[1].text = "Low";
+		//cf.rt_out2_tri.selectedIndex = 1;
+	}
+	else
+	{
+		cf.rt_out2_tri.options[0].text = "High";
+		cf.rt_out2_tri.options[1].text = "None";
+		//cf.rt_out2_tri.selectedIndex = 0;
+	}
+	setoTime2();
+	//actdd2();
+}
+
+/*
+function actdd1()
+{
+    var cf = document.forms[0];
+	var index = cf.actd1.selectedIndex;
+	index = (index > -1 && index < cf.actd1.options.length) ? index : 0;
+	show_hide("a1DIV", (index == 0));
+	show_hide("act1DIV", (index == 1));
+}
+function actdd2()
+{
+    var cf = document.forms[0];
+	var index = cf.actd2.selectedIndex;
+	index = (index > -1 && index < cf.actd2.options.length) ? index : 0;
+	show_hide("a2DIV", (index == 0));
+	show_hide("act2DIV", (index == 1));
+}
+*/
+
+//end script -->
+</script>
+
+</head>
+
+<body bgcolor="#f2f2f2" link="#FFFFFF" vlink="#FFFFFF" alink="#FFFFFF" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="setData();showMsg('I/O Ports');">
+    <style>  
+    td {height:30px;}  
+    </style> 
+
+<div id="newContentArea" style="width:100%;height:100%;overflow:auto;position:relative;">
+ <div width="100%" class="newContentTitle">I/O Ports</div>
+ 	
+<form name="formname" method="post" action="file.cgi">
+	<div id="formpane" class="newFormPane">
+   	<div class="newGroupBoxTitle" style="height:25px;">Input Ports</div>
+    <table border=0 cellspacing=0 cellpadding=0 class="std">
+	<tr>
+	 <td class="sp1" nowrap="nowrap" valign="top">
+	 <table cellspacing=0 cellPadding=0 width="100%" border=0>
+   <tr>
+     <td nowrap height="35" width="20">#</td>
+     <td nowrap width="105">Current State</td>
+   <tr>
+   <tr>
+     <td nowrap height="35">1</td>
+     <td nowrap>@inputState_1#</td>
+   <tr>
+   <tr>
+     <td nowrap height="35">2</td>
+	 <td nowrap>@inputState_2#</td>
+   <tr>
+  </table>
+	 </td>
+	 <td nowrap="nowrap" valign="top">
+<table cellspacing=0 cellpadding=0 width="100%" border=0>
+   <tr>
+     <td nowrap colspan="1" height="35">Triggered When...</td>
+   </tr>
+   <tr>
+     <!-- <td nowrap height="35"><input type="checkbox" name="input_1" value="disable" onClick="setin1()"></td> -->
+     <td nowrap height="35"><select size="1" name="rt_in1_tri" style="{width:70}" width="70">
+         <option value="1">High</option>
+         <option value="2">Low</option>
+         <option value="3">Rising</option>
+         <option value="4">Falling</option>
+       </select>     </td>
+   </tr>
+   <tr>
+     <!-- <td nowrap height="35" width="5%"><input type="checkbox" name="input_2" value="disable" onClick="setin2()"></td> -->
+	 <td nowrap height="35"><select size="1" name="rt_in2_tri" style="{width:70}" width="70">
+         <option value="1">High</option>
+         <option value="2">Low</option>
+         <option value="3">Rising</option>
+         <option value="4">Falling</option>
+       </select></td>
+   </tr>
+ </table>
+	</td>
+	</tr>
+	</table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Output Ports State at Power On</div>
+    <table border=0 cellspacing=0 cellpadding=0 class="std">
+	<tr>
+	 <td class="sp1" nowrap="nowrap" valign="top">
+<table cellspacing=0 cellPadding=0 width="100%" border=0>
+   <tr>
+     <td nowrap height="35" width="20">#</td>
+     <td nowrap width="105">Current State</td>
+   <tr>
+   <tr>
+     <td nowrap height="35">1</td>
+     <td nowrap>@outputState_1#</td>
+   <tr>
+   <tr>
+     <td nowrap height="35">2</td>
+	 <td nowrap>@outputState_2#</td>
+   <tr>
+  </table>	 </td>
+	 <td nowrap="nowrap" valign="top">
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TR>
+				<TD nowrap height="35" width="85">Default State</TD>
+				<td nowrap width="85">Output State</td>
+                <td nowrap>&nbsp;</td>
+              </TR>
+			<tr>
+			<td nowrap height="35"><select size="1" name="norm1" onChange="setNorm1();" style="{width:70}" width="70">
+			 <option value="1">High</option>
+			 <option value="2">Low</option>
+			</select></td>
+			<td nowrap align="left">
+			<select size="1" name="rt_out1_tri" onChange="setoTime1();" style="{width:70}" width="70">
+			 <option value="1">High</option>
+			 <option value="2">Low</option>
+			 <option value="3">Pulse</option>
+			</select>
+			  </td>
+			<td nowrap> <div id="oTime1DIV">
+			 <INPUT size=5 name="output1_dur" value="@output1_dur#"> milliseconds 
+			 </div> </td>
+			</tr>
+			<tr>
+			<td nowrap height="35"><select size="1" name="norm2" onChange="setNorm2();" style="{width:70}" width="70">
+			 <option value="1">High</option>
+			 <option value="2">Low</option>
+			</select></td>
+			<td nowrap align="left">
+			<select size="1" name="rt_out2_tri" onChange="setoTime2();" style="{width:70}" width="70">
+			 <option value="1">High</option>
+			 <option value="2">Low</option>
+			 <option value="3">Pulse</option>
+			</select>			</td>
+			<td nowrap> <div id="oTime2DIV">
+			 <INPUT size=5 name="output2_dur" value="@output2_dur#"> milliseconds
+			 </div> </td>
+			</tr>
+          </TABLE>	</td>
+	</tr>
+	</table>
+    
+        <hr class="newHR">
+	<br style="height:10px">
+    
+    
+ 	<div class="newGroupBoxTitle" style="height:25px;">Output Ports Manual Control</div>
+    <table border=0 cellspacing=0 cellpadding=0 class="std">
+              <TR>
+				<!--<td nowrap height="35" width="10%">&nbsp;</td>-->
+     			<td nowrap height="35" width="20">#</td>
+				<td nowrap height="35">Action Definition</td>
+              </TR>
+			<tr>
+     		<td nowrap height="35">1</td>
+			<td nowrap height="35">
+			<div id="a1DIV"><select size="1" name="acthl1" onChange="">
+			 <option value="0">ON maps to High</option>
+			 <option value="1">ON maps to Low</option>
+			</select></div>
+			<!-- div id="act1DIV"><INPUT size=5 name="act1_dur" value="@act1_dur#"> milliseconds</div -->
+			</td>
+			
+			</tr>
+			<tr>
+     		<td nowrap height="35">2</td>
+			<td nowrap height="35">
+			<div id="a2DIV"><select size="1" name="acthl2" onChange="">
+			 <option value="0">ON maps to High</option>
+			 <option value="1">ON maps to Low</option>
+			</select></div>
+			<!-- div id="act2DIV"><INPUT size=5 name="act2_dur" value="@act2_dur#"> milliseconds</div -->
+			</td>
+			
+			</tr>
+          </TABLE>
+
+
+
+
+
+	</div><!-- formpane end-->
+        <!--SUBMIT BUTTON-->
+	<div class="newButtonRow">
+	<input type="button" name="save" value="Save" class="newbutton" onClick="SaveAll();">
+<!--RELEASE    -->    
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='file.cgi?next_file=io.htm'">
+<!--    -->
+<!--DEMO
+    <input type="button" name="cancel" value="Cancel" class="newbutton" onClick="location.href='io.htm'">
+<!--    --> 
+	</div>
+	<br>
+
+    <script>if (document.addEventListener)  window.addEventListener('resize', inewOnresizeHandler, false);else if (document.attachEvent)  window.attachEvent('onresize', inewOnresizeHandler);inewResizeContent(null);</script>
+
+
+<input type="hidden" name="h_rt_in1_tri" value="@h_rt_in1_tri#">
+<input type="hidden" name="h_rt_in2_tri" value="@h_rt_in2_tri#">
+<input type="hidden" name="h_iTime1" value="@h_iTime1#">
+<input type="hidden" name="h_iTime2" value="@h_iTime2#">
+
+<input type="hidden" name="h_norm1" value="@h_norm1#">
+<input type="hidden" name="h_norm2" value="@h_norm2#">
+<input type="hidden" name="h_rt_out1_tri" value="@h_rt_out1_tri#">
+<input type="hidden" name="h_rt_out2_tri" value="@h_rt_out2_tri#">
+<input type="hidden" name="h_oTime1" value="@h_oTime1#">
+<input type="hidden" name="h_oTime2" value="@h_oTime2#">
+
+<!-- input type="hidden" name="h_actd1" value="@h_actd1#">
+<input type="hidden" name="h_actd2" value="@h_actd2#" -->
+
+<input type="hidden" name="h_acthl1" value="@h_acthl1#">
+<input type="hidden" name="h_acthl2" value="@h_acthl2#">
+
+<input type="hidden" name="this_file" value="io.htm">
+<input type="hidden" name="next_file" value="io.htm">
+<input type="hidden" name="todo" value="save">
+<input type="hidden" name="message" value="@message#">
+
+</form>   
+</div> <!--  newContentArea end -->    
+</body>
+
+</html>

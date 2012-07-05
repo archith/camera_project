@@ -1,0 +1,1 @@
+./wpa_supplicant -i ra0 -D ralink -c wpa_supplicant.conf -d 
