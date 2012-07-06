@@ -23,7 +23,8 @@ clean:
 
 install: $(INSTALL_DIR)/PID
 
-$(INSTALL_DIR)/PID: $(BIN)
+$(INSTALL_DIR)/PID:
+	export PATH=$(PWD):$(PATH)
 	./$(BIN)
 	cp -f PID $(INSTALL_DIR)/PID
 	

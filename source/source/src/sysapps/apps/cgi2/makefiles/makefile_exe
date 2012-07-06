@@ -2,7 +2,7 @@ CFLAGS	+= -I$(PROJ_CGI2)/inc
 BIN	= $(BASE)
 PBIN 	= -L$(PROJ_CGI2)/bin
 ifeq	($(GPL_LICENSE), yes)
-	LDFLAGS += -ldhcp_pond
+	LDFLAGS += -ldhcp_pond $(PBIN)
 else
 	LDFLAGS += -lpond -lpthread
 endif
