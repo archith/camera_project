@@ -2,9 +2,9 @@ CFLAGS	+= -I$(PROJ_CGI2)/inc
 BIN	= $(BASE)
 PBIN 	= -L$(PROJ_CGI2)/bin
 ifeq	($(GPL_LICENSE), yes)
-	LDFLAGS += -ldhcp_pond $(PBIN)
+	LDFLAGS += -ldhcp_pond
 else
-	LDFLAGS += -lpond -lpthread
+	LDFLAGS += -lpond -lpthread $(PBIN)
 endif
 
 include $(PROJ_CGI2)/makefiles/makefile_ground
