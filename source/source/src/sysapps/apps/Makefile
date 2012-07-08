@@ -33,7 +33,7 @@ SUBDIRS += simple
 SUBDIRS += rc_start
 #SUBDIRS += smart_grab
 #SUBDIRS += send_file
-
+SUBDIRS += helloworld
 ifeq ($(PROJ_INSTALL),)
 all install:
 	@echo "YOU SHALL NOT PASS!!!"
