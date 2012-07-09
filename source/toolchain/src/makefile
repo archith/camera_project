@@ -3,7 +3,7 @@ BIN_DIR=$(subst /,\/,$(PWD))
 all:
 	#build toolchain
 	tar xfj buildroot-0.9.27_mod.tar.bz2
-	cd buildroot; patch -p1 < ../buildroot_pl1029.patch
+	cd buildroot; patch -p1 < ../buildroot_pl1029_mod.patch
 	cd buildroot; ln -s ../../pkg/ dl
 	cd buildroot;cp config.arm.pl1029 ./.config;
 	sed 's/\/opt\/prolific/$(BIN_DIR)/' buildroot/.config > buildroot/.config_tmp
